@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lojinha
+namespace _01__ByteBank
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine();
-
-            string charles = 3;
+            new CheckingAccounts();
 
             Console.ReadLine();
         }
