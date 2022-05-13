@@ -10,11 +10,7 @@ namespace Lojinha
     {
         static void Main(string[] args)
         {
-            Console.WriteLine();
-
-            string charles = 3;
-
-            Console.ReadLine();
+            new SelectOption();
         }
     }
 }

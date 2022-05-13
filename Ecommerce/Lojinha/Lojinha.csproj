@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{05C4AF51-EA4C-47B9-969C-6A0A6499C1DC}</ProjectGuid>
+    <ProjectGuid>{FD73F08E-0DA1-4D0E-911C-EC0E562FFCED}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Lojinha</RootNamespace>
     <AssemblyName>Lojinha</AssemblyName>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Selecionaveis.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
