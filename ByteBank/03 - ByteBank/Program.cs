@@ -36,6 +36,11 @@ namespace _03_ByteBank
             Console.WriteLine(contaDaGabrielle.currency);
             Console.WriteLine(contaDaGabrielleCosta.currency);
 
+            if (contaDaGabrielle.currency >= 100)
+            {
+                contaDaGabrielle.currency -= 100;
+            }
+
             Console.ReadLine();
         }
     }
