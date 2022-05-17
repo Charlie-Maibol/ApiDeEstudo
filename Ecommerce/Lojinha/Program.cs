@@ -10,7 +10,23 @@ namespace Lojinha
     {
         static void Main(string[] args)
         {
-            new SelectOption();
+            
+            Console.WriteLine();
+
+            DateTime dat = DateTime.Now;
+
+            Core Category = new Core(); 
+            Console.Write("Deseja cadastrar um novo items?");
+            string category = Console.ReadLine();
+            
+            Console.WriteLine("Cadastro feito com Sucesso");
+            Console.WriteLine("Criado no dia " );
+            Console.WriteLine("Status: " + );
+            
+            Console.ReadLine(); 
+            
+
+            Console.ReadLine();
         }
     }
 }
