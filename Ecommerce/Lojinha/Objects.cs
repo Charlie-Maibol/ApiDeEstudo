@@ -7,24 +7,23 @@ using System.Threading.Tasks;
 
 namespace Lojinha
 {
-    internal class Core
+    internal class Objects
     {
         //public int ID;
         public string status = "inativo";
         public string name;
         public DateTime created;
         public string edit;
-        //public string verifyStatus;
         //public string classfication;
-        public void Register(string batatinha)
+        public void Register(string value)
         {
-            int alpha = Regex.Matches(batatinha, @"[a-zA-Z]").Count;
-            if (batatinha.Length < 128 && alpha == batatinha.Length)
+            int alpha = Regex.Matches(value, @"[a-zA-Z]").Count;
+            if (value.Length <= 128 && alpha == value.Length)
             {
-                this.name = batatinha;
+                this.name = value;
                 this.status = "ativo";
                 this.created = DateTime.Now;
-                Console.WriteLine("Registro criado: " + batatinha);
+                Console.WriteLine("Registro criado: " + value);
                 Console.WriteLine("Cadastro feito com Sucesso");
                 Console.WriteLine("Criado no dia " + this.created);
                 Console.WriteLine("Status: " + this.status);
