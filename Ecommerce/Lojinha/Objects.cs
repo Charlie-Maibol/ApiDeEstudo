@@ -33,6 +33,7 @@ namespace Lojinha
             Console.WriteLine("Valor inválido, Digite novamente");
             string category = Console.ReadLine();
             this.Register(category);
+
         }
               
         
