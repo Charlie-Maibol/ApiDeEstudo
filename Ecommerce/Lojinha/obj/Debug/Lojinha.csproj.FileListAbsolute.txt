@@ -6,3 +6,11 @@ C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Ecommerce\Lojinha\obj\
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Ecommerce\Lojinha\obj\Debug\Lojinha.csproj.CoreCompileInputs.cache
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Ecommerce\Lojinha\obj\Debug\Lojinha.exe
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Ecommerce\Lojinha\obj\Debug\Lojinha.pdb
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\Ecommerce\Lojinha\obj\Debug\Lojinha.csproj.AssemblyReference.cache
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\Ecommerce\Lojinha\obj\Debug\Lojinha.csproj.SuggestedBindingRedirects.cache
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\Ecommerce\Lojinha\obj\Debug\Lojinha.csproj.CoreCompileInputs.cache
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\Ecommerce\Lojinha\obj\Debug\Lojinha.exe
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\Ecommerce\Lojinha\obj\Debug\Lojinha.pdb
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\Ecommerce\Lojinha\bin\Debug\Lojinha.exe.config
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\Ecommerce\Lojinha\bin\Debug\Lojinha.exe
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\Ecommerce\Lojinha\bin\Debug\Lojinha.pdb
