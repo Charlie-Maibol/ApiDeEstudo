@@ -49,6 +49,8 @@ namespace Lojinha
                             break;
 
                         }
+                        Console.WriteLine("Digite [y] para cadastrar ou digite [n] para voltar ao menu");
+                        Console.ReadLine();
                     }
                 }
                 if (options == edit)
