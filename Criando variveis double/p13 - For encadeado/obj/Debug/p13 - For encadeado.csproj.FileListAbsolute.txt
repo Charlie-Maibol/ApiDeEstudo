@@ -1,8 +1,0 @@
-C:\Users\ClearTech\source\repos\Criando variveis double\p13 - For encadeado\bin\Debug\p13 - For encadeado.exe.config
-C:\Users\ClearTech\source\repos\Criando variveis double\p13 - For encadeado\bin\Debug\p13 - For encadeado.exe
-C:\Users\ClearTech\source\repos\Criando variveis double\p13 - For encadeado\bin\Debug\p13 - For encadeado.pdb
-C:\Users\ClearTech\source\repos\Criando variveis double\p13 - For encadeado\obj\Debug\p13 - For encadeado.csproj.AssemblyReference.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\p13 - For encadeado\obj\Debug\p13 - For encadeado.csproj.SuggestedBindingRedirects.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\p13 - For encadeado\obj\Debug\p13 - For encadeado.csproj.CoreCompileInputs.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\p13 - For encadeado\obj\Debug\p13 - For encadeado.exe
-C:\Users\ClearTech\source\repos\Criando variveis double\p13 - For encadeado\obj\Debug\p13 - For encadeado.pdb

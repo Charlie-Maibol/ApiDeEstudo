@@ -1,8 +1,0 @@
-C:\Users\ClearTech\source\repos\Criando variveis double\6 - atribuições de variveis\bin\Debug\6 - atribuições de variveis.exe.config
-C:\Users\ClearTech\source\repos\Criando variveis double\6 - atribuições de variveis\bin\Debug\6 - atribuições de variveis.exe
-C:\Users\ClearTech\source\repos\Criando variveis double\6 - atribuições de variveis\bin\Debug\6 - atribuições de variveis.pdb
-C:\Users\ClearTech\source\repos\Criando variveis double\6 - atribuições de variveis\obj\Debug\6 - atribuições de variveis.csproj.AssemblyReference.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\6 - atribuições de variveis\obj\Debug\6 - atribuições de variveis.csproj.SuggestedBindingRedirects.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\6 - atribuições de variveis\obj\Debug\6 - atribuições de variveis.csproj.CoreCompileInputs.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\6 - atribuições de variveis\obj\Debug\6 - atribuições de variveis.exe
-C:\Users\ClearTech\source\repos\Criando variveis double\6 - atribuições de variveis\obj\Debug\6 - atribuições de variveis.pdb

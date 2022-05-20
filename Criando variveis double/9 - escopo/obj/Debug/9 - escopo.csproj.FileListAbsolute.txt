@@ -1,8 +1,0 @@
-C:\Users\ClearTech\source\repos\Criando variveis double\9 - escopo\bin\Debug\9 - escopo.exe.config
-C:\Users\ClearTech\source\repos\Criando variveis double\9 - escopo\bin\Debug\9 - escopo.exe
-C:\Users\ClearTech\source\repos\Criando variveis double\9 - escopo\bin\Debug\9 - escopo.pdb
-C:\Users\ClearTech\source\repos\Criando variveis double\9 - escopo\obj\Debug\9 - escopo.csproj.AssemblyReference.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\9 - escopo\obj\Debug\9 - escopo.csproj.SuggestedBindingRedirects.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\9 - escopo\obj\Debug\9 - escopo.csproj.CoreCompileInputs.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\9 - escopo\obj\Debug\9 - escopo.exe
-C:\Users\ClearTech\source\repos\Criando variveis double\9 - escopo\obj\Debug\9 - escopo.pdb
