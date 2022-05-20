@@ -1,0 +1,8 @@
+C:\Users\ClearTech\source\repos\Criando variveis double\p11 -  calculaPonpanca 2\obj\Debug\p11 -  calculaPonpanca 2.csproj.AssemblyReference.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\p11 -  calculaPonpanca 2\obj\Debug\p11 -  calculaPonpanca 2.csproj.SuggestedBindingRedirects.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\p11 -  calculaPonpanca 2\obj\Debug\p11 -  calculaPonpanca 2.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\p11 -  calculaPonpanca 2\bin\Debug\p11 -  calculaPonpanca 2.exe.config
+C:\Users\ClearTech\source\repos\Criando variveis double\p11 -  calculaPonpanca 2\bin\Debug\p11 -  calculaPonpanca 2.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\p11 -  calculaPonpanca 2\bin\Debug\p11 -  calculaPonpanca 2.pdb
+C:\Users\ClearTech\source\repos\Criando variveis double\p11 -  calculaPonpanca 2\obj\Debug\p11 -  calculaPonpanca 2.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\p11 -  calculaPonpanca 2\obj\Debug\p11 -  calculaPonpanca 2.pdb

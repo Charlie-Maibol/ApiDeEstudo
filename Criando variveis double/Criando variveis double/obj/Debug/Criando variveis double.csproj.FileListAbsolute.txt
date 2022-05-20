@@ -1,0 +1,8 @@
+C:\Users\ClearTech\source\repos\Criando variveis double\Criando variveis double\bin\Debug\Criando variveis double.exe.config
+C:\Users\ClearTech\source\repos\Criando variveis double\Criando variveis double\bin\Debug\Criando variveis double.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\Criando variveis double\bin\Debug\Criando variveis double.pdb
+C:\Users\ClearTech\source\repos\Criando variveis double\Criando variveis double\obj\Debug\Criando variveis double.csproj.AssemblyReference.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\Criando variveis double\obj\Debug\Criando variveis double.csproj.SuggestedBindingRedirects.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\Criando variveis double\obj\Debug\Criando variveis double.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\Criando variveis double\obj\Debug\Criando variveis double.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\Criando variveis double\obj\Debug\Criando variveis double.pdb

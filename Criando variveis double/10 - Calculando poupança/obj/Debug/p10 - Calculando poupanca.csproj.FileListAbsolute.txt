@@ -1,0 +1,8 @@
+C:\Users\ClearTech\source\repos\Criando variveis double\10 - Calculando poupança\obj\Debug\p10 - Calculando poupanca.csproj.AssemblyReference.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\10 - Calculando poupança\obj\Debug\p10 - Calculando poupanca.csproj.SuggestedBindingRedirects.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\10 - Calculando poupança\obj\Debug\p10 - Calculando poupanca.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\10 - Calculando poupança\obj\Debug\10 - Calculando poupança.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\10 - Calculando poupança\obj\Debug\10 - Calculando poupança.pdb
+C:\Users\ClearTech\source\repos\Criando variveis double\10 - Calculando poupança\bin\Debug\10 - Calculando poupança.exe.config
+C:\Users\ClearTech\source\repos\Criando variveis double\10 - Calculando poupança\bin\Debug\10 - Calculando poupança.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\10 - Calculando poupança\bin\Debug\10 - Calculando poupança.pdb
