@@ -10,34 +10,33 @@ namespace Ecommerce
     {
         static void Main(string[] args)
         {
-                Console.WriteLine();
             string yes = "y";
             string no = "n";
             string edit = "e";
             string register = "r";
             string exit = "c";
             string options = "";
-            Console.WriteLine("Bem-vindo ao console de produtos!");
-            Console.WriteLine("O que deseja fazer?");
+            Console.WriteLine("Bem-vindo ao console de produtos!\n");
+            Console.WriteLine("O que deseja fazer?\n");
             //Sempre precisa do while para utilizar o do;
             do {
-                Console.WriteLine("Digite [r] para registrar; [e] para editar; [c] para encerrar o programa.");
+                Console.WriteLine("Digite [r] para registrar; [e] para editar; [c] para encerrar o programa.\n");
                 options = Console.ReadLine();
 
                 if (options == register){
 
                     AlphaVerify Category = new AlphaVerify();
-                    Console.WriteLine("Deseja cadastrar um novo items?");
+                    Console.WriteLine("Deseja cadastrar um novo items?\n");
 
 
                     do {
-                        Console.WriteLine("Digite [y] para cadastrar ou digite [n] para voltar ao menu");
+                        Console.WriteLine("\nDigite [y] para cadastrar ou digite [n] para voltar ao menu\n");
                         string anwser = Console.ReadLine();
                         if (anwser == yes)
                         {
-                            Console.WriteLine("Qual item deseja cadastrar?");
+                            Console.WriteLine("\nQual item deseja cadastrar?\n");
                             string category = Console.ReadLine();
-                            //Category.Register(category);
+                            Category.Register(category);
                             break;
 
                         }
@@ -50,7 +49,7 @@ namespace Ecommerce
                 }
                 else if (options == edit)
                 {
-                    Console.WriteLine("Qual item você deseja editar?");
+                    Console.WriteLine("\nQual item você deseja editar?");
                     Console.WriteLine();
 
                 }
