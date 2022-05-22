@@ -26,7 +26,7 @@ namespace Ecommerce
                 if (options == register){
 
                     AlphaVerify Category = new AlphaVerify();
-                    Console.WriteLine("Deseja cadastrar um novo items?\n");
+                    Console.WriteLine("\nDeseja cadastrar um novo items?\n");
 
 
                     do {
