@@ -11,10 +11,17 @@ namespace _06___ByteBank
         static void Main(string[] args)
         {
             CheckingAccounts accounts = new CheckingAccounts();
+            Client client = new Client();
 
-            accounts.ObtainCurrecy(-10);
+            client.Name = "Charles";
+            client.CPF = "434.564.879-20";
+            client.Profission = "Desenvolvedor C#";
 
-            Console.WriteLine(accounts.ObtainCurrecy());
+            accounts.Currency = -10;
+            accounts.Holder = client;
+
+            Console.WriteLine(accounts.Holder.Name);
+            Console.WriteLine(accounts.Currency);
 
             Console.ReadLine();
         }
