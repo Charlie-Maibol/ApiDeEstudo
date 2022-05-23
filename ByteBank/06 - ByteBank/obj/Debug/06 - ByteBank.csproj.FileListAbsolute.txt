@@ -1,0 +1,8 @@
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank\06 - ByteBank\obj\Debug\06 - ByteBank.csproj.AssemblyReference.cache
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank\06 - ByteBank\obj\Debug\06 - ByteBank.csproj.SuggestedBindingRedirects.cache
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank\06 - ByteBank\obj\Debug\06 - ByteBank.csproj.CoreCompileInputs.cache
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank\06 - ByteBank\bin\Debug\06 - ByteBank.exe.config
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank\06 - ByteBank\bin\Debug\06 - ByteBank.exe
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank\06 - ByteBank\bin\Debug\06 - ByteBank.pdb
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank\06 - ByteBank\obj\Debug\06 - ByteBank.exe
+C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank\06 - ByteBank\obj\Debug\06 - ByteBank.pdb
