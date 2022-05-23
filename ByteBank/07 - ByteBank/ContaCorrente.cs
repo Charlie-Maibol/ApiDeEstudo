@@ -1,15 +1,38 @@
-﻿namespace _06___ByteBank
+﻿namespace _07___ByteBank
 {
     public class CheckingAccounts
     {
+        private static int TotalOfAccountsCreatead { get; set; }
+
+        public static int GetTotalOfAccountsCreatead()
+        {
+            return TotalOfAccountsCreatead;
+        }
+
         private Client _holder;
-        private int _numeber;
+        private int _number;
         private int _agency;
         private double _currency = 100;
 
+
         public Client Holder { get; set; }
 
-        public int Agency { get; set; }
+        public int Agency
+        {
+            get
+            {
+                return _agency;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    return;
+                }
+                _agency = value;
+                   
+            }
+        }
         public int Number { get; set; } 
 
         
@@ -31,6 +54,14 @@
 
                 _currency = value;
             }
+        }
+
+        public CheckingAccounts(int agency, int number)
+        {
+            Agency = agency;
+            Number = number;
+
+            TotalOfAccountsCreatead++;            
         }
         public bool Checkout(double value)
         {

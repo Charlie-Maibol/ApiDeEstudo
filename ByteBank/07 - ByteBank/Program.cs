@@ -10,6 +10,21 @@ namespace _07___ByteBank
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(CheckingAccounts.GetTotalOfAccountsCreatead());
+
+            
+            CheckingAccounts accounts = new CheckingAccounts(867, 86712540);
+
+            Console.WriteLine(CheckingAccounts.GetTotalOfAccountsCreatead());
+
+            Console.WriteLine(accounts.Agency); 
+            Console.WriteLine(accounts.Number);
+
+            CheckingAccounts contaDaGabrielle = new CheckingAccounts(867, 86745820);
+            
+            Console.WriteLine(CheckingAccounts.GetTotalOfAccountsCreatead());
+
+            Console.ReadLine();
         }
     }
 }
