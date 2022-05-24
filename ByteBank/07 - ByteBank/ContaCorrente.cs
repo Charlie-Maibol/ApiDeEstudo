@@ -2,12 +2,7 @@
 {
     public class CheckingAccounts
     {
-        private static int TotalOfAccountsCreatead { get; set; }
-
-        public static int GetTotalOfAccountsCreatead()
-        {
-            return TotalOfAccountsCreatead;
-        }
+        public static int TotalOfAccountsCreatead { get; private set; }
 
         private Client _holder;
         private int _number;
