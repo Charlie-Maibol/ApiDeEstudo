@@ -14,11 +14,15 @@ namespace ByteBank
         {
             BonusManager bonus = new BonusManager();
 
+            
+
             Employees carlos = new Employees();
 
             carlos.Name = "Carlos";
             carlos.CPF = "546.879.157-20";
             carlos.Salary = 2000;
+
+            Console.WriteLine(Employees.EmployeesTotal);
 
             bonus.Register(carlos);
 
@@ -27,6 +31,8 @@ namespace ByteBank
             roberta.Name = "Roberta";
             roberta.CPF = "454.658.148-3";
             roberta.Salary = 5000;
+
+            Console.WriteLine(Employees.EmployeesTotal);
 
             bonus.Register(roberta);
 

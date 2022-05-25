@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 
 namespace ByteBank.Employee
 {
-    public class Directors
+    public class Directors : Employees
     {
-        public string Name { get; set; }
-        public string CPF { get; set; }
-        public double Salary { get; set; }
 
 
-
-        public double GetBonus()
+        public Directors()
+        {
+            Console.WriteLine("Criando DIRETOR");
+            
+        }
+    
+       
+    
+        public override double GetBonus()
         {
 
-            return Salary;
+            return Salary + base.GetBonus();
 
         }
     }
 }
+
