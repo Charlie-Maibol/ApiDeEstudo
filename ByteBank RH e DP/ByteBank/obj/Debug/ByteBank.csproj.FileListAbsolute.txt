@@ -6,3 +6,11 @@ C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\ob
 C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\obj\Debug\ByteBank.csproj.CoreCompileInputs.cache
 C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\obj\Debug\ByteBank.exe
 C:\Users\tuf\Documents\ClearTech\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\obj\Debug\ByteBank.pdb
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\bin\Debug\ByteBank.exe.config
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\bin\Debug\ByteBank.exe
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\bin\Debug\ByteBank.pdb
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\obj\Debug\ByteBank.csproj.AssemblyReference.cache
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\obj\Debug\ByteBank.csproj.SuggestedBindingRedirects.cache
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\obj\Debug\ByteBank.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\obj\Debug\ByteBank.exe
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank RH e DP\ByteBank\obj\Debug\ByteBank.pdb

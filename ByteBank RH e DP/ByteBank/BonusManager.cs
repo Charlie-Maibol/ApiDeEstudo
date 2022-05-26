@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ByteBank.Employee;
+﻿using ByteBank.Employee;
 
 namespace ByteBank
 {
@@ -12,7 +7,7 @@ namespace ByteBank
         private double _TotalBonus;
         public void Register(Employees employees)
         {
-            _TotalBonus += employees.GetBonus();        
+            _TotalBonus += employees.GetBonus();
         }
 
 
