@@ -45,15 +45,14 @@ namespace Ecommerce
                                 Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro");
                                 edit = Console.ReadLine();
                                 if (edit == yes)
-
                                 {
-                                    Console.WriteLine("\nQual novo nome dessa categoria?");
+                                    Console.WriteLine("\nQual novo nome dessa categoria?\n");
                                     string rename = Console.ReadLine();
                                     Console.WriteLine(Category.name);
                                     Category.name = rename;
                                     Category.Mofided(rename);
-                                    Console.WriteLine("Deseja alterar o status do produto ?");
-                                    Console.WriteLine("Digite [y] para alterar status para inativo ou [n] Permanecer o status");
+                                    Console.WriteLine("\nDeseja alterar o status do produto ?\n");
+                                    Console.WriteLine("\nDigite [y] para alterar status para inativo ou [n] Permanecer o status\n");
                                     string newStatus = Console.ReadLine();
                                     do
                                     {
@@ -68,14 +67,15 @@ namespace Ecommerce
                                         else if (newStatus == no)
                                         {
                                             Console.WriteLine(rename);
-                                            Console.WriteLine("status: "  + Category.status + " " + DateTime.Now);
+                                            Console.WriteLine("status: " + Category.status + " " + DateTime.Now);
+                                            Console.WriteLine();
                                             break;
                                         }
                                         else
                                         {
 
-                                            Console.WriteLine("Opção invalida digite novamente");
-                                            Console.WriteLine("Digite [y] para alterar status para inativo ou [n] Permanecer o status");
+                                            Console.WriteLine("\nOpção invalida digite novamente\n");
+                                            Console.WriteLine("\nDigite [y] para alterar status para inativo ou [n] Permanecer o status\n");
                                             newStatus = Console.ReadLine();
 
                                         }
@@ -83,16 +83,28 @@ namespace Ecommerce
 
                                     } while (newStatus != yes || newStatus != no);
                                 }
-                                else if (edit != yes || edit != no)
+                                else if (edit == no)
                                 {
-                                    Console.WriteLine("Opção invalida");
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nOpção invalida\n");
+                                    Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro\n");
+                                    edit = Console.ReadLine();
                                 }
                                 
-                            } while (false);
+                                
+                                
+                            } while (true);
                         }
                         else if (anwser == no)
                         {
                             break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nOpção inválida\n");
                         }
 
                     } while (true);
