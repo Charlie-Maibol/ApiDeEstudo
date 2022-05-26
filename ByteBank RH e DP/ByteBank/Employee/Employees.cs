@@ -11,7 +11,7 @@ namespace ByteBank.Employee
         public static int EmployeesTotal { get; private set; }   
         
         public string Name { get; set; }
-        public string CPF { get; private set; }
+        public string CPF { get; set; }
         public double Salary { get; set; }
 
         public Employees(string cpf)

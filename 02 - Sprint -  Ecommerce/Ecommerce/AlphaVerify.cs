@@ -18,7 +18,7 @@ namespace Ecommerce
 
         public void Register(string value)
         {
-            int alpha = Regex.Matches(value, @"[a-zA-Z]").Count;
+            int alpha = Regex.Matches(value, @"[a-zA-Zà-úÀ-Ú' ']").Count;
 
             do
             {
@@ -53,7 +53,7 @@ namespace Ecommerce
         }
         public void Mofided(string value)
         {
-            int alpha = Regex.Matches(value, @"[a-zA-Z]").Count;
+            int alpha = Regex.Matches(value, @"[a-zA-Zà-úÀ-Ú' ']").Count;
 
             do
             {
