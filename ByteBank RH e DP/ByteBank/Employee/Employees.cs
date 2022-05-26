@@ -8,14 +8,24 @@ namespace ByteBank.Employee
 {
     public class Employees
     {
+        public static int EmployeesTotal { get; private set; }   
         
         public string Name { get; set; }
         public string CPF { get; set; }
         public double Salary { get; set; }
 
+        public Employees(string cpf)
+        {
+
+            Console.WriteLine("Criando Funcionário");
+            CPF = cpf;
+            EmployeesTotal++;
+
+        }
+
       
         
-        public double GetBonus()
+        public virtual double GetBonus()
         {
             
             return Salary * 0.10;
