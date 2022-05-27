@@ -20,17 +20,10 @@ namespace ByteBank.Employee
 
         }
 
-        public virtual void RaseSalary()
-        {
-            Salary *= 1.1;
-        }
+        public abstract void RaseSalary();
 
-        public virtual double GetBonus()
-        {
-
-            return Salary * 0.10;
-
-        }
+        public abstract double GetBonus();
+       
 
     }
 }

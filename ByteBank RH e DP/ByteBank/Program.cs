@@ -28,10 +28,14 @@ namespace ByteBank
             AccountsManager camila = new AccountsManager("833.222.048-29");
             camila.Name = "Camila";
 
+            Dev charles = new Dev("456.275.468-20");
+            charles.Name = "Charles";
+
             bonusManager.Register(pedro);
             bonusManager.Register(roberta);
             bonusManager.Register(igor);
             bonusManager.Register(camila);
+            bonusManager.Register(charles);
 
 
             Console.WriteLine("Total de bonificações do mês " +

@@ -46,6 +46,7 @@
     <Compile Include="BonusManager.cs" />
     <Compile Include="Employee\Ancillary.cs" />
     <Compile Include="Employee\Designers.cs" />
+    <Compile Include="Employee\Dev.cs" />
     <Compile Include="Employee\Directors.cs" />
     <Compile Include="Employee\Employees.cs" />
     <Compile Include="Employee\AccountsManager.cs" />
