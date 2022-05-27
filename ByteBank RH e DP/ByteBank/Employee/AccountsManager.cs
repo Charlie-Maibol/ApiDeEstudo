@@ -8,6 +8,15 @@ namespace ByteBank.Employee
 {
     internal class AccountsManager : Employees
     {
+        public string Password { get; set; }
+
+        public bool Autentication(string passoword)
+        {
+
+            return this.Password == passoword;
+
+
+        }
 
         public AccountsManager(string cpf) : base(4000, cpf)
         {
