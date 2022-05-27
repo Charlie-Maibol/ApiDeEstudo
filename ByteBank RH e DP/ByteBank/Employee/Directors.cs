@@ -4,7 +4,7 @@ namespace ByteBank.Employee
 {
     public class Directors : Employees
     {
-
+        public string Password { get; set; }
 
         public Directors(string cpf) : base(5000, cpf)
         {
@@ -12,6 +12,13 @@ namespace ByteBank.Employee
 
         }
 
+        public bool Autentication(string passoword)
+        {
+
+            return this.Password == passoword;
+
+
+        }
         public override void RaseSalary()
         {
             Salary *= 1.15;
