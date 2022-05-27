@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce
 {
-    internal class AlphaVerify
+    internal class Category
     {
         //public int ID;
         public string status = "";

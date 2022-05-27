@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ByteBank.Employee;
+﻿using ByteBank.Employee;
+using System;
 
 
 namespace ByteBank
@@ -12,40 +8,41 @@ namespace ByteBank
     {
         static void Main(string[] args)
         {
-            BonusManager bonus = new BonusManager();
-
-            
-
-            Employees carlos = new Employees();
-
-            carlos.Name = "Carlos";
-            carlos.CPF = "546.879.157-20";
-            carlos.Salary = 2000;
-
-            Console.WriteLine(Employees.EmployeesTotal);
-
-            bonus.Register(carlos);
-
-            Directors roberta = new Directors();
-
-            roberta.Name = "Roberta";
-            roberta.CPF = "454.658.148-3";
-            roberta.Salary = 5000;
-
-            Console.WriteLine(Employees.EmployeesTotal);
-
-            bonus.Register(roberta);
-
-            Console.WriteLine(carlos.Name);
-            Console.WriteLine(carlos.GetBonus());
-
-            Console.WriteLine(roberta.Name);
-            Console.WriteLine(roberta.GetBonus());
-
-            Console.WriteLine("Total de  bonificação: " + bonus.GetTotalBonus());
-
-            Console.ReadLine();
+           BonusCalculator();
+           Console.ReadLine();
 
         }
+        public static void BonusCalculator()
+        {
+            BonusManager bonusManager = new BonusManager();
+
+            Designers pedro = new Designers("833.222.048-29");
+            pedro.Name = "Pedro";
+
+            Directors roberta = new Directors("833.222.048-29");
+            roberta.Name = "Roberta";
+
+            Ancillary igor = new Ancillary("833.222.048-29");
+            igor.Name = "Igor";
+
+            AccountsManager camila = new AccountsManager("833.222.048-29");
+            camila.Name = "Camila";
+
+            Dev charles = new Dev("456.275.468-20");
+            charles.Name = "Charles";
+
+            bonusManager.Register(pedro);
+            bonusManager.Register(roberta);
+            bonusManager.Register(igor);
+            bonusManager.Register(camila);
+            bonusManager.Register(charles);
+
+
+            Console.WriteLine("Total de bonificações do mês " +
+            bonusManager.GetTotalBonus());
+
+
+        }
+
     }
 }
