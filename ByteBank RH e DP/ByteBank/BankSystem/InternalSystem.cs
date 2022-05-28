@@ -11,7 +11,7 @@ namespace ByteBank.System
 {
     public class InternalSystem
     {
-        public bool Login(Authenticable employee, string password)
+        public bool Login(IAuthenticable employee, string password)
         {
             bool userLogin = employee.userLogin(password);
 

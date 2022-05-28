@@ -3,7 +3,7 @@ using System;
 
 namespace ByteBank.Employee
 {
-    public class Directors : Authenticable
+    public class Directors : UserLoginEmployee
     {
 
         public Directors(string cpf) : base(5000, cpf)
