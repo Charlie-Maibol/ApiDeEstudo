@@ -26,11 +26,11 @@ namespace ByteBank
 
             AccountsManager camila = new AccountsManager("833.222.048-29");
             camila.Name = "Camila";
-            camila.Password = "123";
+            camila.Password = "abc";
 
 
-            internalSystem.Login(roberta, "abc");
-            //internalSystem.Login(camila, "abc");
+            internalSystem.Login(roberta, "123");
+            internalSystem.Login(camila, "abc");
 
           
         }
@@ -41,13 +41,13 @@ namespace ByteBank
             Employees pedro = new Designers("833.222.048-29");
             pedro.Name = "Pedro";
 
-            Employees roberta = new Directors("833.222.048-29");
+            Directors roberta = new Directors("833.222.048-29");
             roberta.Name = "Roberta";
 
             Employees igor = new Ancillary("833.222.048-29");
             igor.Name = "Igor";
 
-            Employees camila = new AccountsManager("833.222.048-29");
+            AccountsManager camila = new AccountsManager("833.222.048-29");
             camila.Name = "Camila";
 
             Dev charles = new Dev("456.275.468-20");
