@@ -1,7 +1,7 @@
 ﻿using ByteBank.Employee;
 using System;
 using ByteBank.System;
-
+using ByteBank.BankSystem;
 
 namespace ByteBank
 {
@@ -28,11 +28,16 @@ namespace ByteBank
             camila.Name = "Camila";
             camila.Password = "abc";
 
+            BusinessParterner parterner = new BusinessParterner();
+            parterner.Password = "15674879";
+
 
             internalSystem.Login(roberta, "123");
             internalSystem.Login(camila, "abc");
+            internalSystem.Login(parterner, "15674879");
 
-          
+
+
         }
         public static void BonusCalculator()
         {

@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankSystem\Authenticable.cs" />
+    <Compile Include="BankSystem\IAuthenticable.cs" />
+    <Compile Include="BankSystem\BusinessParterner.cs" />
+    <Compile Include="BankSystem\UserLoginEmployee.cs" />
     <Compile Include="BonusManager.cs" />
     <Compile Include="Employee\Ancillary.cs" />
     <Compile Include="Employee\Designers.cs" />
