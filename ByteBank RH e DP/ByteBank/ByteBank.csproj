@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankSystem\Authenticable.cs" />
     <Compile Include="BonusManager.cs" />
     <Compile Include="Employee\Ancillary.cs" />
     <Compile Include="Employee\Designers.cs" />
@@ -50,9 +51,9 @@
     <Compile Include="Employee\Directors.cs" />
     <Compile Include="Employee\Employees.cs" />
     <Compile Include="Employee\AccountsManager.cs" />
+    <Compile Include="BankSystem\InternalSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\InternalSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -10,6 +10,8 @@ namespace ByteBank.Employee
         public string CPF { get; private set; }
         public double Salary { get; protected set; }
 
+       
+
         public Employees(double salary, string cpf)
         {
 
@@ -19,6 +21,7 @@ namespace ByteBank.Employee
             EmployeesTotal++;
 
         }
+      
 
         public abstract void RaseSalary();
 

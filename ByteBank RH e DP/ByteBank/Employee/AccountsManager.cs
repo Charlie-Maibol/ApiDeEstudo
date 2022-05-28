@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ByteBank.BankSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ByteBank.Employee
 {
-    internal class AccountsManager : Employees
+    internal class AccountsManager : Authenticable
     {
-
+               
         public AccountsManager(string cpf) : base(4000, cpf)
         {
             Console.WriteLine("Criando Gerente de contas");
