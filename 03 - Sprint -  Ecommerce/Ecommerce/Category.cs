@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Ecommerce;
 
 namespace Ecommerce
 {
-    internal class Category
+    public class Category
     {
         //public int ID;
-        public string status = "";
-        public string name;
-        public DateTime created;
-        public DateTime modifided;
+        public string status { get; private set; }
+        public string name { get; set; }
+        public DateTime created { get; private set; }
+        public DateTime modifided { get; private set; }
         //public string classfication;
 
         public void Register(string value)
@@ -51,7 +52,7 @@ namespace Ecommerce
 
 
         }
-        public void Mofided(string value)
+        public void Modified(string value)
         {
             int alpha = Regex.Matches(value, @"[a-zA-Zà-úÀ-Ú' ']").Count;
 
@@ -73,7 +74,7 @@ namespace Ecommerce
                 {
                     Console.WriteLine("\nValor invalido digite novamente\n");
                     string category = Console.ReadLine();
-                    this.Mofided(category);
+                    this.Modified(category);
                     break;
 
                 }

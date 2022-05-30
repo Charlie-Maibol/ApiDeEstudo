@@ -16,7 +16,7 @@ namespace ByteBank
            Console.ReadLine();
 
         }
-        public static void StartInternalSystem()
+        //public static void StartInternalSystem()
         {
             InternalSystem internalSystem = new InternalSystem();
 
@@ -39,7 +39,7 @@ namespace ByteBank
 
 
         }
-        public static void BonusCalculator()
+        //public static void BonusCalculator()
         {
             BonusManager bonusManager = new BonusManager();
 

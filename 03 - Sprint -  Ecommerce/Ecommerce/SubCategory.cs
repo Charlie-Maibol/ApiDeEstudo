@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce
 {
-    internal class SubCategory
+    internal class SubCategory : Category
     {
     }
 }
