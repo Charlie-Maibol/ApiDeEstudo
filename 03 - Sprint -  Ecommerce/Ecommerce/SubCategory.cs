@@ -8,5 +8,6 @@ namespace Ecommerce
 {
     internal class SubCategory : Category
     {
+
     }
 }

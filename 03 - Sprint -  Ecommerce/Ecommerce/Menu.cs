@@ -13,7 +13,7 @@ namespace Ecommerce
         public string no = "n";
         public string edit = "";
         public void CategoryMenu()
-        {
+        {          
             Console.WriteLine("\nDeseja cadastrar um novo items?\n");
 
             do

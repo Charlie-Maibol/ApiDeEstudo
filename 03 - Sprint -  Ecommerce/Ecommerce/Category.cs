@@ -18,7 +18,7 @@ namespace Ecommerce
         //public string classfication;
 
         public void Register(string value)
-        {
+        {   
             int alpha = Regex.Matches(value, @"[a-zA-Zà-úÀ-Ú' ']").Count;
 
             do

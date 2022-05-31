@@ -14,8 +14,8 @@ namespace Ecommerce
 
             Console.WriteLine("Bem-vindo ao console de produtos!\n");
             Console.WriteLine("O que deseja fazer?\n");          
-            Category Category = new Category();
             Menu menu = new Menu();
+            menu.CategoryMenu();
             Console.ReadLine();
             
            
