@@ -4,7 +4,7 @@
     {
         public Client holder;
         public int agency;
-        public int number;
+        public int number { get; set; }
         public double currency = 100;
         public bool Checkout(double value)
         {

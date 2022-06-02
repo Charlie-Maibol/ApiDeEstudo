@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ByteBank
 {
-    public class Cliente
+    public class Client
     {
         private string _cpf;
 
-        public string Nome { get; set; }
+        public string Name { get; set; }
         public string CPF
         {
             get
@@ -23,6 +23,6 @@ namespace ByteBank
                 _cpf = value;
             }
         }
-        public string Profissao { get; set; }
+        public string Profession { get; set; }
     }
 }
