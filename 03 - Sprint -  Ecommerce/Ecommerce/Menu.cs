@@ -87,10 +87,31 @@ namespace Ecommerce
                 }
                 else if (anwser == subC)
                 {
-                    Console.WriteLine("Qual novo nome dessa  sub categoria ?");
-                    string subCategory = Console.ReadLine();
-                    Sub.Register(subCategory);
-                    break;
+                    Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
+                    string subAnwser = Console.ReadLine();
+                    do
+                    {
+
+                        if (subAnwser == yes)
+                        {
+
+                            Console.WriteLine("Qual novo nome dessa  sub categoria ?");
+                            string subCategory = Console.ReadLine();
+                            this.Register(subCategory);
+                            break;
+                        }
+                        else if (subAnwser != no || subAnwser != yes)
+                        {
+                            Console.WriteLine("Opção inválida");
+                            Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
+                            subAnwser = Console.ReadLine();
+                        }
+                        else if(subAnwser == no)
+                        {
+                            break;
+                        }
+
+                    }while(true);
                 }
                 else if (anwser == optionNo)
                 {
@@ -102,9 +123,6 @@ namespace Ecommerce
                 }
 
             } while (true);
-            
-
-            
         }
     }
 }
