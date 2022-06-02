@@ -11,7 +11,7 @@ namespace Ecommerce
     public class Category
     {
         //public int ID;
-        public string status { get; private set; }
+        public string status { get; set; }
         public string name { get; set; }
         public DateTime created { get; private set; }
         public DateTime modifided { get; private set; }
@@ -20,7 +20,7 @@ namespace Ecommerce
         public void Register(string value)
         {   
             int alpha = Regex.Matches(value, @"[a-zA-Zà-úÀ-Ú' ']").Count;
-
+            
             do
             {
                 if (value.Length <= 128 && alpha == value.Length && value.Length >= 3)
@@ -31,8 +31,7 @@ namespace Ecommerce
                     Console.WriteLine("\nRegistro criado: " + value);
                     Console.WriteLine("Cadrastro realizado com sucesso");
                     Console.WriteLine("O criado no dia: " + this.created);
-                    Console.WriteLine("Status: " + this.status);
-                    Console.WriteLine();
+                    Console.WriteLine("Status: " + this.status);                  
                     return;
 
 

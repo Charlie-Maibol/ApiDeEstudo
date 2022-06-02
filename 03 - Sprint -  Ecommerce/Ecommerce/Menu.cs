@@ -9,22 +9,26 @@ namespace Ecommerce
 {
     public class Menu : Category
     {
+        public string optionYes = "1";
+        public string subC = "2";
+        public string optionNo = "3";
         public string yes = "y";
         public string no = "n";
         public string edit = "";
+        
         public void CategoryMenu()
         {          
-            Console.WriteLine("\nDeseja cadastrar um novo items?\n");
-
+            Console.WriteLine("\nDeseja cadastrar um novo item?\n");
+            SubCategory Sub = new SubCategory();
             do
             {
-                Console.WriteLine("\nDigite [y] para cadastrar, digite [n] para encerrar o cadastro\n");
+                Console.WriteLine("\nDigite [1] para cadastrar, digite [2] para castrar uma sub Categoria digite [3] para encerrar o cadastro\n");
                 string anwser = Console.ReadLine();
-                if (anwser == yes)
+                if (anwser == optionYes)
                 {
                     Console.WriteLine("\nQual item deseja cadastrar?\n");
                     string category = Console.ReadLine();
-                    this.Register(category);
+                    this.Register(category);                   
                     do
                     {
 
@@ -69,6 +73,7 @@ namespace Ecommerce
 
                             } while (newStatus == yes || newStatus == no);
                         }
+                        
                         else
                         {
                             Console.WriteLine("\nOpção invalida\n");
@@ -80,7 +85,14 @@ namespace Ecommerce
 
                     } while (edit == no);
                 }
-                else if (anwser == no)
+                else if (anwser == subC)
+                {
+                    Console.WriteLine("Qual novo nome dessa  sub categoria ?");
+                    string subCategory = Console.ReadLine();
+                    Sub.Register(subCategory);
+                    break;
+                }
+                else if (anwser == optionNo)
                 {
                     break;
                 }
