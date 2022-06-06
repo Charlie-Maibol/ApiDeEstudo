@@ -5,7 +5,11 @@ namespace ByteBank
     public class CheckingAccounts
     {
         public Client Holder { get; set; }
+
+        public static double TaxesOperation { get; private set; }
+
         public double _currency = 100;
+
         public static int TotalOfCreateadAccoutns { get; private set; }
 
 
@@ -52,6 +56,8 @@ namespace ByteBank
         {
             Agency = agency;
             Number = number;
+
+            TaxesOperation = 30 / TotalOfCreateadAccoutns;
 
             TotalOfCreateadAccoutns++;
         }

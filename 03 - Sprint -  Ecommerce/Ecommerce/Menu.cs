@@ -69,20 +69,14 @@ namespace Ecommerce
                                     newStatus = Console.ReadLine();
 
                                 }
-
-
                             } while (newStatus == yes || newStatus == no);
                         }
-                        
                         else
                         {
                             Console.WriteLine("\nOpção invalida\n");
                             Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro\n");
                             edit = Console.ReadLine();
                         }
-
-
-
                     } while (edit == no);
                 }
                 else if (anwser == subC)
@@ -106,10 +100,6 @@ namespace Ecommerce
                             Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
                             subAnwser = Console.ReadLine();
                         }
-                        else if(subAnwser == no)
-                        {
-                            break;
-                        }
 
                     }while(true);
                 }
@@ -123,6 +113,9 @@ namespace Ecommerce
                 }
 
             } while (true);
+            
+
+            
         }
     }
 }
