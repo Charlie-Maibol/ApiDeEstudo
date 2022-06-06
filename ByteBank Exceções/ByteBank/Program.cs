@@ -12,6 +12,7 @@ namespace ByteBank
         {
             try
             {
+
                 Method();
             }
             catch (DivideByZeroException error)
