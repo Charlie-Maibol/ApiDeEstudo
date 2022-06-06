@@ -69,28 +69,39 @@ namespace Ecommerce
                                     newStatus = Console.ReadLine();
 
                                 }
-
-
                             } while (newStatus == yes || newStatus == no);
                         }
-                        
                         else
                         {
                             Console.WriteLine("\nOpção invalida\n");
                             Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro\n");
                             edit = Console.ReadLine();
                         }
-
-
-
                     } while (edit == no);
                 }
                 else if (anwser == subC)
                 {
-                    Console.WriteLine("Qual novo nome dessa  sub categoria ?");
-                    string subCategory = Console.ReadLine();
-                    Sub.Register(subCategory);
-                    break;
+                    Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
+                    string subAnwser = Console.ReadLine();
+                    do
+                    {
+
+                        if (subAnwser == yes)
+                        {
+
+                            Console.WriteLine("Qual novo nome dessa  sub categoria ?");
+                            string subCategory = Console.ReadLine();
+                            this.Register(subCategory);
+                            break;
+                        }
+                        else if (subAnwser != no || subAnwser != yes)
+                        {
+                            Console.WriteLine("Opção inválida");
+                            Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
+                            subAnwser = Console.ReadLine();
+                        }
+
+                    }while(true);
                 }
                 else if (anwser == optionNo)
                 {
