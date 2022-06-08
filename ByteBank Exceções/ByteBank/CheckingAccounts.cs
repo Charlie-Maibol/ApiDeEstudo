@@ -1,4 +1,4 @@
-﻿// using _05_ByteBank;
+﻿using System;
 
 namespace ByteBank
 {
@@ -13,24 +13,11 @@ namespace ByteBank
         public static int TotalOfCreateadAccoutns { get; private set; }
 
 
-        private int _agency;
-        public int Agency
-        {
-            get
-            {
-                return _agency;
-            }
-            set
-            {
-                if (value <= 0)
-                {
-                    return;
-                }
-
-                _agency = value;
-            }
-        }
-        public int Number { get; set; }
+        private readonly int _agency;
+        public int Agency { get; }
+         
+        private readonly int _number;
+        public int Number { get; }
 
         
 
@@ -54,9 +41,21 @@ namespace ByteBank
 
         public CheckingAccounts(int agency, int number)
         {
+            if (number <= 0)
+            {
+                throw new ArgumentException("O argumento número ser maior que zero.", nameof(number));
+            }
+            if (agency <= 0)
+            {
+                
+                throw new ArgumentException("A agencia deve ser maior que zero.", nameof(agency));
+            }
+            
+
             Agency = agency;
             Number = number;
 
+            
             TaxesOperation = 30 / TotalOfCreateadAccoutns;
 
             TotalOfCreateadAccoutns++;
