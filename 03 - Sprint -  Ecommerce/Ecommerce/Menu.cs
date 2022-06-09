@@ -7,7 +7,7 @@ using Ecommerce;
 
 namespace Ecommerce
 {
-    public class Menu : Category
+    public class Menu
     {
         public string optionYes = "1";
         public string subC = "2";
@@ -20,6 +20,7 @@ namespace Ecommerce
         {          
             Console.WriteLine("\nDeseja cadastrar um novo item?\n");
             SubCategory Sub = new SubCategory();
+            Category category = new Category();
             do
             {
                 Console.WriteLine("\nDigite [1] para cadastrar, digite [2] para castrar uma sub Categoria digite [3] para encerrar o cadastro\n");
@@ -27,8 +28,8 @@ namespace Ecommerce
                 if (anwser == optionYes)
                 {
                     Console.WriteLine("\nQual item deseja cadastrar?\n");
-                    string category = Console.ReadLine();
-                    this.Register(category);                   
+                    Menu.Category(category) = Console.ReadLine();
+                    this.Register();                   
                     do
                     {
 
