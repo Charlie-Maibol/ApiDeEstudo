@@ -19,7 +19,7 @@ namespace Ecommerce
         public void CategoryMenu()
         {          
             Console.WriteLine("\nDeseja cadastrar um novo item?\n");
-            SubCategory Sub = new SubCategory();
+            SubCategory sub = new SubCategory();
             Category category = new Category();
             do
             {
@@ -28,8 +28,8 @@ namespace Ecommerce
                 if (anwser == optionYes)
                 {
                     Console.WriteLine("\nQual item deseja cadastrar?\n");
-                    Menu.Category(category) = Console.ReadLine();
-                    this.Register();                   
+
+                    category.Register(Console.ReadLine()) ;            
                     do
                     {
 
@@ -39,9 +39,9 @@ namespace Ecommerce
                         {
                             Console.WriteLine("\nQual novo nome dessa categoria?\n");
                             string rename = Console.ReadLine();
-                            Console.WriteLine(this.name);
-                            this.name = rename;
-                            this.Modified(rename);
+                            Console.WriteLine(category.name);
+                            category.name = rename;
+                            category.Modified(rename);
                             Console.WriteLine("\nDeseja alterar o status do produto ?\n");
                             Console.WriteLine("\nDigite [y] para alterar status para inativo ou [n] Permanecer o status\n");
                             string newStatus = Console.ReadLine();
@@ -49,16 +49,16 @@ namespace Ecommerce
                             {
                                 if (newStatus == yes)
                                 {
-                                    this.ChangeStatus();
+                                    category.ChangeStatus();
                                     Console.WriteLine(rename);
-                                    Console.WriteLine(this.status);
+                                    Console.WriteLine(category.status);
                                     Console.WriteLine("Desativado em: " + DateTime.Now);
                                     break;
                                 }
                                 else if (newStatus == no)
                                 {
                                     Console.WriteLine(rename);
-                                    Console.WriteLine("status: " + this.status + " " + DateTime.Now);
+                                    Console.WriteLine("status: " + category.status + " " + DateTime.Now);
                                     Console.WriteLine();
                                     break;
                                 }
@@ -92,7 +92,7 @@ namespace Ecommerce
 
                             Console.WriteLine("Qual novo nome dessa  sub categoria ?");
                             string subCategory = Console.ReadLine();
-                            this.Register(subCategory);
+                            sub.Register(subCategory);
                             break;
                         }
                         else if (subAnwser != no || subAnwser != yes)
