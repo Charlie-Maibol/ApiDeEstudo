@@ -72,6 +72,10 @@ namespace Ecommerce
                                 }
                             } while (newStatus == yes || newStatus == no);
                         }
+                        else if(edit == no)
+                        {
+                            break;
+                        }
                         else
                         {
                             Console.WriteLine("\nOpção invalida\n");
