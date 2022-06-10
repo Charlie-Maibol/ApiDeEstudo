@@ -70,7 +70,7 @@ namespace Ecommerce
                                     newStatus = Console.ReadLine();
 
                                 }
-                            } while (newStatus == yes || newStatus == no);
+                            } while (newStatus != yes || newStatus != no);
                         }
                         else if(edit == no)
                         {
