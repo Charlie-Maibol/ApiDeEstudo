@@ -38,10 +38,8 @@ namespace Ecommerce
                 }
                 else
                 {
-                    Console.WriteLine("\nValor invalido digite novamente\n");
-                    string category = Console.ReadLine();
-                    this.Register(category);
-                    break;
+                    throw new ArgumentException ("Valor invalido digite novamente");
+                  
 
                 }
 
