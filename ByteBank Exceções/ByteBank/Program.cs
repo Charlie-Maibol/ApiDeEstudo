@@ -12,17 +12,32 @@ namespace ByteBank
         {
             try
             {
+                CheckingAccounts account = new CheckingAccounts(0, 0);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Aconteu um erro de referência");
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
+            try
+            {
 
                 Method();
             }
-            catch (DivideByZeroException error)
+            catch (DivideByZeroException ex)
             {
-                Console.WriteLine(error.Message);
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 Console.WriteLine("Não é possivel fazer divisão por 0!");
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                Console.WriteLine(error.Message);
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Aconteceu um erro!");
             }
 
@@ -41,17 +56,23 @@ namespace ByteBank
         {
 
             int result = Division(10, divided);
-            Console.WriteLine("Resultado da divisão de 10 por " + divided + " é " + result);
+           Console.WriteLine("Resultado da divisão de 10 por " + divided + " é " + result);
 
         }
 
-        private static int Division(int numero, int divisor)
+        private static int Division(int number, int divided)
         {
 
-           CheckingAccounts accounts = null;
-           Console.WriteLine(accounts.Currency);
+            try
+            {
+                return number / divided;
+            }
 
-            return numero / divisor;
+            catch (DivideByZeroException) { 
+             
+                Console.WriteLine("Exceção com número = " + number + " e divisor = " + divided);
+                throw;
+            }
         }
     }
 }
