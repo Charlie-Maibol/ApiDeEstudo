@@ -56,21 +56,26 @@ namespace ByteBank
             Number = number;
 
             
-            TaxesOperation = 30 / TotalOfCreateadAccoutns;
+            
 
             TotalOfCreateadAccoutns++;
+            TaxesOperation = 30 / TotalOfCreateadAccoutns;
         }
 
 
-        public bool Whithdraw(double ammount)
+        public void Whithdraw(double ammount)
         {
+            if(ammount < 0)
+            {
+                throw new ArgumentException("Valor inválido para o saque.", nameof(ammount));
+            }
             if (_currency < ammount)
             {
-                return false;
+                throw new InsufficientBalanceException(Currency, ammount);
             }
 
             _currency -= ammount;
-            return true;
+            return;
         }
 
         public void Deposit(double ammount)
@@ -79,16 +84,15 @@ namespace ByteBank
         }
 
 
-        public bool Transferir(double ammount, CheckingAccounts DestinyAccount)
+        public void Transfer(double ammount, CheckingAccounts DestinyAccount)
         {
-            if (_currency < ammount)
+            if (ammount < 0)
             {
-                return false;
+                throw new ArgumentException("Valor inválido para o tranferencia.", nameof(ammount));
             }
-
-            _currency -= ammount;
+            Whithdraw(ammount);
             DestinyAccount.Deposit(ammount);
-            return true;
+           
         }
     }
 }

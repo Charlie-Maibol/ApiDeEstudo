@@ -13,6 +13,10 @@ namespace ByteBank
             try
             {
                 CheckingAccounts account = new CheckingAccounts(450, 4578420);
+                CheckingAccounts account2 = new CheckingAccounts(450, 4578478);
+
+                account2.Transfer(10000, account);
+
                 account.Deposit(50);
                 Console.WriteLine(account.Currency);
                 account.Whithdraw(500);
@@ -21,6 +25,15 @@ namespace ByteBank
             {
                 Console.WriteLine("Aconteu um erro de referência");
                 Console.WriteLine(ex.Message);
+            }
+            catch (InsufficientBalanceException ex) 
+            {
+                Console.WriteLine(ex.Balance);
+                Console.WriteLine(ex.WithdrawValue);
+                Console.WriteLine(ex.StackTrace);
+
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Exceção do tipo SaldoInsuficiente");
             }
             catch (Exception ex)
             {
@@ -51,7 +64,7 @@ namespace ByteBank
         private static void Method()
         {
 
-            DivisionTest(0);
+            //DivisionTest(50);
 
         }
 
