@@ -93,27 +93,6 @@ namespace Ecommerce
                         Console.WriteLine(ex.Message);
                     }
 
-<<<<<<< HEAD
-=======
-                                    Console.WriteLine("\nOpção invalida digite novamente\n");
-                                    Console.WriteLine("\nDigite [y] para alterar status para inativo ou [n] Permanecer o status\n");
-                                    newStatus = Console.ReadLine();
-
-                                }
-                            } while (newStatus != yes || newStatus != no);
-                        }
-                        else if(edit == no)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nOpção invalida\n");
-                            Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro\n");
-                            edit = Console.ReadLine();
-                        }
-                    } while (edit == no);
->>>>>>> 8ec40558ffca3459f49a866124a25ef9e48db56b
                 }
                 else if (anwser == subC)
                 {
