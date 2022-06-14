@@ -12,7 +12,10 @@ namespace ByteBank
         {
             try
             {
-                CheckingAccounts account = new CheckingAccounts(0, 0);
+                CheckingAccounts account = new CheckingAccounts(450, 4578420);
+                account.Deposit(50);
+                Console.WriteLine(account.Currency);
+                account.Whithdraw(500);
             }
             catch (ArgumentException ex)
             {
