@@ -96,6 +96,7 @@ namespace Ecommerce
                 }
                 else if (anwser == subC)
                 {
+
                     try
                     {
                         Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
@@ -176,12 +177,17 @@ namespace Ecommerce
                                     }
                                 } while (subEdit == no);
                             }
-                            else if (subAnwser != no || subAnwser != yes)
+                            else if (subAnwser == no)
+                            {
+                                break;
+                            }
+                            else
                             {
                                 Console.WriteLine("\nOpção inválida\n");
                                 Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
                                 subAnwser = Console.ReadLine();
                             }
+
 
                         } while (true);
                     }
@@ -189,6 +195,7 @@ namespace Ecommerce
                     {
                         Console.WriteLine(exSub.Message);
                     }
+
                 }
                 else if (anwser == optionNo)
                 {
