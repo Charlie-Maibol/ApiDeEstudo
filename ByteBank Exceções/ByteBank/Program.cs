@@ -12,83 +12,69 @@ namespace ByteBank
         {
             try
             {
-                CheckingAccounts account = new CheckingAccounts(450, 4578420);
-                CheckingAccounts account2 = new CheckingAccounts(450, 4578478);
+                CheckingAccounts account = new CheckingAccounts(456, 4578420);
+                CheckingAccounts account2 = new CheckingAccounts(485, 456478);
 
-                account2.Transfer(10000, account);
+                account2.Transferir(10000, account);
 
                 account.Deposit(50);
                 Console.WriteLine(account.Currency);
-                account.Whithdraw(500);
+                account.Whithdraw(-500);
+                Console.WriteLine(account.Currency);
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine("Aconteu um erro de referência");
+                if(ex.ParamName == "number")
+                {
+                    
+                }
+
+                Console.WriteLine("Argumento com problema: " + ex.ParamName);
+                Console.WriteLine("Ocorreu uma exceção do tipo ArgumentException");
                 Console.WriteLine(ex.Message);
             }
-            catch (InsufficientBalanceException ex) 
+            catch(InsufficientBalanceException ex)
             {
-                Console.WriteLine(ex.Balance);
-                Console.WriteLine(ex.WithdrawValue);
-                Console.WriteLine(ex.StackTrace);
-
                 Console.WriteLine(ex.Message);
-                Console.WriteLine("Exceção do tipo SaldoInsuficiente");
+                Console.WriteLine("Exceção do tipo SaldoInsuficienteException");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-           
-            try
-            {
+            
+            //Metodo();
 
-                Method();
-            }
-            catch (DivideByZeroException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                Console.WriteLine("Não é possivel fazer divisão por 0!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Aconteceu um erro!");
-            }
-
+            Console.WriteLine("Execução finalizada. Tecle enter para sair");
             Console.ReadLine();
         }
-        //Teste com a cadeia de chamada:
-        //Metodo -> TestaDivisao -> Dividir
+
+        // Teste com a cadeia de chamada:
+        // Metodo -> TestaDivisao -> Dividir
         private static void Method()
         {
-
-            //DivisionTest(50);
-
+            DivisionTest(0);
         }
 
         private static void DivisionTest(int divided)
         {
-
-            int result = Division(10, divided);
-           Console.WriteLine("Resultado da divisão de 10 por " + divided + " é " + result);
-
+            int result = Dividir(10, divided);
+            Console.WriteLine("Resultado da divisão de 10 por " + divided + " é " + result);
         }
 
-        private static int Division(int number, int divided)
+        private static int Dividir(int number, int divided)
         {
-
             try
             {
                 return number / divided;
             }
-
-            catch (DivideByZeroException) { 
-             
-                Console.WriteLine("Exceção com número = " + number + " e divisor = " + divided);
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Exceção com numero=" + number + " e divisor=" + divided);
                 throw;
+                Console.WriteLine("Código depois do throw");
             }
         }
+
     }
 }
