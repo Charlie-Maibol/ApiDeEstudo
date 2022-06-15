@@ -35,6 +35,11 @@ namespace ByteBank
             }
             catch(InsufficientBalanceException ex)
             {
+                Console.WriteLine(ex.Currency);
+                Console.WriteLine(ex.WithdrawValue);
+
+                Console.WriteLine(ex.StackTrace);
+                
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Exceção do tipo SaldoInsuficienteException");
             }
