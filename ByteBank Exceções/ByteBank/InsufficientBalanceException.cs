@@ -9,19 +9,23 @@ namespace ByteBank
     public class InsufficientBalanceException : Exception
     {
         public double Balance { get; }
-        public double WithdrawValue { get; }    
+        public double WithdrawValue { get; }
+
         public InsufficientBalanceException()
         {
 
         }
 
-        public InsufficientBalanceException(double Balance, double WithdrawValue) : this ("Tentativa de saque no valor de " + WithdrawValue + " em uma conta com saldo de " + Balance)
+        public InsufficientBalanceException(double balance, double withdrawValue)
+            : this("Tentativa de saque do valor de " + withdrawValue + " em uma conta com saldo de " + balance)
         {
-
+            Balance = Balance;
+            WithdrawValue = withdrawValue;
         }
-        public InsufficientBalanceException(string message) : base(message)
-        {
 
+        public InsufficientBalanceException(string message)
+            : base(message)
+        {
         }
     }
 }
