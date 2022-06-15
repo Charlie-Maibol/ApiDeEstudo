@@ -8,7 +8,7 @@ namespace ByteBank
 {
     public class InsufficientBalanceException : Exception
     {
-        public double Balance { get; }
+        public double Currency { get; }
         public double WithdrawValue { get; }
 
         public InsufficientBalanceException()
@@ -16,10 +16,10 @@ namespace ByteBank
 
         }
 
-        public InsufficientBalanceException(double balance, double withdrawValue)
-            : this("Tentativa de saque do valor de " + withdrawValue + " em uma conta com saldo de " + balance)
+        public InsufficientBalanceException(double currency, double withdrawValue)
+            : this("Tentativa de saque do valor de " + withdrawValue + " em uma conta com saldo de " + currency)
         {
-            Balance = Balance;
+            Currency = currency;
             WithdrawValue = withdrawValue;
         }
 

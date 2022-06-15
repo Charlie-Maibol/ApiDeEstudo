@@ -14,6 +14,8 @@ namespace ByteBank
 
         public Client Titular { get; set; }
 
+        public int WithdrawCounter { get; set; }    
+
         public int Number { get; }
         public int Agency { get; }
 

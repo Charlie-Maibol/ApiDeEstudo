@@ -15,65 +15,93 @@ namespace Ecommerce
         public string name { get; set; }
         public DateTime created { get; private set; }
         public DateTime modifided { get; private set; }
+
+        
         //public string classfication;
-
-        public void Register(string value)
-        {   
-            int alpha = Regex.Matches(value, @"[a-zA-Zà-úÀ-Ú' ']").Count;
-            
-            do
-            {
-                if (value.Length <= 128 && alpha == value.Length && value.Length >= 3)
-                {
-                    this.name = value;
-                    this.status = "Ativo";
-                    this.created = DateTime.Now;
-                    Console.WriteLine("\nRegistro criado: " + value);
-                    Console.WriteLine("Cadrastro realizado com sucesso");
-                    Console.WriteLine("O criado no dia: " + this.created);
-                    Console.WriteLine("Status: " + this.status);                  
-                    return;
-
-
-                }
-                else
-                {
-                    throw new ArgumentException ("Valor invalido digite novamente");
-                  
-
-                }
-
-
-            } while (true);
-
-        }
-        public void Modified(string value)
+        public bool pipoca(string name)
         {
-            int alpha = Regex.Matches(value, @"[a-zA-Zà-úÀ-Ú' ']").Count;
-
-            do
+            if(String.IsNullOrWhiteSpace(name) || String.IsNullOrEmpty(name))
             {
-                if (value.Length <= 128 && alpha == value.Length && value.Length >= 3)
+                throw new ArgumentException("Valor invalido digite novamente juquinha");
+            }
+            else
+            {
+                int alpha = Regex.Matches(name, @"[a-zA-Zà-úÀ-Ú' ']").Count;
+                if (name.Length <= 128 && alpha == name.Length && name.Length >= 3)
                 {
-                    this.name = value;
-                    this.modifided = DateTime.Now;
-                    Console.WriteLine("\nRegistro criado: " + value);
-                    Console.WriteLine("Edição realizado com sucesso");
-                    Console.WriteLine("Modificado no dia: " + this.modifided);
-                    Console.WriteLine();
-                    return;
-
-
+                    return true;
                 }
-                else
+                return false;
+            }
+        }
+        public string Register()
+        {
+            var loop = true;
+
+
+            while (loop)
+            {
+                try
                 {
-                    throw new ArgumentException("Valor invalido digite novamente");
+                    string nomeCategoria = Console.ReadLine();
+                    if (pipoca(nomeCategoria))
+                    {
 
+                        this.status = "Ativo";
+                        this.created = DateTime.Now;
+                        Console.WriteLine("\nRegistro criado: " + (this.name = nomeCategoria));
+                        Console.WriteLine("Cadrastro realizado com sucesso");
+                        Console.WriteLine("O criado no dia: " + this.created);
+                        Console.WriteLine("Status: " + this.status);
+                        loop = false;
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("Valor invalido digite novamente");
+                    }
+                }
+                catch(ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
+            }
+            return "Cadastro realizado com sucesso!!";
+        }
+        public string Modified()
+        {
+            var loop = true;
+
+
+            while (loop)
+            {
+                try
+                {
+                    string nomeCategoria = Console.ReadLine();
+                    if (pipoca(nomeCategoria))
+                    {
+
+                        this.modifided = DateTime.Now;
+                        Console.WriteLine("\nRegistro criado: " + (this.name = nomeCategoria));
+                        Console.WriteLine("Edição realizado com sucesso");
+                        Console.WriteLine("Modificado no dia: " + this.modifided);
+                        Console.WriteLine();
+                        loop = false;
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Valor invalido digite novamente");
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
 
-
-            } while (true);
-
+            }
+            return "Edição realizado com sucesso!!";
         }
         public void ChangeStatus()
         {
