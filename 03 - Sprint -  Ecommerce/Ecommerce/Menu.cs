@@ -96,6 +96,7 @@ namespace Ecommerce
                 }
                 else if (anwser == subC)
                 {
+
                     try
                     {
                         Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
@@ -106,69 +107,87 @@ namespace Ecommerce
                             if (subAnwser == yes)
                             {
 
-                                Console.WriteLine("Qual novo nome dessa  sub categoria ?");
+                                Console.WriteLine("\nQual novo nome dessa  sub categoria ?\n");
                                 string subCategory = Console.ReadLine();
                                 sub.Register(subCategory);
                                 do
                                 {
-
-                                    Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro");
-                                    subEdit = Console.ReadLine();
-                                    if (subEdit == yes)
+                                    try
                                     {
-                                        Console.WriteLine("\nQual novo nome dessa categoria?\n");
-                                        string rename = Console.ReadLine();
-                                        Console.WriteLine(category.name);
-                                        category.name = rename;
-                                        category.Modified(rename);
-                                        Console.WriteLine("\nDeseja alterar o status do produto ?\n");
-                                        Console.WriteLine("\nDigite [y] para alterar status para inativo ou [n] Permanecer o status\n");
-                                        string newStatus = Console.ReadLine();
-                                        do
-                                        {
-                                            if (newStatus == yes)
-                                            {
-                                                category.ChangeStatus();
-                                                Console.WriteLine(rename);
-                                                Console.WriteLine(category.status);
-                                                Console.WriteLine("Desativado em: " + DateTime.Now);
-                                                break;
-                                            }
-                                            else if (newStatus == no)
-                                            {
-                                                Console.WriteLine(rename);
-                                                Console.WriteLine("status: " + category.status + " " + DateTime.Now);
-                                                Console.WriteLine();
-                                                break;
-                                            }
-                                            else
-                                            {
-
-                                                Console.WriteLine("\nOpção invalida digite novamente\n");
-                                                Console.WriteLine("\nDigite [y] para alterar status para inativo ou [n] Permanecer o status\n");
-                                                newStatus = Console.ReadLine();
-
-                                            }
-                                        } while (newStatus == yes || newStatus == no);
-                                    }
-                                    else if (subEdit == no)
-                                    {
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("\nOpção invalida\n");
                                         Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro\n");
-                                        edit = Console.ReadLine();
+                                        subEdit = Console.ReadLine();
+                                        if (subEdit == yes)
+                                        {
+                                            Console.WriteLine("\nQual novo nome dessa categoria?\n");
+                                            string rename = Console.ReadLine();
+                                            Console.WriteLine(category.name);
+                                            category.name = rename;
+                                            category.Modified(rename);
+                                            Console.WriteLine("\nDeseja alterar o status do produto ?\n");
+                                            Console.WriteLine("\nDigite [y] para alterar status para inativo ou [n] Permanecer o status\n");
+                                            string newStatus = Console.ReadLine();
+                                            do
+                                            {
+                                                try
+                                                {
+                                                    if (newStatus == yes)
+                                                    {
+                                                        category.ChangeStatus();
+                                                        Console.WriteLine(rename);
+                                                        Console.WriteLine(category.status);
+                                                        Console.WriteLine("Desativado em: " + DateTime.Now);
+                                                        break;
+                                                    }
+                                                    else if (newStatus == no)
+                                                    {
+                                                        Console.WriteLine(rename);
+                                                        Console.WriteLine("status: " + category.status + " " + DateTime.Now);
+                                                        Console.WriteLine();
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+
+                                                        Console.WriteLine("\nOpção invalida digite novamente\n");
+                                                        Console.WriteLine("\nDigite [y] para alterar status para inativo ou [n] Permanecer o status\n");
+                                                        newStatus = Console.ReadLine();
+
+                                                    }
+                                                }
+                                                catch (ArgumentException exSub)
+                                                {
+                                                    Console.WriteLine(exSub.Message);
+                                                }
+                                            } while (newStatus == yes || newStatus == no);
+                                        }
+                                        else if (subEdit == no)
+                                        {
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nOpção invalida\n");
+                                            Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro\n");
+                                            edit = Console.ReadLine();
+                                        }
+                                    }
+                                    catch (ArgumentException exSub)
+                                    {
+                                        Console.WriteLine(exSub.Message);
                                     }
                                 } while (subEdit == no);
                             }
-                            else if (subAnwser != no || subAnwser != yes)
+                            else if (subAnwser == no)
                             {
-                                Console.WriteLine("Opção inválida");
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nOpção inválida\n");
                                 Console.WriteLine("\nVocê deseja criar uma sub categoria? Digite [y] para criar ou [n] para encerrar o cadastro\n");
                                 subAnwser = Console.ReadLine();
                             }
+
 
                         } while (true);
                     }
@@ -176,6 +195,7 @@ namespace Ecommerce
                     {
                         Console.WriteLine(exSub.Message);
                     }
+
                 }
                 else if (anwser == optionNo)
                 {
