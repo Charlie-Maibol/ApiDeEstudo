@@ -18,11 +18,11 @@ namespace Ecommerce
 
         
         //public string classfication;
-        public bool pipoca(string name)
+        public bool Verify (string name)
         {
             if(String.IsNullOrWhiteSpace(name) || String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("Valor invalido digite novamente juquinha");
+                throw new ArgumentException("Valor é nulo digite novamente");
             }
             else
             {
@@ -36,7 +36,7 @@ namespace Ecommerce
         }
         public string Register()
         {
-            var loop = true;
+            bool loop = true;
 
 
             while (loop)
@@ -44,7 +44,7 @@ namespace Ecommerce
                 try
                 {
                     string nomeCategoria = Console.ReadLine();
-                    if (pipoca(nomeCategoria))
+                    if (Verify(nomeCategoria))
                     {
 
                         this.status = "Ativo";
@@ -53,6 +53,7 @@ namespace Ecommerce
                         Console.WriteLine("Cadrastro realizado com sucesso");
                         Console.WriteLine("O criado no dia: " + this.created);
                         Console.WriteLine("Status: " + this.status);
+                        Console.WriteLine();
                         loop = false;
                         
                     }
@@ -68,10 +69,11 @@ namespace Ecommerce
                 
             }
             return "Cadastro realizado com sucesso!!";
+
         }
         public string Modified()
         {
-            var loop = true;
+            bool loop = true;
 
 
             while (loop)
@@ -79,7 +81,7 @@ namespace Ecommerce
                 try
                 {
                     string nomeCategoria = Console.ReadLine();
-                    if (pipoca(nomeCategoria))
+                    if (Verify(nomeCategoria))
                     {
 
                         this.modifided = DateTime.Now;
