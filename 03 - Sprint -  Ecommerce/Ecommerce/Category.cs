@@ -83,11 +83,12 @@ namespace Ecommerce
                     string nomeCategoria = Console.ReadLine();
                     if (Verify(nomeCategoria))
                     {
-
+                        this.status = "Ativo";
                         this.modifided = DateTime.Now;
                         Console.WriteLine("\nRegistro criado: " + (this.name = nomeCategoria));
                         Console.WriteLine("Edição realizado com sucesso");
                         Console.WriteLine("Modificado no dia: " + this.modifided);
+                        Console.WriteLine("Status: " + this.status);
                         Console.WriteLine();
                         loop = false;
 
