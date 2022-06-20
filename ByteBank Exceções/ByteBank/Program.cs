@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,48 +11,52 @@ namespace ByteBank
     {
         static void Main(string[] args)
         {
-            try
-            {
-                CheckingAccounts account = new CheckingAccounts(456, 4578420);
-                CheckingAccounts account2 = new CheckingAccounts(485, 456478);
-
-                account2.Transferir(10000, account);
-
-                account.Deposit(50);
-                Console.WriteLine(account.Currency);
-                account.Whithdraw(-500);
-                Console.WriteLine(account.Currency);
-            }
-            catch (ArgumentException ex)
-            {
-                if(ex.ParamName == "number")
-                {
-                    
-                }
-
-                Console.WriteLine("Argumento com problema: " + ex.ParamName);
-                Console.WriteLine("Ocorreu uma exceção do tipo ArgumentException");
-                Console.WriteLine(ex.Message);
-            }
-            catch(InsufficientBalanceException ex)
-            {
-                Console.WriteLine(ex.Currency);
-                Console.WriteLine(ex.WithdrawValue);
-
-                Console.WriteLine(ex.StackTrace);
-                
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Exceção do tipo SaldoInsuficienteException");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            
-            //Metodo();
+            LoadAccounts();
 
             Console.WriteLine("Execução finalizada. Tecle enter para sair");
             Console.ReadLine();
+        }
+        private static void LoadAccounts()
+        {
+            Reader reader = null;
+            try
+            {
+                reader = new Reader("contas.txt");
+
+                reader.NextLine();
+                reader.NextLine();
+                reader.NextLine();
+
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Exceção do tipo IOException capturada e tratada!");
+                
+            }
+            finally
+            {
+                    reader.Close(); 
+            }
+        }
+        private static void InnerExcepitonTester()
+        {
+            try
+            {
+                CheckingAccounts account1 = new CheckingAccounts(4564, 789684);
+                CheckingAccounts account2 = new CheckingAccounts(7891, 456794);
+
+                account1.Transfer(10000, account2);
+                //account1.Whithdraw(100000);
+            }
+            catch (FinancialOperationException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+
+                Console.WriteLine("Informações da INNER EXCEPTION (exceção interna):");
+                Console.WriteLine(e.InnerException.Message);
+                Console.WriteLine(e.InnerException.StackTrace);
+            }
         }
 
         // Teste com a cadeia de chamada:
@@ -77,7 +82,7 @@ namespace ByteBank
             {
                 Console.WriteLine("Exceção com numero=" + number + " e divisor=" + divided);
                 throw;
-                Console.WriteLine("Código depois do throw");
+                
             }
         }
 
