@@ -10,7 +10,11 @@ namespace ByteBank
     {
         private static int TaxesOperation;
 
-        public static int TotalOfCreateadAccoutns { get; private set; }
+        public static int TotalOfCreateadAccounts { get; private set; }
+
+        public int CheckOutFailureCounter { get; private set; } 
+
+        public int TransferFailureCounter { get; private set; } 
 
         public Client Titular { get; set; }
 
@@ -52,8 +56,8 @@ namespace ByteBank
             Agency = agency;
             Number = number;
 
-            TotalOfCreateadAccoutns++;
-            TaxesOperation = 30 / TotalOfCreateadAccoutns;
+            TotalOfCreateadAccounts++;
+            TaxesOperation = 30 / TotalOfCreateadAccounts;
         }
 
         public void Whithdraw(double ammount)
@@ -65,8 +69,20 @@ namespace ByteBank
 
             if (_currency < ammount)
             {
+                CheckOutFailureCounter++;
                 throw new InsufficientBalanceException(Currency, ammount);
             }
+            try
+            {
+                Whithdraw(ammount);
+
+            }
+            catch (InsufficientBalanceException ex)
+            {
+                TransferFailureCounter++;
+                throw new FinancialOperationException("Operação não realizada.", ex);
+            }
+
 
             _currency -= ammount;
         }
@@ -76,14 +92,24 @@ namespace ByteBank
             _currency += ammount;
         }
 
-        public void Transferir(double ammount, CheckingAccounts DestinyAccount)
+        public void Transfer(double ammount, CheckingAccounts DestinyAccount)
         {
             if (ammount < 0)
             {
                 throw new ArgumentException("Valor inválido para a transferência.", nameof(ammount));
             }
 
-            Whithdraw(ammount);
+            try
+            {
+                Whithdraw(ammount);
+                
+            }
+            catch (InsufficientBalanceException ex)
+            {
+                TransferFailureCounter++;
+                throw new FinancialOperationException("Operação não realizada.", ex);
+            }
+
             DestinyAccount.Deposit(ammount);
         }
     }

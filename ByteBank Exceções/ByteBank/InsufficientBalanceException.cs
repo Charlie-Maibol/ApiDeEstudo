@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ByteBank
 {
-    public class InsufficientBalanceException : Exception
+    public class InsufficientBalanceException : FinancialOperationException
     {
         public double Currency { get; }
         public double WithdrawValue { get; }
@@ -26,6 +26,12 @@ namespace ByteBank
         public InsufficientBalanceException(string message)
             : base(message)
         {
+        }
+
+        public InsufficientBalanceException(string message, Exception InnerException)
+            : base(message, InnerException)
+        {
+
         }
     }
 }
