@@ -1,0 +1,6 @@
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\bin\Debug\ByteBank.Modelos.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\bin\Debug\ByteBank.Modelos.pdb
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.csproj.AssemblyReference.cache
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.pdb
