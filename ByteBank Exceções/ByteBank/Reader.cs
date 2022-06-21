@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ByteBank
 {
-    public class Reader
+    public class Reader : IDisposable
     {
 
         public string Arquivo { get; }
@@ -17,6 +17,11 @@ namespace ByteBank
         public Reader(string file)
         {
             File = file;
+            
+            
+
+            //throw new FileNotFoundException();
+
             Console.WriteLine("Abrindo arquivo: " + file);
         }
     
@@ -30,7 +35,7 @@ namespace ByteBank
             return "Linha do arquivo";
         }
 
-        public void Close()
+        public void Dispose()
         {
             Console.WriteLine("Fechando arquivo.");
         }

@@ -11,32 +11,51 @@ namespace ByteBank
     {
         static void Main(string[] args)
         {
-            LoadAccounts();
+            try
+            {
+                LoadAccounts();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Catch no metodo main");
+            }
 
             Console.WriteLine("Execução finalizada. Tecle enter para sair");
             Console.ReadLine();
         }
         private static void LoadAccounts()
         {
-            Reader reader = null;
-            try
-            {
-                reader = new Reader("contas.txt");
 
+            using(Reader reader = new Reader("teste.txt"))
+            {
                 reader.NextLine();
-                reader.NextLine();
-                reader.NextLine();
+            }
 
-            }
-            catch (IOException)
-            {
-                Console.WriteLine("Exceção do tipo IOException capturada e tratada!");
-                
-            }
-            finally
-            {
-                    reader.Close(); 
-            }
+
+            //-----------------------------------------------------
+            //Reader reader = null;
+            //try
+            //{
+            //    reader = new Reader("contas.txt");
+
+            //    reader.NextLine();
+            //    reader.NextLine();
+            //    reader.NextLine();
+
+            //}
+            //catch (IOException)
+            //{
+            //    Console.WriteLine("Exceção do tipo IOException capturada e tratada!");
+
+            //}
+            //finally
+            //{
+            //    Console.WriteLine("Executando Finally");
+            //    if(reader != null)
+            //    {
+            //        reader.Close();
+            //    }
+            //}
         }
         private static void InnerExcepitonTester()
         {
