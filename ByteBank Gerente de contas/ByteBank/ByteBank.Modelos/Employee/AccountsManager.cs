@@ -1,4 +1,4 @@
-﻿using ByteBank.BankSystem;
+﻿using ByteBank.Modelos.Employee;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace ByteBank.Employee
         }
 
 
-        public override double GetBonus()
+        internal protected override double GetBonus()
         {
 
             return Salary * 0.25;

@@ -20,7 +20,7 @@ namespace ByteBank.Employee
             Salary *= 1.10;
         }
 
-        public override double GetBonus()
+        internal protected override double GetBonus()
         {
 
             return Salary * 0.20; 

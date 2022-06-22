@@ -25,7 +25,7 @@ namespace ByteBank.Employee
 
         public abstract void RaseSalary();
 
-        public abstract double GetBonus();
+       internal protected abstract double GetBonus();
 
         
 
