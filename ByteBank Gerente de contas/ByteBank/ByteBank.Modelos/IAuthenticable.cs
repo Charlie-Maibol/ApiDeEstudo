@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ByteBank.BankSystem
+namespace ByteBank.Modelos
 {
     public interface IAuthenticable
     {

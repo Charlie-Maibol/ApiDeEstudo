@@ -5,19 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using ByteBank.Employee;
 
-namespace ByteBank.BankSystem
+namespace ByteBank.Modelos.Employee
 {
     public abstract class UserLoginEmployee : Employees, IAuthenticable
     {
+        private AuthenticationHelper authenticationHelper = new AuthenticationHelper();
         public string Password {  get; set; }
         public UserLoginEmployee(double salary, string cpf) : base(salary, cpf)
         {
 
         }
-        
+
         public bool userLogin(string password)
         {
-            return Password == password;
+            return authenticationHelper.checkPassword(Password, password);
         }
     }
 }
