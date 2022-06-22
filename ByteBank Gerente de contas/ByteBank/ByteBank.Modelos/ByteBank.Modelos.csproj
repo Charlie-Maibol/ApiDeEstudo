@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationHelper.cs" />
     <Compile Include="BonusManager.cs" />
     <Compile Include="BusinessParterner.cs" />
     <Compile Include="CheckingAccounts.cs" />
