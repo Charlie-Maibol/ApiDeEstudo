@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ByteBank
 {
+    /// <summary>
+    /// Esta Classe define uma conta corrente do ByteBank
+    /// </summary>
     public class CheckingAccounts
     {
         private static int TaxesOperation;
@@ -40,7 +43,11 @@ namespace ByteBank
                 _currency = value;
             }
         }
-
+        /// <summary>
+        /// Cria uma Instância de conta corrente com os argumentos utilizados
+        /// </summary>
+        /// <param name="agency"> Representa o Valor da propriedade <see cref="Agency"/> e deve possuir um número maior que zero</param>
+        /// <param name="number"> Representa o Valor da propriedade <see cref="Number"/> e deve possuir um número maior que zero</param>
         public CheckingAccounts(int agency, int number)
         {
             if (number <= 0)
