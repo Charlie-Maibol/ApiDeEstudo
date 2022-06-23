@@ -36,9 +36,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Bibliotecas\ByteBank.Modelos.dll</HintPath>
     </Reference>
-    <Reference Include="Humanizer">
-      <HintPath>..\..\..\Bibliotecas\Humanizer-main\src\Humanizer\bin\Debug\net6.0\Humanizer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
