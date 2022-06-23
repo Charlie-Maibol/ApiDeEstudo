@@ -67,6 +67,15 @@ namespace ByteBank
             TaxesOperation = 30 / TotalOfCreateadAccounts;
         }
 
+        /// <summary>
+        /// /// <summary>
+        /// Realiza o Saque e atualiza o valor da propriedade<see cref="_currency"/>
+        /// </summary>
+        /// <param name="ammount"> Representa o valor do saque, deve ser maior que 0 e menor que o <see cref="Whithdraw"/></param>
+        /// </summary>
+        /// <exception cref="ArgumentException">Exeção de um valor negativo é utilizado no argumento<paramref name="ammount"/exception>
+        /// <exception cref="InsufficientBalanceException"></exception>
+        /// <exception cref="FinancialOperationException"></exception>
         public void Whithdraw(double ammount)
         {
             if (ammount < 0)

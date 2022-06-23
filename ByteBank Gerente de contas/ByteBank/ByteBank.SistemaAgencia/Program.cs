@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,19 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            CheckingAccounts account = new CheckingAccounts(847, 489754);
+            DateTime exipireDate = new DateTime(2022, 7, 21);
+            DateTime currentDay = DateTime.Now;
+            TimeSpan period = TimeSpan.FromMinutes(60);
 
-            Console.WriteLine(account.Number);
+            string message = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(period);
+
+            Console.WriteLine(message);
+            
 
             Console.ReadLine();
         }
+        
     }
+
+
 }
