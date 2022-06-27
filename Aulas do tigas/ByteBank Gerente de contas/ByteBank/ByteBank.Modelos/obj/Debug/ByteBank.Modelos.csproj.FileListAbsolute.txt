@@ -56,3 +56,10 @@ C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de co
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\bin\Debug\zh-Hans\Humanizer.resources.dll
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\bin\Debug\zh-Hant\Humanizer.resources.dll
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.csproj.CopyComplete
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Aulas do tigas\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\bin\Debug\ByteBank.Modelos.xml
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Aulas do tigas\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\bin\Debug\ByteBank.Modelos.pdb
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Aulas do tigas\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.csproj.AssemblyReference.cache
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Aulas do tigas\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Aulas do tigas\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.csproj.CopyComplete
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Aulas do tigas\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Aulas do tigas\ByteBank Gerente de contas\ByteBank\ByteBank.Modelos\obj\Debug\ByteBank.Modelos.pdb

@@ -12,16 +12,17 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            DateTime exipireDate = new DateTime(2022, 7, 21);
-            DateTime currentDay = DateTime.Now;
-            TimeSpan period = TimeSpan.FromMinutes(60);
+            string url = "pagina?moedaOrigem=real&moedaDestino=dolar";
 
-            string message = "Vencimento em " + TimeSpanHumanizeExtensions.Humanize(period);
+            int indice = url.IndexOf('?');
 
-            Console.WriteLine(message);
-            
+            Console.WriteLine(indice);
+            Console.WriteLine(url);
+            string arguments = url.Substring(indice + 1);
+            Console.WriteLine(arguments);
 
             Console.ReadLine();
+
         }
         
     }

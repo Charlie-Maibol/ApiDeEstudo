@@ -16,5 +16,6 @@
             <param name="agency"> Representa o Valor da propriedade <see cref="P:ByteBank.CheckingAccounts.Agency"/> e deve possuir um número maior que zero</param>
             <param name="number"> Representa o Valor da propriedade <see cref="P:ByteBank.CheckingAccounts.Number"/> e deve possuir um número maior que zero</param>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:ByteBank.CheckingAccounts.Whithdraw(System.Double)" -->
     </members>
 </doc>
