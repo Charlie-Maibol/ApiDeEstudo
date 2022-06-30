@@ -11,21 +11,24 @@ namespace Ecommerce
     {
         public string optionYes = "1";
         public string subC = "2";
-        public string optionNo = "3";
+        public string list = "3";
+        public string optionNo = "4";
         public string yes = "y";
         public string no = "n";
         public string edit = "";
         public string subEdit = "";
+        
 
         public void CategoryMenu()
         {
             Console.WriteLine("\nDeseja cadastrar um novo item?\n");
             SubCategory sub = new SubCategory();
             Category category = new Category();
+            
 
             do
             {
-                Console.WriteLine("\nDigite [1] para cadastrar, digite [2] para castrar uma sub Categoria digite [3] para encerrar o cadastro\n");
+                Console.WriteLine("\nDigite [1] para cadastrar, digite [2] para castrar uma sub Categoria, digite [3] para pesquisar uma categoria ou digite [4] para encerrar o cadastro \n");
                 string anwser = Console.ReadLine();
                 if (anwser == optionYes)
                 {
@@ -153,6 +156,10 @@ namespace Ecommerce
                         subAnwser = Console.ReadLine();
                     }
 
+                }      
+                else if (anwser == list)
+                {
+                    category.Search();
                 }
                 else if (anwser == optionNo)
                 {
@@ -162,6 +169,7 @@ namespace Ecommerce
                 {
                     Console.WriteLine("\nOpção inválida\n");
                 }
+               
 
             } while (true);
 

@@ -10,13 +10,16 @@ namespace Ecommerce
 {
     public class Category
     {
-        //public int ID;
+        
+        List<Category> categoryList = new List<Category>();
         public string status { get; set; }
         public string name { get; set; }
-        public DateTime created { get; private set; }
-        public DateTime modifided { get; private set; }
 
-        
+        public string created = DateTime.Now.ToString("dd-MM-yyyy - HH:mm:ss");
+        public string modified = DateTime.Now.ToString("dd-MM-yyyy - HH:mm:ss");
+        public int ID { get; set; }
+
+
         //public string classfication;
         public bool Verify (string name)
         {
@@ -43,17 +46,18 @@ namespace Ecommerce
             {
                 try
                 {
-                    string nomeCategoria = Console.ReadLine();
-                    if (Verify(nomeCategoria))
+                    string nameCategory = Console.ReadLine();
+                    if (Verify(nameCategory))
                     {
-
-                        this.status = "Ativo";
-                        this.created = DateTime.Now;
-                        Console.WriteLine("\nRegistro criado: " + (this.name = nomeCategoria));
-                        Console.WriteLine("Cadrastro realizado com sucesso");
+                        Category category = new Category();
+                        category.status = "Ativo";                       
+                        category.ID = categoryList.Count+1;
+                        Console.WriteLine("\nRegistro criado: " + (category.name = nameCategory));
                         Console.WriteLine("O criado no dia: " + this.created);
-                        Console.WriteLine("Status: " + this.status);
-                        Console.WriteLine();
+                        Console.WriteLine("Status: " + category.status);
+                        Console.WriteLine("ID: " + category.ID);
+                        categoryList.Add(category);
+                        Console.WriteLine("Cadrastro realizado com sucesso");
                         loop = false;
                         
                     }
@@ -83,11 +87,10 @@ namespace Ecommerce
                     string nomeCategoria = Console.ReadLine();
                     if (Verify(nomeCategoria))
                     {
-                        this.status = "Ativo";
-                        this.modifided = DateTime.Now;
+                        this.status = "Ativo";                       
                         Console.WriteLine("\nRegistro criado: " + (this.name = nomeCategoria));
                         Console.WriteLine("Edição realizado com sucesso");
-                        Console.WriteLine("Modificado no dia: " + this.modifided);
+                        Console.WriteLine("Modificado no dia: " + (this.modified = DateTime.Now.ToString("dd-MM-yyyy - HH:mm:ss")));
                         Console.WriteLine("Status: " + this.status);
                         Console.WriteLine();
                         loop = false;
@@ -116,6 +119,18 @@ namespace Ecommerce
             {
 
                 this.status = "Ativo";
+            }
+        }
+
+        public void Search()
+        {
+            foreach(Category listed in categoryList)
+            {
+                Console.WriteLine("\nRegistro criado: " + listed.name);
+                Console.WriteLine("O criado no dia: " + this.created);
+                Console.WriteLine("Status: " + listed.status);
+                Console.WriteLine("ID: " + listed.ID);
+                Console.WriteLine("Editado em: " + this.modified);
             }
         }
     }
