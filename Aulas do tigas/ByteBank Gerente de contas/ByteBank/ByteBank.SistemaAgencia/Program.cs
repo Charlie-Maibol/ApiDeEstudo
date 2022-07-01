@@ -3,31 +3,60 @@ using System.Text.RegularExpressions;
 
 namespace ByteBank.SistemaAgencia
 {
-    internal class Program {
+    internal class Program
+    {
 
         static void Main(string[] args)
         {
+            ListOfCheckingaccounts list = new ListOfCheckingaccounts();
+            list.myMethodo(number: 10);
+            list.myMethodo("text", 10);
 
+            CheckingAccounts CharlesAccount = new CheckingAccounts(564, 567976);
+
+            list.add(CharlesAccount);
+
+
+
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+            list.add(new CheckingAccounts(874, 5679878));
+
+            //lista.remove(CharlesAccount);
+
+
+
+            Console.ReadLine();
+        }
+        public void testingArrayCheckingAccouts()
+        {
             CheckingAccounts[] accounts = new CheckingAccounts[]
-            {
+           {
                 new CheckingAccounts(874, 5679878),
-               new  CheckingAccounts(874, 6669878),
+                new CheckingAccounts(874, 6669878),
                 new CheckingAccounts(874, 9879878),
-            };
+           };
 
-            
+
 
             for (int index = 0; index < accounts.Length; index++)
             {
-                 CheckingAccounts currentAccount = accounts[index];
+                CheckingAccounts currentAccount = accounts[index];
 
                 Console.WriteLine($"Conta {index} {currentAccount.Number}");
                 Console.WriteLine($"Conta {index} {accounts[index].Agency}");
             }
-
-            Console.ReadLine();
         }
-        
         static void arryTesteInt()
         {
             int[] ages = null;
