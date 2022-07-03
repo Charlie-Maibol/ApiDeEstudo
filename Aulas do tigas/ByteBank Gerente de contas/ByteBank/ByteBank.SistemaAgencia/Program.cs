@@ -57,6 +57,7 @@ namespace ByteBank.SistemaAgencia
                 Console.WriteLine($"Conta {index} {accounts[index].Agency}");
             }
         }
+       
         static void arryTesteInt()
         {
             int[] ages = null;

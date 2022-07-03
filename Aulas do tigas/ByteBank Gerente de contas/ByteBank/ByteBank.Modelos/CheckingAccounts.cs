@@ -128,5 +128,19 @@ namespace ByteBank
 
             DestinyAccount.Deposit(ammount);
         }
+
+        public override bool Equals(object obj)
+        {
+            CheckingAccounts anotherAccounts = obj as CheckingAccounts;
+
+            if(anotherAccounts == null)
+            {
+                return false;
+            }
+
+            return Number == anotherAccounts.Number && Agency == anotherAccounts.Agency;
+            
+            
+        }
     }
 }

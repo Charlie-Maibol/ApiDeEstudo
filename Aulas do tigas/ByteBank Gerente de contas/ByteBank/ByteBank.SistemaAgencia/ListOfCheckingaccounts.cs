@@ -28,6 +28,19 @@ namespace ByteBank.SistemaAgencia
             _itens[_nextPosition] = Item;
             _nextPosition++;
         }
+        public void Remove(CheckingAccounts item)
+        {
+            int indexItem = -1;
+
+            for (int i = 0; i < _nextPosition; i++)
+            {
+                CheckingAccounts currentItem = _itens[i];
+                if (_itens[i].Equals(item))
+                {
+
+                }
+            }
+        }
 
         public void myMethodo(string text = "text", int number = 5)
         {
