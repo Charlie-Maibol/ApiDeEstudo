@@ -93,7 +93,7 @@ namespace Ecommerce
                     if (subAnwser == yes)
                     {
                         Console.WriteLine("\nQual nome dessa nova sub categoria ?\n");
-                        sub.Register();
+                        category.Register();
                         do
                         {
                             Console.WriteLine("\nVocê deseja editar o item? Digite [y] para alterar ou [n] para encerrar o cadastro\n");
