@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "IDiNAjjVJDAic8olD4sJIHPHirRcW7b+VQUg7WraOx65g02fx3jkZxac6VeHh5S7fkG4dPV99ifq+6Bkpe9pjg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\Eccomerce\\Eccomerce.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
