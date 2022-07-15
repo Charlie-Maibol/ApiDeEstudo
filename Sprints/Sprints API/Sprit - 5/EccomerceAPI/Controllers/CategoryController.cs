@@ -30,7 +30,7 @@ namespace EccomerceAPI.Controllers
 
             _context.Categories.Add(category);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(SearchName), new { Id = category.ID }, category);
+            return CreatedAtAction(nameof(SearchId), new { Id = category.ID }, category);
         }
 
         [HttpGet]
@@ -44,7 +44,7 @@ namespace EccomerceAPI.Controllers
         {
             if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
            {
-                return NoContent();
+                return NotFound();
            }
 
            var category = _context.Categories.Where(categories => categories.Name.ToLower().Contains(name.ToLower())).ToList();
@@ -63,10 +63,10 @@ namespace EccomerceAPI.Controllers
         public IActionResult SearchId(int Id)
         {
             Category category = _context.Categories.FirstOrDefault(category => category.ID == Id);
-            if (category != null)
+            if (category != null )
             {
-                List<Category> CategoryDto = _mapper.Map<List<Category>>(category);
-                return Ok(category);
+                SearchCategoriesDto SearchDto = _mapper.Map<SearchCategoriesDto>(category);
+                return Ok(SearchDto);
             }
             
             return NotFound();
