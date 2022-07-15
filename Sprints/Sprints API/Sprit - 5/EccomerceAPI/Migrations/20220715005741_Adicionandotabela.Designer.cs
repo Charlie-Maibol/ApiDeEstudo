@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EccomerceAPI.Migrations
 {
     [DbContext(typeof(CategoryContext))]
-    [Migration("20220714200604_CriandoTabelaDeCategorias")]
-    partial class CriandoTabelaDeCategorias
+    [Migration("20220715005741_Adicionandotabela")]
+    partial class Adicionandotabela
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

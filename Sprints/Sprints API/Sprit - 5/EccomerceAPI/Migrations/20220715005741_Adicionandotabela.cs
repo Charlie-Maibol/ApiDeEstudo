@@ -1,33 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.EntityFrameworkCore.Metadata;
 
-namespace FilmesAPI.Migrations
+namespace EccomerceAPI.Migrations
 {
-    public partial class CriandoTabelaDeFilme : Migration
+    public partial class Adicionandotabela : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Filmes",
+                name: "Categories",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Titulo = table.Column<string>(type: "text", nullable: false),
-                    Diretor = table.Column<string>(type: "text", nullable: false),
-                    Genero = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true),
-                    Duracao = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    created = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Consult = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Filmes", x => x.ID);
+                    table.PrimaryKey("PK_Categories", x => x.ID);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Filmes");
+                name: "Categories");
         }
     }
 }

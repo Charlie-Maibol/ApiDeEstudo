@@ -15,5 +15,6 @@ namespace EccomerceAPI.Data.Dtos
         public DateTime Modified { get; set; } = DateTime.Now;
 
         public DateTime Consult { get; set; } = DateTime.Now;
+        
     }
 }

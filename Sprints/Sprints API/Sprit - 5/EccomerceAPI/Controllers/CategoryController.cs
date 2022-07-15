@@ -30,7 +30,7 @@ namespace EccomerceAPI.Controllers
 
             _context.Categories.Add(category);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(SearchId), new { Id = category.ID }, category);
+            return CreatedAtAction(nameof(SearchName), new { Id = category.ID }, category);
         }
 
         [HttpGet]
@@ -39,25 +39,25 @@ namespace EccomerceAPI.Controllers
             return _context.Categories;
         }
 
-        //[HttpGet("{search/name}")]
-        //public IActionResult SearchName(string name)
-        //{
-        //    if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128 || Regex.IsMatch(name, @"[a-zA-Zà-úÀ-Ú' ']"))
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpGet("search/{name}")]
+        public IActionResult SearchName(string name)
+        {
+            if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
+           {
+                return NoContent();
+           }
 
-        //    var category = _context.Categories.Where(categories => categories.Name.ToLower().Contains(name.ToLower())).ToList();
-        //    if (category != null)
-        //    {
-        //        List<Category> CategoryDto = _mapper.Map<List<Category>>(category);
-        //        return Ok(category);
-        //    }
+           var category = _context.Categories.Where(categories => categories.Name.ToLower().Contains(name.ToLower())).ToList();
+           if (category != null)
+           {
+               List<Category> CategoryDto = _mapper.Map<List<Category>>(category);
+                return Ok(category);
+           }
 
 
 
-        //    return NotFound();
-        //}
+            return NotFound();
+        }
 
         [HttpGet("{ID}")]
         public IActionResult SearchId(int Id)
@@ -65,8 +65,8 @@ namespace EccomerceAPI.Controllers
             Category category = _context.Categories.FirstOrDefault(category => category.ID == Id);
             if (category != null)
             {
-                SearchCategoriesDto SearchDto = _mapper.Map<SearchCategoriesDto>(category);
-                return Ok(SearchDto);
+                List<Category> CategoryDto = _mapper.Map<List<Category>>(category);
+                return Ok(category);
             }
             
             return NotFound();
@@ -74,15 +74,15 @@ namespace EccomerceAPI.Controllers
 
        
         [HttpPut("{ID}")]
-        public IActionResult EditCategory(string Name, [FromBody] EditCategoryDto nameDto)
+        public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto categoryDto)
         {
-            Category category = _context.Categories.FirstOrDefault(category => category.Name == Name);
+            Category category = _context.Categories.FirstOrDefault(category => category.ID   == Id);
             if (category == null)
             {
 
                 return NotFound();
             }
-            _mapper.Map(nameDto, category);
+            _mapper.Map(categoryDto, category);
             _context.SaveChanges();
             return NoContent();
 
