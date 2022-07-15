@@ -26,6 +26,9 @@ namespace EccomerceAPI.Migrations
                     b.Property<DateTime>("Consult")
                         .HasColumnType("datetime");
 
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
