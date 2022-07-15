@@ -5,7 +5,6 @@ namespace EccomerceAPI.Data.Dtos
 {
     public class EditCategoryDto
     {
-
         
         [Required(ErrorMessage = "Campo Obrigatório")]
         [StringLength(128, ErrorMessage = "Você excedeu o número da caracteres permitidos!")]
@@ -13,8 +12,6 @@ namespace EccomerceAPI.Data.Dtos
         public string Name { get; set; }
         public bool Status { get; set; } = true;
         public DateTime Modified { get; set; } = DateTime.Now;
-
-        public DateTime Consult { get; set; } = DateTime.Now;
         
     }
 }

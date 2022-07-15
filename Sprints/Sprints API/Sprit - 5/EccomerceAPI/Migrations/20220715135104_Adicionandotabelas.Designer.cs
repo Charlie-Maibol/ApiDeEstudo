@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EccomerceAPI.Migrations
 {
     [DbContext(typeof(CategoryContext))]
-    [Migration("20220715005741_Adicionandotabela")]
-    partial class Adicionandotabela
+    [Migration("20220715135104_Adicionandotabelas")]
+    partial class Adicionandotabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,9 @@ namespace EccomerceAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Consult")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("Modified")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Name")

@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace EccomerceAPI.Migrations
 {
-    public partial class Adicionandotabela : Migration
+    public partial class Adicionandotabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,8 @@ namespace EccomerceAPI.Migrations
                     Name = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     created = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Consult = table.Column<DateTime>(type: "datetime", nullable: false)
+                    Consult = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {

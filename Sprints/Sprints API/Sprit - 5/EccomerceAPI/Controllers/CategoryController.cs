@@ -44,13 +44,13 @@ namespace EccomerceAPI.Controllers
         {
             if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
            {
-                return NotFound();
+                return BadRequest();
            }
 
            var category = _context.Categories.Where(categories => categories.Name.ToLower().Contains(name.ToLower())).ToList();
-           if (category != null)
+           if (category.Count != 0)
            {
-               List<Category> CategoryDto = _mapper.Map<List<Category>>(category);
+               List<Category> categoryDto = _mapper.Map<List<Category>>(category);
                 return Ok(category);
            }
 
@@ -62,19 +62,40 @@ namespace EccomerceAPI.Controllers
         [HttpGet("{ID}")]
         public IActionResult SearchId(int Id)
         {
+            
             Category category = _context.Categories.FirstOrDefault(category => category.ID == Id);
             if (category != null )
             {
-                SearchCategoriesDto SearchDto = _mapper.Map<SearchCategoriesDto>(category);
-                return Ok(SearchDto);
+                List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
+                return Ok(category);
             }
             
             return NotFound();
         }
 
-       
+        [HttpGet("searchstatus/{status}")]
+        public IActionResult SearchStatus(bool status)
+        {
+ 
+            if(status == true)
+            {
+                List<Category> category = _context.Categories.Where(statusCategory => statusCategory.Status == true).ToList();
+                List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
+                return Ok(category);
+            }
+            else if(status == false)
+            {
+                List<Category> category = _context.Categories.Where(statusCategory => statusCategory.Status == false).ToList();
+                List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
+                return Ok(category);
+            }
+
+            return NotFound();
+        }
+
+
         [HttpPut("{ID}")]
-        public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto categoryDto)
+        public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
             Category category = _context.Categories.FirstOrDefault(category => category.ID   == Id);
             if (category == null)
@@ -82,7 +103,7 @@ namespace EccomerceAPI.Controllers
 
                 return NotFound();
             }
-            _mapper.Map(categoryDto, category);
+            _mapper.Map(Category, category);
             _context.SaveChanges();
             return NoContent();
 
