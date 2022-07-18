@@ -17,12 +17,12 @@ namespace EccomerceAPI.Controllers
         private CategoryContext _context;
         private IMapper _mapper;
 
-       public CategoryController(CategoryContext context, IMapper mapper)
-       {
+        public CategoryController(CategoryContext context, IMapper mapper)
+        {
             _context = context;
             _mapper = mapper;
-       }
-   
+        }
+
         [HttpPost]
         public IActionResult AddCategory([FromBody] CreateCategoryDto categoryDto)
         {
@@ -43,16 +43,16 @@ namespace EccomerceAPI.Controllers
         public IActionResult SearchName(string name)
         {
             if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
-           {
+            {
                 return BadRequest();
-           }
+            }
 
-           var category = _context.Categories.Where(categories => categories.Name.ToLower().Contains(name.ToLower())).ToList();
-           if (category.Count != 0)
-           {
-               List<Category> categoryDto = _mapper.Map<List<Category>>(category);
+            var category = _context.Categories.Where(categories => categories.Name.ToLower().Contains(name.ToLower())).ToList();
+            if (category.Count != 0)
+            {
+                List<Category> categoryDto = _mapper.Map<List<Category>>(category);
                 return Ok(category);
-           }
+            }
 
 
 
@@ -62,28 +62,28 @@ namespace EccomerceAPI.Controllers
         [HttpGet("{ID}")]
         public IActionResult SearchId(int Id)
         {
-            
+
             Category category = _context.Categories.FirstOrDefault(category => category.ID == Id);
-            if (category != null )
+            if (category != null)
             {
-                List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
-                return Ok(category);
+                SearchCategoriesDto categoryDto = _mapper.Map<SearchCategoriesDto>(category);
+                return Ok(categoryDto);
             }
-            
+
             return NotFound();
         }
 
         [HttpGet("searchstatus/{status}")]
         public IActionResult SearchStatus(bool status)
         {
- 
-            if(status == true)
+
+            if (status == true)
             {
                 List<Category> category = _context.Categories.Where(statusCategory => statusCategory.Status == true).ToList();
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
                 return Ok(category);
             }
-            else if(status == false)
+            else if (status == false)
             {
                 List<Category> category = _context.Categories.Where(statusCategory => statusCategory.Status == false).ToList();
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
@@ -97,7 +97,7 @@ namespace EccomerceAPI.Controllers
         [HttpPut("{ID}")]
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
-            Category category = _context.Categories.FirstOrDefault(category => category.ID   == Id);
+            Category category = _context.Categories.FirstOrDefault(category => category.ID == Id);
             if (category == null)
             {
 
