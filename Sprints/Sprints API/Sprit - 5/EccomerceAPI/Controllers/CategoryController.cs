@@ -66,8 +66,8 @@ namespace EccomerceAPI.Controllers
             Category category = _context.Categories.FirstOrDefault(category => category.ID == Id);
             if (category != null)
             {
-                List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
-                return Ok(category);
+                SearchCategoriesDto categoryDto = _mapper.Map<SearchCategoriesDto>(category);
+                return Ok(categoryDto);
             }
 
             return NotFound();
