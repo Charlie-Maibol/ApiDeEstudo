@@ -22,6 +22,8 @@
     <Compile Include="Migrations\20220718131105_endereco.Designer.cs" />
     <Compile Include="Migrations\20220719142416_Adicionado Relação entre Gerente e Cinema.cs" />
     <Compile Include="Migrations\20220719142416_Adicionado Relação entre Gerente e Cinema.Designer.cs" />
+    <Compile Include="Migrations\20220720142238_Adicionando relacionamento entre cinema e filme.cs" />
+    <Compile Include="Migrations\20220720142238_Adicionando relacionamento entre cinema e filme.Designer.cs" />
     <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
   </ItemGroup>
 

@@ -18,7 +18,7 @@ namespace FilmesApi.Controllers
             _context = context;
             _mapper = mapper;
         }
-
+        [HttpPost]
         public IActionResult AdicionaGerente(CreateGerenteDto dto)
         {
             Gerente gerente = _mapper.Map<Gerente>(dto);
@@ -27,16 +27,32 @@ namespace FilmesApi.Controllers
             return CreatedAtAction(nameof(RecuperaGerentesPorId), new { Id = gerente.Id }, gerente);
 
         }
+        [HttpGet("{id}")]
         public IActionResult RecuperaGerentesPorId(int id)
         {
             Gerente gerente = _context.Gerentes.FirstOrDefault(filme => filme.Id == id);
             if (gerente != null)
             {
-                ReadGerenteDto gererenteDto = _mapper.Map<ReadGerenteDto>(gerente);
+                ReadSessaoDto gererenteDto = _mapper.Map<ReadSessaoDto>(gerente);
 
                 return Ok(gererenteDto);
             }
             return NotFound();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletaGerente(int id)
+        {
+            Gerente gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
+            if (gerente == null)
+            {
+                return NotFound();
+            }
+            _context.Remove(gerente);
+            _context.SaveChanges();
+            return NoContent();
+        }
     }
+
+
 }
