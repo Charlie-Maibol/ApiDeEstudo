@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EccomerceAPI.Data.Dtos;
+using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Models;
 
 namespace EccomerceAPI.Profiles

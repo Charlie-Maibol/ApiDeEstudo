@@ -1,10 +1,14 @@
-﻿using System;
+﻿using EccomerceAPI.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace EccomerceAPI.Data.Dtos
+namespace EccomerceAPI.Data.Dtos.SubCategories
 {
-    public class CreateCategoryDto
+    public class SearchSubCategoriesDto
     {
+        [Key]
+        [Required]
+        public string Id { get; internal set; }
 
         [Required(ErrorMessage = "Campo Obrigatório")]
         [StringLength(128, ErrorMessage = "Você excedeu o número da caracteres permitidos!")]
@@ -14,5 +18,6 @@ namespace EccomerceAPI.Data.Dtos
         public DateTime created { get; set; } = DateTime.Now;
 
         public DateTime Consult { get; set; } = DateTime.Now;
+        public Category Category { get; set; }
     }
 }

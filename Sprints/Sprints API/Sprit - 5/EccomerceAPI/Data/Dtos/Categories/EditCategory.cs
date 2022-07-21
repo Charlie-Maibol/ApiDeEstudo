@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace EccomerceAPI.Data.Dtos
+namespace EccomerceAPI.Data.Dtos.Categories
 {
-    public class CreateSubCategoryDto
+    public class EditCategoryDto
     {
 
         [Required(ErrorMessage = "Campo Obrigatório")]
@@ -11,8 +11,7 @@ namespace EccomerceAPI.Data.Dtos
         [RegularExpression(@"^[a-zA-Z' '-'\s]{1,40}$")]
         public string Name { get; set; }
         public bool Status { get; set; } = true;
-        public DateTime created { get; set; } = DateTime.Now;
+        public DateTime Modified { get; set; } = DateTime.Now;
 
-        public DateTime Consult { get; set; } = DateTime.Now;
     }
 }
