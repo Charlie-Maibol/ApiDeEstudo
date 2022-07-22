@@ -16,8 +16,6 @@ namespace EccomerceAPI.Models
 
         public DateTime created { get; set; } = DateTime.Now;
 
-        public DateTime Consult { get; set; } = DateTime.Now;
-
         public DateTime Modified { get; set; } = DateTime.Now;
         public virtual Category Category { get; set; }
         public int CategoryId { get; set; }

@@ -47,3 +47,5 @@ C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Sp
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Sprit - 5\EccomerceAPI\obj\Debug\net5.0\ref\EccomerceAPI.dll
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Sprit - 5\EccomerceAPI\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Sprit - 5\EccomerceAPI\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Sprit - 5\EccomerceAPI\bin\Debug\net5.0\Castle.Core.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Sprit - 5\EccomerceAPI\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Proxies.dll

@@ -17,7 +17,6 @@ namespace EccomerceAPI.Models
 
         public DateTime created { get; set; } = DateTime.Now;
 
-        public DateTime Consult { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; } = DateTime.Now;
 
