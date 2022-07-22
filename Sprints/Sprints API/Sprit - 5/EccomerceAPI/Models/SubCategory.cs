@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EccomerceAPI.Models
 {
@@ -14,10 +15,11 @@ namespace EccomerceAPI.Models
         public string Name { get; set; }
         public bool Status { get; set; } = true;
 
-        public DateTime created { get; set; } = DateTime.Now;
+        public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; } = DateTime.Now;
         public virtual Category Category { get; set; }
+        
         public int CategoryId { get; set; }
     }
 }
