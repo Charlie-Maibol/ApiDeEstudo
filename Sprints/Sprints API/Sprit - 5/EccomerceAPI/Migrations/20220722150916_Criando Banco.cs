@@ -4,10 +4,26 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace EccomerceAPI.Migrations
 {
-    public partial class Adicionandorelaçãodecategoriasesubcategorias : Migration
+    public partial class CriandoBanco : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    created = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "datetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "SubCategories",
                 columns: table => new
@@ -16,8 +32,7 @@ namespace EccomerceAPI.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    created = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Consult = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime", nullable: false),
                     Modified = table.Column<DateTime>(type: "datetime", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -42,6 +57,9 @@ namespace EccomerceAPI.Migrations
         {
             migrationBuilder.DropTable(
                 name: "SubCategories");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

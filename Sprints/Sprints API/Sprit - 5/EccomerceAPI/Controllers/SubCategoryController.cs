@@ -12,6 +12,7 @@ namespace EccomerceAPI.Controllers
     [Route("{controller}")]
     public class SubCategoryController : ControllerBase
     {
+        
         private CategoryContext _context;
         private  IMapper _mapper;
 
@@ -23,6 +24,11 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public IActionResult AddSubCategory(CreateSubCategoryDto dto)
         {
+            var category = _context.Categories.FirstOrDefault(c => c.ID == dto.CategoryId);
+            if (category.Status == false)
+            {
+                return BadRequest();
+            }
             SubCategory sub = _mapper.Map<SubCategory>(dto);
             _context.SubCategories.Add(sub);
             _context.SaveChanges();

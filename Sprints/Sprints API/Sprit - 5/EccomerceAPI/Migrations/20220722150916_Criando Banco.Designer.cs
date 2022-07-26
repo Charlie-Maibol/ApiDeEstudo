@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EccomerceAPI.Migrations
 {
     [DbContext(typeof(CategoryContext))]
-    [Migration("20220721143547_Adicionando relação de categorias e subcategorias")]
-    partial class Adicionandorelaçãodecategoriasesubcategorias
+    [Migration("20220722150916_Criando Banco")]
+    partial class CriandoBanco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,6 @@ namespace EccomerceAPI.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Consult")
-                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime");
@@ -56,7 +53,7 @@ namespace EccomerceAPI.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Consult")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime>("Modified")
@@ -69,9 +66,6 @@ namespace EccomerceAPI.Migrations
 
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime>("created")
-                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
