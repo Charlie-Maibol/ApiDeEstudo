@@ -1,7 +1,7 @@
 ﻿
 using AutoMapper;
 using EccomerceAPI.Data;
-using EccomerceAPI.Data.Dtos;
+using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -108,6 +108,29 @@ namespace EccomerceAPI.Controllers
             return NoContent();
 
 
+        }
+        [HttpPut("status/{Id}")]
+        public IActionResult ChangeStatus(int Id)
+        {
+            var cat = _context.Categories.FirstOrDefault(category => category.ID == Id);
+            var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
+            if (sub.Count == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                foreach (SubCategory subcategory in sub)
+                {
+                    if (subcategory.Status == true)
+                    {
+                        subcategory.Status = false;
+                    }
+                }
+            }
+
+            _context.SaveChanges();
+            return NoContent();
         }
 
         [HttpDelete("{ID}")]
