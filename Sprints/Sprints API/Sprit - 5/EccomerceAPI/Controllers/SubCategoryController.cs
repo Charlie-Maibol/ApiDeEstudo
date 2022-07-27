@@ -47,5 +47,20 @@ namespace EccomerceAPI.Controllers
 
             return NotFound();
         }
+        [HttpPut("{ID}")]
+        public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto SubCategory)
+        {
+            SubCategory subCategory = _context.SubCategories.FirstOrDefault(subCategory => subCategory.Id == Id);
+            if (subCategory == null)
+            {
+
+                return NotFound();
+            }
+            _mapper.Map(SubCategory, subCategory);
+            _context.SaveChanges();
+            return NoContent();
+
+
+        }
     }
 }

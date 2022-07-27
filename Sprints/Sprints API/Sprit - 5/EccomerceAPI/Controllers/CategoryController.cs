@@ -112,14 +112,21 @@ namespace EccomerceAPI.Controllers
         [HttpPut("status/{Id}")]
         public IActionResult ChangeStatus(int Id)
         {
+            
             var cat = _context.Categories.FirstOrDefault(category => category.ID == Id);
             var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
             if (sub.Count == 0)
             {
                 return NotFound();
+            }                        
+            if (cat.Status == false)
+            {
+                cat.Status = true;
             }
             else
             {
+                cat.Status = false;
+
                 foreach (SubCategory subcategory in sub)
                 {
                     if (subcategory.Status == true)
