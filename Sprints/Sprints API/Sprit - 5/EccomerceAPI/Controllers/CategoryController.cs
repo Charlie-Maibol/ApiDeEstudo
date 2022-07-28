@@ -4,6 +4,7 @@ using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -34,9 +35,12 @@ namespace EccomerceAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Category> ShowCategories()
+        public IEnumerable<SearchCategoriesDto> ShowCategories()
         {
-            return _context.Categories;
+            var category = _context.Categories.ToList();
+            List<SearchCategoriesDto> CategoriesDtos = _mapper.Map<List<SearchCategoriesDto>>(category);
+            return (CategoriesDtos);
+            
         }
 
         [HttpGet("search/{name}")]
@@ -73,7 +77,7 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
 
-        [HttpGet("searchstatus/{status}")]
+        [HttpGet("{status}")]
         public IActionResult SearchStatus(bool status)
         {
 
@@ -112,19 +116,28 @@ namespace EccomerceAPI.Controllers
         [HttpPut("status/{Id}")]
         public IActionResult ChangeStatus(int Id)
         {
+            
             var cat = _context.Categories.FirstOrDefault(category => category.ID == Id);
             var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
             if (sub.Count == 0)
             {
                 return NotFound();
+            }                        
+            if (cat.Status == false)
+            {
+                cat.Status = true;
+                cat.Modified = DateTime.Now;
             }
             else
             {
+                cat.Status = false;
+
                 foreach (SubCategory subcategory in sub)
                 {
                     if (subcategory.Status == true)
                     {
                         subcategory.Status = false;
+                        cat.Modified = DateTime.Now;
                     }
                 }
             }

@@ -4,6 +4,7 @@ using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EccomerceAPI.Controllers
@@ -34,6 +35,13 @@ namespace EccomerceAPI.Controllers
             _context.SaveChanges();
             return CreatedAtAction(nameof(searchSubId), new { Id = sub.Id }, sub);
         }
+
+        [HttpGet]
+        public IEnumerable<SubCategory> ShowSubCategories()
+        {
+            return _context.SubCategories;
+        }
+
         [HttpGet("{id}")]
         public IActionResult searchSubId(int id)
         {
@@ -46,6 +54,21 @@ namespace EccomerceAPI.Controllers
             }
 
             return NotFound();
+        }
+        [HttpPut("{ID}")]
+        public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto SubCategory)
+        {
+            SubCategory subCategory = _context.SubCategories.FirstOrDefault(subCategory => subCategory.Id == Id);
+            if (subCategory == null)
+            {
+
+                return NotFound();
+            }
+            _mapper.Map(SubCategory, subCategory);
+            _context.SaveChanges();
+            return NoContent();
+
+
         }
     }
 }
