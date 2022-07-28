@@ -38,9 +38,9 @@ namespace EccomerceAPI.Controllers
         public IEnumerable<SearchCategoriesDto> ShowCategories()
         {
             var category = _context.Categories.ToList();
-            List<SearchCategoriesDto> CategoriesDtos = _mapper.Map<List<SearchCategoriesDto>>(category);
-            return (CategoriesDtos);
-            
+            List<SearchCategoriesDto> CategoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
+            return (CategoryDto);
+
         }
 
         [HttpGet("search/{name}")]
@@ -116,13 +116,13 @@ namespace EccomerceAPI.Controllers
         [HttpPut("status/{Id}")]
         public IActionResult ChangeStatus(int Id)
         {
-            
+
             var cat = _context.Categories.FirstOrDefault(category => category.ID == Id);
             var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
             if (sub.Count == 0)
             {
                 return NotFound();
-            }                        
+            }
             if (cat.Status == false)
             {
                 cat.Status = true;
@@ -137,7 +137,7 @@ namespace EccomerceAPI.Controllers
                     if (subcategory.Status == true)
                     {
                         subcategory.Status = false;
-                        cat.Modified = DateTime.Now;
+                        subcategory.Modified = DateTime.Now;
                     }
                 }
             }

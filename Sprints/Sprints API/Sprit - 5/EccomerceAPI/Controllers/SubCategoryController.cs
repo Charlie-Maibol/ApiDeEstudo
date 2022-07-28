@@ -67,8 +67,6 @@ namespace EccomerceAPI.Controllers
             _mapper.Map(SubCategory, subCategory);
             _context.SaveChanges();
             return NoContent();
-
-
         }
     }
 }
