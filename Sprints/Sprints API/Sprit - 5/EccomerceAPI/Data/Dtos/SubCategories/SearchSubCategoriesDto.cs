@@ -20,6 +20,6 @@ namespace EccomerceAPI.Data.Dtos.SubCategories
 
         public DateTime Consult { get; set; } = DateTime.Now;
 
-        public Category Category { get; set; }
+        public Category Categories { get; set; }
     }
 }
