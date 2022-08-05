@@ -9,7 +9,7 @@ namespace EccomerceAPI.Models
     {
         [Key]
         [Required]
-        public int ID { get; internal set; }
+        public int Id { get; internal set; }
         [Required(ErrorMessage = "Campo Obrigatório")]
         [StringLength(128, ErrorMessage = "Você excedeu o número da caracteres permitidos!")]
         [RegularExpression(@"^[a-zA-Z' '-'\s]{1,40}$")]
