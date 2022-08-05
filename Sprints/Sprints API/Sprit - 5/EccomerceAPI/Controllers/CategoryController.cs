@@ -65,11 +65,11 @@ namespace EccomerceAPI.Controllers
         }
 
         [HttpGet("Filter")]
-        public IActionResult SearchNameCresc([FromQuery] string name = null, [FromQuery] int? ord = null,
+        public IActionResult SearchNameCresc([FromQuery] string name = null, [FromQuery] int? order = null,
             [FromQuery] bool? status = null, [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
         {        
             List<Category> categories;
-            if (name != null && ord == null && status == null)
+            if (name != null && order == null && status == null)
             {
                 categories = _context.Categories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()))
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -77,7 +77,7 @@ namespace EccomerceAPI.Controllers
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
-            if (name != null && ord == 1 && status == null)
+            if (name != null && order == 1 && status == null)
             {
                 categories = _context.Categories.OrderBy(fil => fil.Name.ToLower().Contains(name.ToLower()))
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -86,7 +86,7 @@ namespace EccomerceAPI.Controllers
                 return Ok(categories);
 
             }
-            if (name != null && ord == 2 && status == null)
+            if (name != null && order == 2 && status == null)
             {
                 categories = _context.Categories.OrderByDescending(fil => fil.Name.ToLower().Contains(name.ToLower()))
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -94,7 +94,7 @@ namespace EccomerceAPI.Controllers
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
-            if(name != null && ord == null && status != null)
+            if(name != null && order == null && status != null)
             {
                 
                 categories = _context.Categories.Where(fil => fil.Name.ToLower()
@@ -104,7 +104,7 @@ namespace EccomerceAPI.Controllers
                 List <SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
-            if (name == null && ord == null && status != null)
+            if (name == null && order == null && status != null)
             {
                 categories = _context.Categories.Where(fil => fil.Status == status)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -112,7 +112,7 @@ namespace EccomerceAPI.Controllers
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
-            if (name == null && ord == 1 && status != null)
+            if (name == null && order == 1 && status != null)
             {
                 categories = _context.Categories.OrderBy(fil => fil.Status == status)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -120,15 +120,15 @@ namespace EccomerceAPI.Controllers
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
-            if (name == null && ord == 2 && status != null)
+            if (name == null && order == 2 && status != null)
             {
                 categories = _context.Categories.OrderByDescending(fil => fil.Status == status)
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
-                return Ok(categoryDto);
+                return Ok(categories);
             }
-            if (name != null && ord == null && status != null)
+            if (name != null && order == null && status != null)
             {
                 categories = _context.Categories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()) && fil.Status == status)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -136,7 +136,7 @@ namespace EccomerceAPI.Controllers
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
-            if (name != null && ord == 1 && status != null)
+            if (name != null && order == 1 && status != null)
             {
                 categories = _context.Categories.OrderBy(fil => fil.Status == status && fil.Status == status)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -144,7 +144,7 @@ namespace EccomerceAPI.Controllers
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
-            if (name != null && ord == 2 && status != null)
+            if (name != null && order == 2 && status != null)
             {
                 categories = _context.Categories.OrderByDescending(fil => fil.Name.ToLower().Contains(name.ToLower()) && fil.Status == status)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -152,7 +152,7 @@ namespace EccomerceAPI.Controllers
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
-            if (name == null && ord == null && status == null)
+            if (name == null && order == null && status == null)
             {
                 categories = _context.Categories.Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
