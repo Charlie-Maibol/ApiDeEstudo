@@ -19,7 +19,7 @@ namespace EccomerceAPI.Migrations
 
             modelBuilder.Entity("EccomerceAPI.Models.Category", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -37,7 +37,7 @@ namespace EccomerceAPI.Migrations
                     b.Property<DateTime>("created")
                         .HasColumnType("datetime");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
                 });
