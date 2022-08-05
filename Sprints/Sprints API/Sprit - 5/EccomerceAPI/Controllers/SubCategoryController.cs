@@ -4,8 +4,10 @@ using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EccomerceAPI.Controllers
 {
@@ -13,9 +15,9 @@ namespace EccomerceAPI.Controllers
     [Route("{controller}")]
     public class SubCategoryController : ControllerBase
     {
-        
+
         private CategoryContext _context;
-        private  IMapper _mapper;
+        private IMapper _mapper;
 
         public SubCategoryController(CategoryContext context, IMapper mapper)
         {
@@ -25,7 +27,7 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public IActionResult AddSubCategory(CreateSubCategoryDto dto)
         {
-            var category = _context.Categories.FirstOrDefault(c => c.ID == dto.CategoryId);
+            var category = _context.Categories.FirstOrDefault(c => c.Id == dto.CategoryId);
             if (category.Status == false)
             {
                 return BadRequest();
@@ -42,7 +44,8 @@ namespace EccomerceAPI.Controllers
             return _context.SubCategories;
         }
 
-        [HttpGet("{id}")]
+        
+        [HttpGet("{Id}")]
         public IActionResult searchSubId(int id)
         {
             SubCategory sub = _context.SubCategories.FirstOrDefault(sub => sub.Id == id);
@@ -50,11 +53,115 @@ namespace EccomerceAPI.Controllers
             {
 
                 SearchSubCategoriesDto subCategory = _mapper.Map<SearchSubCategoriesDto>(sub);
-                return Ok(subCategory);
+                return Ok(sub);
             }
 
             return NotFound();
         }
+
+        [HttpGet("Filter")]
+        public IActionResult Search([FromQuery] string name = null, [FromQuery] int? ord = null,
+                    [FromQuery] bool? status = null, [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
+        {
+            List<SubCategory> subCategories;
+            if (name != null && ord == null && status == null)
+            {
+                subCategories = _context.SubCategories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()))
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if (name != null && ord == 1 && status == null)
+            {
+                subCategories = _context.SubCategories.OrderBy(fil => fil.Name.ToLower().Contains(name.ToLower()))
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+
+            }
+            if (name != null && ord == 2 && status == null)
+            {
+                subCategories = _context.SubCategories.OrderByDescending(fil => fil.Name.ToLower().Contains(name.ToLower()))
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if (name != null && ord == null && status != null)
+            {
+
+                subCategories = _context.SubCategories.Where(fil => fil.Name.ToLower()
+                .Contains(name.ToLower()) && fil.Status == status)
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if (name == null && ord == null && status != null)
+            {
+                subCategories = _context.SubCategories.Where(fil => fil.Status == status)
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if (name == null && ord == 1 && status != null)
+            {
+                subCategories = _context.SubCategories.OrderBy(fil => fil.Status == status)
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if (name == null && ord == 2 && status != null)
+            {
+                subCategories = _context.SubCategories.OrderByDescending(fil => fil.Status == status)
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if (name != null && ord == null && status != null)
+            {
+                subCategories = _context.SubCategories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()) && fil.Status == status)
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if (name != null && ord == 1 && status != null)
+            {
+                subCategories = _context.SubCategories.OrderBy(fil => fil.Status == status && fil.Status == status)
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if (name != null && ord == 2 && status != null)
+            {
+                subCategories = _context.SubCategories.OrderByDescending(fil => fil.Name.ToLower()
+                .Contains(name.ToLower()) && fil.Status == status && fil.Status == status)
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+            if(name == null && ord == null && status == null)
+            {
+                subCategories = _context.SubCategories.Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
+                List <SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                return Ok(subCategories);
+            }
+
+
+
+            return NotFound();
+        }
+
+
         [HttpPut("{ID}")]
         public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto SubCategory)
         {
