@@ -74,7 +74,8 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == 1 && status == null)
             {
-                subCategories = _context.SubCategories.OrderBy(fil => fil.Name.ToLower().Contains(name.ToLower()))
+                subCategories = _context.SubCategories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()))
+                    .OrderBy(fil => fil.Name)
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
                 List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
@@ -83,7 +84,8 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == 2 && status == null)
             {
-                subCategories = _context.SubCategories.OrderByDescending(fil => fil.Name.ToLower().Contains(name.ToLower()))
+                subCategories = _context.SubCategories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()))
+                    .OrderByDescending(fil => fil.Name)
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
                 List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
@@ -133,7 +135,8 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == 1 && status != null)
             {
-                subCategories = _context.SubCategories.OrderBy(fil => fil.Status == status && fil.Status == status)
+                subCategories = _context.SubCategories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()) && fil.Status == status)
+                    .OrderBy(fil => fil.Name)
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
                 List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
@@ -141,8 +144,8 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == 2 && status != null)
             {
-                subCategories = _context.SubCategories.OrderByDescending(fil => fil.Name.ToLower()
-                .Contains(name.ToLower()) && fil.Status == status && fil.Status == status)
+                subCategories = _context.SubCategories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()) && fil.Status == status)
+                    .OrderByDescending(fil => fil.Name)
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
                 List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);

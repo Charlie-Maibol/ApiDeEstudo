@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace EccomerceAPI.Data.Dtos.Categories
+namespace EccomerceAPI.Controllers
 {
     public class SearchCategoriesDto
     {
