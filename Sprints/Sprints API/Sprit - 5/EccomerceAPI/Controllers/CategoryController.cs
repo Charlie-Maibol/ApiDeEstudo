@@ -67,10 +67,15 @@ namespace EccomerceAPI.Controllers
         [HttpGet("Filter")]
         public IActionResult Search([FromQuery] string name = null, [FromQuery] int? ord = null,
             [FromQuery] bool? status = null, [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
-        {        
+        {
+              
              List<Category> categories;
             if (name != null && ord == null && status == null)
             {
+                if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
+                {
+                    return BadRequest();
+                }
                 categories = _context.Categories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()))
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
@@ -79,6 +84,10 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == 1 && status == null)
             {
+                if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
+                {
+                    return BadRequest();
+                }
                 categories = _context.Categories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()))
                     .OrderBy(fil => fil.Name)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -89,6 +98,10 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == 2 && status == null)
             {
+                if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
+                {
+                    return BadRequest();
+                }
                 categories = _context.Categories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()))
                     .OrderByDescending(fil => fil.Name)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -98,7 +111,10 @@ namespace EccomerceAPI.Controllers
             }
             if(name != null && ord == null && status != null)
             {
-                
+                if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
+                {
+                    return BadRequest();
+                }
                 categories = _context.Categories.Where(fil => fil.Name.ToLower()
                 .Contains(name.ToLower()) && fil.Status == status)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -132,6 +148,10 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == null && status != null)
             {
+                if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
+                {
+                    return BadRequest();
+                }
                 categories = _context.Categories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()) && fil.Status == status)
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
@@ -140,6 +160,10 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == 1 && status != null)
             {
+                if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
+                {
+                    return BadRequest();
+                }
                 categories = _context.Categories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()) && fil.Status == status)
                     .OrderBy(fil => fil.Name)
                     .Skip((pageNumber - 1) * itensPerPage)
@@ -149,6 +173,10 @@ namespace EccomerceAPI.Controllers
             }
             if (name != null && ord == 2 && status != null)
             {
+                if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
+                {
+                    return BadRequest();
+                }
                 categories = _context.Categories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()) && fil.Status == status)
                     .OrderByDescending(fil => fil.Name)
                     .Skip((pageNumber - 1) * itensPerPage)
