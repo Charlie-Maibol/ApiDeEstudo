@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Castle.Core.Internal;
 using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,12 +66,15 @@ namespace EccomerceAPI.Controllers
                     [FromQuery] bool? status = null, [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
         {
             List<SubCategory> subCategories;
+            
             if (name != null && ord == null && status == null)
             {
+                
                 subCategories = _context.SubCategories.Where(fil => fil.Name.ToLower().Contains(name.ToLower()))
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
                 List<SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
+                
                 return Ok(subCategories);
             }
             if (name != null && ord == 1 && status == null)
@@ -153,8 +158,7 @@ namespace EccomerceAPI.Controllers
             }
             if(name == null && ord == null && status == null)
             {
-                subCategories = _context.SubCategories.Skip((pageNumber - 1) * itensPerPage)
-                    .Take(itensPerPage).ToList();
+                subCategories = _context.SubCategories.ToList();
                 List <SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
                 return Ok(subCategories);
             }

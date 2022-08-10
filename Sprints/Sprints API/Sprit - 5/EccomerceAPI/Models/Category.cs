@@ -16,7 +16,7 @@ namespace EccomerceAPI.Models
         public string Name { get; set; }
         public bool Status { get; set; } = true;
 
-        public DateTime created { get; set; } = DateTime.Now;
+        public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; } = DateTime.Now;
         [JsonIgnore]

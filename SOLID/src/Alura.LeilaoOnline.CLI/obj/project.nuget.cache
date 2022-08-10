@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "JhLx0iDvjCpX84mgGKh0+fTfDuORG2iA5t3Ii2poaOQUrK1mS45yqYtfz+fdUSt8aD5iQEo5Yq2MJaq62MXSeA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\solid-csharp-master\\src\\Alura.LeilaoOnline.CLI\\Alura.LeilaoOnline.CLI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.26\\microsoft.netcore.app.host.win-x64.3.1.26.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}
