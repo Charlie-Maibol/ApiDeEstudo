@@ -13,6 +13,7 @@ namespace EccomerceAPI.Controllers
     [Route("{controller}")]
     public class ProductController : ControllerBase
     {
+
         private CategoryContext _context;
         private IMapper _mapper;
 
@@ -23,13 +24,13 @@ namespace EccomerceAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCategory([FromBody] CreateProductDto productDto)
+        public IActionResult AddProduct([FromBody] CreateProductDto productDto)
         {
             Product product = _mapper.Map<Product>(productDto);
 
             _context.Products.Add(product);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(SearchId), new { Id = product.Id }, product);
+            return CreatedAtAction(nameof(SearchId), new { product.Id }, product);
         }
 
         [HttpGet("searchId/{Id}")]
@@ -58,6 +59,21 @@ namespace EccomerceAPI.Controllers
 
             return NotFound();
 
+    
+        }
+        [HttpDelete("{ID}")]
+        public IActionResult DeletProduct(int ID)
+        {
+            Product product = _context.Products.FirstOrDefault(product => product.Id == ID);
+            if (product == null)
+            {
+
+                return NotFound();
+            }
+            _context.Remove(product);
+            _context.SaveChanges();
+            return NoContent();
         }
     }
+
 }

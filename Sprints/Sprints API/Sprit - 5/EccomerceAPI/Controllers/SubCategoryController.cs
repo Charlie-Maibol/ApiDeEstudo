@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
-using Castle.Core.Internal;
 using EccomerceAPI.Data;
-using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace EccomerceAPI.Controllers
 {
@@ -37,7 +33,7 @@ namespace EccomerceAPI.Controllers
             SubCategory sub = _mapper.Map<SubCategory>(dto);
             _context.SubCategories.Add(sub);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(searchSubId), new { Id = sub.Id }, sub);
+            return CreatedAtAction(nameof(searchSubId), new {sub.Id }, sub);
         }
 
         [HttpGet]
@@ -206,6 +202,19 @@ namespace EccomerceAPI.Controllers
                 return NotFound();
             }
             _mapper.Map(SubCategory, subCategory);
+            _context.SaveChanges();
+            return NoContent();
+        }
+        [HttpDelete("{ID}")]
+        public IActionResult DeletSubCategory(int ID)
+        {
+            SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Id == ID);
+            if (subCategory == null)
+            {
+
+                return NotFound();
+            }
+            _context.Remove(subCategory);
             _context.SaveChanges();
             return NoContent();
         }

@@ -4,12 +4,10 @@ using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 
 namespace EccomerceAPI.Controllers
 {
@@ -33,7 +31,7 @@ namespace EccomerceAPI.Controllers
 
             _context.Categories.Add(category);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(SearchId), new { Id = category.Id }, category);
+            return CreatedAtAction(nameof(SearchId), new {category.Id }, category);
         }
 
         [HttpGet("searchId/{Id}")]
