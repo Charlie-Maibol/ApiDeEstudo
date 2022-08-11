@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EccomerceAPI.Models
 {
-    public class Products
+    public class Product
     {
         [Key]
         [Required]

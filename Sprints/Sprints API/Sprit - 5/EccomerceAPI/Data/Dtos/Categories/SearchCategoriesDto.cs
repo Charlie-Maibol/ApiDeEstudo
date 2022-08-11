@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EccomerceAPI.Data.Dtos.Categories
 {
-    public class SearchProductsDto
+    public class SearchCategoriesDto
     {
         [Key]
         [Required]

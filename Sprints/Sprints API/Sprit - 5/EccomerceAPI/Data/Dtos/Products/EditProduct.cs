@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EccomerceAPI.Data.Dtos.Products
 {
-    public class CreateProductsDto
+    public class EditProductDto
     {
 
         [Required(ErrorMessage = "Campo Obrigatório")]
@@ -11,8 +11,7 @@ namespace EccomerceAPI.Data.Dtos.Products
         [RegularExpression(@"^[a-zA-Z' '-'\s]{1,40}$")]
         public string Name { get; set; }
         public bool Status { get; set; } = true;
-        public DateTime created { get; set; } = DateTime.Now;
+        public DateTime Modified { get; set; } = DateTime.Now;
 
-        
     }
 }

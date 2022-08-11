@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EccomerceAPI.Data.Dtos.Categories
 {
-    public class CreateProductsDto
+    public class CreateCategoryDto
     {
 
         [Required(ErrorMessage = "Campo Obrigatório")]
