@@ -28,7 +28,7 @@ namespace EccomerceAPI.Controllers
             var category = _context.Categories.FirstOrDefault(c => c.Id == dto.CategoryId);
             if (category.Status == false)
             {
-                return BadRequest();
+                return BadRequest("Não é possivel cadastrar uma subcategoria em uma categoria inativa");
             }
             SubCategory sub = _mapper.Map<SubCategory>(dto);
             _context.SubCategories.Add(sub);
@@ -181,7 +181,9 @@ namespace EccomerceAPI.Controllers
             }
             if(name == null && ord == null && status == null)
             {
-                subCategories = _context.SubCategories.ToList();
+                subCategories = _context.SubCategories.
+                    Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
                 List <SearchSubCategoriesDto> subCategoryDto = _mapper.Map<List<SearchSubCategoriesDto>>(subCategories);
                 return Ok(subCategories);
             }

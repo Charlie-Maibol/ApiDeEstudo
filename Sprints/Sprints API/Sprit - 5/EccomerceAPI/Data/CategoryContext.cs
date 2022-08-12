@@ -20,6 +20,7 @@ namespace EccomerceAPI.Data
                 .WithMany(category => category.SubCategories)
                 .HasForeignKey(sub => sub.CategoryId);
 
+            
         }
         
 

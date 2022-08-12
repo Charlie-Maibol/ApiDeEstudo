@@ -184,7 +184,9 @@ namespace EccomerceAPI.Controllers
             }
             if (name == null && ord == null && status == null)
             {
-                categories = _context.Categories.ToList();
+                categories = _context.Categories
+                    .Skip((pageNumber - 1) * itensPerPage)
+                    .Take(itensPerPage).ToList();
                 List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(categories);
                 return Ok(categories);
             }
