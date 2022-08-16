@@ -7672,11 +7672,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel\\Aula 2\\FilmesApi\\FilmesApi.csproj",
+      "projectUniqueName": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 2\\FilmesApi\\FilmesApi.csproj",
       "projectName": "FilmesApi",
-      "projectPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel\\Aula 2\\FilmesApi\\FilmesApi.csproj",
+      "projectPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 2\\FilmesApi\\FilmesApi.csproj",
       "packagesPath": "C:\\Users\\ClearTech\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel\\Aula 2\\FilmesApi\\obj\\",
+      "outputPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 2\\FilmesApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
