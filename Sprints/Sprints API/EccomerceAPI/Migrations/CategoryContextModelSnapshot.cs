@@ -23,6 +23,9 @@ namespace EccomerceAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime");
 
@@ -34,12 +37,62 @@ namespace EccomerceAPI.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTime>("created")
-                        .HasColumnType("datetime");
-
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AmountOfProducts")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("DistributionCenter")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Lengths")
+                        .HasColumnType("double");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Widths")
+                        .HasColumnType("double");
+
+                    b.Property<int>("subCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("subCategoryId");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("EccomerceAPI.Models.SubCategory", b =>
@@ -72,6 +125,17 @@ namespace EccomerceAPI.Migrations
                     b.ToTable("SubCategories");
                 });
 
+            modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
+                {
+                    b.HasOne("EccomerceAPI.Models.SubCategory", "SubCategory")
+                        .WithMany("Products")
+                        .HasForeignKey("subCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubCategory");
+                });
+
             modelBuilder.Entity("EccomerceAPI.Models.SubCategory", b =>
                 {
                     b.HasOne("EccomerceAPI.Models.Category", "Category")
@@ -86,6 +150,11 @@ namespace EccomerceAPI.Migrations
             modelBuilder.Entity("EccomerceAPI.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("EccomerceAPI.Models.SubCategory", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

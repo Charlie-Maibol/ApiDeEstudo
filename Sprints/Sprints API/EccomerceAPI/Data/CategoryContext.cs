@@ -20,7 +20,10 @@ namespace EccomerceAPI.Data
                 .WithMany(category => category.SubCategories)
                 .HasForeignKey(sub => sub.CategoryId);
 
-            
+            builder.Entity<Product>()
+                .HasOne(prod => prod.SubCategory)
+                .WithMany(sub => sub.Products)
+                .HasForeignKey(sub => sub.subCategoryId);
         }
         
 

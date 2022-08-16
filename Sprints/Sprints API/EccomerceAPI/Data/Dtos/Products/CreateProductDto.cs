@@ -32,5 +32,6 @@ namespace EccomerceAPI.Data.Dtos.Products
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; } = DateTime.Now;
+        public int subCategoryId { get; set; }
     }
 }

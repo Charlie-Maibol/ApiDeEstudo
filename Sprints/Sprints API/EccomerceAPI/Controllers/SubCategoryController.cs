@@ -17,6 +17,7 @@ namespace EccomerceAPI.Controllers
         private CategoryContext _context;
         private IMapper _mapper;
 
+
         public SubCategoryController(CategoryContext context, IMapper mapper)
         {
             _context = context;

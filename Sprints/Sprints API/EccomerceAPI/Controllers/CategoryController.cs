@@ -196,25 +196,6 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
 
-        [HttpGet("search/{name}")]
-        public IActionResult SearchName(string name)
-        {
-            if (string.IsNullOrEmpty(name) || name.Length < 3 || name.Length > 128)
-            {
-                return BadRequest();
-            }
-
-            var category = _context.Categories.Where(categories => categories.Name.ToLower().Contains(name.ToLower())).ToList();
-            if (category.Count != 0)
-            {
-                List<Category> categoryDto = _mapper.Map<List<Category>>(category);
-                return Ok(category);
-            }
-
-
-
-            return NotFound();
-        }
 
         [HttpGet("{ID}")]
         public IActionResult SearchId(int Id)
@@ -228,17 +209,6 @@ namespace EccomerceAPI.Controllers
             }
 
             return NotFound();
-        }
-
-        [HttpGet("status/{status}")]
-        public IActionResult SearchStatus(bool status)
-        {
-
-            List<Category> category = _context.Categories.OrderByDescending(statusCategory => statusCategory.Status == status).ToList();
-            List<SearchCategoriesDto> categoryDto = _mapper.Map<List<SearchCategoriesDto>>(category);
-            return Ok(category);
-
-
         }
 
 

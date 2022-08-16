@@ -32,5 +32,9 @@ namespace EccomerceAPI.Models
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; } = DateTime.Now;
+
+        public virtual SubCategory SubCategory { get; set; }
+
+        public int subCategoryId { get; set; }
     }
 }

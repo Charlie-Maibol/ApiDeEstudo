@@ -16,11 +16,13 @@ namespace EccomerceAPI.Controllers
 
         private CategoryContext _context;
         private IMapper _mapper;
+        
 
         public ProductController(CategoryContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
+            
         }
 
         [HttpPost]
@@ -61,7 +63,21 @@ namespace EccomerceAPI.Controllers
 
     
         }
+        [HttpPut("{ID}")]
+        public IActionResult EditProduct(int Id, [FromBody] EditProductDto Product)
+        {
+            Product product = _context.Products.FirstOrDefault(product => product.Id == Id);
+            if (product == null)
+            {
+
+                return NotFound();
+            }
+            _mapper.Map(Product, product);
+            _context.SaveChanges();
+            return NoContent();
+        }
         [HttpDelete("{ID}")]
+        
         public IActionResult DeletProduct(int ID)
         {
             Product product = _context.Products.FirstOrDefault(product => product.Id == ID);

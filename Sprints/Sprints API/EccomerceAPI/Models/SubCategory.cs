@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -21,5 +22,8 @@ namespace EccomerceAPI.Models
         public virtual Category Category { get; set; }
 
         public int CategoryId { get; set; }
+        [JsonIgnore]
+        public virtual List<Product> Products { get; set; }
+
     }
 }
