@@ -35,7 +35,7 @@ namespace EccomerceAPI.Controllers
             return CreatedAtAction(nameof(SearchId), new { product.Id }, product);
         }
 
-        [HttpGet("searchId/{Id}")]
+        [HttpGet("searchId/")]
         public IActionResult SearchId([FromQuery] int? Id = null, [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
         {
             List<Product> products;
