@@ -1,7 +1,7 @@
 ﻿
 using AutoMapper;
-using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.Categories;
+using EccomerceAPI.Data.EfCore;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -211,13 +211,30 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
 
+        [HttpPut("{ID}")]
+        public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
+        {
+            Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
+           
+            if (category == null)
+            {
 
-        [HttpPut("{Id}")]
+                return NotFound();
+            }
+           
+
+            _mapper.Map(Category, category);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpPut("status/{Id}")]
         public IActionResult ChangeStatus(int Id)
         {
 
             var cat = _context.Categories.FirstOrDefault(category => category.Id == Id);
             var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
+           
             if (sub.Count == 0)
             {
                 return NotFound();
@@ -240,6 +257,7 @@ namespace EccomerceAPI.Controllers
                     }
                 }
             }
+            
 
             _context.SaveChanges();
             return NoContent();

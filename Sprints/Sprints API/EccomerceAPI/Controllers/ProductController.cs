@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using EccomerceAPI.Data;
-using EccomerceAPI.Data.Dtos.Products;
+﻿using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Models;
+using EccomerceAPI.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
+
 
 namespace EccomerceAPI.Controllers
 {
@@ -14,81 +14,52 @@ namespace EccomerceAPI.Controllers
     public class ProductController : ControllerBase
     {
 
-        private CategoryContext _context;
-        private IMapper _mapper;
-        
 
-        public ProductController(CategoryContext context, IMapper mapper)
+        private ProductsServices _service;
+
+        public ProductController(ProductsServices service)
         {
-            _context = context;
-            _mapper = mapper;
-            
+
+            _service = service;
+
         }
 
         [HttpPost]
         public IActionResult AddProduct([FromBody] CreateProductDto productDto)
         {
-            Product product = _mapper.Map<Product>(productDto);
-
-            _context.Products.Add(product);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(SearchId), new { product.Id }, product);
+            SearchProductsDto searchProducts = _service.AddProduct(productDto);
+            return CreatedAtAction(nameof(SearchId), new { id = searchProducts.Id }, searchProducts);
         }
-
-        [HttpGet("searchId/")]
-        public IActionResult SearchId([FromQuery] int? Id = null, [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
+        [HttpGet]
+        public List<Product> SearchId([FromQuery] string name, [FromQuery] string center, [FromQuery] bool? status, [FromQuery] double? weight,
+            [FromQuery] double? height, [FromQuery] double? lengths, [FromQuery] double? widths,
+            [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order)
         {
-            List<Product> products;
-
-            if (Id == null)
-            {
-                products = _context.Products.ToList();
-            }
-
-            else
-            {
-                products = _context.Products.Where(cat => cat.Id == Id)
-                        .Skip((pageNumber - 1) * itensPerPage)
-                        .Take(itensPerPage).ToList();
-                List<SearchProductsDto> productDto = _mapper.Map<List<SearchProductsDto>>(products);
-
-            }
-            if (products != null)
-            {
-                List<SearchProductsDto> productDto = _mapper.Map<List<SearchProductsDto>>(products);
-                return Ok(products);
-            }
-
-            return NotFound();
+           return _service.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order);
 
     
         }
-        [HttpPut("{ID}")]
+        [HttpPut("{Id}")]
         public IActionResult EditProduct(int Id, [FromBody] EditProductDto Product)
         {
-            Product product = _context.Products.FirstOrDefault(product => product.Id == Id);
-            if (product == null)
+           Result result = _service.EditProduct(Id, Product);
+            if (result.IsFailed)
             {
-
                 return NotFound();
             }
-            _mapper.Map(Product, product);
-            _context.SaveChanges();
+           
             return NoContent();
         }
-        [HttpDelete("{ID}")]
-        
-        public IActionResult DeletProduct(int ID)
-        {
-            Product product = _context.Products.FirstOrDefault(product => product.Id == ID);
-            if (product == null)
-            {
+        [HttpDelete("{Id}")]
 
+        public IActionResult DeletProduct(int Id)
+        {
+            Result result = _service.DeletProduct(Id);
+            if (result.IsFailed)
+            {
                 return NotFound();
             }
-            _context.Remove(product);
-            _context.SaveChanges();
-            return NoContent();
+            return Ok();
         }
     }
 

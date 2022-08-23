@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.SubCategories;
+using EccomerceAPI.Data.EfCore;
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -24,14 +24,10 @@ namespace EccomerceAPI.Controllers
             _mapper = mapper;
         }
         [HttpPost]
-        public IActionResult AddSubCategory(CreateSubCategoryDto dto)
+        public IActionResult AddSubCategory(CreateSubCategoryDto SubDto)
         {
-            var category = _context.Categories.FirstOrDefault(c => c.Id == dto.CategoryId);
-            if (category.Status == false)
-            {
-                return BadRequest("Não é possivel cadastrar uma subcategoria em uma categoria inativa");
-            }
-            SubCategory sub = _mapper.Map<SubCategory>(dto);
+            
+            SubCategory sub = _mapper.Map<SubCategory>(SubDto);
             _context.SubCategories.Add(sub);
             _context.SaveChanges();
             return CreatedAtAction(nameof(searchSubId), new {sub.Id }, sub);
@@ -196,15 +192,15 @@ namespace EccomerceAPI.Controllers
 
 
         [HttpPut("{ID}")]
-        public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto SubCategory)
+        public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto subCategoryDto)
         {
             SubCategory subCategory = _context.SubCategories.FirstOrDefault(subCategory => subCategory.Id == Id);
             if (subCategory == null)
             {
 
                 return NotFound();
-            }
-            _mapper.Map(SubCategory, subCategory);
+            }      
+            _mapper.Map(subCategoryDto, subCategory);
             _context.SaveChanges();
             return NoContent();
         }
