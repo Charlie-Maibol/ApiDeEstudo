@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data.EfCore;
+
 using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using FluentResults;
@@ -12,6 +12,7 @@ using System.Web.Http;
 using Microsoft.Extensions.Configuration;
 using Dapper;
 using System;
+using EccomerceAPI.Data;
 
 namespace EccomerceAPI.Services
 {
@@ -174,7 +175,10 @@ namespace EccomerceAPI.Services
                 Price = price,
                 Lenght = widths,
                 Widths = lengths,
-                AmountOfProducts = amountOfProducts
+                AmountOfProducts = amountOfProducts,
+                Offset = (pageNumber - 1) * itensPerPage,
+                PageSize = itensPerPage
+            
 
 
 

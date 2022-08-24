@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data.EfCore;
+using EccomerceAPI.Data;
 using EccomerceAPI.Models;
 using System.Linq;
 
