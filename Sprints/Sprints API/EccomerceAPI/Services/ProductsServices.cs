@@ -95,7 +95,7 @@ namespace EccomerceAPI.Services
             return Result.Ok();
         }
         public List<Product> FilterProduct(string name, string center,bool? status,double? weight,double? height,double? lengths,double? widths,
-            double? price, int? amountOfProducts,int? order)
+            double? price, int? amountOfProducts,int? order, int? itensPerPage, int? pageNumber)
         {
             var sql = "SELECT * FROM Products WHERE ";
             using var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
@@ -156,7 +156,7 @@ namespace EccomerceAPI.Services
                 }
                 if(order == 1)
                 {
-                    sql += " ORDER BY Name";
+                    sql += " ORDER BY Name OFFSET";
                 }
                 if(order == 2)
                 {

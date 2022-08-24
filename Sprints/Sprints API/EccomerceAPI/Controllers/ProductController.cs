@@ -33,9 +33,10 @@ namespace EccomerceAPI.Controllers
         [HttpGet]
         public List<Product> SearchId([FromQuery] string name, [FromQuery] string center, [FromQuery] bool? status, [FromQuery] double? weight,
             [FromQuery] double? height, [FromQuery] double? lengths, [FromQuery] double? widths,
-            [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order)
+            [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order,
+            [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
         {
-           return _service.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order);
+           return _service.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage);
 
     
         }
