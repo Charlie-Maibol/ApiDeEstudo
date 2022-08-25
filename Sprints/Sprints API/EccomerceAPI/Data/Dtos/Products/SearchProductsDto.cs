@@ -17,7 +17,6 @@ namespace EccomerceAPI.Data.Dtos.Products
         public string Name { get; set; }
         public bool Status { get; set; } = true;
         public DateTime created { get; set; }
-        public DateTime Consult { get; set; } = DateTime.Now;
 
         public object SubCategories { get; set; }
     }

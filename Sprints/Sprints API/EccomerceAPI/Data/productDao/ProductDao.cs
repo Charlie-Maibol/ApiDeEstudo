@@ -29,9 +29,9 @@ namespace EccomerceAPI.Data.productDao
             _context.Remove(product);
             _context.SaveChanges();
         }
-        public void EditProduct(int id, EditProductDto productDto)
+        public void EditProduct(int id, Product product)
         {
-            _mapper.Map<Product>(productDto);           
+                       
             _context.SaveChanges();
         }
         public Product SearchProdId(int id)
@@ -39,6 +39,8 @@ namespace EccomerceAPI.Data.productDao
             
             return _context.Products.FirstOrDefault(p => p.Id == id);
         }
+
+        
         
     }
 }

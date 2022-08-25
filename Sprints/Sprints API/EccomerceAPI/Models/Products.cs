@@ -32,8 +32,7 @@ namespace EccomerceAPI.Models
         public string DistributionCenter { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
 
-        public DateTime Modified { get; set; } = DateTime.Now;
-        public DateTime Consult { get; set; } = DateTime.Now;
+        public DateTime Modified { get; set; }
         [JsonIgnore]
         public virtual SubCategory SubCategory { get; set; }
 
