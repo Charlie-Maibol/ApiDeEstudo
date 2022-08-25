@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EccomerceAPI.Models
 {
@@ -32,7 +33,8 @@ namespace EccomerceAPI.Models
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; } = DateTime.Now;
-
+        public DateTime Consult { get; set; } = DateTime.Now;
+        [JsonIgnore]
         public virtual SubCategory SubCategory { get; set; }
 
         public int subCategoryId { get; set; }
