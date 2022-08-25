@@ -3,6 +3,7 @@ using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 
@@ -28,15 +29,26 @@ namespace EccomerceAPI.Controllers
         public IActionResult AddProduct([FromBody] CreateProductDto productDto)
         {
             SearchProductsDto searchProducts = _service.AddProduct(productDto);
-            return CreatedAtAction(nameof(SearchId), new { id = searchProducts.Id }, searchProducts);
+            return CreatedAtAction(nameof(SearchProdId), new { id = searchProducts.Id }, searchProducts);
+        }
+        [HttpGet("{ID}")]
+        public IActionResult SearchProdId(int? Id)
+        {
+            List <SearchProductsDto> productDto =  _service.SearchProdId(Id);
+            if(productDto != null)
+            {
+                return Ok(productDto);
+
+            }
+            return NotFound();
         }
         [HttpGet]
-        public List<Product> SearchId([FromQuery] string name, [FromQuery] string center, [FromQuery] bool? status, [FromQuery] double? weight,
+        public IActionResult FilterProduct([FromQuery] string name, [FromQuery] string center, [FromQuery] bool? status, [FromQuery] double? weight,
             [FromQuery] double? height, [FromQuery] double? lengths, [FromQuery] double? widths,
             [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order,
             [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
         {
-           return _service.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage);
+            return Ok(_service.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
 
     
         }

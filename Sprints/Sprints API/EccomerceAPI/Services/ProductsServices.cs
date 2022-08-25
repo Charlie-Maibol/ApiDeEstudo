@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EccomerceAPI.Data.Dtos.Products;
-
 using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using FluentResults;
@@ -39,16 +38,21 @@ namespace EccomerceAPI.Services
             Product product = _mapper.Map<Product>(productDto);
             SubCategory sub = _context.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
             Category cat = _context.Categories.FirstOrDefault(cat => cat.Id == sub.CategoryId);
-            if (cat.Status == false && sub.Status == false)
+            if (cat.Status == true && sub.Status == true)
             {
-               _dao.AddProduct(productDto);
-            }           
-
-            return _mapper.Map<SearchProductsDto>(productDto);
+                
+               
+                return _dao.AddProduct(productDto);
+            }
+            else
+            {
+                return null;
+            }
+            
             
         }
 
-        public List<SearchProductsDto> SearchId(int? Id, int pageNumber, int itensPerPage)
+        public List<SearchProductsDto> SearchProdId(int? Id)
         {
             List<Product> products;
 
@@ -58,10 +62,8 @@ namespace EccomerceAPI.Services
             }
             else
             {
-                products = _context.Products.Where(cat => cat.Id == Id)
-                        .Skip((pageNumber - 1) * itensPerPage)
-                        .Take(itensPerPage).ToList();
-                List<SearchProductsDto> productDto = _mapper.Map<List<SearchProductsDto>>(products);
+                products = _context.Products.Where(p => p.Id == Id).ToList();
+                
 
             }
             if (products != null)
@@ -96,7 +98,7 @@ namespace EccomerceAPI.Services
             return Result.Ok();
         }
         public List<Product> FilterProduct(string name, string center,bool? status,double? weight,double? height,double? lengths,double? widths,
-            double? price, int? amountOfProducts,int? order, int? itensPerPage, int? pageNumber)
+            double? price, int? amountOfProducts,int? order, int itensPerPage = 0, int pageNumber = 0)
         {
             var sql = "SELECT * FROM Products WHERE ";
             using var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
@@ -116,27 +118,27 @@ namespace EccomerceAPI.Services
             }
             if (weight != null)
             {
-                sql += "Weight = @peso and ";
+                sql += "Weight = @weight and ";
             }
             if (height != null)
             {
-                sql += "Height = @altura and ";
-            }
-            if (lengths != null)
-            {
-                sql += "Widths = @largura and ";
+                sql += "Height = @height and ";
             }
             if (widths != null)
             {
-                sql += "Lengths = @comprimento and "; 
+                sql += "Widths = @widths and ";
+            }
+            if (lengths != null)
+            {
+                sql += "Lengths = @lengths and "; 
             }
             if (amountOfProducts != null)
             {
-                sql += "AmountOfProducts = @quantidade and ";
+                sql += "AmountOfProducts = @amountOfProducts and ";
             }
             if (price != null)
             {
-                sql += "Price = @valor and ";
+                sql += "Price = @price and ";
             }
             if(name == null && center == null && price == null && amountOfProducts == null && widths == null && lengths == null && height == null && status == null
                 && weight == null)
@@ -157,14 +159,14 @@ namespace EccomerceAPI.Services
                 }
                 if(order == 1)
                 {
-                    sql += " ORDER BY Name OFFSET";
+                    sql += " ORDER BY Name";
                 }
                 if(order == 2)
                 {
                     sql += " ORDER BY Name DESC";
                 }
             }
-
+            Console.WriteLine(sql);
             var result = connection.Query<Product>(sql, new
             {
                 Name = name,
@@ -175,12 +177,8 @@ namespace EccomerceAPI.Services
                 Price = price,
                 Lenght = widths,
                 Widths = lengths,
-                AmountOfProducts = amountOfProducts,
-                Offset = (pageNumber - 1) * itensPerPage,
-                PageSize = itensPerPage
-            
-
-
+                AmountOfProducts = amountOfProducts
+                
 
             });
             return result.ToList();
