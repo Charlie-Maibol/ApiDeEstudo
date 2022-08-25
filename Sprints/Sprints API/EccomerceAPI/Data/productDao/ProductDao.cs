@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data.EfCore;
+using EccomerceAPI.Data;
 using EccomerceAPI.Models;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace EccomerceAPI.Data.productDao
 {
@@ -16,12 +17,12 @@ namespace EccomerceAPI.Data.productDao
             _context = context;
             _mapper = mapper;   
         }
-        public void AddProduct(CreateProductDto productDto)
+        public SearchProductsDto AddProduct(CreateProductDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
             _context.Products.Add(product);
             _context.SaveChanges();
-            _mapper.Map<SearchProductsDto>(product);
+            return _mapper.Map<SearchProductsDto>(product);
         }
         public void DeleteProduct(Product product)
         {
@@ -35,7 +36,9 @@ namespace EccomerceAPI.Data.productDao
         }
         public Product SearchProdId(int id)
         {
+            
             return _context.Products.FirstOrDefault(p => p.Id == id);
         }
+        
     }
 }

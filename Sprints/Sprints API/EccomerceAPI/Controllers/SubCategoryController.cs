@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.SubCategories;
-using EccomerceAPI.Data.EfCore;
+
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
