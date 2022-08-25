@@ -177,13 +177,17 @@ namespace EccomerceAPI.Services
                 Price = price,
                 Lenght = widths,
                 Widths = lengths,
-                AmountOfProducts = amountOfProducts
+                AmountOfProducts = amountOfProducts,
                 
 
-            });
+            }).Skip((itensPerPage - 1) * pageNumber)
+                .Take(pageNumber).ToList();
+
+            connection.Close();
+
             return result.ToList();
         }
 
     }
-        
+    
 }

@@ -48,6 +48,8 @@ namespace EccomerceAPI.Controllers
             [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order,
             [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
         {
+            
+                
             return Ok(_service.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
 
     
