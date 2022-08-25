@@ -46,7 +46,7 @@ namespace EccomerceAPI.Services
             }
             else
             {
-                return null;
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
             
             
@@ -75,7 +75,7 @@ namespace EccomerceAPI.Services
 
         }
 
-        public Result EditProduct(int id, EditProductDto Product)
+        public Result EditProduct(int id, EditProductDto ProductDto)
         {
             var product = _dao.SearchProdId(id);
             if (product == null)
@@ -83,8 +83,8 @@ namespace EccomerceAPI.Services
 
                 return Result.Fail("Produto não encontrado");
             }
-
-            _dao.EditProduct(id, Product);
+            _mapper.Map(ProductDto, product);
+            _dao.EditProduct(id, product);
             return Result.Ok();
         }
         public Result DeletProduct(int id)
@@ -166,7 +166,7 @@ namespace EccomerceAPI.Services
                     sql += " ORDER BY Name DESC";
                 }
             }
-            Console.WriteLine(sql);
+            
             var result = connection.Query<Product>(sql, new
             {
                 Name = name,
