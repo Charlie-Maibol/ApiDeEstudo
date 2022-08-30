@@ -17,19 +17,19 @@ namespace EccomerceAPI.Services
 {
     public class ProductsServices
     {
-        private IConfiguration _configuration;
-        private CategoryContext _context;
+        
+        private AppDbContext _context;
         private ProductDao _dao;
         private IMapper _mapper;
        
 
 
-        public ProductsServices(CategoryContext context, IMapper mapper, ProductDao dao, IConfiguration configuration)
+        public ProductsServices(AppDbContext context, IMapper mapper, ProductDao dao, IConfiguration configuration)
         {
             _context = context;
             _mapper = mapper;
             _dao = dao;
-            _configuration = configuration;
+            
             
 
         }
@@ -97,96 +97,7 @@ namespace EccomerceAPI.Services
            _dao.DeleteProduct(product);
             return Result.Ok();
         }
-        public List<Product> FilterProduct(string name, string center,bool? status,double? weight,double? height,double? lengths,double? widths,
-            double? price, int? amountOfProducts,int? order, int itensPerPage = 0, int pageNumber = 0)
-        {
-            var sql = "SELECT * FROM Products WHERE ";
-            using var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
-            connection.Open();
-
-            if(name != null)
-            {
-                sql += "Name LIKE \"%" + name + "%\" and ";
-            }
-            if (center != null)
-            {
-                sql += "DistributionCenter LIKE \"%" + center + "%\" and ";
-            }
-            if (status != null)
-            {
-                sql += "Status = @status and "; 
-            }
-            if (weight != null)
-            {
-                sql += "Weight = @weight and ";
-            }
-            if (height != null)
-            {
-                sql += "Height = @height and ";
-            }
-            if (widths != null)
-            {
-                sql += "Widths = @widths and ";
-            }
-            if (lengths != null)
-            {
-                sql += "Lengths = @lengths and "; 
-            }
-            if (amountOfProducts != null)
-            {
-                sql += "AmountOfProducts = @amountOfProducts and ";
-            }
-            if (price != null)
-            {
-                sql += "Price = @price and ";
-            }
-            if(name == null && center == null && price == null && amountOfProducts == null && widths == null && lengths == null && height == null && status == null
-                && weight == null)
-            {
-                var wherePosition = sql.LastIndexOf("WHERE");
-                sql = sql.Remove(wherePosition);
-            }
-            else
-            {
-                var andPosition = sql.LastIndexOf("and");
-                sql = sql.Remove(andPosition);
-            }
-            if(order != null)
-            {
-                if(order != 1 && order != 2)
-                {
-                    throw new HttpResponseException(HttpStatusCode.BadRequest);
-                }
-                if(order == 1)
-                {
-                    sql += " ORDER BY Name";
-                }
-                if(order == 2)
-                {
-                    sql += " ORDER BY Name DESC";
-                }
-            }
-            
-            var result = connection.Query<Product>(sql, new
-            {
-                Name = name,
-                Status = status,
-                DistributionCenter = center,
-                Height = height,
-                Weight = weight,
-                Price = price,
-                Lenght = widths,
-                Widths = lengths,
-                AmountOfProducts = amountOfProducts,
-                
-
-            }).Skip((itensPerPage - 1) * pageNumber)
-                .Take(pageNumber).ToList();
-
-            connection.Close();
-
-            return result.ToList();
-        }
+        
 
     }
     

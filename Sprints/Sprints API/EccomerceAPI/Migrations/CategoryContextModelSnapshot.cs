@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EccomerceAPI.Migrations
 {
-    [DbContext(typeof(CategoryContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class CategoryContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
