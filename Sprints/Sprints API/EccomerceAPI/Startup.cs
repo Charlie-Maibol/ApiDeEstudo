@@ -31,7 +31,7 @@ namespace EccomerceAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CategoryContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("CategoryConnection")));
+            services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("CategoryConnection")));
             services.AddScoped<ProductsServices, ProductsServices> ();
             services.AddScoped<ProductDao>();
             services.AddControllers();

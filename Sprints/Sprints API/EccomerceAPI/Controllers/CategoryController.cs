@@ -16,10 +16,10 @@ namespace EccomerceAPI.Controllers
     [Route("{controller}")]
     public class CategoryController : ControllerBase
     {
-        private CategoryContext _context;
+        private AppDbContext _context;
         private IMapper _mapper;
 
-        public CategoryController(CategoryContext context, IMapper mapper)
+        public CategoryController(AppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -216,11 +216,16 @@ namespace EccomerceAPI.Controllers
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
             Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
-           
+            SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
+
             if (category == null)
             {
 
                 return NotFound();
+            }
+            if(subCategory.Status == false)
+            {
+                return BadRequest("Ainda existem SubCategorias ativas");
             }
            
 

@@ -1,4 +1,5 @@
 ﻿using EccomerceAPI.Data.Dtos.Products;
+using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using FluentResults;
@@ -15,14 +16,13 @@ namespace EccomerceAPI.Controllers
     public class ProductController : ControllerBase
     {
 
-
+        private ProductDao _dao;
         private ProductsServices _service;
 
-        public ProductController(ProductsServices service)
+        public ProductController(ProductsServices service, ProductDao productDao)
         {
-
             _service = service;
-
+            _dao = productDao;
         }
 
         [HttpPost]
@@ -34,8 +34,8 @@ namespace EccomerceAPI.Controllers
         [HttpGet("{ID}")]
         public IActionResult SearchProdId(int? Id)
         {
-            List <SearchProductsDto> productDto =  _service.SearchProdId(Id);
-            if(productDto != null)
+            List<SearchProductsDto> productDto = _service.SearchProdId(Id);
+            if (productDto != null)
             {
                 return Ok(productDto);
 
@@ -48,21 +48,21 @@ namespace EccomerceAPI.Controllers
             [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order,
             [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
         {
-            
-                
-            return Ok(_service.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
 
-    
+
+            return Ok(_dao.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
+
+
         }
         [HttpPut("{Id}")]
         public IActionResult EditProduct(int Id, [FromBody] EditProductDto Product)
         {
-           Result result = _service.EditProduct(Id, Product);
+            Result result = _service.EditProduct(Id, Product);
             if (result.IsFailed)
             {
                 return NotFound();
             }
-           
+
             return NoContent();
         }
         [HttpDelete("{Id}")]

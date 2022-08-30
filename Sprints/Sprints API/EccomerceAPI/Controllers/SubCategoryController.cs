@@ -15,11 +15,11 @@ namespace EccomerceAPI.Controllers
     public class SubCategoryController : ControllerBase
     {
 
-        private CategoryContext _context;
+        private AppDbContext _context;
         private IMapper _mapper;
 
 
-        public SubCategoryController(CategoryContext context, IMapper mapper)
+        public SubCategoryController(AppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -195,12 +195,17 @@ namespace EccomerceAPI.Controllers
         [HttpPut("{ID}")]
         public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto subCategoryDto)
         {
+            Product products = _context.Products.FirstOrDefault(prod => prod.Id == Id);
             SubCategory subCategory = _context.SubCategories.FirstOrDefault(subCategory => subCategory.Id == Id);
             if (subCategory == null)
             {
 
                 return NotFound();
-            }      
+            }
+            if (products.Status == false)
+            {
+                return BadRequest("Ainda existem produtos ativos");
+            }
             _mapper.Map(subCategoryDto, subCategory);
             _context.SaveChanges();
             return NoContent();

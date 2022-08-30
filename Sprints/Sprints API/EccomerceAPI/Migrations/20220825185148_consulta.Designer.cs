@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EccomerceAPI.Migrations
 {
-    [DbContext(typeof(CategoryContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20220825185148_consulta")]
     partial class consulta
     {
