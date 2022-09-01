@@ -50,22 +50,13 @@ namespace EccomerceAPI.Services
             }
             
             
-        }
+        }   
 
         public List<SearchProductsDto> SearchProdId(int? Id)
         {
             List<Product> products;
 
-            if (Id == null)
-            {
-                products = _context.Products.ToList();
-            }
-            else
-            {
-                products = _context.Products.Where(p => p.Id == Id).ToList();
-                
-
-            }
+            products = _dao.NullProducts(Id);
             if (products != null)
             {
                 List<SearchProductsDto> productDto = _mapper.Map<List<SearchProductsDto>>(products);
@@ -74,7 +65,7 @@ namespace EccomerceAPI.Services
             return null;
 
         }
-
+      
         public Result EditProduct(int id, EditProductDto ProductDto)
         {
             var product = _dao.SearchProdId(id);

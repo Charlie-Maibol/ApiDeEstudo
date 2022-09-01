@@ -46,60 +46,76 @@ namespace EccomerceAPI.Data.productDao
             
             return _context.Products.FirstOrDefault(p => p.Id == id);
         }
+        public List<Product> NullProducts(int? Id)
+        {
+            List<Product> products;
+            if (Id == null)
+            {
+                products = _context.Products.ToList();
+            }
+            else
+            {
+                products = _context.Products.Where(p => p.Id == Id).ToList();
+
+
+            }
+
+            return products;
+        }
 
         public List<Product> FilterProduct(string name, string center, bool? status, double? weight, double? height, double? lengths, double? widths,
             double? price, int? amountOfProducts, int? order, int itensPerPage = 0, int pageNumber = 0)
         {
-            var sql = "SELECT * FROM Products WHERE ";
-            using var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
+            var FilterSql = "SELECT * FROM Products WHERE ";
+            var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
             connection.Open();
 
             if (name != null)
             {
-                sql += "Name LIKE \"%" + name + "%\" and ";
+                FilterSql += "Name LIKE \"%" + name + "%\" and ";
             }
             if (center != null)
             {
-                sql += "DistributionCenter LIKE \"%" + center + "%\" and ";
+                FilterSql += "DistributionCenter LIKE \"%" + center + "%\" and ";
             }
             if (status != null)
             {
-                sql += "Status = @status and ";
+                FilterSql += "Status = @status and ";
             }
             if (weight != null)
             {
-                sql += "Weight = @weight and ";
+                FilterSql += "Weight = @weight and ";
             }
             if (height != null)
             {
-                sql += "Height = @height and ";
+                FilterSql += "Height = @height and ";
             }
             if (widths != null)
             {
-                sql += "Widths = @widths and ";
+                FilterSql += "Widths = @widths and ";
             }
             if (lengths != null)
             {
-                sql += "Lengths = @lengths and ";
+                FilterSql += "Lengths = @lengths and ";
             }
             if (amountOfProducts != null)
             {
-                sql += "AmountOfProducts = @amountOfProducts and ";
+                FilterSql += "AmountOfProducts = @amountOfProducts and ";
             }
             if (price != null)
             {
-                sql += "Price = @price and ";
+                FilterSql += "Price = @price and ";
             }
             if (name == null && center == null && price == null && amountOfProducts == null && widths == null && lengths == null && height == null && status == null
                 && weight == null)
             {
-                var wherePosition = sql.LastIndexOf("WHERE");
-                sql = sql.Remove(wherePosition);
+                var wherePosition = FilterSql.LastIndexOf("WHERE");
+                FilterSql = FilterSql.Remove(wherePosition);
             }
             else
             {
-                var andPosition = sql.LastIndexOf("and");
-                sql = sql.Remove(andPosition);
+                var andPosition = FilterSql.LastIndexOf("and");
+                FilterSql = FilterSql.Remove(andPosition);
             }
             if (order != null)
             {
@@ -109,15 +125,15 @@ namespace EccomerceAPI.Data.productDao
                 }
                 if (order == 1)
                 {
-                    sql += " ORDER BY Name";
+                    FilterSql += " ORDER BY Name";
                 }
                 if (order == 2)
                 {
-                    sql += " ORDER BY Name DESC";
+                    FilterSql += " ORDER BY Name DESC";
                 }
             }
 
-            var result = connection.Query<Product>(sql, new
+            var result = connection.Query<Product>(FilterSql, new
             {
                 Name = name,
                 Status = status,

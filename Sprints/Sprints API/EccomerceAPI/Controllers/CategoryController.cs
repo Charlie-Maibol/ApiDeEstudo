@@ -216,14 +216,15 @@ namespace EccomerceAPI.Controllers
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
             Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
-            SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
+            SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Status);
+            Product product = _context.Products.FirstOrDefault(product => product.Status);
 
             if (category == null)
             {
 
                 return NotFound();
             }
-            if(subCategory.Status == false)
+            if(subCategory.Status == true && product.Status == true)
             {
                 return BadRequest("Ainda existem SubCategorias ativas");
             }
