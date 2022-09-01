@@ -217,14 +217,14 @@ namespace EccomerceAPI.Controllers
         {
             Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
             SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Status);
-            Product product = _context.Products.FirstOrDefault(product => product.Status);
+            
 
             if (category == null)
             {
 
                 return NotFound();
             }
-            if(Category.Status == true && product.Status == true)
+            if(Category.Status != true && subCategory.Status == true)
             {
                 return BadRequest("Ainda existem SubCategorias ativas");
             }

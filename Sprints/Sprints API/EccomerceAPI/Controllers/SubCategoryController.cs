@@ -202,7 +202,7 @@ namespace EccomerceAPI.Controllers
 
                 return NotFound();
             }
-            if (products.Status == true && subCategory.Status == true)
+            if (products.Status == true && subCategory.Status != true)
             {
                 return BadRequest("Ainda existem produtos ativos");
             }
