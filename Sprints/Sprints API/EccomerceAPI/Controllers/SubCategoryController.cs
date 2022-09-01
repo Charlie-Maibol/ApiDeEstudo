@@ -195,20 +195,21 @@ namespace EccomerceAPI.Controllers
         [HttpPut("{ID}")]
         public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto subCategoryDto)
         {
-            Product products = _context.Products.FirstOrDefault(prod => prod.Id == Id);
+            Product products = _context.Products.FirstOrDefault(prod => prod.Status);
             SubCategory subCategory = _context.SubCategories.FirstOrDefault(subCategory => subCategory.Id == Id);
             if (subCategory == null)
             {
 
                 return NotFound();
             }
-            if (products.Status == false)
+            if (products.Status == true && subCategory.Status == true)
             {
                 return BadRequest("Ainda existem produtos ativos");
             }
             _mapper.Map(subCategoryDto, subCategory);
             _context.SaveChanges();
             return NoContent();
+
         }
         [HttpDelete("{ID}")]
         public IActionResult DeletSubCategory(int ID)
