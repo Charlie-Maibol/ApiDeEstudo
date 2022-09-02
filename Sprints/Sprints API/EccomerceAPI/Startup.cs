@@ -4,17 +4,13 @@ using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace EccomerceAPI
 {
@@ -33,6 +29,8 @@ namespace EccomerceAPI
             services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("CategoryConnection")));
             services.AddScoped<ProductsServices, ProductsServices>();
             services.AddScoped<ProductDao>();
+            services.AddScoped<DcServices, DcServices>();
+            services.AddScoped<DcDao>();
             services.AddControllers().AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         );
