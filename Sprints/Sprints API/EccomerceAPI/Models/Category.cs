@@ -19,7 +19,7 @@ namespace EccomerceAPI.Models
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; } = DateTime.Now;
-        [JsonIgnore]
+       
         public virtual List<SubCategory> SubCategories { get; set; }
         
     }

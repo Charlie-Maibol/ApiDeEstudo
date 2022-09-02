@@ -1,14 +1,11 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.Categories;
-
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 
 namespace EccomerceAPI.Controllers
 {
@@ -206,7 +203,7 @@ namespace EccomerceAPI.Controllers
             if (category != null)
             {
                 SearchCategoriesDto categoryDto = _mapper.Map<SearchCategoriesDto>(category);
-                return Ok(category);
+                return Ok(categoryDto);
             }
 
             return NotFound();
@@ -216,27 +213,25 @@ namespace EccomerceAPI.Controllers
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
             Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
-            SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Status);
-            
+            List<SubCategory> subCategory = _context.SubCategories.Where(sub => sub.CategoryId == Id && sub.Status == true).ToList();
+
 
             if (category == null)
             {
 
                 return NotFound();
             }
-            if(Category.Status != true && subCategory.Status == true)
+            if (Category.Status != true && subCategory.Count > 0 )
             {
                 return BadRequest("Ainda existem SubCategorias ativas");
             }
-           
 
+            this.ChangeStatus(Id);
             _mapper.Map(Category, category);
             _context.SaveChanges();
             return NoContent();
         }
-
-        [HttpPut("status/{Id}")]
-        public IActionResult ChangeStatus(int Id)
+        public SearchCategoriesDto ChangeStatus(int Id)
         {
 
             var cat = _context.Categories.FirstOrDefault(category => category.Id == Id);
@@ -244,14 +239,14 @@ namespace EccomerceAPI.Controllers
            
             if (sub.Count == 0)
             {
-                return NotFound();
+                return null;
             }
             if (cat.Status == false)
             {
                 cat.Status = true;
                 cat.Modified = DateTime.Now;
             }
-            else
+            else if (cat.Status == true);
             {
                 cat.Status = false;
                 cat.Modified = DateTime.Now;
@@ -264,10 +259,9 @@ namespace EccomerceAPI.Controllers
                     }
                 }
             }
-            
 
             _context.SaveChanges();
-            return NoContent();
+            return null;
         }
 
         [HttpDelete("{ID}")]

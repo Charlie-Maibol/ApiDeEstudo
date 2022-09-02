@@ -15,7 +15,6 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EccomerceAPI
 {
@@ -32,9 +31,12 @@ namespace EccomerceAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("CategoryConnection")));
-            services.AddScoped<ProductsServices, ProductsServices> ();
+            services.AddScoped<ProductsServices, ProductsServices>();
             services.AddScoped<ProductDao>();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EccomerceAPI", Version = "v1" });

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.SubCategories;
-
 using EccomerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -195,14 +194,14 @@ namespace EccomerceAPI.Controllers
         [HttpPut("{ID}")]
         public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto subCategoryDto)
         {
-            Product products = _context.Products.FirstOrDefault(prod => prod.Status);
-            SubCategory subCategory = _context.SubCategories.FirstOrDefault(subCategory => subCategory.Id == Id);
+            SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
+            List<Product> product = _context.Products.Where(prod => prod.subCategoryId == Id && prod.Status == true).ToList();
             if (subCategory == null)
             {
 
                 return NotFound();
             }
-            if (products.Status == true && subCategory.Status != true)
+            if (product.Count > 0 && subCategory.Status != true)
             {
                 return BadRequest("Ainda existem produtos ativos");
             }
