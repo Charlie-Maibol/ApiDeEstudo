@@ -16,13 +16,13 @@ namespace EccomerceAPI.Controllers
     public class ProductController : ControllerBase
     {
 
-        private ProductDao _dao;
+        private ProductDao _productDao;
         private ProductsServices _service;
 
         public ProductController(ProductsServices service, ProductDao productDao)
         {
             _service = service;
-            _dao = productDao;
+            _productDao = productDao;
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace EccomerceAPI.Controllers
         {
 
 
-            return Ok(_dao.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
+            return Ok(_productDao.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
 
 
         }

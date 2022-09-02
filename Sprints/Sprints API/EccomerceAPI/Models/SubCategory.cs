@@ -20,9 +20,9 @@ namespace EccomerceAPI.Models
 
         public DateTime Modified { get; set; } = DateTime.Now;
         public virtual Category Category { get; set; }
-
-        public int CategoryId { get; set; }
         [JsonIgnore]
+        public int CategoryId { get; set; }
+        
         public virtual List<Product> Products { get; set; }
 
     }

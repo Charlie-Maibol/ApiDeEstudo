@@ -11,7 +11,7 @@ namespace EccomerceAPI.Profiles
             CreateMap<CreateProductDto, Product>();
             CreateMap<Product, SearchProductsDto>();
             CreateMap<EditProductDto, Product>();
-            CreateMap<SearchProductsDto, Product>();
+           
         }
     }
 }

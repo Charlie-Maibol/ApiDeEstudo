@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EccomerceAPI.Data.Dtos.Products
 {
@@ -17,7 +18,7 @@ namespace EccomerceAPI.Data.Dtos.Products
         public string Name { get; set; }
         public bool Status { get; set; } = true;
         public DateTime created { get; set; }
-
+        
         public object SubCategories { get; set; }
     }
 }

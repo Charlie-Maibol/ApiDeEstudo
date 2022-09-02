@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EccomerceAPI.Data.Dtos.Categories
 {
@@ -18,7 +19,7 @@ namespace EccomerceAPI.Data.Dtos.Categories
         public bool Status { get; set; } = true;
         public DateTime created { get; set; }
         public DateTime Consult { get; set; } = DateTime.Now;
-
+      
         public object SubCategories { get; set; }
     }
 }
