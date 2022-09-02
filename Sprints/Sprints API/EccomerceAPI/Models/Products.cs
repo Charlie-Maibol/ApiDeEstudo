@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -27,9 +28,7 @@ namespace EccomerceAPI.Models
         public double Widths { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório")]
         public int AmountOfProducts { get; set; }
-        [Required(ErrorMessage = "Campo Obrigatório")]
-        [StringLength(128, ErrorMessage = "Você excedeu o número da caracteres permitidos!")]
-        public string DistributionCenter { get; set; }
+        [Required(ErrorMessage = "Campo Obrigatório")]        
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; }
@@ -37,5 +36,7 @@ namespace EccomerceAPI.Models
         public virtual SubCategory SubCategory { get; set; }
         
         public int subCategoryId { get; set; }
+        public virtual DistribuitonCenter DistributionCenters { get; set; }
+        public int distribuitonCenterId { get;set; }
     }
 }

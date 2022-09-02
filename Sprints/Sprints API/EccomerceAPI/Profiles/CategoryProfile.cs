@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace EccomerceAPI.Profiles
 {
-    public class CategoryProfile : Profile
+    public class CategoryProfile : AutoMapper.Profile
     {
         public CategoryProfile()
         {

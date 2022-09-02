@@ -29,8 +29,8 @@ namespace EccomerceAPI
             services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("CategoryConnection")));
             services.AddScoped<ProductsServices, ProductsServices>();
             services.AddScoped<ProductDao>();
-            services.AddScoped<DcServices, DcServices>();
-            services.AddScoped<DcDao>();
+            services.AddScoped<DistribuitonCenterServices, DistribuitonCenterServices>();
+            services.AddScoped<DistribuitonCenterDao>();
             services.AddControllers().AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         );

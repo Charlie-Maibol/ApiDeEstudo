@@ -4,7 +4,7 @@ using EccomerceAPI.Models;
 
 namespace EccomerceAPI.Profiles
 {
-    public class SubCategoryProfile : Profile
+    public class SubCategoryProfile : AutoMapper.Profile
     {
         public SubCategoryProfile()
         {

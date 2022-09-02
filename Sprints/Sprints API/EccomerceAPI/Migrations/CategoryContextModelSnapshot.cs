@@ -42,6 +42,48 @@ namespace EccomerceAPI.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("EccomerceAPI.Models.DistribuitonCenter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("Neighbourhood")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<int>("StreetNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UF")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("DistribuitonCenters");
+                });
+
             modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -53,11 +95,6 @@ namespace EccomerceAPI.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
-
-                    b.Property<string>("DistributionCenter")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("varchar(128)");
 
                     b.Property<double>("Height")
                         .HasColumnType("double");
@@ -85,10 +122,15 @@ namespace EccomerceAPI.Migrations
                     b.Property<double>("Widths")
                         .HasColumnType("double");
 
+                    b.Property<int>("distribuitonCenterId")
+                        .HasColumnType("int");
+
                     b.Property<int>("subCategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("distribuitonCenterId");
 
                     b.HasIndex("subCategoryId");
 
@@ -127,11 +169,19 @@ namespace EccomerceAPI.Migrations
 
             modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
                 {
+                    b.HasOne("EccomerceAPI.Models.DistribuitonCenter", "DistributionCenters")
+                        .WithMany("Products")
+                        .HasForeignKey("distribuitonCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EccomerceAPI.Models.SubCategory", "SubCategory")
                         .WithMany("Products")
                         .HasForeignKey("subCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DistributionCenters");
 
                     b.Navigation("SubCategory");
                 });
@@ -150,6 +200,11 @@ namespace EccomerceAPI.Migrations
             modelBuilder.Entity("EccomerceAPI.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("EccomerceAPI.Models.DistribuitonCenter", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("EccomerceAPI.Models.SubCategory", b =>
