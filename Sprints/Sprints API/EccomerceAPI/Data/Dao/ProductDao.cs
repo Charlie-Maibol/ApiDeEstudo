@@ -14,48 +14,48 @@ namespace EccomerceAPI.Data.productDao
 {
     public class ProductDao
     {
-        private AppDbContext _context;
+        private AppDbContext _productContext;
         private IMapper _mapper;
         private IConfiguration _configuration;
 
         public ProductDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
         {
-            _context = context;
+            _productContext = context;
             _mapper = mapper;
             _configuration = configuration;
         }
         public SearchProductsDto AddProduct(CreateProductDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
-            _context.Products.Add(product);
-            _context.SaveChanges();
+            _productContext.Products.Add(product);
+            _productContext.SaveChanges();
             return _mapper.Map<SearchProductsDto>(product);
         }
         public void DeleteProduct(Product product)
         {
-            _context.Remove(product);
-            _context.SaveChanges();
+            _productContext.Remove(product);
+            _productContext.SaveChanges();
         }
         public void EditProduct(int id, Product product)
         {
                        
-            _context.SaveChanges();
+            _productContext.SaveChanges();
         }
         public Product SearchProdId(int id)
         {
             
-            return _context.Products.FirstOrDefault(p => p.Id == id);
+            return _productContext.Products.FirstOrDefault(p => p.Id == id);
         }
         public List<Product> NullProducts(int? Id)
         {
             List<Product> products;
             if (Id == null)
             {
-                products = _context.Products.ToList();
+                products = _productContext.Products.ToList();
             }
             else
             {
-                products = _context.Products.Where(p => p.Id == Id).ToList();
+                products = _productContext.Products.Where(p => p.Id == Id).ToList();
 
 
             }

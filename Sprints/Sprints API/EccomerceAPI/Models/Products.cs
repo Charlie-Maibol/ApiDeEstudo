@@ -36,7 +36,7 @@ namespace EccomerceAPI.Models
         public virtual SubCategory SubCategory { get; set; }
         
         public int subCategoryId { get; set; }
-        public virtual DistribuitonCenter DistributionCenters { get; set; }
+        public virtual DistributionCenter DistributionCenters { get; set; }
         public int distribuitonCenterId { get;set; }
     }
 }

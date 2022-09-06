@@ -17,24 +17,24 @@ namespace EccomerceAPI.Controllers
     {
 
         private ProductDao _productDao;
-        private ProductsServices _service;
+        private ProductsServices _productService;
 
         public ProductController(ProductsServices service, ProductDao productDao)
         {
-            _service = service;
+            _productService = service;
             _productDao = productDao;
         }
 
         [HttpPost]
         public IActionResult AddProduct([FromBody] CreateProductDto productDto)
         {
-            SearchProductsDto searchProducts = _service.AddProduct(productDto);
+            SearchProductsDto searchProducts = _productService.AddProduct(productDto);
             return CreatedAtAction(nameof(SearchProdId), new { id = searchProducts.Id }, searchProducts);
         }
         [HttpGet("{ID}")]
         public IActionResult SearchProdId(int? Id)
         {
-            List<SearchProductsDto> productDto = _service.SearchProdId(Id);
+            List<SearchProductsDto> productDto = _productService.SearchProdId(Id);
             if (productDto != null)
             {
                 return Ok(productDto);
@@ -57,7 +57,7 @@ namespace EccomerceAPI.Controllers
         [HttpPut("{Id}")]
         public IActionResult EditProduct(int Id, [FromBody] EditProductDto Product)
         {
-            Result result = _service.EditProduct(Id, Product);
+            Result result = _productService.EditProduct(Id, Product);
             if (result.IsFailed)
             {
                 return NotFound();
@@ -69,7 +69,7 @@ namespace EccomerceAPI.Controllers
 
         public IActionResult DeletProduct(int Id)
         {
-            Result result = _service.DeletProduct(Id);
+            Result result = _productService.DeletProduct(Id);
             if (result.IsFailed)
             {
                 return NotFound();

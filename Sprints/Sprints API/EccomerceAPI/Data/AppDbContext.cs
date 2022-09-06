@@ -12,7 +12,7 @@ namespace EccomerceAPI.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<DistribuitonCenter> DistribuitonCenters { get; set; }
+        public DbSet<DistributionCenter> DistributionCenters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,7 +31,7 @@ namespace EccomerceAPI.Data
                 .WithMany(center => center.Products)
                 .HasForeignKey(center => center.distribuitonCenterId);
 
-            builder.Entity<DistribuitonCenter>()
+            builder.Entity<DistributionCenter>()
                 .HasIndex(center => center.Name)
                 .IsUnique();
                 
