@@ -213,7 +213,7 @@ namespace EccomerceAPI.Controllers
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
             Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
-            List<SubCategory> subCategory = _context.Dcs.Where(sub => sub.CategoryId == Id && sub.Status == true).ToList();
+            List<SubCategory> subCategory = _context.SubCategories.Where(sub => sub.CategoryId == Id && sub.Status ).ToList();
 
 
             if (category == null)
@@ -235,7 +235,7 @@ namespace EccomerceAPI.Controllers
         {
 
             var cat = _context.Categories.FirstOrDefault(category => category.Id == Id);
-            var sub = _context.Dcs.Where(sub => sub.CategoryId == Id).ToList();
+            var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
            
             if (sub.Count == 0)
             {

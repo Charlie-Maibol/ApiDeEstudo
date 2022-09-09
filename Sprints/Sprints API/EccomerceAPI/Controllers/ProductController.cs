@@ -1,4 +1,5 @@
-﻿using EccomerceAPI.Data.Dtos.Products;
+﻿using EccomerceAPI.Data.Dtos;
+using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
@@ -17,24 +18,24 @@ namespace EccomerceAPI.Controllers
     {
 
         private ProductDao _productDao;
-        private ProductsServices _service;
+        private ProductsServices _productService;
 
         public ProductController(ProductsServices service, ProductDao productDao)
         {
-            _service = service;
+            _productService = service;
             _productDao = productDao;
         }
 
         [HttpPost]
         public IActionResult AddProduct([FromBody] CreateProductDto productDto)
         {
-            SearchProductsDto searchProducts = _service.AddProduct(productDto);
+            SearchProductsDto searchProducts = _productService.AddProduct(productDto);
             return CreatedAtAction(nameof(SearchProdId), new { id = searchProducts.Id }, searchProducts);
         }
         [HttpGet("{ID}")]
         public IActionResult SearchProdId(int? Id)
         {
-            List<SearchProductsDto> productDto = _service.SearchProdId(Id);
+            List<SearchProductsDto> productDto = _productService.SearchProdId(Id);
             if (productDto != null)
             {
                 return Ok(productDto);
@@ -43,21 +44,18 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
         [HttpGet]
-        public IActionResult FilterProduct([FromQuery] string name, [FromQuery] string center, [FromQuery] bool? status, [FromQuery] double? weight,
-            [FromQuery] double? height, [FromQuery] double? lengths, [FromQuery] double? widths,
-            [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order,
-            [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
+        public IActionResult FilterProduct(ProductFIlterDto productFilterDto)
         {
 
-
-            return Ok(_productDao.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
+            _productDao.FilterProduct(productFilterDto);
+            return Ok();
 
 
         }
         [HttpPut("{Id}")]
         public IActionResult EditProduct(int Id, [FromBody] EditProductDto Product)
         {
-            Result result = _service.EditProduct(Id, Product);
+            Result result = _productService.EditProduct(Id, Product);
             if (result.IsFailed)
             {
                 return NotFound();
@@ -69,7 +67,7 @@ namespace EccomerceAPI.Controllers
 
         public IActionResult DeletProduct(int Id)
         {
-            Result result = _service.DeletProduct(Id);
+            Result result = _productService.DeletProduct(Id);
             if (result.IsFailed)
             {
                 return NotFound();

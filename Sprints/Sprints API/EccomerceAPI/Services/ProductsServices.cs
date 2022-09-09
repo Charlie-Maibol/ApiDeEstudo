@@ -15,14 +15,14 @@ namespace EccomerceAPI.Services
     public class ProductsServices
     {
 
-        private AppDbContext _context;
+        private AppDbContext _productContext;
         private ProductDao _productDao;
-        private IMapper _mapper;
+        private IMapper _productMapper;
 
         public ProductsServices(AppDbContext context, IMapper mapper, ProductDao dao, IConfiguration configuration)
         {
-            _context = context;
-            _mapper = mapper;
+            _productContext = context;
+            _productMapper = mapper;
             _productDao = dao;
 
 
@@ -30,9 +30,9 @@ namespace EccomerceAPI.Services
         }
         public SearchProductsDto AddProduct(CreateProductDto productDto)
         {
-            Product product = _mapper.Map<Product>(productDto);
-            SubCategory sub = _context.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
-            Category cat = _context.Categories.FirstOrDefault(cat => cat.Id == sub.CategoryId);
+            Product product = _productMapper.Map<Product>(productDto);
+            SubCategory sub = _productContext.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
+            Category cat = _productContext.Categories.FirstOrDefault(cat => cat.Id == sub.CategoryId);
             if (cat.Status == true && sub.Status == true)
             {
 
@@ -46,6 +46,10 @@ namespace EccomerceAPI.Services
 
 
         }
+        public List<Product> GetProductsCenterID(int Id)
+        {
+            return _productContext.Products.Where(prod => prod.distribuitonCenterId == Id).ToList();
+        }
         public List<SearchProductsDto> SearchProdId(int? Id)
         {
             List<Product> products;
@@ -53,7 +57,7 @@ namespace EccomerceAPI.Services
             products = _productDao.NullProducts(Id);
             if (products != null)
             {
-                List<SearchProductsDto> productDto = _mapper.Map<List<SearchProductsDto>>(products);
+                List<SearchProductsDto> productDto = _productMapper.Map<List<SearchProductsDto>>(products);
                 return productDto;
             }
             return null;
@@ -67,7 +71,7 @@ namespace EccomerceAPI.Services
 
                 return Result.Fail("Produto não encontrado");
             }
-            _mapper.Map(ProductDto, product);
+            _productMapper.Map(ProductDto, product);
             _productDao.EditProduct(id, product);
             return Result.Ok();
         }

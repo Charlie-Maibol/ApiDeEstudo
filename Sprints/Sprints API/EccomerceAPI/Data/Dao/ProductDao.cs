@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data;
 using EccomerceAPI.Models;
 using System.Linq;
 using System.Collections.Generic;
@@ -9,105 +8,116 @@ using System.Web.Http;
 using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Configuration;
 using Dapper;
+using EccomerceAPI.Data.Dtos;
 
 namespace EccomerceAPI.Data.productDao
 {
     public class ProductDao
     {
-        private AppDbContext _context;
+        private AppDbContext _productContext;
         private IMapper _mapper;
         private IConfiguration _configuration;
+       
 
         public ProductDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
         {
-            _context = context;
+            _productContext = context;
             _mapper = mapper;
             _configuration = configuration;
+            
         }
         public SearchProductsDto AddProduct(CreateProductDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
-            _context.Products.Add(product);
-            _context.SaveChanges();
+            _productContext.Products.Add(product);
+            _productContext.SaveChanges();
             return _mapper.Map<SearchProductsDto>(product);
+        }
+        public Product CenterID(int id)
+        {
+
+            return _productContext.Products.FirstOrDefault(p => p.distribuitonCenterId == id);
         }
         public void DeleteProduct(Product product)
         {
-            _context.Remove(product);
-            _context.SaveChanges();
+            _productContext.Remove(product);
+            _productContext.SaveChanges();
         }
         public void EditProduct(int id, Product product)
         {
                        
-            _context.SaveChanges();
+            _productContext.SaveChanges();
         }
         public Product SearchProdId(int id)
         {
             
-            return _context.Products.FirstOrDefault(p => p.Id == id);
+            return _productContext.Products.FirstOrDefault(p => p.Id == id);
         }
         public List<Product> NullProducts(int? Id)
         {
             List<Product> products;
             if (Id == null)
             {
-                products = _context.Products.ToList();
+                products = _productContext.Products.ToList();
             }
             else
             {
-                products = _context.Products.Where(p => p.Id == Id).ToList();
+                products = _productContext.Products.Where(p => p.Id == Id).ToList();
 
 
             }
 
             return products;
         }
-
-        public List<Product> FilterProduct(string name, string center, bool? status, double? weight, double? height, double? lengths, double? widths,
-            double? price, int? amountOfProducts, int? order, int itensPerPage = 0, int pageNumber = 0)
+        private static bool Null(ProductFIlterDto productFIlterDto)
+        {
+            return productFIlterDto.name == null && productFIlterDto.center == null && productFIlterDto.price == null && productFIlterDto.amountOfProducts == null
+            && productFIlterDto.widths == null && productFIlterDto.lengths == null && productFIlterDto.height == null && productFIlterDto.status == null
+            && productFIlterDto.weight == null;
+        }
+        public List<Product> FilterProduct(ProductFIlterDto productFIlterDto)
         {
             var FilterSql = "SELECT * FROM Products WHERE ";
             var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
             connection.Open();
 
-            if (name != null)
+            if (productFIlterDto.name != null)
             {
-                FilterSql += "Name LIKE \"%" + name + "%\" and ";
+                FilterSql += "Name LIKE \"%" + productFIlterDto.name + "%\" and ";
             }
-            if (center != null)
+            if (productFIlterDto.center != null)
             {
-                FilterSql += "DistributionCenter LIKE \"%" + center + "%\" and ";
+                FilterSql += "DistributionCenter LIKE \"%" + productFIlterDto.center + "%\" and ";
             }
-            if (status != null)
+            if (productFIlterDto.status != null)
             {
                 FilterSql += "Status = @status and ";
             }
-            if (weight != null)
+            if (productFIlterDto.weight != null)
             {
                 FilterSql += "Weight = @weight and ";
             }
-            if (height != null)
+            if (productFIlterDto.height != null)
             {
                 FilterSql += "Height = @height and ";
             }
-            if (widths != null)
+            if (productFIlterDto.widths != null)
             {
                 FilterSql += "Widths = @widths and ";
             }
-            if (lengths != null)
+            if (productFIlterDto.lengths != null)
             {
                 FilterSql += "Lengths = @lengths and ";
             }
-            if (amountOfProducts != null)
+            if (productFIlterDto.amountOfProducts != null)
             {
                 FilterSql += "AmountOfProducts = @amountOfProducts and ";
             }
-            if (price != null)
+            if (productFIlterDto.price != null)
             {
                 FilterSql += "Price = @price and ";
             }
-            if (name == null && center == null && price == null && amountOfProducts == null && widths == null && lengths == null && height == null && status == null
-                && weight == null)
+            if (Null(productFIlterDto))
             {
                 var wherePosition = FilterSql.LastIndexOf("WHERE");
                 FilterSql = FilterSql.Remove(wherePosition);
@@ -117,17 +127,17 @@ namespace EccomerceAPI.Data.productDao
                 var andPosition = FilterSql.LastIndexOf("and");
                 FilterSql = FilterSql.Remove(andPosition);
             }
-            if (order != null)
+            if (productFIlterDto.order != null)
             {
-                if (order != 1 && order != 2)
+                if (productFIlterDto.order != 1 && productFIlterDto.order != 2)
                 {
                     throw new HttpResponseException(HttpStatusCode.BadRequest);
                 }
-                if (order == 1)
+                if (productFIlterDto.order == 1)
                 {
                     FilterSql += " ORDER BY Name";
                 }
-                if (order == 2)
+                if (productFIlterDto.order == 2)
                 {
                     FilterSql += " ORDER BY Name DESC";
                 }
@@ -135,21 +145,21 @@ namespace EccomerceAPI.Data.productDao
 
             var result = connection.Query<Product>(FilterSql, new
             {
-                Name = name,
-                Status = status,
-                DistributionCenter = center,
-                Height = height,
-                Weight = weight,
-                Price = price,
-                Lenght = widths,
-                Widths = lengths,
-                AmountOfProducts = amountOfProducts,
+                Name = productFIlterDto.name,
+                Status = productFIlterDto.status,
+                DistributionCenter = productFIlterDto.center,
+                Height = productFIlterDto.height,
+                Weight = productFIlterDto.weight,
+                Price = productFIlterDto.price,
+                Lenght = productFIlterDto.widths,
+                Widths = productFIlterDto.lengths,
+                AmountOfProducts = productFIlterDto.amountOfProducts,
 
 
             });
-            if (pageNumber > 0 && itensPerPage > 0 && itensPerPage <= 10)
+            if (productFIlterDto.pageNumber > 0 && productFIlterDto.itensPerPage > 0 && productFIlterDto.itensPerPage <= 10)
             {
-                var pages = result.Skip((itensPerPage - 1) * pageNumber).Take(pageNumber).ToList();
+                var pages = result.Skip((productFIlterDto.itensPerPage - 1) * productFIlterDto.pageNumber).Take(productFIlterDto.pageNumber).ToList();
                 connection.Close();
                 return pages;
 
@@ -160,6 +170,8 @@ namespace EccomerceAPI.Data.productDao
             return limit;
 
         }
+
+        
 
     }
 }
