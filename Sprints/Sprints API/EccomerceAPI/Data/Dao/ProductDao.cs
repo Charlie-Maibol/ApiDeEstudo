@@ -170,8 +170,5 @@ namespace EccomerceAPI.Data.productDao
             return limit;
 
         }
-
-        
-
     }
 }

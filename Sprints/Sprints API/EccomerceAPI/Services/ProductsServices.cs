@@ -48,7 +48,7 @@ namespace EccomerceAPI.Services
         }
         public List<Product> GetProductsCenterID(int Id)
         {
-            return _productContext.Products.Where(prod => prod.distribuitonCenterId == Id).ToList();
+            return _productContext.Products.Where(prod => prod.distribuitonCenterId == Id && prod.Status).ToList();
         }
         public List<SearchProductsDto> SearchProdId(int? Id)
         {
