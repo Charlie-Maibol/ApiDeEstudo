@@ -2,6 +2,7 @@
 using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.Categories.DC;
 using EccomerceAPI.Data.Dtos.DC;
+using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
@@ -34,10 +35,10 @@ namespace EccomerceAPI.Controllers
         public IActionResult AddCenter([FromBody] CreateDistributionCenterDto centerDto)
         {
             SearchDistributionCentersDto searchCenter = _distributionService.AddCenter(centerDto);
-            return CreatedAtAction(nameof(SearchProdId), new { id = searchCenter.Id }, searchCenter);
+            return CreatedAtAction(nameof(SearchCenterId), new { id = searchCenter.Id }, searchCenter);
         }
         [HttpGet("{ID}")]
-        public IActionResult SearchProdId(int? Id)
+        public IActionResult SearchCenterId(int? Id)
         {
             List<SearchDistributionCentersDto> distributionCenterDto = _distributionService.SearchDistributionCenterId(Id);
             if (distributionCenterDto != null)
@@ -48,14 +49,11 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
         [HttpGet]
-        public IActionResult FilterCenter([FromQuery] string name, [FromQuery] string center, [FromQuery] bool? status, [FromQuery] double? weight,
-            [FromQuery] double? height, [FromQuery] double? lengths, [FromQuery] double? widths,
-            [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order,
-            [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
+        public IActionResult FilterCenter([FromQuery]DistributionCenterFilterDto fIlterDto)
         {
 
-
-            return Ok(_distributionDao.FilterCenter(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
+            _distributionDao.FilterCenter(fIlterDto);
+            return Ok(fIlterDto);
 
 
         }

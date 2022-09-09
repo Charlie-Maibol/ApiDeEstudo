@@ -8,6 +8,10 @@ using FluentResults;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Web.Http;
+using System.Net.Http;
 
 namespace EccomerceAPI.Services
 {
@@ -16,13 +20,15 @@ namespace EccomerceAPI.Services
         private AppDbContext _distributionContext;
         private DistributionCenterDao _distributionDao;
         private IMapper _distributionMapper;
+        private ProductsServices _productService;
 
-        public DistributionCenterServices(AppDbContext context, IMapper mapper, DistributionCenterDao dao, IConfiguration configuration)
+        public DistributionCenterServices(AppDbContext context, IMapper mapper, DistributionCenterDao dao, IConfiguration configuration,
+            ProductsServices prodService)
         {
             _distributionContext = context;
             _distributionCenterMapper = mapper;
             _distributionCenterDao = dao;
-
+            _productService = prodService;
 
 
         }
@@ -30,21 +36,34 @@ namespace EccomerceAPI.Services
         private DistributionCenterDao _distributionCenterDao;
         private IMapper _distributionCenterMapper;
 
-        public SearchDistributionCentersDto AddCenter(CreateDistributionCenterDto distributionCenterDto)
+        public SearchDistributionCentersDto AddCenter(CreateDistributionCenterDto centerDto)
         {
 
+            //DistributionCenter center = _distributionCenterMapper.Map<DistributionCenter>(centerDto);
+            //List<Product> prod = _productService.GetProductsCenterID(Id);
+            //SubCategory sub = _distributionContext.SubCategories.FirstOrDefault(sub => sub.Id == sub.CategoryId);
+            //if (sub.Status == true && prod.Status == true)
+            //{
+
+
+            //    return _distributionCenterDao.AddCenter(centerDto);
+            //}
+            //else
+            //{
+            //    throw new HttpResponseException(HttpStatusCode.BadRequest);
+            //}
             return null;
 
         }
         public List<SearchDistributionCentersDto> SearchDistributionCenterId(int? Id)
         {
-            List<DistributionCenter> products;
+            List<DistributionCenter> center;
 
-            products = _distributionCenterDao.NullCenter(Id);
-            if (products != null)
+            center = _distributionCenterDao.NullCenter(Id);
+            if (center != null)
             {
-                List<SearchDistributionCentersDto> productDto = _distributionCenterMapper.Map<List<SearchDistributionCentersDto>>(products);
-                return productDto;
+                List<SearchDistributionCentersDto> centerDto = _distributionCenterMapper.Map<List<SearchDistributionCentersDto>>(center);
+                return centerDto;
             }
             return null;
 
@@ -65,8 +84,8 @@ namespace EccomerceAPI.Services
         }
         public Result DeletCenter(int id)
         {
-            var product = _distributionCenterDao.SearchCenterId(id);
-            if (product == null)
+            var center = _distributionCenterDao.SearchCenterId(id);
+            if (center == null)
             {
                 return Result.Fail("Produto não encontrado");
             }

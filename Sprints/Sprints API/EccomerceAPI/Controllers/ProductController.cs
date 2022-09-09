@@ -1,4 +1,5 @@
-﻿using EccomerceAPI.Data.Dtos.Products;
+﻿using EccomerceAPI.Data.Dtos;
+using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
@@ -43,14 +44,11 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
         [HttpGet]
-        public IActionResult FilterProduct([FromQuery] string name, [FromQuery] string center, [FromQuery] bool? status, [FromQuery] double? weight,
-            [FromQuery] double? height, [FromQuery] double? lengths, [FromQuery] double? widths,
-            [FromQuery] double? price, [FromQuery] int? amountOfProducts, [FromQuery] int? order,
-            [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
+        public IActionResult FilterProduct(ProductFIlterDto productFilterDto)
         {
 
-
-            return Ok(_productDao.FilterProduct(name, center, status, weight, height, lengths, widths, price, amountOfProducts, order, pageNumber, itensPerPage));
+            _productDao.FilterProduct(productFilterDto);
+            return Ok();
 
 
         }

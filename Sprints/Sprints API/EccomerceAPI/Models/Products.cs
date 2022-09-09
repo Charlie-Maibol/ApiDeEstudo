@@ -15,7 +15,7 @@ namespace EccomerceAPI.Models
         [StringLength(128, ErrorMessage = "Você excedeu o número da caracteres permitidos!")]
         [RegularExpression(@"^[a-zA-Z' '-'\s]{1,40}$")]
         public string Name { get; set; }
-        public bool Status { get; set; } = true;
+        public bool Status { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório")]
         public double Weight { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório")]

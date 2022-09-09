@@ -17,48 +17,54 @@ namespace EccomerceAPI.Data.productDao
 {
     public class DistributionCenterDao
     {
-        private AppDbContext _disctributionContext;
-        private IMapper _disctributionMapper;
-        private IConfiguration _disctributionConfiguration;
+        private AppDbContext _distributionContext;
+        private IMapper _distributionMapper;
+        private IConfiguration _distributionConfiguration;
 
         public DistributionCenterDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
         {
-            _disctributionContext = context;
-            _disctributionMapper = mapper;
-            _disctributionConfiguration = configuration;
+            _distributionContext = context;
+            _distributionMapper = mapper;
+            _distributionConfiguration = configuration;
         }
         public SearchDistributionCentersDto AddCenter(CreateDistributionCenterDto centerDto)
         {
-            var center = _disctributionMapper.Map<DistributionCenter>(centerDto);
-            _disctributionContext.DistributionCenters.Add(center);
-            _disctributionContext.SaveChanges();
-            return _disctributionMapper.Map<SearchDistributionCentersDto>(center);
+            var center = _distributionMapper.Map<DistributionCenter>(centerDto);
+            _distributionContext.DistributionCenters.Add(center);
+            _distributionContext.SaveChanges();
+            return _distributionMapper.Map<SearchDistributionCentersDto>(center);
         }
         public void DeleteCenter(DistributionCenter center)
         {
-            _disctributionContext.Remove(center);
-            _disctributionContext.SaveChanges();
+            _distributionContext.Remove(center);
+            _distributionContext.SaveChanges();
         }
         public void EditCenter(int id, DistributionCenter center)
         {
 
-            _disctributionContext.SaveChanges();
+            _distributionContext.SaveChanges();
         }
         public DistributionCenter SearchCenterId(int id)
         {
 
-            return _disctributionContext.DistributionCenters.FirstOrDefault(p => p.Id == id);
+            return _distributionContext.DistributionCenters.FirstOrDefault(c => c.Id == id);
         }
+
+        public List<DistributionCenter> FilterCenter(DistributionCenterFilterDto fIlterDto)
+        {
+            return null;
+        }
+
         public List<DistributionCenter> NullCenter(int? Id)
         {
             List<DistributionCenter> centers;
             if (Id == null)
             {
-                centers = _disctributionContext.DistributionCenters.ToList();
+                centers = _distributionContext.DistributionCenters.ToList();
             }
             else
             {
-                centers = _disctributionContext.DistributionCenters.Where(p => p.Id == Id).ToList();
+                centers = _distributionContext.DistributionCenters.Where(c => c.Id == Id).ToList();
 
 
             }
@@ -66,9 +72,6 @@ namespace EccomerceAPI.Data.productDao
             return centers;
         }
 
-        public object FilterCenter(string name, string center, bool? status, double? weight, double? height, double? lengths, double? widths, double? price, int? amountOfProducts, int? order, int pageNumber, int itensPerPage)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
