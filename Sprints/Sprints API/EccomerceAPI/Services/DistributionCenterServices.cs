@@ -39,20 +39,20 @@ namespace EccomerceAPI.Services
         public SearchDistributionCentersDto AddCenter(CreateDistributionCenterDto centerDto)
         {
 
-            //DistributionCenter center = _distributionCenterMapper.Map<DistributionCenter>(centerDto);
-            //List<Product> prod = _productService.GetProductsCenterID(Id);
-            //SubCategory sub = _distributionContext.SubCategories.FirstOrDefault(sub => sub.Id == sub.CategoryId);
-            //if (sub.Status == true && prod.Status == true)
-            //{
+            DistributionCenter center = _distributionCenterMapper.Map<DistributionCenter>(centerDto);
+            List<Product> prod = _productService.GetProductsCenterID(Id);
+            SubCategory sub = _distributionContext.SubCategories.FirstOrDefault(sub => sub.Id == sub.CategoryId);
+            if (sub.Status == true && prod.Status == true)
+            {
 
 
-            //    return _distributionCenterDao.AddCenter(centerDto);
-            //}
-            //else
-            //{
-            //    throw new HttpResponseException(HttpStatusCode.BadRequest);
-            //}
-            return null;
+                return _distributionCenterDao.AddCenter(centerDto);
+            }
+            else
+            {
+               throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+            
 
         }
         public List<SearchDistributionCentersDto> SearchDistributionCenterId(int? Id)

@@ -44,7 +44,7 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
         [HttpGet]
-        public IActionResult FilterProduct(ProductFIlterDto productFilterDto)
+        public IActionResult FilterProduct([FromQuery]ProductFIlterDto productFilterDto)
         {
 
             _productDao.FilterProduct(productFilterDto);
