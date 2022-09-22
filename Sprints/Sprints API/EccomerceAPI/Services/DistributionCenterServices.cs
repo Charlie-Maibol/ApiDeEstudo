@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace EccomerceAPI.Services
 {
@@ -36,7 +37,7 @@ namespace EccomerceAPI.Services
         private DistributionCenterDao _distributionCenterDao;
         private IMapper _distributionCenterMapper;
 
-        public SearchDistributionCentersDto AddCenter(CreateDistributionCenterDto centerDto)
+        public async Task <SearchDistributionCentersDto> AddCenter(CreateDistributionCenterDto centerDto)
         {
 
             DistributionCenter center = _distributionCenterMapper.Map<DistributionCenter>(centerDto);

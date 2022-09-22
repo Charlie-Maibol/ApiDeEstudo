@@ -10,6 +10,7 @@ using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EccomerceAPI.Controllers
 {
@@ -32,9 +33,9 @@ namespace EccomerceAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCenter([FromBody] CreateDistributionCenterDto centerDto)
+        public async Task <IActionResult> AddCenter([FromBody] CreateDistributionCenterDto centerDto)
         {
-            SearchDistributionCentersDto searchCenter = _distributionService.AddCenter(centerDto);
+            var pipoca = await _distributionService.AddCenter(centerDto);            
             return CreatedAtAction(nameof(SearchCenterId), new { id = searchCenter.Id }, searchCenter);
         }
         [HttpGet("{ID}")]
