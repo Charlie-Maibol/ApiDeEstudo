@@ -27,13 +27,7 @@ namespace EccomerceAPI.Data.productDao
             _distributionMapper = mapper;
             _distributionConfiguration = configuration;
         }
-        public SearchDistributionCentersDto AddCenter(CreateDistributionCenterDto centerDto)
-        {
-            var center = _distributionMapper.Map<DistributionCenter>(centerDto);
-            _distributionContext.DistributionCenters.Add(center);
-            _distributionContext.SaveChanges();
-            return _distributionMapper.Map<SearchDistributionCentersDto>(center);
-        }
+        
         public void DeleteCenter(DistributionCenter center)
         {
             _distributionContext.Remove(center);
@@ -48,6 +42,18 @@ namespace EccomerceAPI.Data.productDao
         {
 
             return _distributionContext.DistributionCenters.FirstOrDefault(c => c.Id == id);
+        } 
+        public void CreateCenter(CreateDistributionCenterDto centerDto, DistributionCenter street)
+        {
+            var center = _distributionMapper.Map<DistributionCenter>(centerDto);
+            center.ZipCode = street.ZipCode;
+            center.Street = street.Street;
+            center.Neighbourhood = street.Neighbourhood;
+            center.UF = street.UF;
+
+            _distributionContext.DistributionCenters.Add(center);
+            _distributionContext.SaveChanges();
+
         }
 
         public List<DistributionCenter> FilterCenter(DistributionCenterFilterDto fIlterDto)

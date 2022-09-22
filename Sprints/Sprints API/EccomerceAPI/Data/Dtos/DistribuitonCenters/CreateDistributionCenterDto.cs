@@ -19,12 +19,13 @@ namespace EccomerceAPI.Data.Dtos.Categories.DC
 
         public string UF { get; set; }
 
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
 
         public string Street { get; set; }
         public int StreetNumber { get; set; }
         public string Neighbourhood { get; set; }
         public DateTime created { get; set; } = DateTime.Now;
+        public string AddComplemente { get; set; }
 
 
     }

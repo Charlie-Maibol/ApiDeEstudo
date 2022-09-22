@@ -35,8 +35,8 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public async Task <IActionResult> AddCenter([FromBody] CreateDistributionCenterDto centerDto)
         {
-            var pipoca = await _distributionService.AddCenter(centerDto);            
-            return CreatedAtAction(nameof(SearchCenterId), new { id = searchCenter.Id }, searchCenter);
+            var cepCreation = await _distributionService.CepCreated(centerDto);            
+            return CreatedAtAction(nameof(SearchCenterId), new { id = centerDto.Id }, centerDto);
         }
         [HttpGet("{ID}")]
         public IActionResult SearchCenterId(int? Id)

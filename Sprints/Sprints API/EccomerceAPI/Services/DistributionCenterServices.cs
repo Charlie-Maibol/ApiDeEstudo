@@ -13,6 +13,7 @@ using System.Net;
 using System.Web.Http;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace EccomerceAPI.Services
 {
@@ -33,29 +34,40 @@ namespace EccomerceAPI.Services
 
 
         }
-        private AppDbContext _distributionCenterContext;
+      
         private DistributionCenterDao _distributionCenterDao;
         private IMapper _distributionCenterMapper;
 
-        public async Task <SearchDistributionCentersDto> AddCenter(CreateDistributionCenterDto centerDto)
+        public async Task <SearchDistributionCentersDto> CepCreated(CreateDistributionCenterDto centerDto)
         {
-
-            DistributionCenter center = _distributionCenterMapper.Map<DistributionCenter>(centerDto);
-            List<Product> prod = _productService.GetProductsCenterID(Id);
-            SubCategory sub = _distributionContext.SubCategories.FirstOrDefault(sub => sub.Id == sub.CategoryId);
-            if (sub.Status == true && prod.Status == true)
+            var street = await CreateCEP(centerDto.ZipCode);
+            if(street.Street == null)
             {
-
-
-                return _distributionCenterDao.AddCenter(centerDto);
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
             else
             {
-               throw new HttpResponseException(HttpStatusCode.BadRequest);
+                _distributionCenterDao.CreateCenter(centerDto, street);
+                
             }
-            
+            return null;
 
         }
+
+        public async Task<DistributionCenter>CreateCEP(string cep)
+        {
+            HttpClient client = new HttpClient();
+            var requisition = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
+            var json = await requisition.Content.ReadAsStringAsync();
+
+            var street = JsonConvert.DeserializeObject<DistributionCenter>(json);
+
+            Console.WriteLine($"Cep: {street.ZipCode}");
+            Console.WriteLine($"Logradouro: {street.Street}");
+            return street;
+
+        }
+
         public List<SearchDistributionCentersDto> SearchDistributionCenterId(int? Id)
         {
             List<DistributionCenter> center;

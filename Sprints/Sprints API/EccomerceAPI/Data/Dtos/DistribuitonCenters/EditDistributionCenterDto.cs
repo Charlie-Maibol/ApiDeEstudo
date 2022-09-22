@@ -18,7 +18,7 @@ namespace EccomerceAPI.Data.Dtos.DC
 
         public string UF { get; set; }
 
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
 
         public string Street { get; set; }
         public int StreetNumber { get; set; }
