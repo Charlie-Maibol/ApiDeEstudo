@@ -6,9 +6,10 @@
         public bool status;
         public string city;
         public string UF;
-        public int zipCode;
+        public string zipCode;
         public string street;
         public int streetNumber;
         public string neighbourhood;
+        public string AddComplemente;
     }
 }

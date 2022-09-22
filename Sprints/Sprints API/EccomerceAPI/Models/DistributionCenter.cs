@@ -19,7 +19,7 @@ namespace EccomerceAPI.Models
 
         public string UF { get; set; }
 
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório")]
         [StringLength(128, ErrorMessage = "Você excedeu o número da caracteres permitidos!")]
         [RegularExpression(@"^[a-zA-Z' '-'\s]{1,40}$")]
@@ -28,6 +28,7 @@ namespace EccomerceAPI.Models
         public string Neighbourhood { get; set; }
         public virtual List<Product> Products { get; set; }
 
+        public string AddComplemente { get; set; }
 
     }
 }

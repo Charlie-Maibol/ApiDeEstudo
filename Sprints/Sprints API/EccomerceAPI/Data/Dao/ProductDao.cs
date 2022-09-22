@@ -159,7 +159,8 @@ namespace EccomerceAPI.Data.productDao
             });
             if (productFIlterDto.pageNumber > 0 && productFIlterDto.itensPerPage > 0 && productFIlterDto.itensPerPage <= 10)
             {
-                var pages = result.Skip((productFIlterDto.itensPerPage - 1) * productFIlterDto.pageNumber).Take(productFIlterDto.pageNumber).ToList();
+                var pages = result.Skip((productFIlterDto.itensPerPage - 1) * productFIlterDto.pageNumber)
+                    .Take(productFIlterDto.pageNumber).ToList();
                 connection.Close();
                 return pages;
 
@@ -170,8 +171,5 @@ namespace EccomerceAPI.Data.productDao
             return limit;
 
         }
-
-        
-
     }
 }
