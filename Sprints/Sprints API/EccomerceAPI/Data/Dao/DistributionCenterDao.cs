@@ -51,6 +51,9 @@ namespace EccomerceAPI.Data.productDao
             center.Street = street.Street;
             center.Neighbourhood = street.Neighbourhood;
             center.UF = street.UF;
+            center.City = street.City;
+            center.StreetNumber = street.StreetNumber;
+            center.AddComplemente = street.AddComplemente;
 
             _distributionContext.DistributionCenters.Add(center);
             _distributionContext.SaveChanges();

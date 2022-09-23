@@ -62,9 +62,9 @@ namespace EccomerceAPI.Services
             var viacep = JsonConvert.DeserializeObject<ViaCepDto>(json);
             distributionCenter.ZipCode = viacep.cep;
             distributionCenter.Street = viacep.logradouro;
-            distributionCenter.AddComplemente = viacep.complemento;
             distributionCenter.UF = viacep.uf;
             distributionCenter.Neighbourhood = viacep.bairro;
+            distributionCenter.City = viacep.localidade;
             return distributionCenter;
 
         }

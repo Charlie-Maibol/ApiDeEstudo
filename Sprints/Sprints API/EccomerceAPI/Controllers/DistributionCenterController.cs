@@ -35,7 +35,7 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public async Task <IActionResult> AddCenter([FromBody] CreateDistributionCenterDto centerDto)
         {
-            var cepCreation = await _distributionService.CepCreated(centerDto);            
+            SearchDistributionCentersDto searchDistribution = await _distributionService.CepCreated(centerDto);            
             return CreatedAtAction(nameof(SearchCenterId), new { id = centerDto.Id }, centerDto);
         }
         [HttpGet("{ID}")]

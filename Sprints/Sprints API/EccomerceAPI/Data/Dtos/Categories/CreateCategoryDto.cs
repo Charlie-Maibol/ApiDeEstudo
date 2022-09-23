@@ -13,7 +13,6 @@ namespace EccomerceAPI.Data.Dtos.Categories
         public bool Status { get; set; } = true;
         public DateTime created { get; set; } = DateTime.Now;
 
-       
-        
+
     }
 }
