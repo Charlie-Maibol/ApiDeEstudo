@@ -14,6 +14,7 @@ using System.Web.Http;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using EccomerceAPI.Data.Dtos.DistribuitonCenters;
 
 namespace EccomerceAPI.Services
 {
@@ -57,12 +58,14 @@ namespace EccomerceAPI.Services
             HttpClient client = new HttpClient();
             var requisition = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
             var json = await requisition.Content.ReadAsStringAsync();
-
-            var street = JsonConvert.DeserializeObject<DistributionCenter>(json);
-
-            Console.WriteLine($"Cep: {street.ZipCode}");
-            Console.WriteLine($"Logradouro: {street.Street}");
-            return street;
+            DistributionCenter distributionCenter = new DistributionCenter();
+            var viacep = JsonConvert.DeserializeObject<ViaCepDto>(json);
+            distributionCenter.ZipCode = viacep.cep;
+            distributionCenter.Street = viacep.logradouro;
+            distributionCenter.AddComplemente = viacep.complemento;
+            distributionCenter.UF = viacep.uf;
+            distributionCenter.Neighbourhood = viacep.bairro;
+            return distributionCenter;
 
         }
 

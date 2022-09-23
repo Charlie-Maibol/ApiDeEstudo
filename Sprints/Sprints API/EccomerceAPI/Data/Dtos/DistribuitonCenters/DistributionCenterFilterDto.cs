@@ -2,17 +2,17 @@
 {
     public class DistributionCenterFilterDto
     {
-        public string name;
-        public bool? status;
-        public string city;
-        public string UF;
-        public string zipCode;
-        public string street;
-        public int? streetNumber;
-        public string neighbourhood;
-        public string addComplemente;
-        public int pageNumber = 0;
-        public int itensPerPage = 0;
-        public int? order;
+        public string name { get; set; }
+        public bool? status { get; set; }
+        public string city { get; set; }
+        public string UF { get; set; }
+        public string zipCode { get; set; }
+        public string street { get; set; }
+        public int? streetNumber { get; set; }
+        public string neighbourhood { get; set; }
+        public string addComplemente { get; set; }
+        public int pageNumber { get; set; }
+        public int itensPerPage { get; set; }
+        public int? order { get; set; }
     }
 }
