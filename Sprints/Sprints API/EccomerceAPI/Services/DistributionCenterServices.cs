@@ -19,24 +19,22 @@ namespace EccomerceAPI.Services
 {
     public class DistributionCenterServices
     {
-        private AppDbContext _distributionContext;
-        private DistributionCenterDao _distributionDao;
-        private IMapper _distributionMapper;
-        private ProductsServices _productService;
+        private readonly AppDbContext _distributionContext;
+        private readonly DistributionCenterDao _distributionDao;
+        private readonly IMapper _distributionMapper;
+        private readonly ProductsServices _productService;
 
         public DistributionCenterServices(AppDbContext context, IMapper mapper, DistributionCenterDao dao, IConfiguration configuration,
             ProductsServices prodService)
         {
             _distributionContext = context;
-            _distributionCenterMapper = mapper;
-            _distributionCenterDao = dao;
+            _distributionMapper = mapper;
+            _distributionDao = dao;
             _productService = prodService;
 
 
         }
       
-        private DistributionCenterDao _distributionCenterDao;
-        private IMapper _distributionCenterMapper;
 
         public async Task <SearchDistributionCentersDto> CepCreated(CreateDistributionCenterDto centerDto)
         {
@@ -47,7 +45,7 @@ namespace EccomerceAPI.Services
             }
             else
             {
-                _distributionCenterDao.CreateCenter(centerDto, street);
+                _distributionDao.CreateCenter(centerDto, street);
                 
             }
             return null;
@@ -72,10 +70,10 @@ namespace EccomerceAPI.Services
         {
             List<DistributionCenter> center;
 
-            center = _distributionCenterDao.NullCenter(Id);
+            center = _distributionDao.NullCenter(Id);
             if (center != null)
             {
-                List<SearchDistributionCentersDto> centerDto = _distributionCenterMapper.Map<List<SearchDistributionCentersDto>>(center);
+                List<SearchDistributionCentersDto> centerDto = _distributionMapper.Map<List<SearchDistributionCentersDto>>(center);
                 return centerDto;
             }
             return null;
@@ -85,24 +83,24 @@ namespace EccomerceAPI.Services
 
         public Result EditCenter(int id, EditDistributionCenterDto centerDto)
         {
-            var center = _distributionCenterDao.SearchCenterId(id);
+            var center = _distributionDao.SearchCenterId(id);
             if (center == null)
             {
 
                 return Result.Fail("Produto não encontrado");
             }
-            _distributionCenterMapper.Map(centerDto, center);
-            _distributionCenterDao.EditCenter(id, center);
+            _distributionMapper.Map(centerDto, center);
+            _distributionDao.EditCenter(id, center);
             return Result.Ok();
         }
         public Result DeletCenter(int id)
         {
-            var center = _distributionCenterDao.SearchCenterId(id);
+            var center = _distributionDao.SearchCenterId(id);
             if (center == null)
             {
                 return Result.Fail("Produto não encontrado");
             }
-            _distributionCenterDao.DeleteCenter(center);
+            _distributionDao.DeleteCenter(center);
             return Result.Ok();
         }
 
