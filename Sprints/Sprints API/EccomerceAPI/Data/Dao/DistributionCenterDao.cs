@@ -20,6 +20,7 @@ namespace EccomerceAPI.Data.productDao
         private AppDbContext _distributionContext;
         private IMapper _distributionMapper;
         private IConfiguration _distributionConfiguration;
+        
 
         public DistributionCenterDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
         {
@@ -55,11 +56,111 @@ namespace EccomerceAPI.Data.productDao
             _distributionContext.SaveChanges();
 
         }
+        private static bool Null(DistributionCenterFilterDto fIlterDto)
+        {
+            return fIlterDto.name == null && fIlterDto.addComplemente == null && fIlterDto.city == null && fIlterDto.UF == null
+            && fIlterDto.zipCode == null && fIlterDto.street == null && fIlterDto.streetNumber == null && fIlterDto.status == null
+            && fIlterDto.neighbourhood == null;
+        }
 
         public List<DistributionCenter> FilterCenter(DistributionCenterFilterDto fIlterDto)
-        {
-            return null;
-        }
+        {           
+            
+                var FilterSql = "SELECT * FROM Products WHERE ";
+                var connection = new MySqlConnection(_distributionConfiguration.GetConnectionString("CategoryConnection"));
+                connection.Open();
+
+                if (fIlterDto.name != null)
+                {
+                    FilterSql += "Name LIKE \"%" + fIlterDto.name + "%\" and ";
+                }
+                if (fIlterDto.addComplemente != null)
+                {
+                    FilterSql += "AddComplemente LIKE \"%" + fIlterDto.addComplemente + "%\" and ";
+                }
+                if (fIlterDto.status != null)
+                {
+                    FilterSql += "Status = @status and ";
+                }
+                if (fIlterDto.city != null)
+                {
+                    FilterSql += "City LIKE \"%" + fIlterDto.city + "%\" and ";
+            }
+                if (fIlterDto.UF != null)
+                {
+                    FilterSql += "UF LIKE \"%" + fIlterDto.UF + "%\" and ";
+            }
+                if (fIlterDto.zipCode != null)
+                {
+                    FilterSql += "ZipCode LIKE \"%" + fIlterDto.zipCode + "%\" and ";
+            }
+                if (fIlterDto.street != null)
+                {
+                    FilterSql += "Street LIKE \"%" + fIlterDto.street + "%\" and ";
+            }
+                if (fIlterDto.streetNumber != null)
+                {
+                    FilterSql += "StreetNumber = @streetNumber and ";
+            }
+                if (fIlterDto.neighbourhood != null)
+                {
+                    FilterSql += "Neighbourhood LIKE \"%" + fIlterDto.neighbourhood + "%\" and ";
+            }
+                if (Null(fIlterDto))
+                {
+                    var wherePosition = FilterSql.LastIndexOf("WHERE");
+                    FilterSql = FilterSql.Remove(wherePosition);
+                }
+                else
+                {
+                    var andPosition = FilterSql.LastIndexOf("and");
+                    FilterSql = FilterSql.Remove(andPosition);
+                }
+                if (fIlterDto.order != null)
+                {
+                    if (fIlterDto.order != 1 && fIlterDto.order != 2)
+                    {
+                        throw new HttpResponseException(HttpStatusCode.BadRequest);
+                    }
+                    if (fIlterDto.order == 1)
+                    {
+                        FilterSql += " ORDER BY Name";
+                    }
+                    if (fIlterDto.order == 2)
+                    {
+                        FilterSql += " ORDER BY Name DESC";
+                    }
+                }
+
+                var result = connection.Query<DistributionCenter>(FilterSql, new
+                {
+                    Name = fIlterDto.name,
+                    Status = fIlterDto.status,
+                    City = fIlterDto.city,
+                    UF = fIlterDto.UF,
+                    ZipCode = fIlterDto.zipCode,
+                    Street = fIlterDto.street,
+                    StreetNumber = fIlterDto.streetNumber,
+                    Neighbourhood = fIlterDto.neighbourhood,
+                    AddComplemente = fIlterDto.addComplemente,
+
+
+                });
+                if (fIlterDto.pageNumber > 0 && fIlterDto.itensPerPage > 0 && fIlterDto.itensPerPage <= 10)
+                {
+                    var pages = result.Skip((fIlterDto.itensPerPage - 1) * fIlterDto.pageNumber)
+                        .Take(fIlterDto.pageNumber).ToList();
+                    connection.Close();
+                    return pages;
+
+                }
+
+                var limit = result.Skip(0).Take(25).ToList();
+                connection.Close();
+                return limit;
+
+    }
+
 
         public List<DistributionCenter> NullCenter(int? Id)
         {
