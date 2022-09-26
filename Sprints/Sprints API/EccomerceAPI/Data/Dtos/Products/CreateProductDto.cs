@@ -26,9 +26,6 @@ namespace EccomerceAPI.Data.Dtos.Products
         public double Widths { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório")]
         public int AmountOfProducts { get; set; }
-        [Required(ErrorMessage = "Campo Obrigatório")]
-        [StringLength(128, ErrorMessage = "Você excedeu o número da caracteres permitidos!")]
-        public string DistributionCenter { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime Modified { get; set; } = DateTime.Now;

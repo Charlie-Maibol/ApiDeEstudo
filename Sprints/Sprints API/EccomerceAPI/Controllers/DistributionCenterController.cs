@@ -35,7 +35,7 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public async Task <IActionResult> AddCenter([FromBody] CreateDistributionCenterDto centerDto)
         {
-            var cepCreation = await _distributionService.CepCreated(centerDto);            
+            SearchDistributionCentersDto searchDistribution = await _distributionService.CepCreated(centerDto);            
             return CreatedAtAction(nameof(SearchCenterId), new { id = centerDto.Id }, centerDto);
         }
         [HttpGet("{ID}")]
@@ -49,12 +49,11 @@ namespace EccomerceAPI.Controllers
             }
             return NotFound();
         }
-        [HttpGet]
-        public IActionResult FilterCenter([FromQuery]DistributionCenterFilterDto fIlterDto)
+        [HttpGet("filter")]
+        public List<DistributionCenter> FilterCenter([FromBody] DistributionCenterFilterDto fIlterDto)
         {
-
-            _distributionDao.FilterCenter(fIlterDto);
-            return Ok(fIlterDto);
+            return _distributionDao.FilterCenter(fIlterDto);
+            
 
 
         }
