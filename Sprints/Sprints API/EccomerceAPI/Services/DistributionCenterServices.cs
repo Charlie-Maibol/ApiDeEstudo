@@ -23,15 +23,15 @@ namespace EccomerceAPI.Services
         private readonly AppDbContext _distributionContext;
         private readonly DistributionCenterDao _distributionDao;
         private readonly IMapper _distributionMapper;
-        private readonly ProductsServices _productService;
+        private AppDbContext _productContext;
 
         public DistributionCenterServices(AppDbContext context, IMapper mapper, DistributionCenterDao dao, IConfiguration configuration,
-            ProductsServices prodService)
+            AppDbContext prodContext)
         {
             _distributionContext = context;
             _distributionMapper = mapper;
             _distributionDao = dao;
-            _productService = prodService;
+            _productContext = prodContext;
 
 
         }
@@ -91,11 +91,16 @@ namespace EccomerceAPI.Services
 
         public Result EditCenter(int id, EditDistributionCenterDto centerDto)
         {
+            var prod = _productContext.Products.FirstOrDefault(prod => prod.Id == id);
             var center = _distributionDao.SearchCenterId(id);
             if (center == null)
             {
 
                 return Result.Fail("Produto não encontrado");
+            }
+            if(prod.Status == true && center.Status == true)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
             _distributionMapper.Map(centerDto, center);
             _distributionDao.EditCenter(id, center);
