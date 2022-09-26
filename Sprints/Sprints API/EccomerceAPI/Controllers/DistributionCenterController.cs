@@ -49,12 +49,11 @@ namespace EccomerceAPI.Controllers
             }
             return NotFound();
         }
-        [HttpGet]
-        public IActionResult FilterCenter([FromQuery]DistributionCenterFilterDto fIlterDto)
+        [HttpGet("filter")]
+        public List<DistributionCenter> FilterCenter([FromBody] DistributionCenterFilterDto fIlterDto)
         {
-
-            _distributionDao.FilterCenter(fIlterDto);
-            return Ok(fIlterDto);
+            return _distributionDao.FilterCenter(fIlterDto);
+            
 
 
         }

@@ -60,13 +60,18 @@ namespace EccomerceAPI.Services
             var json = await requisition.Content.ReadAsStringAsync();
             DistributionCenter distributionCenter = new DistributionCenter();
             var viacep = JsonConvert.DeserializeObject<ViaCepDto>(json);
+            ViaCep(distributionCenter, viacep);
+            return distributionCenter;
+
+        }
+
+        private static void ViaCep(DistributionCenter distributionCenter, ViaCepDto viacep)
+        {
             distributionCenter.ZipCode = viacep.cep;
             distributionCenter.Street = viacep.logradouro;
             distributionCenter.UF = viacep.uf;
             distributionCenter.Neighbourhood = viacep.bairro;
             distributionCenter.City = viacep.localidade;
-            return distributionCenter;
-
         }
 
         public List<SearchDistributionCentersDto> SearchDistributionCenterId(int? Id)

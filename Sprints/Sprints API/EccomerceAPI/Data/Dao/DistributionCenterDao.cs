@@ -39,21 +39,19 @@ namespace EccomerceAPI.Data.productDao
 
             _distributionContext.SaveChanges();
         }
-        public DistributionCenter SearchCenterId(int id)
+        public DistributionCenter SearchCenterId(int id)    
         {
 
             return _distributionContext.DistributionCenters.FirstOrDefault(c => c.Id == id);
         } 
         public void CreateCenter(CreateDistributionCenterDto centerDto, DistributionCenter street)
         {
-            var center = _distributionMapper.Map<DistributionCenter>(centerDto);
-            center.ZipCode = street.ZipCode;
+            var center = _distributionMapper.Map<DistributionCenter>(centerDto);           
             center.Street = street.Street;
             center.Neighbourhood = street.Neighbourhood;
             center.UF = street.UF;
             center.City = street.City;
-            center.StreetNumber = street.StreetNumber;
-            center.AddComplemente = street.AddComplemente;
+            
 
             _distributionContext.DistributionCenters.Add(center);
             _distributionContext.SaveChanges();
@@ -67,11 +65,12 @@ namespace EccomerceAPI.Data.productDao
         }
 
         public List<DistributionCenter> FilterCenter(DistributionCenterFilterDto fIlterDto)
-        {           
-            
-                var FilterSql = "SELECT * FROM Products WHERE ";
-                var connection = new MySqlConnection(_distributionConfiguration.GetConnectionString("CategoryConnection"));
-                connection.Open();
+        {
+            var connection = new MySqlConnection(_distributionConfiguration.GetConnectionString("CategoryConnection"));
+            connection.Open();
+            var FilterSql = "SELECT * FROM DistributionCenters WHERE ";
+                
+                
 
                 if (fIlterDto.name != null)
                 {
@@ -108,7 +107,7 @@ namespace EccomerceAPI.Data.productDao
                 if (fIlterDto.neighbourhood != null)
                 {
                     FilterSql += "Neighbourhood LIKE \"%" + fIlterDto.neighbourhood + "%\" and ";
-            }
+            }           
                 if (Null(fIlterDto))
                 {
                     var wherePosition = FilterSql.LastIndexOf("WHERE");
