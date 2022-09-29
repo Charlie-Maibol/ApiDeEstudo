@@ -28,6 +28,7 @@ namespace EccomerceAPI.Data.Dtos.Products
         public int AmountOfProducts { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
 
+        public int distribuitonCenterId { get; set; }
         public DateTime Modified { get; set; } = DateTime.Now;
         public int subCategoryId { get; set; }
     }

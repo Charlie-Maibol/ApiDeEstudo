@@ -18,7 +18,8 @@ namespace EccomerceAPI.Data.Dtos.Products
         public string Name { get; set; }
         public bool Status { get; set; } = true;
         public DateTime created { get; set; }
-        
+        public int distribuitonCenterId { get; set; }
+
         public object SubCategories { get; set; }
     }
 }
