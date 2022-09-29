@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿  using AutoMapper;
 using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dtos.Categories.DC;
 using EccomerceAPI.Data.Dtos.DC;
@@ -35,7 +35,7 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public async Task <IActionResult> AddCenter([FromBody] CreateDistributionCenterDto centerDto)
         {
-            SearchDistributionCentersDto searchDistribution = await _distributionService.CepCreated(centerDto);            
+            SearchDistributionCentersDto searchDistribution = await _distributionService.CreateCenter(centerDto);            
             return CreatedAtAction(nameof(SearchCenterId), new { id = centerDto.Id }, centerDto);
         }
         [HttpGet("{ID}")]
