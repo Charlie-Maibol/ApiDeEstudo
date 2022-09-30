@@ -1,4 +1,6 @@
-﻿namespace EccomerceAPI.Data.Dtos.Products
+﻿using EccomerceAPI.Models;
+
+namespace EccomerceAPI.Data.Dtos.Products
 {
     public class DistributionCenterFilterDto
     {
@@ -14,5 +16,7 @@
         public int pageNumber { get; set; }
         public int itensPerPage { get; set; }
         public int? order { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
     }
 }

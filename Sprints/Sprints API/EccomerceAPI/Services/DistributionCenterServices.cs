@@ -39,7 +39,7 @@ namespace EccomerceAPI.Services
 
         public async Task <SearchDistributionCentersDto>CreateCenter(CreateDistributionCenterDto centerDto)
         {
-            var street = await GetViaCep(centerDto.ZipCode);
+            var street = await GetAdress(centerDto.ZipCode);
             if(street.Street == null)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -53,7 +53,7 @@ namespace EccomerceAPI.Services
 
         }
 
-        public async Task<DistributionCenter>GetViaCep(string cep)
+        public async Task<DistributionCenter>GetAdress(string cep)
         {
             HttpClient client = new HttpClient();
             var requisition = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
@@ -91,16 +91,16 @@ namespace EccomerceAPI.Services
 
         public Result EditCenter(int id, EditDistributionCenterDto centerDto)
         {
-            List<Product> prod = _productContext.Products.Where(prod => prod.Id == id).ToList();
+            List<Product> prod = _productContext.Products.Where(prod => prod.Id == id && prod.Status == true).ToList();
             var center = _distributionDao.SearchCenterId(id);
-            if (center == null)
+            if (center == null) 
             {
 
                 return Result.Fail("Produto não encontrado");
             }
             if(prod.Count > 0 && center.Status != true)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return Result.Fail("Ainda existem produtos ativos");
             }
             _distributionMapper.Map(centerDto, center);
             _distributionDao.EditCenter(id, center);

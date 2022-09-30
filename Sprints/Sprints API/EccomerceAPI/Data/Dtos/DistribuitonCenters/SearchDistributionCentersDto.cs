@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EccomerceAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace EccomerceAPI.Data.Dtos.DC
 {
@@ -23,6 +24,9 @@ namespace EccomerceAPI.Data.Dtos.DC
         public int StreetNumber { get; set; }
         public string Neighbourhood { get; set; }
         public string AddComplemente { get; set; }
+
+        public virtual Product Product { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
 
     }
 }
