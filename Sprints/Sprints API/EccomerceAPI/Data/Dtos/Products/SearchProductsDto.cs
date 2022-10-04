@@ -21,5 +21,7 @@ namespace EccomerceAPI.Data.Dtos.Products
         public int distribuitonCenterId { get; set; }
 
         public object SubCategories { get; set; }
+
+        public virtual DistributionCenter DistributionCenters { get; set; }
     }
 }
