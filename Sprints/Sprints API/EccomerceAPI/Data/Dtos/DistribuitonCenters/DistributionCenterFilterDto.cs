@@ -15,8 +15,8 @@ namespace EccomerceAPI.Data.Dtos.Products
         public string addComplemente { get; set; }
         public int pageNumber { get; set; }
         public int itensPerPage { get; set; }
-        public int? order { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual SubCategory SubCategory { get; set; }
+        public string order { get; set; }
+        public string  product { get; set; }
+        public string  subCategory { get; set; }
     }
 }
