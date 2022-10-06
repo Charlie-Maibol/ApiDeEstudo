@@ -64,15 +64,15 @@ namespace EccomerceAPI.Data.productDao
             && filterDto.neighbourhood == null;
         }
 
-        public IEnumerable<DistributionCenter> FilterCenter(DistributionCenterFilterDto filterDto)
+        public List<DistributionCenter> FilterCenter(DistributionCenterFilterDto filterDto)
         {
             using var connection = new MySqlConnection(_distributionConfiguration.GetConnectionString("CategoryConnection"));
             connection.Open();
             var queryArgs = new DynamicParameters();
             var FilterSql = "SELECT d.id, d.name, d.addComplemente, d.status, d.city, d.uf, d.zipCode, d.street, d.streetNumber, d.neighbourhood, " +
-                "p.name as Product " +
+                "p.name as Product, p.distribuitonCenterId as Product " +
                 "FROM DistributionCenters d " +
-                "INNER JOIN Products p ON p.id = d.id " +
+                "INNER JOIN Products p ON p.distribuitonCenterId = d.id " +
                 "WHERE ";
 
 
@@ -141,19 +141,19 @@ namespace EccomerceAPI.Data.productDao
 
                 {   if( filterDto.order == "product")
                     {
-                        FilterSql += " ORDER BY p.name DESC";
+                        FilterSql += " ORDER BY p.name";
                     }
                     else
                     {
-                        FilterSql += "ORDER BY d.name DESC";
+                        FilterSql += "ORDER BY p.name DESC";
                     }
                     
                 }
                 else
                 {
-                    if (filterDto.order == "product")
+                    if (filterDto.order == "Distribution")
                     {
-                        FilterSql += " ORDER BY p.name";
+                        FilterSql += " ORDER BY d.name DESC";
                     }
                     else
                     {
@@ -167,11 +167,11 @@ namespace EccomerceAPI.Data.productDao
                (FilterSql, (center, product) => {
                    center.Id = product.Id;
                    return center;
-               }, queryArgs, splitOn: "Product")
+               }, queryArgs, splitOn: "Products")
                .Skip((filterDto.itensPerPage - 1) * filterDto.pageNumber)
-               .Take(filterDto.pageNumber);
+               .Take(filterDto.pageNumber).ToList();
 
-            connection.Close();
+            connection.Close(); 
             return result;
 
         }

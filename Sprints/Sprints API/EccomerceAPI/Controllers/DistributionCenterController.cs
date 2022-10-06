@@ -49,7 +49,7 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
         [HttpGet("filter")]
-        public IEnumerable<DistributionCenter> FilterCenter([FromBody] DistributionCenterFilterDto fIlterDto)
+        public List<DistributionCenter> FilterCenter([FromBody] DistributionCenterFilterDto fIlterDto)
         {
             return _distributionDao.FilterCenter(fIlterDto);
             

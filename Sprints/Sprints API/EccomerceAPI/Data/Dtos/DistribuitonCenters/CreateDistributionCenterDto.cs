@@ -26,7 +26,7 @@ namespace EccomerceAPI.Data.Dtos.Categories.DC
         public string Neighbourhood { get; set; }
         public DateTime created { get; set; } = DateTime.Now;
         public string AddComplemente { get; set; }
-
+        
 
     }
 }
