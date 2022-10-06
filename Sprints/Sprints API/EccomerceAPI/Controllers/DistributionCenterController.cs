@@ -23,7 +23,6 @@ namespace EccomerceAPI.Controllers
 
 
         private DistributionCenterDao _distributionDao;
-        private IMapper _distributionMapper;
         private DistributionCenterServices _distributionService;
 
         public DistributionCenterController(DistributionCenterServices service, DistributionCenterDao centerDao)
@@ -50,7 +49,7 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
         [HttpGet("filter")]
-        public List<DistributionCenter> FilterCenter([FromBody] DistributionCenterFilterDto fIlterDto)
+        public IEnumerable<DistributionCenter> FilterCenter([FromBody] DistributionCenterFilterDto fIlterDto)
         {
             return _distributionDao.FilterCenter(fIlterDto);
             

@@ -57,58 +57,74 @@ namespace EccomerceAPI.Data.productDao
             _distributionContext.SaveChanges();
 
         }
-        private static bool FilterIsNull(DistributionCenterFilterDto fIlterDto)
+        private static bool FilterIsNull(DistributionCenterFilterDto filterDto)
         {
-            return fIlterDto.name == null && fIlterDto.addComplemente == null && fIlterDto.city == null && fIlterDto.UF == null
-            && fIlterDto.zipCode == null && fIlterDto.street == null && fIlterDto.streetNumber == null && fIlterDto.status == null
-            && fIlterDto.neighbourhood == null;
+            return filterDto.name == null && filterDto.addComplemente == null && filterDto.city == null && filterDto.UF == null
+            && filterDto.zipCode == null && filterDto.street == null && filterDto.streetNumber == null && filterDto.status == null
+            && filterDto.neighbourhood == null;
         }
 
-        public List<DistributionCenter> FilterCenter(DistributionCenterFilterDto fIlterDto)
+        public IEnumerable<DistributionCenter> FilterCenter(DistributionCenterFilterDto filterDto)
         {
-            var connection = new MySqlConnection(_distributionConfiguration.GetConnectionString("CategoryConnection"));
+            using var connection = new MySqlConnection(_distributionConfiguration.GetConnectionString("CategoryConnection"));
             connection.Open();
-            var FilterSql = "SELECT * FROM DistributionCenters WHERE ";
+            var queryArgs = new DynamicParameters();
+            var FilterSql = "SELECT d.id, d.name, d.addComplemente, d.status, d.city, d.uf, d.zipCode, d.street, d.streetNumber, d.neighbourhood, " +
+                "p.name as Product " +
+                "FROM DistributionCenters d " +
+                "INNER JOIN Products p ON p.id = d.id " +
+                "WHERE ";
 
 
 
-            if (fIlterDto.name != null)
+            if (filterDto.name != null)
             {
-                FilterSql += "Name LIKE \"%" + fIlterDto.name + "%\" and ";
+                FilterSql += "d.name LIKE CONCAT('%',@name,'%') and ";
+                queryArgs.Add("Name", filterDto.name);
             }
-            if (fIlterDto.addComplemente != null)
+            if (filterDto.addComplemente != null)
             {
-                FilterSql += "AddComplemente LIKE \"%" + fIlterDto.addComplemente + "%\" and ";
+                FilterSql += "d.addComplemente LIKE CONCAT('%',@addComplemente,'%') and ";
+                queryArgs.Add("AddComplemente", filterDto.addComplemente);
             }
-            if (fIlterDto.status != null)
+            if (filterDto.status != null)
             {
-                FilterSql += "Status = @status and ";
+
+                FilterSql += "d.status = @status and ";
+                queryArgs.Add("Status", filterDto.status);
             }
-            if (fIlterDto.city != null)
+            if (filterDto.city != null)
             {
-                FilterSql += "City LIKE \"%" + fIlterDto.city + "%\" and ";
+                FilterSql += "d.city LIKE CONCAT('%',@city,'%') and ";
+                queryArgs.Add("City", filterDto.city);
             }
-            if (fIlterDto.UF != null)
+            if (filterDto.UF != null)
+            {              
+                FilterSql += "d.uf LIKE CONCAT('%',@uf,'%') and ";
+                queryArgs.Add("UF", filterDto.UF);
+            }
+            if (filterDto.zipCode != null)
             {
-                FilterSql += "UF LIKE \"%" + fIlterDto.UF + "%\" and ";
+                FilterSql += "d.zipCode LIKE CONCAT('%',@zipCode,'%') and ";
+                queryArgs.Add("ZipCode", filterDto.zipCode);
             }
-            if (fIlterDto.zipCode != null)
+            if (filterDto.street != null)
             {
-                FilterSql += "ZipCode LIKE \"%" + fIlterDto.zipCode + "%\" and ";
+                FilterSql += "d.street LIKE CONCAT('%',@street,'%') and ";
+                queryArgs.Add("Street", filterDto.street);
             }
-            if (fIlterDto.street != null)
+            if (filterDto.streetNumber != null)
             {
-                FilterSql += "Street LIKE \"%" + fIlterDto.street + "%\" and ";
+                
+                FilterSql += "d.streetNumber = @streetNumber and ";
+                queryArgs.Add("StreetNumber", filterDto.streetNumber);
             }
-            if (fIlterDto.streetNumber != null)
+            if (filterDto.neighbourhood != null)
             {
-                FilterSql += "StreetNumber = @streetNumber and ";
+                FilterSql += "d.neighbourhood LIKE CONCAT('%',@neighbourhood,'%') and ";
+                queryArgs.Add("Neighbourhood", filterDto.neighbourhood);
             }
-            if (fIlterDto.neighbourhood != null)
-            {
-                FilterSql += "Neighbourhood LIKE \"%" + fIlterDto.neighbourhood + "%\" and ";
-            }
-            if (FilterIsNull(fIlterDto))
+            if (FilterIsNull(filterDto))
             {
                 var wherePosition = FilterSql.LastIndexOf("WHERE");
                 FilterSql = FilterSql.Remove(wherePosition);
@@ -118,50 +134,45 @@ namespace EccomerceAPI.Data.productDao
                 var andPosition = FilterSql.LastIndexOf("and");
                 FilterSql = FilterSql.Remove(andPosition);
             }
-            if (fIlterDto.order != null)
+            if (filterDto.order != null)
             {
-                if (fIlterDto.order != 1 && fIlterDto.order != 2)
-                {
-                    throw new HttpResponseException(HttpStatusCode.BadRequest);
+                
+                if (filterDto.order == "desc")
+
+                {   if( filterDto.order == "product")
+                    {
+                        FilterSql += " ORDER BY p.name DESC";
+                    }
+                    else
+                    {
+                        FilterSql += "ORDER BY d.name DESC";
+                    }
+                    
                 }
-                if (fIlterDto.order == 1)
+                else
                 {
-                    FilterSql += " ORDER BY Name";
-                }
-                if (fIlterDto.order == 2)
-                {
-                    FilterSql += " ORDER BY Name DESC";
+                    if (filterDto.order == "product")
+                    {
+                        FilterSql += " ORDER BY p.name";
+                    }
+                    else
+                    {
+                        FilterSql += "ORDER BY d.name";
+                    }
+                   
                 }
             }
 
-            var result = connection.Query<DistributionCenter>(FilterSql, new
-            {
-                Name = fIlterDto.name,
-                Status = fIlterDto.status,
-                City = fIlterDto.city,
-                UF = fIlterDto.UF,
-                ZipCode = fIlterDto.zipCode,
-                Street = fIlterDto.street,
-                StreetNumber = fIlterDto.streetNumber,
-                Neighbourhood = fIlterDto.neighbourhood,
-                AddComplemente = fIlterDto.addComplemente,
-                Product = fIlterDto.Product,
-                SubCategory = fIlterDto.SubCategory,
+            var result = connection.Query<DistributionCenter, Product, DistributionCenter>
+               (FilterSql, (center, product) => {
+                   center.Id = product.Id;
+                   return center;
+               }, queryArgs, splitOn: "Product")
+               .Skip((filterDto.itensPerPage - 1) * filterDto.pageNumber)
+               .Take(filterDto.pageNumber);
 
-
-            });
-            if (fIlterDto.pageNumber > 0 && fIlterDto.itensPerPage > 0 && fIlterDto.itensPerPage <= 10)
-            {
-                var pages = result.Skip((fIlterDto.itensPerPage - 1) * fIlterDto.pageNumber)
-                    .Take(fIlterDto.pageNumber).ToList();
-                connection.Close();
-                return pages;
-
-            }
-
-            var limit = result.Skip(0).Take(25).ToList();
             connection.Close();
-            return limit;
+            return result;
 
         }
 

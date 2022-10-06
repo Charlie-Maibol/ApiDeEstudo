@@ -246,7 +246,7 @@ namespace EccomerceAPI.Controllers
                 cat.Status = true;
                 cat.Modified = DateTime.Now;
             }
-            else if (cat.Status == true);
+            else if (cat.Status == true)
             {
                 cat.Status = false;
                 cat.Modified = DateTime.Now;
