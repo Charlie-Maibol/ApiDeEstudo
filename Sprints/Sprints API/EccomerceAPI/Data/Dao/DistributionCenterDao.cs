@@ -69,14 +69,19 @@ namespace EccomerceAPI.Data.productDao
             using var connection = new MySqlConnection(_distributionConfiguration.GetConnectionString("CategoryConnection"));
             connection.Open();
             var queryArgs = new DynamicParameters();
-            var FilterSql = "SELECT d.id, d.name, d.addComplemente, d.status, d.city, d.uf, d.zipCode, d.street, d.streetNumber, d.neighbourhood, " +
-                "p.name as Product, p.distribuitonCenterId as Product " +
+            var FilterSql = "SELECT d.id, d.name, d.addComplemente, d.status, d.city, d.uf, d.zipCode, d.street, d.streetNumber," +
+                "d.neighbourhood as neighbourhood, " +
+                "p.name as Product, p.distribuitonCenterId "  +
                 "FROM DistributionCenters d " +
-                "INNER JOIN Products p ON p.distribuitonCenterId = d.id " +
+                "INNER JOIN Products p ON d.id = p.distribuitonCenterId " +
                 "WHERE ";
 
 
-
+            if(filterDto.id != null)
+            {
+                FilterSql += "d.id = @id and ";
+                queryArgs.Add("Id", filterDto.id);
+            }
             if (filterDto.name != null)
             {
                 FilterSql += "d.name LIKE CONCAT('%',@name,'%') and ";
@@ -134,30 +139,30 @@ namespace EccomerceAPI.Data.productDao
                 var andPosition = FilterSql.LastIndexOf("and");
                 FilterSql = FilterSql.Remove(andPosition);
             }
-            if (filterDto.order != null)
+            if (filterDto.orderName != null)
             {
                 
-                if (filterDto.order == "desc")
+                if (filterDto.orderName == "product")
 
-                {   if( filterDto.order == "product")
+                {   if( filterDto.order == "asc")
                     {
                         FilterSql += " ORDER BY p.name";
                     }
                     else
                     {
-                        FilterSql += "ORDER BY p.name DESC";
+                        FilterSql += "ORDER BY d.name";
                     }
                     
                 }
                 else
                 {
-                    if (filterDto.order == "Distribution")
+                    if (filterDto.order == "desc")
                     {
                         FilterSql += " ORDER BY d.name DESC";
                     }
                     else
                     {
-                        FilterSql += "ORDER BY d.name";
+                        FilterSql += "ORDER BY p.name DESC";
                     }
                    
                 }
@@ -167,7 +172,7 @@ namespace EccomerceAPI.Data.productDao
                (FilterSql, (center, product) => {
                    center.Id = product.Id;
                    return center;
-               }, queryArgs, splitOn: "Products")
+               }, queryArgs, splitOn: "distribuitonCenterId")
                .Skip((filterDto.itensPerPage - 1) * filterDto.pageNumber)
                .Take(filterDto.pageNumber).ToList();
 

@@ -4,6 +4,7 @@ namespace EccomerceAPI.Data.Dtos.Products
 {
     public class DistributionCenterFilterDto
     {
+        public int? id { get; set; }
         public string name { get; set; }
         public bool? status { get; set; }
         public string city { get; set; }
@@ -16,6 +17,7 @@ namespace EccomerceAPI.Data.Dtos.Products
         public int pageNumber { get; set; }
         public int itensPerPage { get; set; }
         public string order { get; set; }
+        public string orderName { get; set; }
         public string  product { get; set; }
         public string  subCategory { get; set; }
     }

@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using EccomerceAPI.Data.Dtos.DistribuitonCenters;
+using EccomerceAPI.Data.Dtos.Products;
 
 namespace EccomerceAPI.Services
 {
@@ -40,7 +41,7 @@ namespace EccomerceAPI.Services
         public async Task <SearchDistributionCentersDto>CreateCenter(CreateDistributionCenterDto centerDto)
         {
             var street = await GetAdress(centerDto.ZipCode);
-            if(street.Street == null)
+            if (street.Street == null)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
@@ -63,6 +64,29 @@ namespace EccomerceAPI.Services
             ViaCep(distributionCenter, viacep);
             return distributionCenter;
 
+        }
+
+        private bool UniqueAddress(DistributionCenter center)
+        {
+            DistributionCenterFilterDto filter = new();
+            var centerList = _distributionDao.FilterCenter(filter);
+            string address = center.Street;
+            address += center.StreetNumber;
+            address += center.AddComplemente;
+
+            foreach (var a in centerList)
+            {
+                string addressComplet = a.Street;
+                addressComplet += a.StreetNumber;
+                addressComplet += a.AddComplemente;
+                if( address == addressComplet)
+                {
+                    return false;
+                }
+                
+            }
+
+            return true;
         }
 
         private static void ViaCep(DistributionCenter distributionCenter, ViaCepDto viacep)
