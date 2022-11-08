@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserAPI.Data;
+using UserAPI.Services;
 
 namespace User
 {
@@ -30,14 +31,15 @@ namespace User
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<UserDBContext>(options =>
-            options.UseMySQL(Configuration.GetConnectionString("UserConnection")));
-            services.AddControllers().AddNewtonsoftJson(options =>
-        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            options.UseMySQL(Configuration.GetConnectionString("UserConnection"))
+
             );
 
             services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
                 .AddEntityFrameworkStores<UserDBContext>();
             services.AddControllers();
+            services.AddScoped<SignUpService, SignUpService>();
+            services.AddScoped<LogInService, LogInService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         }
@@ -48,20 +50,20 @@ namespace User
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "User v1"));
+
+
+
+                app.UseHttpsRedirection();
+
+                app.UseRouting();
+
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
             }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
     }
 }
