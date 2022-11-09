@@ -20,8 +20,8 @@ namespace UserAPI.Controllers
         public IActionResult LogInUser(LoginRequest request)
         {
             Result result = _logInService.LogInUser(request);
-            if(result.IsFailed) return Unauthorized(); 
-            return Ok();
+            if(result.IsFailed) return Unauthorized(result.Errors); 
+            return Ok(result.Successes);
         }
     }
 }

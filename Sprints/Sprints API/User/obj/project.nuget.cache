@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fQtxDHz4KOSeEvrTBtJd18UjkQw6tpx+Vs7Hr3OfX8lpjPLUfxlhCPj2rLn5/gQZCeu6axG3Bxbk5zqyirbVEg==",
+  "dgSpecHash": "+VaMQSe0JQ3XaT/lV4UiUF75tgl+pbZ5DMH+Tz1Mzpn3hb0OSQ/jTRLvEKdmxxzQwRiodr3A3wOx2wyfU2/Dow==",
   "success": true,
   "projectFilePath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\User\\UserAPI.csproj",
   "expectedPackageFiles": [
@@ -101,7 +101,7 @@
     "C:\\Users\\ClearTech\\.nuget\\packages\\system.componentmodel.typeconverter\\4.3.0\\system.componentmodel.typeconverter.4.3.0.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\system.console\\4.3.0\\system.console.4.3.0.nupkg.sha512",
-    "C:\\Users\\ClearTech\\.nuget\\packages\\system.data.sqlclient\\4.8.3\\system.data.sqlclient.4.8.3.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\system.data.sqlclient\\4.8.5\\system.data.sqlclient.4.8.5.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
