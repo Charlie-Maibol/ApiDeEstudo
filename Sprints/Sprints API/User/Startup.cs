@@ -40,6 +40,7 @@ namespace User
             services.AddControllers();
             services.AddScoped<SignUpService, SignUpService>();
             services.AddScoped<LogInService, LogInService>();
+            services.AddScoped<TokenService, TokenService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         }
