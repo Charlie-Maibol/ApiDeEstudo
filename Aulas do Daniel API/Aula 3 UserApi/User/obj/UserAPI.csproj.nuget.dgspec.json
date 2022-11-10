@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\User\\UserAPI.csproj": {}
+    "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 3 UserApi\\User\\UserAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\User\\UserAPI.csproj": {
+    "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 3 UserApi\\User\\UserAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\User\\UserAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 3 UserApi\\User\\UserAPI.csproj",
         "projectName": "UserAPI",
-        "projectPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\User\\UserAPI.csproj",
+        "projectPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 3 UserApi\\User\\UserAPI.csproj",
         "packagesPath": "C:\\Users\\ClearTech\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\User\\obj\\",
+        "outputPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 3 UserApi\\User\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -35,8 +35,11 @@ namespace User
 
             );
 
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
-                .AddEntityFrameworkStores<UserDBContext>();
+            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+                opt => opt.SignIn.RequireConfirmedEmail = true
+                )
+                .AddEntityFrameworkStores<UserDBContext>()
+                .AddDefaultTokenProviders();
             services.AddControllers();
             services.AddScoped<SignUpService, SignUpService>();
             services.AddScoped<LogInService, LogInService>();

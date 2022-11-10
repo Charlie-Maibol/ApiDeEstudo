@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+VaMQSe0JQ3XaT/lV4UiUF75tgl+pbZ5DMH+Tz1Mzpn3hb0OSQ/jTRLvEKdmxxzQwRiodr3A3wOx2wyfU2/Dow==",
+  "dgSpecHash": "dxXPreyzIVztBRpsmPlf80asVTZJ1VT8stGLvioT9ySyVHx/Hho5K41StL+AzbnGG+XeEi8/vqpZzbLBQqCIHQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\User\\UserAPI.csproj",
+  "projectFilePath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Aulas do Daniel API\\Aula 3 UserApi\\User\\UserAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ClearTech\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
