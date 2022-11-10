@@ -6,13 +6,10 @@ namespace UserAPI.Models
 {
     public class CustomIdentityUser : IdentityUser<int>
     {
-        public string Name { get; set; }
         public DateTime BirthDay { get; set; }
         [Required]
         public string CPF { get; set; }
-        public string Address { get; set; }
         public bool Status { get; set; } = true;
-        public DateTime SignInDate { get; set; } = DateTime.Now;
         public string ZipCode {get; set;}
         public string Street { get; set; }
         public string StretNumber { get; set; }

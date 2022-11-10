@@ -1,4 +1,5 @@
-﻿using FluentResults;
+﻿
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using UserAPI.Data.DTOs;
 using UserAPI.Services;
