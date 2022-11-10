@@ -26,8 +26,8 @@ namespace UserAPI.Controllers0
             return Ok(result.Successes);
         }
 
-        [HttpPost("/confirm")]
-        public IActionResult ConfirmUser(ConfirmUserRequest request)
+        [HttpGet("/confirm")]
+        public IActionResult ConfirmUser([FromQuery] ConfirmUserRequest request)
         {
             Result result = _signUpService.ConfirmUser(request);
             if (result.IsFailed) return StatusCode(500);
