@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using UserAPI.Data.DTOs;
 using UserAPI.Data.Requests;
 using UserAPI.Models;
@@ -14,11 +15,13 @@ namespace UserAPI.Services
     {
         public IMapper _mapper;
         public UserManager<IdentityUser<int>> _userManager;
+        private EmailService _emailService;
 
-        public SignUpService(IMapper mapper, UserManager<IdentityUser<int>> userManager)
+        public SignUpService(IMapper mapper, UserManager<IdentityUser<int>> userManager, EmailService emailService)
         {
             _mapper = mapper;
             _userManager = userManager;
+            _emailService = emailService;
         }
 
         public Result signUpUser(CreateUserDTO createDto)
@@ -30,6 +33,9 @@ namespace UserAPI.Services
             if (identityResult.Result.Succeeded)
             {
                 var code = _userManager.GenerateEmailConfirmationTokenAsync(identityUser).Result;
+                var encodedCode = HttpUtility.UrlEncode(code);
+                _emailService.SendEmail(new [] {identityUser.Email},
+                    "Link de Ativação", identityUser.Id, encodedCode);
                 return Result.Ok().WithSuccess(code);
             }
             return Result.Fail("Falha ao cadastrar usuário");
