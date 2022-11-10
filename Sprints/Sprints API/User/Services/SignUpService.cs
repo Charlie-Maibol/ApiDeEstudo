@@ -29,12 +29,13 @@ namespace UserAPI.Services
                 Users user = _mapper.Map<Users>(createDto);
                 CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
                 Task<IdentityResult> identityResult = _userManager.CreateAsync(identityUser, createDto.PassWord);
-                if (identityResult.Result.Succeeded)
+                if (!identityResult.Result.Succeeded)
                 {
-                    return Result.Ok();
+                    return Result.Fail("Falha ao cadastrar usuário");
                 }
+                
             }
-            return Result.Fail("Falha ao cadastrar usuário");
+            return Result.Ok();
 
         }
         public async Task<Users> GetAdress(string cep)

@@ -21,17 +21,17 @@ namespace UserAPI.Services
         {
             var resultIdentity = _signInManager
                 .PasswordSignInAsync(request.Email, request.PassWord, false, false);
-            if (resultIdentity.Result.Succeeded) 
+            if (!resultIdentity.Result.Succeeded) 
             {
-                var identityUser = _signInManager
+                return Result.Fail("Usuário e senhas incorretos");
+            } 
+            var identityUser = _signInManager
                     .UserManager
                     .Users
-                    .FirstOrDefault(user => 
+                    .FirstOrDefault(user =>
                     user.NormalizedUserName == request.Email.ToUpper());
-                Token token = _tokenService.CreateToken(identityUser);
-                return Result.Ok().WithSuccess(token.Value);
-            } 
-            return Result.Fail("Usuário e senhas incorretos");
+            Token token = _tokenService.CreateToken(identityUser);
+            return Result.Ok().WithSuccess(token.Value);
         }
     }
 }
