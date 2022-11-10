@@ -20,9 +20,11 @@ namespace UserAPI.Controllers
         [HttpPost]
         public IActionResult LogInUser(LoginRequest request)
         {
+            
             Result result = _logInService.LogInUser(request);
             if(result.IsFailed) return Unauthorized(result.Errors.FirstOrDefault()); 
             return Ok(result.Successes.FirstOrDefault());
         }
+
     }
 }

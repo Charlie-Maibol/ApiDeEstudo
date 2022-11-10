@@ -9,9 +9,9 @@ namespace UserAPI.Services
 {
     public class LogInService
     {
-        private SignInManager<IdentityUser<int>> _signInManager;
+        private SignInManager<CustomIdentityUser> _signInManager;
         private TokenService _tokenService;
-        public LogInService(SignInManager<IdentityUser<int>> signInManager, TokenService tokenService)
+        public LogInService(SignInManager<CustomIdentityUser> signInManager, TokenService tokenService)
         {
             _signInManager = signInManager;
             _tokenService = tokenService;
@@ -20,18 +20,18 @@ namespace UserAPI.Services
         public Result LogInUser(LoginRequest request)
         {
             var resultIdentity = _signInManager
-                .PasswordSignInAsync(request.UserName, request.PassWord, false, false);
+                .PasswordSignInAsync(request.Email, request.PassWord, false, false);
             if (resultIdentity.Result.Succeeded) 
             {
                 var identityUser = _signInManager
                     .UserManager
                     .Users
                     .FirstOrDefault(user => 
-                    user.NormalizedUserName == request.UserName.ToUpper());
+                    user.NormalizedUserName == request.Email.ToUpper());
                 Token token = _tokenService.CreateToken(identityUser);
                 return Result.Ok().WithSuccess(token.Value);
             } 
-            return Result.Fail("O logIn falhou!");
+            return Result.Fail("Usuário e senhas incorretos");
         }
     }
 }

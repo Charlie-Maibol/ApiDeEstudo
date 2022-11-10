@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserAPI.Data;
+using UserAPI.Models;
 using UserAPI.Services;
 
 namespace User
@@ -35,9 +36,13 @@ namespace User
 
             );
 
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
+            services.AddIdentity<CustomIdentityUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<UserDBContext>();
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserAPI", Version = "v1" });
+            });
             services.AddScoped<SignUpService, SignUpService>();
             services.AddScoped<LogInService, LogInService>();
             services.AddScoped<TokenService, TokenService>();
@@ -53,7 +58,8 @@ namespace User
             {
                 app.UseDeveloperExceptionPage();
 
-
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UserAPI v1"));
 
                 app.UseHttpsRedirection();
 

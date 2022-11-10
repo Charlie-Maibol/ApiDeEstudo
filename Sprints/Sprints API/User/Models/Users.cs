@@ -10,6 +10,7 @@ namespace UserAPI.Models
         [StringLength(250, ErrorMessage = "Você excedeu o número máximo de caracteres")]
         public string UserName { get; set; }
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
         public string CPF { get; set; }
