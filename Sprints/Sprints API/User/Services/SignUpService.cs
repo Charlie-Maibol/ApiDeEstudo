@@ -34,8 +34,8 @@ namespace UserAPI.Services
                 user.UF = logIn.UF;
                 user.City = logIn.City;
                 CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
-                if (ConfirmBirthDay(identityUser.BirthDay) == false 
-                    || ConfirmCPF(identityUser.CPF) = false)
+                if (ConfirmBirthDay(identityUser.BirthDay) == false
+                    || ConfirmCPF(identityUser.CPF) == false)
                     return Result.Fail("Falha ao cadastrar usuário");
                 Task<IdentityResult> identityResult = _userManager
                     .CreateAsync(identityUser, createDto.PassWord);
@@ -71,15 +71,15 @@ namespace UserAPI.Services
             user.City = viacep.localidade;
 
         }
-        private static bool ConfirmBirthDay(CustomIdentityUser identityUser)
+        private static bool ConfirmBirthDay(DateTime identityUser)
         {
-            if (identityUser.BirthDay > DateTime.Today) return false;
+            if (identityUser > DateTime.Today) return false;
             return true;
         }
 
         private static bool ConfirmCPF(string cpf)
         {
-            Console.WriteLine("Valida CPF");
+            
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 

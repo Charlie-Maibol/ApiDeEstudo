@@ -6,6 +6,7 @@ namespace UserAPI.Models
 {
     public class CustomIdentityUser : IdentityUser<int>
     {
+        
         public DateTime BirthDay { get; set; }
         [Required]
         public string CPF { get; set; }
@@ -17,7 +18,7 @@ namespace UserAPI.Models
         public string City { get; set; }
         public string Neighborhood { get; set; }
 
-        public DateTime CriatonDate { get; set; }
+        public DateTime CriatonDate { get; set; } = DateTime.Now;
         public DateTime EditDate { get; set; }
         public string AddComplemente { get; set; }
 
