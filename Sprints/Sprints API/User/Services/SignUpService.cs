@@ -2,6 +2,7 @@
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using UserAPI.Data.DTOs;
@@ -33,6 +34,9 @@ namespace UserAPI.Services
                 user.UF = logIn.UF;
                 user.City = logIn.City;
                 CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
+                if (ConfirmBirthDay(identityUser.BirthDay) == false 
+                    || ConfirmCPF(identityUser.CPF) = false)
+                    return Result.Fail("Falha ao cadastrar usuário");
                 Task<IdentityResult> identityResult = _userManager
                     .CreateAsync(identityUser, createDto.PassWord);
                 _userManager.AddToRoleAsync(identityUser, "regular");
@@ -40,8 +44,9 @@ namespace UserAPI.Services
                 {
                     return Result.Fail("Falha ao cadastrar usuário");
                 }
-
+                
             }
+            
             return Result.Ok();
 
         }
@@ -65,6 +70,62 @@ namespace UserAPI.Services
             user.Neighborhood = viacep.bairro;
             user.City = viacep.localidade;
 
+        }
+        private static bool ConfirmBirthDay(CustomIdentityUser identityUser)
+        {
+            if (identityUser.BirthDay > DateTime.Today) return false;
+            return true;
+        }
+
+        private static bool ConfirmCPF(string cpf)
+        {
+            Console.WriteLine("Valida CPF");
+            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            string tempCpf;
+            string digit;
+            int plus;
+            int remain;
+
+            cpf = cpf.Trim();
+            cpf = cpf.Replace(".", "").Replace("-", "");
+
+            Console.WriteLine("Tamanho: " + cpf.Length);
+            if (cpf.Length != 11) { return false; }
+
+            tempCpf = cpf.Substring(0, 9);
+            plus = 0;
+
+            for (int i = 0; i < 9; i++)
+            {
+                plus += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+            }
+
+            remain = plus % 11;
+
+            if (remain < 2) { remain = 0; }
+            else { remain = 11 - remain; }
+
+            digit = remain.ToString();
+
+            tempCpf += digit;
+
+            plus = 0;
+
+            for (int i = 0; i < 10; i++)
+            {
+                plus += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+            }
+
+            remain = plus % 11;
+
+            if (remain < 2) { remain = 0; }
+            else { remain = 11 - remain; }
+
+            digit += remain.ToString();
+
+            return cpf.EndsWith(digit);
         }
     }
 }
