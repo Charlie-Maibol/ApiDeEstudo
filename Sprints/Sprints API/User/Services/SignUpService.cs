@@ -2,13 +2,9 @@
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
-using System;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using UserAPI.Data.DTOs;
-using UserAPI.Data.Requests;
 using UserAPI.Models;
 namespace UserAPI.Services
 {
@@ -16,14 +12,13 @@ namespace UserAPI.Services
     {
         public IMapper _mapper;
         public UserManager<CustomIdentityUser> _userManager;
-        public EmailService _emailService;
+        
 
-        public SignUpService(IMapper mapper, UserManager<CustomIdentityUser> userManager, EmailService emailService)
+        public SignUpService(IMapper mapper, UserManager<CustomIdentityUser> userManager)
         {
             _mapper = mapper;
             _userManager = userManager;
-            _emailService = emailService;
-            _emailService = emailService;
+          
         }
 
         public Result signUpUser(CreateUserDTO createDto)
@@ -38,14 +33,6 @@ namespace UserAPI.Services
                 user.City = logIn.City;
                 CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
                 Task<IdentityResult> identityResult = _userManager.CreateAsync(identityUser, createDto.PassWord);
-                if (identityResult.Result.Succeeded)
-                {
-                    var code = _userManager.GenerateEmailConfirmationTokenAsync(identityUser).Result;
-                    var encodedCode = HttpUtility.UrlEncode(code);
-                    _emailService.SendEmail(new[] { identityUser.Email },
-                        "Link de Ativação", identityUser.Id, encodedCode);
-                    return Result.Ok().WithSuccess(code);
-                }
                 if (!identityResult.Result.Succeeded)
                 {
                     return Result.Fail("Falha ao cadastrar usuário");
@@ -56,18 +43,6 @@ namespace UserAPI.Services
 
         }
 
-        public Result ConfirmUser(ConfirmUserRequest request)
-        {
-            var IdentityUser = _userManager
-                .Users
-                .FirstOrDefault(u => u.Id == request.UserId);
-            var identityResult = _userManager.ConfirmEmailAsync(IdentityUser, request.ActivationCode).Result;
-            if (identityResult.Succeeded)
-            {
-                return Result.Ok();
-            }
-            return Result.Fail("Falha ao ativar conta");
-        }
         public async Task<Users> GetAdress(string cep)
         {
             HttpClient client = new HttpClient();
