@@ -2,6 +2,7 @@
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using UserAPI.Data.DTOs;
+using UserAPI.Data.Requests;
 using UserAPI.Services;
 
 namespace UserAPI.Controllers0
@@ -25,5 +26,7 @@ namespace UserAPI.Controllers0
             if (result.IsFailed) return StatusCode(500);
             return Ok();
         }
+
+    
     }
 }

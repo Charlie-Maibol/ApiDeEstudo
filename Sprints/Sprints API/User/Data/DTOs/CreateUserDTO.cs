@@ -22,7 +22,7 @@ namespace UserAPI.Data.DTOs
         public bool Status { get; set; } = true;
         public string ZipCode { get; set; }
         public string Street { get; set; }
-        public string StretNumber { get; set; }
+        public string StreetNumber { get; set; }
         public string UF { get; set; }
         public string City { get; set; }
         public string Neighborhood { get; set; }
