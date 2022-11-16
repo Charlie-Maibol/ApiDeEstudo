@@ -217,7 +217,7 @@ namespace UserAPI.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("text");
 
-                    b.Property<string>("StretNumber")
+                    b.Property<string>("StreetNumber")
                         .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")

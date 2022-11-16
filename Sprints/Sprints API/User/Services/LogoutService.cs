@@ -20,5 +20,6 @@ namespace UserAPI.Services
             if (identityResult.IsCompletedSuccessfully) return Result.Ok();
             return Result.Fail("Erro ao realizar logout");
         }
+
     }
 }
