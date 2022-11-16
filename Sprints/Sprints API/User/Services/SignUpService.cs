@@ -12,13 +12,14 @@ namespace UserAPI.Services
     {
         public IMapper _mapper;
         public UserManager<CustomIdentityUser> _userManager;
-        
+        public RoleManager<IdentityRole<int>> _roleManager;
 
-        public SignUpService(IMapper mapper, UserManager<CustomIdentityUser> userManager)
+
+        public SignUpService(IMapper mapper, UserManager<CustomIdentityUser> userManager, RoleManager<IdentityRole<int>> roleManager)
         {
             _mapper = mapper;
             _userManager = userManager;
-          
+            _roleManager = roleManager;
         }
 
         public Result signUpUser(CreateUserDTO createDto)
@@ -32,7 +33,9 @@ namespace UserAPI.Services
                 user.UF = logIn.UF;
                 user.City = logIn.City;
                 CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
-                Task<IdentityResult> identityResult = _userManager.CreateAsync(identityUser, createDto.PassWord);
+                Task<IdentityResult> identityResult = _userManager
+                    .CreateAsync(identityUser, createDto.PassWord);
+                _userManager.AddToRoleAsync(identityUser, "regular");
                 if (!identityResult.Result.Succeeded)
                 {
                     return Result.Fail("Falha ao cadastrar usuário");
