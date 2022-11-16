@@ -19,8 +19,9 @@ namespace UserAPI.Services
 
         public Result LogInUser(LoginRequest request)
         {
+            var user = _signInManager.UserManager.FindByEmailAsync(request.Email);
             var resultIdentity = _signInManager
-                .PasswordSignInAsync(request.Email, request.PassWord, false, false);
+                .PasswordSignInAsync(user.Result.UserName, request.PassWord, false, false);
             if (!resultIdentity.Result.Succeeded) 
             {
                 return Result.Fail("Usuário e senhas incorretos");
@@ -29,7 +30,7 @@ namespace UserAPI.Services
                     .UserManager
                     .Users
                     .FirstOrDefault(user =>
-                    user.NormalizedUserName == request.Email.ToUpper());
+                    user.NormalizedUserName == user.UserName.ToUpper());
             Token token = _tokenService
                 .CreateToken(identityUser, _signInManager
                 .UserManager.GetRolesAsync(identityUser)

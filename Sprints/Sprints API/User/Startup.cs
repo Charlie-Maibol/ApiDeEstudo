@@ -55,7 +55,7 @@ namespace User
                 });
 
             services.AddIdentity<CustomIdentityUser, IdentityRole<int>>(
-                opt => opt.SignIn.RequireConfirmedEmail = true
+                opt => opt.SignIn.RequireConfirmedEmail = false
                 )
                 .AddEntityFrameworkStores<UserDBContext>()
                 .AddDefaultTokenProviders();
