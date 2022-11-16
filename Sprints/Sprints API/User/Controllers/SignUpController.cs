@@ -1,5 +1,6 @@
 ﻿
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserAPI.Data.DTOs;
 using UserAPI.Data.Requests;
@@ -27,6 +28,35 @@ namespace UserAPI.Controllers0
             return Ok();
         }
 
-    
+        
+        [HttpGet("filter")]
+        [Authorize(Roles = "admin, regular")]
+        public IActionResult GetUserId(SearchUserDto searchDto)
+        {
+            return Ok();
+        }
+        [HttpGet]
+        [Authorize(Roles = "admin, regular")]
+        public IActionResult GetUser(SearchUserDto searchDto)
+        {
+            
+            return Ok();
+        }
+        [HttpPut("{Id}")]
+        [Authorize(Roles = "admin")]
+        public IActionResult EditUser(EditUserDto editDto)
+        {
+            
+            return Ok();
+        }
+
+        [HttpDelete("{Id}")]
+        [Authorize(Roles = "admin")]
+        public IActionResult DeleteUser(CreateUserDTO deleteDto)
+        {
+            
+            return Ok();
+        }
+
     }
 }

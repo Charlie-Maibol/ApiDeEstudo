@@ -26,7 +26,7 @@ namespace UserAPI.Data.DTOs
         public string UF { get; set; }
         public string City { get; set; }
         public string Neighborhood { get; set; }
-        public DateTime CriatonDate { get; set; }
+        public DateTime CriatonDate { get; set; } = DateTime.Now;
         public string AddComplemente { get; set; }
     }
 }

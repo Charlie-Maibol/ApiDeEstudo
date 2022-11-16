@@ -42,6 +42,22 @@ namespace UserAPI.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 99999,
+                            ConcurrencyStamp = "ec6a5430-3f79-4864-9431-779d92acc71e",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 99998,
+                            ConcurrencyStamp = "45d8d29a-4af5-4747-a87d-444fb2a02a49",
+                            Name = "regular",
+                            NormalizedName = "REGULAR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -122,6 +138,13 @@ namespace UserAPI.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 99999,
+                            RoleId = 99999
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -160,7 +183,7 @@ namespace UserAPI.Migrations
 
                     b.Property<string>("CPF")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(767)");
 
                     b.Property<string>("City")
                         .HasColumnType("text");
@@ -235,6 +258,12 @@ namespace UserAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CPF")
+                        .IsUnique();
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -243,6 +272,29 @@ namespace UserAPI.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 99999,
+                            AccessFailedCount = 0,
+                            BirthDay = new DateTime(2022, 11, 16, 16, 51, 58, 163, DateTimeKind.Local).AddTicks(971),
+                            CPF = "123456789",
+                            ConcurrencyStamp = "70690eca-1b82-4ab0-9c9c-5a8d5977a48a",
+                            CriatonDate = new DateTime(2022, 11, 16, 16, 51, 58, 160, DateTimeKind.Local).AddTicks(3001),
+                            EditDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "admin@admin.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEILR5H1Bqc+J9qb7Vx8L7r9Blcv96ODzLfRX2oYAK09+/4PbX9xrICaZhg4ABENEvA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "75a56c10-70b4-4abc-8d48-85ca4498a084",
+                            Status = true,
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

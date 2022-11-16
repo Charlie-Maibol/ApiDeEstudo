@@ -149,3 +149,6 @@ C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Ec
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Metadata.dll
