@@ -11,11 +11,6 @@ namespace UserAPI.Data.DTOs
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         
-        [DataType(DataType.Password)]
-        public string PassWord { get; set; }
-  
-        [Compare("PassWord")]
-        public string RePassWord { get; set; }
         public DateTime? BirthDay { get; set; }
        
         public string CPF { get; set; }

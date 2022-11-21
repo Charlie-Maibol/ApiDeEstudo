@@ -39,7 +39,7 @@ namespace UserAPI.Controllers0
            
         //}
         [HttpGet]
-        [Authorize(Roles = "admin, regular")]
+        //[Authorize(Roles = "admin, regular")]
         public async Task<IActionResult> GetUser([FromQuery] string name,
             [FromQuery] string cpf, [FromQuery] string email, [FromQuery] bool? status)
         {
@@ -47,7 +47,7 @@ namespace UserAPI.Controllers0
             return Ok(result);
         }
         [HttpPut("{Id}")]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> EditUser(int Id, [FromBody] EditUserDto userDto)
         {
             var result = await _signUpService.EditUser(Id, userDto);
