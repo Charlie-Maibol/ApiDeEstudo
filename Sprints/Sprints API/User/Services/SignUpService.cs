@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using UserAPI.Data.DTOs;
@@ -44,11 +48,88 @@ namespace UserAPI.Services
                 {
                     return Result.Fail("Falha ao cadastrar usuário");
                 }
-                
+
             }
-            
+
             return Result.Ok();
 
+        }
+
+        //public async Task<List<SearchUserDto>> GetUserId(int? id)
+        //{
+        //    var users = await _userManager.Users.ToListAsync();
+        //    List<SearchUserDto> searchUserDto = new();
+        //    foreach (var user in users)
+        //    {
+        //        var userDto = _mapper.Map<SearchUserDto>(user);
+        //        searchUserDto.Add(userDto);
+        //    }
+        //    if (id != null)
+        //    {
+        //        return searchUserDto.Where(user => user.Id == id).ToList();
+        //    }
+        //    throw new HttpResponseException(HttpStatusCode.BadRequest);
+        //}
+
+        public async Task<List<SearchUserDto>> GetUser(string userName, string cpf, bool? status, string email)
+        {
+            var users = await _userManager.Users.ToListAsync();
+            List<SearchUserDto> searchUserDto = new();
+            foreach(var user in users)
+            {
+                var userDto = _mapper.Map<SearchUserDto>(user);
+                searchUserDto.Add(userDto);
+            }
+            if(userName != null)
+            {
+                return searchUserDto.Where(user => user.UserName.ToLower().Contains(userName.ToLower())).ToList();
+            }
+            if (email != null)
+            {
+                return searchUserDto.Where(user => user.Email == email).ToList();
+            }
+            if (status != null)
+            {
+                return searchUserDto.Where(user => user.Status == status).ToList();
+            }
+            if (cpf != null)
+            {
+                return searchUserDto.Where(user => user.CPF == cpf).ToList();
+            }
+            return searchUserDto;
+        }
+
+        public async Task<Result> EditUser(int id, EditUserDto editUser)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
+            var address = await GetAdress(user.ZipCode);
+            if (user.ZipCode != null)
+            {
+                user.UF = address.UF;
+                user.Neighborhood = address.Neighborhood;
+                user.City = address.City;
+                user.Street = address.Street;
+                user.ZipCode = address.ZipCode;
+                user.AddComplemente = address.AddComplemente;
+            }
+            if (user.CPF != null)
+            {
+                user.CPF = editUser.CPF;
+            }
+            if (user.UserName != null)
+            {
+                user.UserName = editUser.UserName;
+            }
+            if (user.Email != null)
+            {
+                user.Email = editUser.Email;
+            }
+            if (user.BirthDay != null)
+            {
+                user.BirthDay = editUser.BirthDay;
+            }
+            await _userManager.UpdateAsync(user);
+            return Result.Ok();
         }
 
         public async Task<Users> GetAdress(string cep)
@@ -71,7 +152,7 @@ namespace UserAPI.Services
             user.City = viacep.localidade;
 
         }
-        private static bool ConfirmBirthDay(DateTime identityUser)
+        private static bool ConfirmBirthDay(DateTime? identityUser)
         {
             if (identityUser > DateTime.Today) return false;
             return true;
@@ -79,7 +160,7 @@ namespace UserAPI.Services
 
         private static bool ConfirmCPF(string cpf)
         {
-            
+
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 

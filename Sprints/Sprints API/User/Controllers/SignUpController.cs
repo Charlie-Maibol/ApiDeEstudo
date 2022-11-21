@@ -2,6 +2,8 @@
 using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 using UserAPI.Data.DTOs;
 using UserAPI.Data.Requests;
 using UserAPI.Services;
@@ -28,35 +30,32 @@ namespace UserAPI.Controllers0
             return Ok();
         }
 
-        
-        [HttpGet("filter")]
-        [Authorize(Roles = "admin, regular")]
-        public IActionResult GetUserId(SearchUserDto searchDto)
-        {
-            return Ok();
-        }
+        //[HttpGet("filter")]
+        //[Authorize(Roles = "admin, regular")]
+        //public async Task<IActionResult> GetUserId([FromQuery] int id)
+        //{
+        //    var result = await _signUpService.GetUserId(id);
+        //    return Ok(result);
+           
+        //}
         [HttpGet]
         [Authorize(Roles = "admin, regular")]
-        public IActionResult GetUser(SearchUserDto searchDto)
+        public async Task<IActionResult> GetUser([FromQuery] string name,
+            [FromQuery] string cpf, [FromQuery] string email, [FromQuery] bool? status)
         {
-            
-            return Ok();
+            var result = await _signUpService.GetUser(name, cpf, status, email);
+            return Ok(result);
         }
         [HttpPut("{Id}")]
         [Authorize(Roles = "admin")]
-        public IActionResult EditUser(EditUserDto editDto)
+        public async Task<IActionResult> EditUser(int Id, [FromBody] EditUserDto userDto)
         {
-            
-            return Ok();
+            var result = await _signUpService.EditUser(Id, userDto);
+            if (!result.IsSuccess) return StatusCode(400);
+            return Ok(result);
         }
 
-        [HttpDelete("{Id}")]
-        [Authorize(Roles = "admin")]
-        public IActionResult DeleteUser(CreateUserDTO deleteDto)
-        {
-            
-            return Ok();
-        }
+     
 
     }
 }

@@ -5,6 +5,8 @@ namespace UserAPI.Models
 {
     public class Users
     {
+        [Key]
+        [Required]
         public int Id { get; set; }
         [Required]
         [StringLength(250, ErrorMessage = "Você excedeu o número máximo de caracteres")]
@@ -22,7 +24,7 @@ namespace UserAPI.Models
         public string Neighborhood { get; set; }
         public int StreetNumber { get; set; }
         public string AddComplemente { get; set; }
-        public DateTime BirthDay { get; set; }
+        public DateTime? BirthDay { get; set; }
         public bool Status { get; set; } = true;
         public DateTime CriationDate { get; set; }
         public DateTime EditDate { get; set; }

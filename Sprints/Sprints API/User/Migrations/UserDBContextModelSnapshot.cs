@@ -47,14 +47,14 @@ namespace UserAPI.Migrations
                         new
                         {
                             Id = 99999,
-                            ConcurrencyStamp = "ec6a5430-3f79-4864-9431-779d92acc71e",
+                            ConcurrencyStamp = "820baa49-79d9-4d85-9b82-f623f1bc4bab",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 99998,
-                            ConcurrencyStamp = "45d8d29a-4af5-4747-a87d-444fb2a02a49",
+                            ConcurrencyStamp = "3856df78-1319-4994-869c-3df00024443a",
                             Name = "regular",
                             NormalizedName = "REGULAR"
                         });
@@ -178,7 +178,7 @@ namespace UserAPI.Migrations
                     b.Property<string>("AddComplemente")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("BirthDay")
+                    b.Property<DateTime?>("BirthDay")
                         .HasColumnType("datetime");
 
                     b.Property<string>("CPF")
@@ -195,9 +195,6 @@ namespace UserAPI.Migrations
                     b.Property<DateTime>("CriatonDate")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("EditDate")
-                        .HasColumnType("datetime");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -210,6 +207,9 @@ namespace UserAPI.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Neighborhood")
                         .HasColumnType("text");
@@ -278,19 +278,19 @@ namespace UserAPI.Migrations
                         {
                             Id = 99999,
                             AccessFailedCount = 0,
-                            BirthDay = new DateTime(2022, 11, 16, 16, 51, 58, 163, DateTimeKind.Local).AddTicks(971),
+                            BirthDay = new DateTime(2022, 11, 21, 14, 37, 36, 637, DateTimeKind.Local).AddTicks(521),
                             CPF = "123456789",
-                            ConcurrencyStamp = "70690eca-1b82-4ab0-9c9c-5a8d5977a48a",
-                            CriatonDate = new DateTime(2022, 11, 16, 16, 51, 58, 160, DateTimeKind.Local).AddTicks(3001),
-                            EditDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "0bd08663-7451-47d8-8068-a53710e47da4",
+                            CriatonDate = new DateTime(2022, 11, 21, 14, 37, 36, 637, DateTimeKind.Local).AddTicks(209),
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEILR5H1Bqc+J9qb7Vx8L7r9Blcv96ODzLfRX2oYAK09+/4PbX9xrICaZhg4ABENEvA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJjSKgoMr+MglWFlcdfDQsX4AhcNJLNOQ1Njhtqkvbqhq2UdBIyxQc4Vje0FH940ig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "75a56c10-70b4-4abc-8d48-85ca4498a084",
+                            SecurityStamp = "94c399d7-5f46-4023-a32a-c2508e188809",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "admin"
