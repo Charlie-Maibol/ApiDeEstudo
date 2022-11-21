@@ -16,7 +16,7 @@ namespace UserAPI.Data.DTOs
   
         [Compare("PassWord")]
         public string RePassWord { get; set; }
-        public DateTime BirthDay { get; set; }
+        public DateTime? BirthDay { get; set; }
        
         public string CPF { get; set; }
         public bool Status { get; set; } = true;
