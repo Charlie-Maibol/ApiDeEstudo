@@ -30,14 +30,6 @@ namespace UserAPI.Controllers0
             return Ok();
         }
 
-        //[HttpGet("filter")]
-        //[Authorize(Roles = "admin, regular")]
-        //public async Task<IActionResult> GetUserId([FromQuery] int id)
-        //{
-        //    var result = await _signUpService.GetUserId(id);
-        //    return Ok(result);
-           
-        //}
         [HttpGet]
         //[Authorize(Roles = "admin, regular")]
         public async Task<IActionResult> GetUser([FromQuery] string name,

@@ -54,23 +54,6 @@ namespace UserAPI.Services
             return Result.Ok();
 
         }
-
-        //public async Task<List<SearchUserDto>> GetUserId(int? id)
-        //{
-        //    var users = await _userManager.Users.ToListAsync();
-        //    List<SearchUserDto> searchUserDto = new();
-        //    foreach (var user in users)
-        //    {
-        //        var userDto = _mapper.Map<SearchUserDto>(user);
-        //        searchUserDto.Add(userDto);
-        //    }
-        //    if (id != null)
-        //    {
-        //        return searchUserDto.Where(user => user.Id == id).ToList();
-        //    }
-        //    throw new HttpResponseException(HttpStatusCode.BadRequest);
-        //}
-
         public async Task<List<SearchUserDto>> GetUser(string userName, string cpf, bool? status, string email)
         {
             var users = await _userManager.Users.ToListAsync();
