@@ -9,7 +9,7 @@ using UserAPI.Data;
 namespace UserAPI.Migrations
 {
     [DbContext(typeof(UserDBContext))]
-    [Migration("20221121173737_criando tabelas")]
+    [Migration("20221122134417_criando tabelas")]
     partial class criandotabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,14 +49,14 @@ namespace UserAPI.Migrations
                         new
                         {
                             Id = 99999,
-                            ConcurrencyStamp = "820baa49-79d9-4d85-9b82-f623f1bc4bab",
+                            ConcurrencyStamp = "02f88b33-cf2a-4fbd-ac17-5e610e739e66",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 99998,
-                            ConcurrencyStamp = "3856df78-1319-4994-869c-3df00024443a",
+                            ConcurrencyStamp = "0560c09e-889c-486e-90f2-52cc5fd04e7b",
                             Name = "regular",
                             NormalizedName = "REGULAR"
                         });
@@ -185,7 +185,7 @@ namespace UserAPI.Migrations
 
                     b.Property<string>("CPF")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("text");
 
                     b.Property<string>("City")
                         .HasColumnType("text");
@@ -260,12 +260,6 @@ namespace UserAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CPF")
-                        .IsUnique();
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -280,19 +274,19 @@ namespace UserAPI.Migrations
                         {
                             Id = 99999,
                             AccessFailedCount = 0,
-                            BirthDay = new DateTime(2022, 11, 21, 14, 37, 36, 637, DateTimeKind.Local).AddTicks(521),
+                            BirthDay = new DateTime(2022, 11, 22, 10, 44, 16, 684, DateTimeKind.Local).AddTicks(243),
                             CPF = "123456789",
-                            ConcurrencyStamp = "0bd08663-7451-47d8-8068-a53710e47da4",
-                            CriatonDate = new DateTime(2022, 11, 21, 14, 37, 36, 637, DateTimeKind.Local).AddTicks(209),
+                            ConcurrencyStamp = "6f14b349-ca71-4663-a7b4-ec28d7a75eb0",
+                            CriatonDate = new DateTime(2022, 11, 22, 10, 44, 16, 683, DateTimeKind.Local).AddTicks(9786),
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(2022, 11, 22, 10, 44, 16, 683, DateTimeKind.Local).AddTicks(933),
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJjSKgoMr+MglWFlcdfDQsX4AhcNJLNOQ1Njhtqkvbqhq2UdBIyxQc4Vje0FH940ig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGChef0NwJApumEd/eiO/JDGnFmBzg2m3byTgs7SIk706JumSFEahlNtweTO4swBSw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "94c399d7-5f46-4023-a32a-c2508e188809",
+                            SecurityStamp = "663f3d2c-598a-4eef-abf5-ce9f2c286aa3",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "admin"

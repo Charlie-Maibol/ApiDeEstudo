@@ -19,7 +19,7 @@ namespace UserAPI.Models
         public string Neighborhood { get; set; }
 
         public DateTime CriatonDate { get; set; } = DateTime.Now;
-        public DateTime Modified { get; set; }
+        public DateTime Modified { get; set; } = DateTime.Now;
         public string AddComplemente { get; set; }
 
     }

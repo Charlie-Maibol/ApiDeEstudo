@@ -30,7 +30,7 @@ namespace UserAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     BirthDay = table.Column<DateTime>(type: "datetime", nullable: true),
-                    CPF = table.Column<string>(type: "varchar(256)", nullable: false),
+                    CPF = table.Column<string>(type: "text", nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ZipCode = table.Column<string>(type: "text", nullable: true),
                     Street = table.Column<string>(type: "text", nullable: true),
@@ -170,17 +170,17 @@ namespace UserAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 99999, "820baa49-79d9-4d85-9b82-f623f1bc4bab", "admin", "ADMIN" });
+                values: new object[] { 99999, "02f88b33-cf2a-4fbd-ac17-5e610e739e66", "admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 99998, "3856df78-1319-4994-869c-3df00024443a", "regular", "REGULAR" });
+                values: new object[] { 99998, "0560c09e-889c-486e-90f2-52cc5fd04e7b", "regular", "REGULAR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "AddComplemente", "BirthDay", "CPF", "City", "ConcurrencyStamp", "CriatonDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Modified", "Neighborhood", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "Street", "StreetNumber", "TwoFactorEnabled", "UF", "UserName", "ZipCode" },
-                values: new object[] { 99999, 0, null, new DateTime(2022, 11, 21, 14, 37, 36, 637, DateTimeKind.Local).AddTicks(521), "123456789", null, "0bd08663-7451-47d8-8068-a53710e47da4", new DateTime(2022, 11, 21, 14, 37, 36, 637, DateTimeKind.Local).AddTicks(209), "admin@admin.com", false, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEJjSKgoMr+MglWFlcdfDQsX4AhcNJLNOQ1Njhtqkvbqhq2UdBIyxQc4Vje0FH940ig==", null, false, "94c399d7-5f46-4023-a32a-c2508e188809", true, null, null, false, null, "admin", null });
+                values: new object[] { 99999, 0, null, new DateTime(2022, 11, 22, 10, 44, 16, 684, DateTimeKind.Local).AddTicks(243), "123456789", null, "6f14b349-ca71-4663-a7b4-ec28d7a75eb0", new DateTime(2022, 11, 22, 10, 44, 16, 683, DateTimeKind.Local).AddTicks(9786), "admin@admin.com", false, false, null, new DateTime(2022, 11, 22, 10, 44, 16, 683, DateTimeKind.Local).AddTicks(933), null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEGChef0NwJApumEd/eiO/JDGnFmBzg2m3byTgs7SIk706JumSFEahlNtweTO4swBSw==", null, false, "663f3d2c-598a-4eef-abf5-ce9f2c286aa3", true, null, null, false, null, "admin", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -217,18 +217,6 @@ namespace UserAPI.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_CPF",
-                table: "AspNetUsers",
-                column: "CPF",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_Email",
-                table: "AspNetUsers",
-                column: "Email",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
