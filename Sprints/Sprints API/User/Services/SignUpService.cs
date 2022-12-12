@@ -27,43 +27,46 @@ namespace UserAPI.Services
             _roleManager = roleManager;
         }
 
-        public Result signUpUser(CreateUserDTO createDto)
+        public async Task<Result> signUpUser(CreateUserDTO createDto)
         {
-            var logIn = GetAdress(createDto.ZipCode).Result;
-            if (logIn != null)
+            var logIn = await GetAdress(createDto.ZipCode);
+
+
+            Users user = _mapper.Map<Users>(createDto);
+            user.Street = logIn.Street;
+            user.Neighborhood = logIn.Neighborhood;
+            user.UF = logIn.UF;
+            user.City = logIn.City;
+            user.Status = true;
+            CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
+            var identityResult = await _userManager
+                .CreateAsync(identityUser, createDto.PassWord);
+            var identityRoles =  _userManager.AddToRoleAsync(identityUser, "regular");
+
+            if (ConfirmBirthDay(identityUser.BirthDay) == false
+                || ConfirmCPF(identityUser.CPF) == false)
+
+                return Result.Fail("Falha ao cadastrar usuário");
+
+            if (logIn == null) return Result.Fail("Falha ao cadastrar usuário");
+
+            if (identityResult.Succeeded)
             {
-                Users user = _mapper.Map<Users>(createDto);
-                user.Street = logIn.Street;
-                user.Neighborhood = logIn.Neighborhood;
-                user.UF = logIn.UF;
-                user.City = logIn.City;
-                CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
-                if (ConfirmBirthDay(identityUser.BirthDay) == false
-                    || ConfirmCPF(identityUser.CPF) == false)
-                    return Result.Fail("Falha ao cadastrar usuário");
-                Task<IdentityResult> identityResult = _userManager
-                    .CreateAsync(identityUser, createDto.PassWord);
-                _userManager.AddToRoleAsync(identityUser, "regular");
-                if (!identityResult.Result.Succeeded)
-                {
-                    return Result.Fail("Falha ao cadastrar usuário");
-                }
+                return Result.Ok();
 
             }
-
-            return Result.Ok();
-
+            return Result.Fail("Falha ao cadastrar usuário");
         }
         public async Task<List<SearchUserDto>> GetUser(string userName, string cpf, bool? status, string email)
         {
             var users = await _userManager.Users.ToListAsync();
             List<SearchUserDto> searchUserDto = new();
-            foreach(var user in users)
+            foreach (var user in users)
             {
                 var userDto = _mapper.Map<SearchUserDto>(user);
                 searchUserDto.Add(userDto);
             }
-            if(userName != null)
+            if (userName != null)
             {
                 return searchUserDto.Where(user => user.UserName.ToLower().Contains(userName.ToLower())).ToList();
             }

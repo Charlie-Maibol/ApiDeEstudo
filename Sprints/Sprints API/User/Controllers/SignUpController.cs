@@ -23,15 +23,15 @@ namespace UserAPI.Controllers0
         }
 
         [HttpPost]
-        public IActionResult SignUpUser(CreateUserDTO createDto)
+        public async Task<IActionResult> SignUpUser(CreateUserDTO createDto)
         {
-            Result result = _signUpService.signUpUser(createDto);
+            Result result = await _signUpService.signUpUser(createDto);
             if (result.IsFailed) return StatusCode(500);
             return Ok();
         }
 
         [HttpGet]
-        //[Authorize(Roles = "admin, regular")]
+        [Authorize(Roles = "admin, regular")]
         public async Task<IActionResult> GetUser([FromQuery] string name,
             [FromQuery] string cpf, [FromQuery] string email, [FromQuery] bool? status)
         {
@@ -39,7 +39,7 @@ namespace UserAPI.Controllers0
             return Ok(result);
         }
         [HttpPut("{Id}")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> EditUser(int Id, [FromBody] EditUserDto userDto)
         {
             var result = await _signUpService.EditUser(Id, userDto);
