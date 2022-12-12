@@ -9,10 +9,10 @@ namespace UserAPI.Data
 {
     public class UserDBContext : IdentityDbContext<CustomIdentityUser, IdentityRole<int>, int>
     {
-        private IConfiguration _configuration;
-        public UserDBContext(DbContextOptions<UserDBContext> opt, IConfiguration configuration) : base(opt)
+        
+        public UserDBContext(DbContextOptions<UserDBContext> opt) : base(opt)
         {
-            _configuration = configuration;
+            
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,7 +32,7 @@ namespace UserAPI.Data
                 Email = "admin@admin.com",
                 NormalizedEmail = "ADMIN@ADMIN.COM",
                 SecurityStamp = Guid.NewGuid().ToString(),
-                Id = 99999,
+                Id = 9999,
                 CPF = "123456789",
                 CriatonDate = DateTime.Now,
                 BirthDay = DateTime.Now,
@@ -63,7 +63,7 @@ namespace UserAPI.Data
            builder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int>
             {
                 RoleId = 99999,
-                UserId = 99999
+                UserId = 9999
             });
         }
     }

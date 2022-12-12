@@ -14,6 +14,9 @@ namespace UserAPI.Profiles
             CreateMap<Users, CustomIdentityUser>();
             CreateMap<SearchUserDto, CustomIdentityUser>();
             CreateMap<CustomIdentityUser, SearchUserDto>();
+            CreateMap<Users, SearchUserDto>();
+            CreateMap<EditUserDto, CustomIdentityUser>();
+            CreateMap<EditUserDto, Users>();    
            
         }
     }

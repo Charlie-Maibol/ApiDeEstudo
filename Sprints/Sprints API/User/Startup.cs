@@ -14,6 +14,7 @@ using UserAPI.Data;
 using UserAPI.Models;
 using UserAPI.Services;
 
+
 namespace User
 {
     public class Startup
@@ -29,9 +30,21 @@ namespace User
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<UserDBContext>(options =>
-            options.UseMySQL(Configuration.GetConnectionString("UserConnection"))
+            options.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("UserConnection"))
 
             );
+
+            services.AddScoped<SignUpService, SignUpService>();
+            services.AddScoped<LogInService, LogInService>();
+            services.AddScoped<TokenService, TokenService>();
+            services.AddScoped<LogoutService, LogoutService>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddIdentity<CustomIdentityUser, IdentityRole<int>>(
+                opt => opt.SignIn.RequireConfirmedEmail = false
+                )
+                .AddEntityFrameworkStores<UserDBContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAuthentication(auth =>
             {
@@ -52,21 +65,13 @@ namespace User
                 };
             });
 
-            services.AddIdentity<CustomIdentityUser, IdentityRole<int>>(
-                opt => opt.SignIn.RequireConfirmedEmail = false
-                )
-                .AddEntityFrameworkStores<UserDBContext>()
-                .AddDefaultTokenProviders();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserAPI", Version = "v1" });
             });
-            services.AddScoped<SignUpService, SignUpService>();
-            services.AddScoped<LogInService, LogInService>();
-            services.AddScoped<TokenService, TokenService>();
-            services.AddScoped<LogoutService, LogoutService>();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
         }
 
@@ -84,8 +89,10 @@ namespace User
 
                 app.UseRouting();
 
-                app.UseAuthentication();
                 app.UseAuthorization();
+
+                app.UseAuthentication();
+
 
                 app.UseEndpoints(endpoints =>
                 {
