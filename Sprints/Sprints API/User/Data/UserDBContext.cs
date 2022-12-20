@@ -36,7 +36,7 @@ namespace UserAPI.Data
                 CPF = "123456789",
                 CriatonDate = DateTime.Now,
                 BirthDay = DateTime.Now,
-                Status = true,
+                Status = true
                 
             };
 

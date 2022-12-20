@@ -47,14 +47,14 @@ namespace UserAPI.Migrations
                         new
                         {
                             Id = 99999,
-                            ConcurrencyStamp = "21626b01-7f4a-4be0-ac69-bcd785efd64f",
+                            ConcurrencyStamp = "65018803-99e1-4507-ae55-5830631d9643",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 99998,
-                            ConcurrencyStamp = "96e9946d-726d-4113-97c5-09add56271d5",
+                            ConcurrencyStamp = "e9837995-4934-4f86-aece-d6f59e07c7a5",
                             Name = "regular",
                             NormalizedName = "REGULAR"
                         });
@@ -278,19 +278,19 @@ namespace UserAPI.Migrations
                         {
                             Id = 9999,
                             AccessFailedCount = 0,
-                            BirthDay = new DateTime(2022, 12, 12, 11, 1, 16, 5, DateTimeKind.Local).AddTicks(3348),
+                            BirthDay = new DateTime(2022, 12, 16, 9, 30, 4, 454, DateTimeKind.Local).AddTicks(313),
                             CPF = "123456789",
-                            ConcurrencyStamp = "d5908a43-eb25-4cf2-9e06-36276bd5d0d0",
-                            CriatonDate = new DateTime(2022, 12, 12, 11, 1, 16, 5, DateTimeKind.Local).AddTicks(1410),
+                            ConcurrencyStamp = "b58d41a6-a527-427b-93d9-6cf8d8d70e71",
+                            CriatonDate = new DateTime(2022, 12, 16, 9, 30, 4, 453, DateTimeKind.Local).AddTicks(9965),
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            Modified = new DateTime(2022, 12, 12, 11, 1, 16, 3, DateTimeKind.Local).AddTicks(7715),
+                            Modified = new DateTime(2022, 12, 16, 9, 30, 4, 453, DateTimeKind.Local).AddTicks(3235),
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBRi2nfRI+YGXQOnBcYAHif00cw68vksGvuLthngBymaJEF1FTDOWUh1ZFI7PxSaKQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP2Arcp+W1MH/SVvsfodZrXv+WcXehKHQOCfgMd+rFzy7Q9NC7agf/B2QcrQjgwATQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "243feafc-daf6-4922-bf76-3371bbb5805d",
+                            SecurityStamp = "44327ef7-5327-427d-a376-3564c25cee1c",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "admin"

@@ -26,14 +26,9 @@ namespace UserAPI.Services
             {
                 return Result.Fail("Usuário e senhas incorretos");
             } 
-            var identityUser = _signInManager
-                    .UserManager
-                    .Users
-                    .FirstOrDefault(user =>
-                    user.NormalizedUserName == user.UserName.ToUpper());
             Token token = _tokenService
-                .CreateToken(identityUser, _signInManager
-                .UserManager.GetRolesAsync(identityUser)
+                .CreateToken(user.Result, _signInManager
+                .UserManager.GetRolesAsync(user.Result)
                 .Result.FirstOrDefault());
             return Result.Ok().WithSuccess(token.Value);
         }
