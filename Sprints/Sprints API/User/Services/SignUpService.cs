@@ -41,7 +41,7 @@ namespace UserAPI.Services
             CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
             var identityResult = await _userManager
                 .CreateAsync(identityUser, createDto.PassWord);
-            var identityRoles =  _userManager.AddToRoleAsync(identityUser, "regular");
+            var identityRoles = await _userManager.AddToRoleAsync(identityUser, "regular");
 
             if (ConfirmBirthDay(identityUser.BirthDay) == false
                 || ConfirmCPF(identityUser.CPF) == false)
@@ -88,9 +88,10 @@ namespace UserAPI.Services
         public async Task<Result> EditUser(int id, EditUserDto editUser)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
-            var address = await GetAdress(user.ZipCode);
+            
             if (user.ZipCode != null)
             {
+                var address = await GetAdress(editUser.ZipCode);
                 user.UF = address.UF;
                 user.Neighborhood = address.Neighborhood;
                 user.City = address.City;
