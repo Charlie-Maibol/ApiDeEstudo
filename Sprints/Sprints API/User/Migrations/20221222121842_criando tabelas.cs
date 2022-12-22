@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace UserAPI.Migrations
 {
-    public partial class Criandotabelas : Migration
+    public partial class criandotabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,7 @@ namespace UserAPI.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     BirthDay = table.Column<DateTime>(type: "datetime", nullable: true),
                     CPF = table.Column<string>(type: "varchar(256)", nullable: false),
-                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     ZipCode = table.Column<string>(type: "text", nullable: true),
                     Street = table.Column<string>(type: "text", nullable: true),
                     StreetNumber = table.Column<string>(type: "text", nullable: true),
@@ -170,17 +170,17 @@ namespace UserAPI.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 99999, "65018803-99e1-4507-ae55-5830631d9643", "admin", "ADMIN" });
+                values: new object[] { 99999, "025c27b6-2ac3-47f0-a3e9-90780a765e36", "admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 99998, "e9837995-4934-4f86-aece-d6f59e07c7a5", "regular", "REGULAR" });
+                values: new object[] { 99998, "959f4555-a963-4fe2-adc1-d9852fcb6644", "regular", "REGULAR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "AddComplemente", "BirthDay", "CPF", "City", "ConcurrencyStamp", "CriatonDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Modified", "Neighborhood", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "Street", "StreetNumber", "TwoFactorEnabled", "UF", "UserName", "ZipCode" },
-                values: new object[] { 9999, 0, null, new DateTime(2022, 12, 16, 9, 30, 4, 454, DateTimeKind.Local).AddTicks(313), "123456789", null, "b58d41a6-a527-427b-93d9-6cf8d8d70e71", new DateTime(2022, 12, 16, 9, 30, 4, 453, DateTimeKind.Local).AddTicks(9965), "admin@admin.com", false, false, null, new DateTime(2022, 12, 16, 9, 30, 4, 453, DateTimeKind.Local).AddTicks(3235), null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEP2Arcp+W1MH/SVvsfodZrXv+WcXehKHQOCfgMd+rFzy7Q9NC7agf/B2QcrQjgwATQ==", null, false, "44327ef7-5327-427d-a376-3564c25cee1c", true, null, null, false, null, "admin", null });
+                values: new object[] { 9999, 0, null, new DateTime(2022, 12, 22, 9, 18, 41, 717, DateTimeKind.Local).AddTicks(902), "123456789", null, "1f5313bf-1745-4b22-a52f-7516bf16e8fa", new DateTime(2022, 12, 22, 9, 18, 41, 717, DateTimeKind.Local).AddTicks(629), "admin@admin.com", false, false, null, new DateTime(2022, 12, 22, 9, 18, 41, 716, DateTimeKind.Local).AddTicks(7877), null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEBqN9J+NJUTlmb7xV2gs6LWurgyWlnevC5XQrI2SmpQXqg4m0jIF6By0eb5t38SobA==", null, false, "0de83682-a4d3-41d0-86bb-96be97bb8073", true, null, null, false, null, "admin", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

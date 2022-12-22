@@ -19,7 +19,7 @@ namespace UserAPI.Data.DTOs
         public DateTime? BirthDay { get; set; }
         [Required]
         public string CPF { get; set; }
-        public bool Status { get; set; } = true;
+        public bool? Status { get; set; }
         public string ZipCode { get; set; }
         public string Street { get; set; }
         public string StreetNumber { get; set; }
