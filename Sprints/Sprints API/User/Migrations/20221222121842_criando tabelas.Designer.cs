@@ -9,8 +9,8 @@ using UserAPI.Data;
 namespace UserAPI.Migrations
 {
     [DbContext(typeof(UserDBContext))]
-    [Migration("20221216123005_Criando tabelas")]
-    partial class Criandotabelas
+    [Migration("20221222121842_criando tabelas")]
+    partial class criandotabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,14 +49,14 @@ namespace UserAPI.Migrations
                         new
                         {
                             Id = 99999,
-                            ConcurrencyStamp = "65018803-99e1-4507-ae55-5830631d9643",
+                            ConcurrencyStamp = "025c27b6-2ac3-47f0-a3e9-90780a765e36",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 99998,
-                            ConcurrencyStamp = "e9837995-4934-4f86-aece-d6f59e07c7a5",
+                            ConcurrencyStamp = "959f4555-a963-4fe2-adc1-d9852fcb6644",
                             Name = "regular",
                             NormalizedName = "REGULAR"
                         });
@@ -236,7 +236,7 @@ namespace UserAPI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
-                    b.Property<bool>("Status")
+                    b.Property<bool?>("Status")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Street")
@@ -280,19 +280,19 @@ namespace UserAPI.Migrations
                         {
                             Id = 9999,
                             AccessFailedCount = 0,
-                            BirthDay = new DateTime(2022, 12, 16, 9, 30, 4, 454, DateTimeKind.Local).AddTicks(313),
+                            BirthDay = new DateTime(2022, 12, 22, 9, 18, 41, 717, DateTimeKind.Local).AddTicks(902),
                             CPF = "123456789",
-                            ConcurrencyStamp = "b58d41a6-a527-427b-93d9-6cf8d8d70e71",
-                            CriatonDate = new DateTime(2022, 12, 16, 9, 30, 4, 453, DateTimeKind.Local).AddTicks(9965),
+                            ConcurrencyStamp = "1f5313bf-1745-4b22-a52f-7516bf16e8fa",
+                            CriatonDate = new DateTime(2022, 12, 22, 9, 18, 41, 717, DateTimeKind.Local).AddTicks(629),
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            Modified = new DateTime(2022, 12, 16, 9, 30, 4, 453, DateTimeKind.Local).AddTicks(3235),
+                            Modified = new DateTime(2022, 12, 22, 9, 18, 41, 716, DateTimeKind.Local).AddTicks(7877),
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP2Arcp+W1MH/SVvsfodZrXv+WcXehKHQOCfgMd+rFzy7Q9NC7agf/B2QcrQjgwATQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBqN9J+NJUTlmb7xV2gs6LWurgyWlnevC5XQrI2SmpQXqg4m0jIF6By0eb5t38SobA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "44327ef7-5327-427d-a376-3564c25cee1c",
+                            SecurityStamp = "0de83682-a4d3-41d0-86bb-96be97bb8073",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "admin"

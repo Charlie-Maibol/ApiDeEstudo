@@ -152,3 +152,8 @@ C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Ec
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authorization.dll
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\obj\Debug\net5.0\staticwebassets\EccomerceAPI.StaticWebAssets.Pack.cache
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\obj\Debug\net5.0\staticwebassets\msbuild.EccomerceAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\obj\Debug\net5.0\staticwebassets\msbuild.build.EccomerceAPI.props
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.EccomerceAPI.props
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.EccomerceAPI.props

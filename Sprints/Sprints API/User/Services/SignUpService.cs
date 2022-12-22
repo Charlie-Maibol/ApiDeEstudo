@@ -115,6 +115,10 @@ namespace UserAPI.Services
             {
                 user.BirthDay = editUser.BirthDay;
             }
+            if(user.Status != null)
+            {
+                user.Status = editUser.Status;
+            }
             await _userManager.UpdateAsync(user);
             return Result.Ok();
         }
