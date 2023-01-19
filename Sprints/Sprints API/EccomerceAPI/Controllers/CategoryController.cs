@@ -34,7 +34,7 @@ namespace EccomerceAPI.Controllers
             return CreatedAtAction(nameof(SearchId), new {category.Id }, category);
         }
 
-        [HttpGet("searchid/{Id}")]
+        [HttpGet]
         public IActionResult ShowCategories([FromQuery] int? Id = null, [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
         {
             _categoryDao.ListCategories(pageNumber, itensPerPage, Id);
