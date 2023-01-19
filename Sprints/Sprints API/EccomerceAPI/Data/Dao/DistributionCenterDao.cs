@@ -168,7 +168,7 @@ namespace EccomerceAPI.Data.productDao
                 }
             }
 
-            var result = connection.Query<DistributionCenter, Product, DistributionCenter>
+            var result = connection.Query<DistributionCenter, Category, DistributionCenter>
                (FilterSql, (center, product) => {
                    center.Id = product.Id;
                    return center;

@@ -1,5 +1,6 @@
 
 using EccomerceAPI.Data;
+using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Services;
 using Microsoft.AspNetCore.Builder;
@@ -27,6 +28,10 @@ namespace EccomerceAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("CategoryConnection")));
+            services.AddScoped<CategoryServices, CategoryServices>();
+            services.AddScoped<CategoryDao>();
+            services.AddScoped<SubCategoryServices, SubCategoryServices>();
+            services.AddScoped<SubCategoryDao>();
             services.AddScoped<ProductsServices, ProductsServices>();
             services.AddScoped<ProductDao>();
             services.AddScoped<DistributionCenterServices, DistributionCenterServices>();

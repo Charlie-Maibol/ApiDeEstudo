@@ -30,7 +30,7 @@ namespace EccomerceAPI.Services
         }
         public SearchProductsDto AddProduct(CreateProductDto productDto)
         {
-            Product product = _productMapper.Map<Product>(productDto);
+            Category product = _productMapper.Map<Category>(productDto);
             SubCategory sub = _productContext.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
             Category cat = _productContext.Categories.FirstOrDefault(cat => cat.Id == sub.CategoryId);
             if (cat.Status == true && sub.Status == true)

@@ -25,7 +25,7 @@ namespace EccomerceAPI.Data.Dtos.DC
         public string Neighbourhood { get; set; }
         public string AddComplemente { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual Category Product { get; set; }
         public virtual SubCategory SubCategory { get; set; }
 
     }

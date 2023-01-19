@@ -195,7 +195,7 @@ namespace EccomerceAPI.Controllers
         public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto subCategoryDto)
         {
             SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
-            List<Product> product = _context.Products.Where(prod => prod.subCategoryId == Id && prod.Status).ToList();
+            List<Category> product = _context.Categories.Where(prod => prod.subCategoryId == Id && prod.Status).ToList();
             if (subCategory == null)
             {
 

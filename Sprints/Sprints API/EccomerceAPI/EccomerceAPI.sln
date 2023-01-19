@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EccomerceAPI", "EccomerceAPI.csproj", "{80B50BC2-8C8E-4C1D-B438-85055DD873D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAPI", "..\User\UserAPI.csproj", "{DBA0169C-C0CC-41FF-AD24-ABB09B162C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAPI", "..\User\UserAPI.csproj", "{DBA0169C-C0CC-41FF-AD24-ABB09B162C29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eccomerce.Test", "..\Eccomerce.Test\Eccomerce.Test.csproj", "{0825C222-8A32-4BE6-9FC5-EE27292BF265}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DBA0169C-C0CC-41FF-AD24-ABB09B162C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBA0169C-C0CC-41FF-AD24-ABB09B162C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBA0169C-C0CC-41FF-AD24-ABB09B162C29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0825C222-8A32-4BE6-9FC5-EE27292BF265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0825C222-8A32-4BE6-9FC5-EE27292BF265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0825C222-8A32-4BE6-9FC5-EE27292BF265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0825C222-8A32-4BE6-9FC5-EE27292BF265}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

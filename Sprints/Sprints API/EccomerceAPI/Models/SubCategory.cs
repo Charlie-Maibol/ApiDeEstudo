@@ -22,7 +22,7 @@ namespace EccomerceAPI.Models
         public virtual Category Category { get; set; }
         [JsonIgnore]
         public int CategoryId { get; set; }
-        
+
         public virtual List<Product> Products { get; set; }
 
     }

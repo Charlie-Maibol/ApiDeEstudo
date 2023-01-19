@@ -34,7 +34,7 @@ namespace EccomerceAPI.Data
             builder.Entity<DistributionCenter>()
                 .HasIndex(center => center.Name)
                 .IsUnique();
-                
+
         }
         
 
