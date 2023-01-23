@@ -2,6 +2,7 @@
 using Dapper;
 using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Categories;
+using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Models;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
@@ -30,11 +31,13 @@ namespace EccomerceAPI.Data.Dao
             _configuration = configuration;
         }
 
-        public Category AddCategory(Category category)
+        public SearchCategoriesDto AddCategory(CreateCategoryDto categoryDto)
         {
+                        
+            var category = _mapper.Map<Category>(categoryDto);            
             _context.Categories.Add(category);
             _context.SaveChanges();
-            return category;
+            return _mapper.Map<SearchCategoriesDto>(category);
         }
 
         public Result ListCategories(int pageNumber, int itensPerPage, int? Id)
@@ -45,7 +48,6 @@ namespace EccomerceAPI.Data.Dao
             {
                 categories = _context.Categories.ToList();
             }
-
             else
             {
                 categories = _context.Categories.Where(cat => cat.Id == Id)
@@ -60,26 +62,7 @@ namespace EccomerceAPI.Data.Dao
                 return Result.Ok();
             }
             return null;
-        }
-
-        public List<Category> NullCategories(int? Id)
-        {
-            List<Category> category;
-            if (Id == null)
-            {
-                category = _context.Categories.ToList();
-            }
-            else
-            {
-                category = _context.Categories.Where(p => p.Id == Id).ToList();
-
-
-            }
-
-            return category;
-        }
-
-        public void DeleteCategory(int iD)
+        }        public void DeleteCategory(int iD)
         {
             Category category = _context.Categories.FirstOrDefault(category => category.Id == iD);
 
@@ -149,6 +132,27 @@ namespace EccomerceAPI.Data.Dao
             var limit = result.Skip(0).Take(25).ToList();
             connection.Close();
             return limit;
+        }
+
+        public Category SearchId(int Id)
+        {
+           return _context.Categories.FirstOrDefault(category => category.Id == Id);
+        }
+
+        public List<Category> NullCategories(int? Id)
+        {
+            List<Category> category;
+            if (Id == null)
+            {
+                category = _context.Categories.ToList();
+            }
+            else
+            {
+                category = _context.Categories.Where(p => p.Id == Id).ToList();
+
+
+            }
+            return category;
         }
     }
 }

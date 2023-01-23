@@ -2,6 +2,8 @@
 using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos.Categories;
+using EccomerceAPI.Data.Dtos.Products;
+using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,12 @@ namespace EccomerceAPI.Services
             _Mapper = mapper;
         }
 
-        internal List<SearchCategoriesDto> SearchCategoryId(int Id)
+        public SearchCategoriesDto AddCategory(CreateCategoryDto categoryDto)
+        {
+             return _CategoryDao.AddCategory(categoryDto);
+        }
+
+        public List<SearchCategoriesDto> SearchCategoryId(int? Id)
         {
             List<Category> category;
 
@@ -34,9 +41,5 @@ namespace EccomerceAPI.Services
             return null;
         }
 
-        internal List<SearchCategoriesDto> SearchProdId(object id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

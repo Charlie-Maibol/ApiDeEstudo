@@ -29,9 +29,8 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public IActionResult AddCategory([FromBody] CreateCategoryDto categoryDto)
         {
-            Category category = _mapper.Map<Category>(categoryDto);
-            _categoryDao.AddCategory(category);
-            return CreatedAtAction(nameof(SearchId), new {category.Id }, category);
+            SearchCategoriesDto searchCategoriesDto  = _categoryServices.AddCategory(categoryDto);
+            return CreatedAtAction(nameof(SearchId), new { searchCategoriesDto.Id }, searchCategoriesDto);
         }
 
         [HttpGet]
@@ -54,19 +53,18 @@ namespace EccomerceAPI.Controllers
         }
 
 
-
         [HttpGet("{ID}")]
-        public IActionResult SearchId(int Id)
+        public IActionResult SearchCategoryId(int? Id)
         {
 
-            Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
-            if (category != null)
+            List<SearchCategoriesDto> productDto = _categoryServices.SearchCategoryId(Id);
+            if (productDto != null)
             {
-                SearchCategoriesDto categoryDto = _mapper.Map<SearchCategoriesDto>(category);
-                return Ok(categoryDto);
-            }
+                return Ok(productDto);
 
+            }
             return NotFound();
+
         }
 
         [HttpPut("{ID}")]
