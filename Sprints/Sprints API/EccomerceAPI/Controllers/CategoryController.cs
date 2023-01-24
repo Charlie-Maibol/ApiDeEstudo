@@ -6,6 +6,7 @@ using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -30,17 +31,9 @@ namespace EccomerceAPI.Controllers
         public IActionResult AddCategory([FromBody] CreateCategoryDto categoryDto)
         {
             SearchCategoriesDto searchCategoriesDto  = _categoryServices.AddCategory(categoryDto);
-            return CreatedAtAction(nameof(SearchId), new { searchCategoriesDto.Id }, searchCategoriesDto);
+            return CreatedAtAction(nameof(SearchCategoryId), new { searchCategoriesDto.Id }, searchCategoriesDto);
         }
 
-        [HttpGet]
-        public IActionResult ShowCategories([FromQuery] int? Id = null, [FromQuery] int pageNumber = 0, [FromQuery] int itensPerPage = 0)
-        {
-            _categoryDao.ListCategories(pageNumber, itensPerPage, Id);
-
-            return NotFound();
-
-        }
 
         [HttpGet("Filter")]
         public IActionResult FilterProduct([FromQuery] FiltersCategoryDto categoryFilterDto)
@@ -51,8 +44,6 @@ namespace EccomerceAPI.Controllers
 
 
         }
-
-
         [HttpGet("{ID}")]
         public IActionResult SearchCategoryId(int? Id)
         {
@@ -66,61 +57,20 @@ namespace EccomerceAPI.Controllers
             return NotFound();
 
         }
-
         [HttpPut("{ID}")]
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
-            Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
-            List<SubCategory> subCategory = _context.SubCategories.Where(sub => sub.CategoryId == Id && sub.Status ).ToList();
+            
 
-
-            if (category == null)
+            Result result = _categoryServices.EditProduct(Id, Category);
+            if (result.IsFailed)
             {
-
                 return NotFound();
             }
-            if (Category.Status != true && subCategory.Count > 0 )
-            {
-                return BadRequest("Ainda existem SubCategorias ativas");
-            }
-
-            this.ChangeStatus(Id);
-            _mapper.Map(Category, category);
-            _context.SaveChanges();
+            
             return NoContent();
         }
-        public SearchCategoriesDto ChangeStatus(int Id)
-        {
 
-            var cat = _context.Categories.FirstOrDefault(category => category.Id == Id);
-            var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
-           
-            if (sub.Count == 0)
-            {
-                return null;
-            }
-            if (cat.Status == false)
-            {
-                cat.Status = true;
-                cat.Modified = DateTime.Now;
-            }
-            else if (cat.Status == true)
-            {
-                cat.Status = false;
-                cat.Modified = DateTime.Now;
-                foreach (SubCategory subcategory in sub)
-                {
-                    if (subcategory.Status == true)
-                    {
-                        subcategory.Status = false;
-                        subcategory.Modified = DateTime.Now;
-                    }
-                }
-            }
-
-            _context.SaveChanges();
-            return null;
-        }
 
         [HttpDelete("{ID}")]
         public IActionResult DeletCategory(int ID)

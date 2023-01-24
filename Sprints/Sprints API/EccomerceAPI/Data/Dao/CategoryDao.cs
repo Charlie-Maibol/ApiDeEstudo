@@ -134,7 +134,7 @@ namespace EccomerceAPI.Data.Dao
             return limit;
         }
 
-        public Category SearchId(int Id)
+        public Category SearchId(int? Id)
         {
            return _context.Categories.FirstOrDefault(category => category.Id == Id);
         }
@@ -154,5 +154,62 @@ namespace EccomerceAPI.Data.Dao
             }
             return category;
         }
+
+        public Result EditValidation(int? Id)
+        {
+            Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
+            List<SubCategory> subCategory = _context.SubCategories.Where(sub => sub.CategoryId == Id && sub.Status).ToList();
+            if (category == null)
+            {
+
+                return Result.Fail("Categoria nula");
+            }
+            if (category.Status != true && subCategory.Count > 0)
+            {
+                return Result.Fail("Ainda existem SubCategorias ativas");
+            }
+            return null;
+        }
+
+        public void EditCategory(int? id, Category category)
+        {
+            _context.SaveChanges();
+        }
+
+        
+        
+            public SearchCategoriesDto ChangeStatus(int? Id)
+            {
+
+                var cat = _context.Categories.FirstOrDefault(category => category.Id == Id);
+                var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
+
+                if (sub.Count == 0)
+                {
+                    return null;
+                }
+                if (cat.Status == false)
+                {
+                    cat.Status = true;
+                    cat.Modified = DateTime.Now;
+                }
+                else if (cat.Status == true)
+                {
+                    cat.Status = false;
+                    cat.Modified = DateTime.Now;
+                    foreach (SubCategory subcategory in sub)
+                    {
+                        if (subcategory.Status == true)
+                        {
+                            subcategory.Status = false;
+                            subcategory.Modified = DateTime.Now;
+                        }
+                    }
+                }
+
+                _context.SaveChanges();
+                return null;
+            }
+        
     }
 }

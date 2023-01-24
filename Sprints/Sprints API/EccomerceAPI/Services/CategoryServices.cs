@@ -5,6 +5,8 @@ using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
+using FluentResults;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
@@ -41,5 +43,18 @@ namespace EccomerceAPI.Services
             return null;
         }
 
+        internal Result EditProduct(int? Id, EditCategoryDto categoryDto)
+        {
+            var category = _CategoryDao.SearchId(Id);
+            if(Id != null)
+            {
+                _CategoryDao.EditValidation(Id);
+            }
+            _Mapper.Map(categoryDto, category);
+            _CategoryDao.EditCategory(Id, category);
+            _CategoryDao.ChangeStatus(Id);
+            return null;
+        }
+        
     }
 }
