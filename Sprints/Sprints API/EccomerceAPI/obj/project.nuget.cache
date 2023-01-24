@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5sc3mbls3O1VFnvSffPPNE4oQGECkBEeZWUwWOj7zi/IVSYbLt2G4Pz9Jj+lqVXQSsEUMCVBRQvE1W7dmM0W+A==",
+  "dgSpecHash": "obdN7mSh5o0u/dap4xECkuumhGt+8noQfx3DddTh78QjFaOBNjgZLisvjMGq/UxV1GpYKIqaYifsPP8iYDfaiw==",
   "success": true,
   "projectFilePath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI\\EccomerceAPI.csproj",
   "expectedPackageFiles": [
@@ -65,6 +65,7 @@
     "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\ClearTech\\.nuget\\packages\\moq\\4.16.1\\moq.4.16.1.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\mysql.data\\8.0.29\\mysql.data.8.0.29.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\mysql.entityframeworkcore\\5.0.13\\mysql.entityframeworkcore.5.0.13.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",

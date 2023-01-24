@@ -115,7 +115,7 @@ namespace EccomerceAPI.Services
 
         public Result EditCenter(int id, EditDistributionCenterDto centerDto)
         {
-            List<Product> prod = _productContext.Products.Where(prod => prod.Id == id && prod.Status == true).ToList();
+            List<Category> prod = _productContext.Categories.Where(prod => prod.Id == id && prod.Status == true).ToList();
             var center = _distributionDao.SearchCenterId(id);
             if (center == null) 
             {

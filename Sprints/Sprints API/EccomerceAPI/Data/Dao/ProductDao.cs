@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Configuration;
 using Dapper;
 using EccomerceAPI.Data.Dtos;
+using System;
 
 namespace EccomerceAPI.Data.productDao
 {
@@ -171,5 +172,7 @@ namespace EccomerceAPI.Data.productDao
             return limit;
 
         }
+
+
     }
 }
