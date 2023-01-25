@@ -157,3 +157,4 @@ C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\Ec
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\obj\Debug\net5.0\staticwebassets\msbuild.build.EccomerceAPI.props
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.EccomerceAPI.props
 C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.EccomerceAPI.props
+C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\Sprints\Sprints API\EccomerceAPI\bin\Debug\net5.0\Moq.dll
