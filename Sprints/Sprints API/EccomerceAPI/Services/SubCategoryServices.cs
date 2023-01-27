@@ -4,6 +4,10 @@ using EccomerceAPI.Data;
 using FluentResults;
 using System;
 using EccomerceAPI.Data.Dao;
+using EccomerceAPI.Data.Dtos.SubCategories;
+using EccomerceAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace EccomerceAPI.Services
 {
@@ -19,6 +23,13 @@ namespace EccomerceAPI.Services
             _Mapper = mapper;
         }
 
+        public SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto SubDto)
+        {
+            SubCategory sub = _Mapper.Map<SubCategory>(SubDto);
+            return _SubCategoryDao.AddSubCategory(SubDto);
+
+        }
+
         internal Result DeletSubCategory(int id)
         {
             var subCategory = _SubCategoryDao.SearchId(id);
@@ -27,6 +38,21 @@ namespace EccomerceAPI.Services
                 return Result.Fail("Produto não encontrado");
             }
             _SubCategoryDao.DeleteSubCategory(subCategory);
+            return Result.Ok();
+        }
+
+        public Result EditSubCategory(int Id, EditSubCategoryDto subCategoryDto)
+        {
+            var subCategory = _SubCategoryDao.SearchProdId(Id);
+            var validationSubCategory = _SubCategoryDao.ValidationSub(Id);
+            
+            if (validationSubCategory == null)
+            {
+
+                return  
+            }
+            _Mapper.Map(subCategoryDto, subCategory);
+            _SubCategoryDao.EditSubCategory(Id, subCategory);
             return Result.Ok();
         }
     }

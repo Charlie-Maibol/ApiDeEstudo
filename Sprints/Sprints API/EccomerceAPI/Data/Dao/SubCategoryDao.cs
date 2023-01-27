@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Dapper;
-using EccomerceAPI.Data.Dtos;
+using Eccomerce.Test;
+using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.Dtos.SubCategories;
+using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using FluentResults;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
@@ -15,7 +18,7 @@ using System.Web.Http;
 
 namespace EccomerceAPI.Data.Dao
 {
-    public class SubCategoryDao
+    public class SubCategoryDao : ISubCategory
     {
 
         private AppDbContext _context;
@@ -112,6 +115,37 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
+        internal SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto subDto)
+        {
+            var sub = _mapper.Map<SubCategory>(subDto);
+            _context.SubCategories.Add(sub);
+            _context.SaveChanges();
+            return _mapper.Map<SearchSubCategoriesDto>(sub);
 
+        }
+
+        public Result ValidationSub(int Id)
+        {
+            SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
+
+            List<Product> product = _context.Products.Where(prod => prod.subCategoryId == Id && prod.Status).ToList();
+            if (subCategory == null)
+            {
+                return Result.Fail("NotFound");
+            }
+            if (product.Count > 0 && subCategory.Status != true)
+            {
+                return Result.Fail("Ainda existem produtos ativos");
+            }
+
+            return _context.SaveChanges();
+            
+            
+        }
+
+        public void EditSubCategory(int id, SubCategory subCategory)
+        {
+           _context.SaveChanges();
+        }
     }
 }

@@ -10,19 +10,20 @@ using Microsoft.Extensions.Configuration;
 using Dapper;
 using EccomerceAPI.Data.Dtos;
 using System;
+using Microsoft.AspNetCore.SignalR;
 
 namespace EccomerceAPI.Data.productDao
 {
     public class ProductDao
     {
-        private AppDbContext _productContext;
+        private AppDbContext _context;
         private IMapper _mapper;
         private IConfiguration _configuration;
        
 
         public ProductDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
         {
-            _productContext = context;
+            _context = context;
             _mapper = mapper;
             _configuration = configuration;
             
@@ -30,40 +31,40 @@ namespace EccomerceAPI.Data.productDao
         public SearchProductsDto AddProduct(CreateProductDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
-            _productContext.Products.Add(product);
-            _productContext.SaveChanges();
+            _context.Products.Add(product);
+            _context.SaveChanges();
             return _mapper.Map<SearchProductsDto>(product);
         }
         public Product CenterID(int id)
         {
 
-            return _productContext.Products.FirstOrDefault(p => p.distribuitonCenterId == id);
+            return _context.Products.FirstOrDefault(p => p.distribuitonCenterId == id);
         }
         public void DeleteProduct(Product product)
         {
-            _productContext.Remove(product);
-            _productContext.SaveChanges();
+            _context.Remove(product);
+            _context.SaveChanges();
         }
         public void EditProduct(int id, Product product)
         {
                        
-            _productContext.SaveChanges();
+            _context.SaveChanges();
         }
         public Product SearchProdId(int id)
         {
             
-            return _productContext.Products.FirstOrDefault(p => p.Id == id);
+            return _context.Products.FirstOrDefault(p => p.Id == id);
         }
         public List<Product> NullProducts(int? Id)
         {
             List<Product> products;
             if (Id == null)
             {
-                products = _productContext.Products.ToList();
+                products = _context.Products.ToList();
             }
             else
             {
-                products = _productContext.Products.Where(p => p.Id == Id).ToList();
+                products = _context.Products.Where(p => p.Id == Id).ToList();
 
 
             }
@@ -173,6 +174,20 @@ namespace EccomerceAPI.Data.productDao
 
         }
 
+        public List<Product> GetProductsCenterID(int Id)
+        {
+            return _context.Products.Where(prod => prod.distribuitonCenterId == Id && prod.Status).ToList();
+        }
 
+        internal object SubCategories(SubCategory sub)
+        {
+            return _context.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
+        }
+
+        internal object Categories()
+        {
+            SubCategory sub = _context.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
+            return _context.Categories.FirstOrDefault(cat => cat.Id == sub.CategoryId);
+        }
     }
 }

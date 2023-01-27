@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Dapper;
-using EccomerceAPI.Data.Dtos;
+using Eccomerce.Test;
 using EccomerceAPI.Data.Dtos.Categories;
-using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Models;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +15,7 @@ using System.Web.Http;
 
 namespace EccomerceAPI.Data.Dao
 {
-    public class CategoryDao
+    public class CategoryDao : ICategory
     {
 
 
