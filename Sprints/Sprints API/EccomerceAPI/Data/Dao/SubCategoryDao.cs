@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using Dapper;
 using Eccomerce.Test;
-using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.Dtos.SubCategories;
-using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using FluentResults;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
@@ -38,14 +35,14 @@ namespace EccomerceAPI.Data.Dao
             _context.SaveChanges();
         }
 
-        public SubCategory SearchId(int id)
+        public SubCategory GetID(int id)
         {
             return _context.SubCategories.FirstOrDefault(p => p.Id == id);
         }
 
         private bool Null(SubCategoryFilterDto filterSubCategoryDto)
         {
-            throw new NotImplementedException();
+            return filterSubCategoryDto.name == null && filterSubCategoryDto.status == null;
         }
         public List<SubCategory> FilterProduct(SubCategoryFilterDto filterSubCategoryDto)
         {
@@ -124,28 +121,24 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
-        public Result ValidationSub(int Id)
+
+        internal SubCategory SearchSubId(int Id)
         {
-            SubCategory subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
-
-            List<Product> product = _context.Products.Where(prod => prod.subCategoryId == Id && prod.Status).ToList();
-            if (subCategory == null)
-            {
-                return Result.Fail("NotFound");
-            }
-            if (product.Count > 0 && subCategory.Status != true)
-            {
-                return Result.Fail("Ainda existem produtos ativos");
-            }
-
-            return _context.SaveChanges();
-            
-            
+           return _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
         }
 
-        public void EditSubCategory(int id, SubCategory subCategory)
+        public IEnumerable<SubCategory> GetAll()
         {
-           _context.SaveChanges();
+            return _context.SubCategories.ToList();
+
+        }
+
+        public Result EditSubCategory(SubCategory subCategory)
+        {
+            subCategory.Modified = DateTime.Now;
+            _context.Update(subCategory);
+            _context.SaveChanges();
+            return Result.Ok();
         }
     }
 }

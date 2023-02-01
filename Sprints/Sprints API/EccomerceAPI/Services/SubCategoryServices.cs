@@ -1,19 +1,16 @@
 ﻿using AutoMapper;
-using EccomerceAPI.Data.productDao;
-using EccomerceAPI.Data;
+
 using FluentResults;
-using System;
 using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System;
 
 namespace EccomerceAPI.Services
 {
     public class SubCategoryServices
     {
-      
+
         private SubCategoryDao _SubCategoryDao;
         private IMapper _Mapper;
 
@@ -32,7 +29,7 @@ namespace EccomerceAPI.Services
 
         internal Result DeletSubCategory(int id)
         {
-            var subCategory = _SubCategoryDao.SearchId(id);
+            var subCategory = _SubCategoryDao.GetID(id);
             if (subCategory == null)
             {
                 return Result.Fail("Produto não encontrado");
@@ -43,17 +40,20 @@ namespace EccomerceAPI.Services
 
         public Result EditSubCategory(int Id, EditSubCategoryDto subCategoryDto)
         {
-            var subCategory = _SubCategoryDao.SearchProdId(Id);
-            var validationSubCategory = _SubCategoryDao.ValidationSub(Id);
-            
-            if (validationSubCategory == null)
+            var subCategory = _SubCategoryDao.SearchSubId(Id);
+            if (subCategory != null)
             {
 
-                return  
+                _Mapper.Map(subCategoryDto, subCategory);
+                _SubCategoryDao.EditSubCategory(subCategory);
+                return Result.Ok();
             }
-            _Mapper.Map(subCategoryDto, subCategory);
-            _SubCategoryDao.EditSubCategory(Id, subCategory);
-            return Result.Ok();
+            return Result.Fail("SubCategoria não encontrada");
+        }
+
+        internal object GetId(int Id)
+        {
+            return _SubCategoryDao.SearchSubId(Id);
         }
     }
 }

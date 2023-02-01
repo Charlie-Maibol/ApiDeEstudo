@@ -32,8 +32,8 @@ namespace EccomerceAPI.Data.Dao
 
         public SearchCategoriesDto AddCategory(CreateCategoryDto categoryDto)
         {
-                        
-            var category = _mapper.Map<Category>(categoryDto);            
+
+            var category = _mapper.Map<Category>(categoryDto);
             _context.Categories.Add(category);
             _context.SaveChanges();
             return _mapper.Map<SearchCategoriesDto>(category);
@@ -61,7 +61,8 @@ namespace EccomerceAPI.Data.Dao
                 return Result.Ok();
             }
             return null;
-        }        public void DeleteCategory(int iD)
+        }
+        public void DeleteCategory(int iD)
         {
             Category category = _context.Categories.FirstOrDefault(category => category.Id == iD);
 
@@ -133,82 +134,53 @@ namespace EccomerceAPI.Data.Dao
             return limit;
         }
 
-        public Category SearchId(int? Id)
+        public Category GetId(int Id)
         {
-           return _context.Categories.FirstOrDefault(category => category.Id == Id);
+            return _context.Categories.FirstOrDefault(category => category.Id == Id);
         }
 
-        public List<Category> NullCategories(int? Id)
+        public Result EditCategory(Category editCategory)
         {
-            List<Category> category;
-            if (Id == null)
-            {
-                category = _context.Categories.ToList();
-            }
-            else
-            {
-                category = _context.Categories.Where(p => p.Id == Id).ToList();
-
-
-            }
-            return category;
+            editCategory.Modified = DateTime.Now;
+            _context.Update(editCategory);
+            _context.SaveChanges();
+            return Result.Ok();
         }
 
-        public Result EditValidation(int? Id)
-        {
-            Category category = _context.Categories.FirstOrDefault(category => category.Id == Id);
-            List<SubCategory> subCategory = _context.SubCategories.Where(sub => sub.CategoryId == Id && sub.Status).ToList();
-            if (category == null)
-            {
 
-                return Result.Fail("Categoria nula");
-            }
-            if (category.Status != true && subCategory.Count > 0)
+
+        public SearchCategoriesDto ChangeStatus(int? Id)
+        {
+
+            var cat = _context.Categories.FirstOrDefault(category => category.Id == Id);
+            var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
+
+            if (sub.Count == 0)
             {
-                return Result.Fail("Ainda existem SubCategorias ativas");
+                return null;
             }
+            if (cat.Status == false)
+            {
+                cat.Status = true;
+                cat.Modified = DateTime.Now;
+            }
+            else if (cat.Status == true)
+            {
+                cat.Status = false;
+                cat.Modified = DateTime.Now;
+                foreach (SubCategory subcategory in sub)
+                {
+                    if (subcategory.Status == true)
+                    {
+                        subcategory.Status = false;
+                        subcategory.Modified = DateTime.Now;
+                    }
+                }
+            }
+
+            _context.SaveChanges();
             return null;
         }
 
-        public void EditCategory(int? id, Category category)
-        {
-            _context.SaveChanges();
-        }
-
-        
-        
-            public SearchCategoriesDto ChangeStatus(int? Id)
-            {
-
-                var cat = _context.Categories.FirstOrDefault(category => category.Id == Id);
-                var sub = _context.SubCategories.Where(sub => sub.CategoryId == Id).ToList();
-
-                if (sub.Count == 0)
-                {
-                    return null;
-                }
-                if (cat.Status == false)
-                {
-                    cat.Status = true;
-                    cat.Modified = DateTime.Now;
-                }
-                else if (cat.Status == true)
-                {
-                    cat.Status = false;
-                    cat.Modified = DateTime.Now;
-                    foreach (SubCategory subcategory in sub)
-                    {
-                        if (subcategory.Status == true)
-                        {
-                            subcategory.Status = false;
-                            subcategory.Modified = DateTime.Now;
-                        }
-                    }
-                }
-
-                _context.SaveChanges();
-                return null;
-            }
-        
     }
 }

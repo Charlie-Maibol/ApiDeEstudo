@@ -1,4 +1,5 @@
-﻿using EccomerceAPI.Data.Dao;
+﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
@@ -26,23 +27,21 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public IActionResult AddSubCategory([FromBody] CreateSubCategoryDto SubDto)
         {
-            SearchSubCategoriesDto sub = _subCategoryServices.AddSubCategory(SubDto);
-            return CreatedAtAction(nameof(searchSubId), new { sub.Id }, sub);
+            var sub = _subCategoryServices.AddSubCategory(SubDto);
+            if(sub == null) 
+            {
+                return BadRequest();
+            }
+            return Ok(sub);
         }
 
 
         [HttpGet]
-        public IActionResult searchSubId(int id)
+        public IActionResult searchSubId(int Id)
         {
-            SubCategory sub = _context.SubCategories.FirstOrDefault(sub => sub.Id == id);
-            if (sub != null)
-            {
-
-                SearchSubCategoriesDto subCategory = _mapper.Map<SearchSubCategoriesDto>(sub);
-                return Ok(sub);
-            }
-
-            return NotFound();
+            var sub = _subCategoryServices.GetId(Id);
+            if(sub != null) { return Ok(sub); } 
+            return NotFound();  
         }
 
         [HttpGet("Filter")]

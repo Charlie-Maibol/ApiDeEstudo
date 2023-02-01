@@ -26,17 +26,20 @@ namespace EccomerceAPI.Services
         }
         public SearchProductsDto AddProduct(CreateProductDto productDto)
         {
-            if (cat.Status == true && sub.Status == true)
-            {
-
-
-                return _productDao.AddProduct(productDto);
-            }
-            else
+            var validation = _productDao.GetSubCategoryID(productDto);
+            if(productDto.Name.Length < 3)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-
+            if(validation.Status == false)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+            if(validation.Status == true)
+            {
+                _productDao.AddProduct(productDto);
+            }
+            return null;
 
         }
 

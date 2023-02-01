@@ -179,15 +179,15 @@ namespace EccomerceAPI.Data.productDao
             return _context.Products.Where(prod => prod.distribuitonCenterId == Id && prod.Status).ToList();
         }
 
-        internal object SubCategories(SubCategory sub)
+        internal IEnumerable<Product> GetAll()
         {
-            return _context.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
+            return _context.Products.ToList();
         }
 
-        internal object Categories()
+        public SubCategory GetSubCategoryID(CreateProductDto productDto)
         {
-            SubCategory sub = _context.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
-            return _context.Categories.FirstOrDefault(cat => cat.Id == sub.CategoryId);
+            var subCategory = _context.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
+            return subCategory;
         }
     }
 }
