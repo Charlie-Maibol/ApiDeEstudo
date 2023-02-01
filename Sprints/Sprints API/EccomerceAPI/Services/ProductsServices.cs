@@ -15,41 +15,34 @@ namespace EccomerceAPI.Services
     public class ProductsServices
     {
 
-        private AppDbContext _productContext;
         private ProductDao _productDao;
         private IMapper _productMapper;
 
-        public ProductsServices(AppDbContext context, IMapper mapper, ProductDao dao, IConfiguration configuration)
+        public ProductsServices(IMapper mapper, ProductDao dao, IConfiguration configuration)
         {
-            _productContext = context;
             _productMapper = mapper;
             _productDao = dao;
-
-
 
         }
         public SearchProductsDto AddProduct(CreateProductDto productDto)
         {
-            Category product = _productMapper.Map<Category>(productDto);
-            SubCategory sub = _productContext.SubCategories.FirstOrDefault(sub => sub.Id == productDto.subCategoryId);
-            Category cat = _productContext.Categories.FirstOrDefault(cat => cat.Id == sub.CategoryId);
-            if (cat.Status == true && sub.Status == true)
-            {
-
-
-                return _productDao.AddProduct(productDto);
-            }
-            else
+            var validation = _productDao.GetSubCategoryID(productDto);
+            if(productDto.Name.Length < 3)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-
+            if(validation.Status == false)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+            if(validation.Status == true)
+            {
+                _productDao.AddProduct(productDto);
+            }
+            return null;
 
         }
-        public List<Product> GetProductsCenterID(int Id)
-        {
-            return _productContext.Products.Where(prod => prod.distribuitonCenterId == Id && prod.Status).ToList();
-        }
+
         public List<SearchProductsDto> SearchProdId(int? Id)
         {
             List<Product> products;

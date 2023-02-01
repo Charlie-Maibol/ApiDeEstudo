@@ -45,13 +45,13 @@ namespace EccomerceAPI.Controllers
 
         }
         [HttpGet("{ID}")]
-        public IActionResult SearchCategoryId(int? Id)
+        public IActionResult SearchCategoryId(int Id)
         {
 
-            List<SearchCategoriesDto> productDto = _categoryServices.SearchCategoryId(Id);
-            if (productDto != null)
+            List<SearchCategoriesDto> CategoryDto = _categoryServices.SearchCategoryId(Id);
+            if (CategoryDto != null)
             {
-                return Ok(productDto);
+                return Ok(CategoryDto);
 
             }
             return NotFound();
@@ -62,7 +62,7 @@ namespace EccomerceAPI.Controllers
         {
             
 
-            Result result = _categoryServices.EditProduct(Id, Category);
+            Result result = _categoryServices.EditCategory(Id, Category);
             if (result.IsFailed)
             {
                 return NotFound();
@@ -71,6 +71,15 @@ namespace EccomerceAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("{ID}")]
+        public IActionResult EditCategoryStatus(int Id)
+        {
+
+
+            var result = _categoryServices.EditCategoryStatus(Id);
+            if (result != null) return Ok(result);
+            return NotFound();
+        }
 
         [HttpDelete("{ID}")]
         public IActionResult DeletCategory(int ID)

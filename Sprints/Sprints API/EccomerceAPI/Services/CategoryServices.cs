@@ -9,32 +9,37 @@ using FluentResults;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EccomerceAPI.Services
 {
     public class CategoryServices
     {
-        private AppDbContext _Context;
-        private CategoryDao _CategoryDao;
+        private AppDbContext _context;
+        private CategoryDao _categoryDao;
+        private ProductDao _productDao;
+        private SubCategoryDao _subCategoryDao;
         private IMapper _Mapper;
 
-        public CategoryServices(AppDbContext context, CategoryDao categotyDao, IMapper mapper)
+        public CategoryServices(AppDbContext context, CategoryDao categoryDao, ProductDao productDao, SubCategoryDao subCategoryDao, IMapper mapper)
         {
-            _Context = context;
-            _CategoryDao = categotyDao;
+            _context = context;
+            _categoryDao = categoryDao;
+            _productDao = productDao;
+            _subCategoryDao = subCategoryDao;
             _Mapper = mapper;
         }
 
         public SearchCategoriesDto AddCategory(CreateCategoryDto categoryDto)
         {
-             return _CategoryDao.AddCategory(categoryDto);
+            return _categoryDao.AddCategory(categoryDto);
         }
 
-        public List<SearchCategoriesDto> SearchCategoryId(int? Id)
+        public List<SearchCategoriesDto> SearchCategoryId(int Id)
         {
-            List<Category> category;
+            Category category;
 
-            category = _CategoryDao.NullCategories(Id);
+            category = _categoryDao.GetId(Id);
             if (category != null)
             {
                 List<SearchCategoriesDto> categoryDto = _Mapper.Map<List<SearchCategoriesDto>>(category);
@@ -43,18 +48,58 @@ namespace EccomerceAPI.Services
             return null;
         }
 
-        internal Result EditProduct(int? Id, EditCategoryDto categoryDto)
+        public SearchCategoriesDto EditCategoryStatus(int Id)
         {
-            var category = _CategoryDao.SearchId(Id);
-            if(Id != null)
+            var editCategory = _categoryDao.GetId(Id);
+            var getProducts = _productDao.GetAll().Where(p => p.subCategoryId == editCategory.Id).ToList();
+            var getSubCategories = _subCategoryDao.GetAll().Where(sub => sub.CategoryId == Id).ToList();
+
+            if (editCategory != null)
             {
-                _CategoryDao.EditValidation(Id);
+                if (editCategory.Status == true)
+                {
+                    if (getProducts.Count != 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        editCategory.Status = false;
+                        editCategory.Modified = DateTime.Now;
+
+
+                        foreach (SubCategory sub in getSubCategories)
+                        {
+                            sub.Status = false;
+                        }
+                    }
+                }
+                else
+                {
+                    editCategory.Status = true;
+                    editCategory.Modified = DateTime.Now;
+
+                    foreach (SubCategory sub in getSubCategories)
+                    {
+                        sub.Status = false;
+                    }
+
+                }
+                _categoryDao.EditCategory(editCategory);
             }
-            _Mapper.Map(categoryDto, category);
-            _CategoryDao.EditCategory(Id, category);
-            _CategoryDao.ChangeStatus(Id);
             return null;
         }
-        
+
+        public Category EditCategory(int Id, EditCategoryDto category)
+        {
+            var editCategory = _categoryDao.GetId(Id);
+            if(editCategory != null)
+            {
+                _Mapper.Map(category, editCategory);
+                _categoryDao.EditCategory(editCategory);
+                return editCategory;
+            }
+            return null;    
+        }
     }
 }

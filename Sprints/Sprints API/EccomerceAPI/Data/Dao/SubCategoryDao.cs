@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Dapper;
-using EccomerceAPI.Data.Dtos;
+using Eccomerce.Test;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
 using FluentResults;
@@ -15,7 +15,7 @@ using System.Web.Http;
 
 namespace EccomerceAPI.Data.Dao
 {
-    public class SubCategoryDao
+    public class SubCategoryDao : ISubCategory
     {
 
         private AppDbContext _context;
@@ -35,14 +35,14 @@ namespace EccomerceAPI.Data.Dao
             _context.SaveChanges();
         }
 
-        public SubCategory SearchId(int id)
+        public SubCategory GetID(int id)
         {
             return _context.SubCategories.FirstOrDefault(p => p.Id == id);
         }
 
         private bool Null(SubCategoryFilterDto filterSubCategoryDto)
         {
-            throw new NotImplementedException();
+            return filterSubCategoryDto.name == null && filterSubCategoryDto.status == null;
         }
         public List<SubCategory> FilterProduct(SubCategoryFilterDto filterSubCategoryDto)
         {
@@ -112,6 +112,33 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
+        internal SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto subDto)
+        {
+            var sub = _mapper.Map<SubCategory>(subDto);
+            _context.SubCategories.Add(sub);
+            _context.SaveChanges();
+            return _mapper.Map<SearchSubCategoriesDto>(sub);
 
+        }
+
+
+        internal SubCategory SearchSubId(int Id)
+        {
+           return _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
+        }
+
+        public IEnumerable<SubCategory> GetAll()
+        {
+            return _context.SubCategories.ToList();
+
+        }
+
+        public Result EditSubCategory(SubCategory subCategory)
+        {
+            subCategory.Modified = DateTime.Now;
+            _context.Update(subCategory);
+            _context.SaveChanges();
+            return Result.Ok();
+        }
     }
 }
