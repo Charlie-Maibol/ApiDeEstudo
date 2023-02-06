@@ -10,8 +10,8 @@ using System.Collections.Generic;
 
 namespace EccomerceAPI.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
-    [Route("{controller}")]
     public class SubCategoryController : ControllerBase
     {
 
@@ -54,7 +54,7 @@ namespace EccomerceAPI.Controllers
         }
 
 
-        [HttpPut("{ID}")]
+        [HttpPut("{Id}")]
         public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto subCategoryDto)
         {
             _subCategoryServices.EditSubCategory(Id, subCategoryDto);
@@ -62,7 +62,7 @@ namespace EccomerceAPI.Controllers
 
         }
 
-        [HttpDelete("{ID}")]
+        [HttpDelete("{Id}")]
         public IActionResult DeletSubCategory(int Id)
         {
             Result result = _subCategoryServices.DeletSubCategory(Id);

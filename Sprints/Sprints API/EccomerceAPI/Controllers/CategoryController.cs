@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 namespace EccomerceAPI.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
-    [Route("{controller}")]
     public class CategoryController : ControllerBase
     {
         private ICategoryDao _categoryDao;
@@ -49,7 +49,7 @@ namespace EccomerceAPI.Controllers
             return NotFound();
 
         }
-        [HttpPut("{ID}")]
+        [HttpPut("{Id}")]
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
             
@@ -63,7 +63,7 @@ namespace EccomerceAPI.Controllers
             return NoContent();
         }
 
-        [HttpPut("{ID}")]
+        [HttpPut("editarStatus/{Id}")]
         public IActionResult EditCategoryStatus(int Id)
         {
 
@@ -73,10 +73,10 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
 
-        [HttpDelete("{ID}")]
-        public IActionResult DeletCategory(int ID)
+        [HttpDelete("{Id}")]
+        public IActionResult DeletCategory(int Id)
         {
-            _categoryDao.DeleteCategory(ID);
+            _categoryDao.DeleteCategory(Id);
             return NoContent();
         }
     }

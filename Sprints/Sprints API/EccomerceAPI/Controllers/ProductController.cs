@@ -13,8 +13,8 @@ using System.Collections.Generic;
 namespace EccomerceAPI.Controllers
 {
 
+    [Route("[controller]")]
     [ApiController]
-    [Route("{controller}")]
     public class ProductController : ControllerBase
     {
 
@@ -33,7 +33,7 @@ namespace EccomerceAPI.Controllers
             SearchProductsDto searchProducts = _productService.AddProduct(productDto);
             return CreatedAtAction(nameof(SearchProdId), new { id = searchProducts.Id }, searchProducts);
         }
-        [HttpGet("{ID}")]
+        [HttpGet("{Id}")]
         public IActionResult SearchProdId(int? Id)
         {
             List<SearchProductsDto> productDto = _productService.SearchProdId(Id);

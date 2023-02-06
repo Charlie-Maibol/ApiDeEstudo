@@ -1,9 +1,11 @@
 using AutoMapper;
+using EccomerceAPI.Controllers;
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Interface;
 using EccomerceAPI.Models;
 using EccomerceAPI.Profiles;
 using EccomerceAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
 using Xunit;
@@ -16,7 +18,7 @@ namespace Eccomerce.Test
         private Mock<ICategoryDao> categoryDao;
         private Mock<ISubCategoryDao> subcategoryDao;
         private Mock<IProductDao> productDao;
-        //readonly IMapper mapper;
+        readonly IMapper mapper;
         MapperConfiguration _mapperConfiguration;
 
         public CategoryTest()
@@ -24,23 +26,22 @@ namespace Eccomerce.Test
             categoryDao = new Mock<ICategoryDao>();
             subcategoryDao = new Mock<ISubCategoryDao>();
             productDao = new Mock<IProductDao>();
-            //_mapperConfiguration = new MapperConfiguration(c =>
-            //{
-            //    c.AddProfile(new CategoryProfile());
-            //});
-            //mapper = _mapperConfiguration.CreateMapper();
-            categoryService = new CategoryServices(new Mock<ICategoryDao>().Object,new Mock<IProductDao>().Object, new Mock<ISubCategoryDao>().Object, new Mock<IMapper>().Object);
+            _mapperConfiguration = new MapperConfiguration(c =>
+            {
+                c.AddProfile(new CategoryProfile());
+            });
+            mapper = _mapperConfiguration.CreateMapper();
+            categoryService = new CategoryServices(categoryDao.Object, productDao.Object, subcategoryDao.Object, mapper);
         }
 
 
         [Fact]
         public void TestCreateCategory()
         {
-            //var categoryService = new CategoryServices(categoryDao.Object, productDao.Object, subcategoryDao.Object, mapper); 
+            var controller = new CategoryController(categoryDao.Object, categoryService);
+            var result = (ObjectResult)controller.AddCategory(new CreateCategoryDto { Name = "teste" });
 
-            var result = categoryService.AddCategory(new CreateCategoryDto { Name = "teste" });
-            Assert.NotNull(result);
-
+            Assert.Equal(201, result.StatusCode);
         }
     }
 }

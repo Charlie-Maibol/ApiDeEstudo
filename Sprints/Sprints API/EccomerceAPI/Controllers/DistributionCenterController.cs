@@ -16,8 +16,8 @@ namespace EccomerceAPI.Controllers
 {
 
 
+    [Route("[controller]")]
     [ApiController]
-    [Route("{controller}")]
     public class DistributionCenterController : ControllerBase
     {
 
@@ -37,7 +37,7 @@ namespace EccomerceAPI.Controllers
             SearchDistributionCentersDto searchDistribution = await _distributionService.CreateCenter(centerDto);            
             return CreatedAtAction(nameof(SearchCenterId), new { id = centerDto.Id }, centerDto);
         }
-        [HttpGet("{ID}")]
+        [HttpGet("{Id}")]
         public IActionResult SearchCenterId(int? Id)
         {
             List<SearchDistributionCentersDto> distributionCenterDto = _distributionService.SearchDistributionCenterId(Id);
