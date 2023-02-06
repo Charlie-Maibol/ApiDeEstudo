@@ -1,6 +1,7 @@
 ﻿using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.productDao;
+using EccomerceAPI.Interface;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using FluentResults;
@@ -17,10 +18,10 @@ namespace EccomerceAPI.Controllers
     public class ProductController : ControllerBase
     {
 
-        private ProductDao _productDao;
+        private IProductDao _productDao;
         private ProductsServices _productService;
 
-        public ProductController(ProductsServices service, ProductDao productDao)
+        public ProductController(ProductsServices service, IProductDao productDao)
         {
             _productService = service;
             _productDao = productDao;

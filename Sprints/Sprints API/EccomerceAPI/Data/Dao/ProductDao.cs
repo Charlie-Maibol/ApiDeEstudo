@@ -9,12 +9,11 @@ using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Configuration;
 using Dapper;
 using EccomerceAPI.Data.Dtos;
-using System;
-using Microsoft.AspNetCore.SignalR;
+using EccomerceAPI.Interface;
 
 namespace EccomerceAPI.Data.productDao
 {
-    public class ProductDao
+    public class ProductDao : IProductDao
     {
         private AppDbContext _context;
         private IMapper _mapper;
@@ -71,12 +70,7 @@ namespace EccomerceAPI.Data.productDao
 
             return products;
         }
-        private static bool Null(ProductFIlterDto productFIlterDto)
-        {
-            return productFIlterDto.name == null && productFIlterDto.center == null && productFIlterDto.price == null && productFIlterDto.amountOfProducts == null
-            && productFIlterDto.widths == null && productFIlterDto.lengths == null && productFIlterDto.height == null && productFIlterDto.status == null
-            && productFIlterDto.weight == null;
-        }
+
         public List<Product> FilterProduct(ProductFIlterDto productFIlterDto)
         {
             var FilterSql = "SELECT * FROM Products WHERE ";
@@ -119,7 +113,9 @@ namespace EccomerceAPI.Data.productDao
             {
                 FilterSql += "Price = @price and ";
             }
-            if (Null(productFIlterDto))
+            if (productFIlterDto.name == null && productFIlterDto.center == null && productFIlterDto.price == null && productFIlterDto.amountOfProducts == null
+            && productFIlterDto.widths == null && productFIlterDto.lengths == null && productFIlterDto.height == null && productFIlterDto.status == null
+            && productFIlterDto.weight == null)
             {
                 var wherePosition = FilterSql.LastIndexOf("WHERE");
                 FilterSql = FilterSql.Remove(wherePosition);
@@ -179,7 +175,7 @@ namespace EccomerceAPI.Data.productDao
             return _context.Products.Where(prod => prod.distribuitonCenterId == Id && prod.Status).ToList();
         }
 
-        internal IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll()
         {
             return _context.Products.ToList();
         }

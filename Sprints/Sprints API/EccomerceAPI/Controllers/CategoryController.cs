@@ -1,16 +1,8 @@
-﻿using AutoMapper;
-using EccomerceAPI.Data.Dao;
-using EccomerceAPI.Data.Dtos;
+﻿using Eccomerce.Test;
 using EccomerceAPI.Data.Dtos.Categories;
-using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data.productDao;
-using EccomerceAPI.Models;
 using EccomerceAPI.Services;
-using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EccomerceAPI.Controllers
 {
@@ -18,10 +10,10 @@ namespace EccomerceAPI.Controllers
     [Route("{controller}")]
     public class CategoryController : ControllerBase
     {
-        private CategoryDao _categoryDao;
+        private ICategoryDao _categoryDao;
         private CategoryServices _categoryServices;
 
-        public CategoryController(CategoryDao categoryDao, CategoryServices categoryServices)
+        public CategoryController(ICategoryDao categoryDao, CategoryServices categoryServices)
         {
             _categoryDao = categoryDao;
             _categoryServices = categoryServices;
@@ -30,7 +22,7 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public IActionResult AddCategory([FromBody] CreateCategoryDto categoryDto)
         {
-            SearchCategoriesDto searchCategoriesDto  = _categoryServices.AddCategory(categoryDto);
+            var searchCategoriesDto  = _categoryServices.AddCategory(categoryDto);
             return CreatedAtAction(nameof(SearchCategoryId), new { searchCategoriesDto.Id }, searchCategoriesDto);
         }
 
@@ -62,8 +54,8 @@ namespace EccomerceAPI.Controllers
         {
             
 
-            Result result = _categoryServices.EditCategory(Id, Category);
-            if (result.IsFailed)
+            var result = _categoryServices.EditCategory(Id, Category);
+            if (result == null)
             {
                 return NotFound();
             }

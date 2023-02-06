@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using Eccomerce.Test;
 using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
@@ -14,11 +15,11 @@ namespace EccomerceAPI.Controllers
     public class SubCategoryController : ControllerBase
     {
 
-        private SubCategoryDao _subCategoryDao;
+        private ISubCategoryDao _subCategoryDao;
         private SubCategoryServices _subCategoryServices;
 
 
-        public SubCategoryController(SubCategoryDao subCategoryDao, SubCategoryServices subCategoryServices)
+        public SubCategoryController(ISubCategoryDao subCategoryDao, SubCategoryServices subCategoryServices)
         {
             _subCategoryDao = subCategoryDao;
             _subCategoryServices = subCategoryServices;

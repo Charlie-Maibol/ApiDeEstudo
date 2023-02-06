@@ -1,7 +1,9 @@
 
+using Eccomerce.Test;
 using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.productDao;
+using EccomerceAPI.Interface;
 using EccomerceAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,24 +30,26 @@ namespace EccomerceAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(opts => opts.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString("CategoryConnection")));
-            services.AddScoped<CategoryServices, CategoryServices>();
-            services.AddScoped<CategoryDao>();
+            services.AddScoped<CategoryServices, CategoryServices>();          
+            services.AddScoped<ICategoryDao, CategoryDao>();
             services.AddScoped<SubCategoryServices, SubCategoryServices>();
-            services.AddScoped<SubCategoryDao>();
+            services.AddScoped<ISubCategoryDao, SubCategoryDao>();
             services.AddScoped<ProductsServices, ProductsServices>();
-            services.AddScoped<ProductDao>();
+            services.AddScoped<IProductDao,ProductDao>();
             services.AddScoped<DistributionCenterServices, DistributionCenterServices>();
             services.AddScoped<DistributionCenterDao>();
             services.AddControllers().AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         );
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EccomerceAPI", Version = "v1" });
             });
+            
+           
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

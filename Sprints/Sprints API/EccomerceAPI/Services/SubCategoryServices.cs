@@ -1,20 +1,19 @@
 ﻿using AutoMapper;
 
 using FluentResults;
-using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
-using System;
+using Eccomerce.Test;
 
 namespace EccomerceAPI.Services
 {
     public class SubCategoryServices
     {
 
-        private SubCategoryDao _SubCategoryDao;
+        private ISubCategoryDao _SubCategoryDao;
         private IMapper _Mapper;
 
-        public SubCategoryServices(SubCategoryDao subCategoryDao, IMapper mapper)
+        public SubCategoryServices(ISubCategoryDao subCategoryDao, IMapper mapper)
         {
             _SubCategoryDao = subCategoryDao;
             _Mapper = mapper;

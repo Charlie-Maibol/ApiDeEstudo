@@ -15,7 +15,7 @@ using System.Web.Http;
 
 namespace EccomerceAPI.Data.Dao
 {
-    public class SubCategoryDao : ISubCategory
+    public class SubCategoryDao : ISubCategoryDao
     {
 
         private AppDbContext _context;
@@ -29,7 +29,7 @@ namespace EccomerceAPI.Data.Dao
             _configuration = configuration;
         }
 
-        internal void DeleteSubCategory(object subCategory)
+        public void DeleteSubCategory(object subCategory)
         {
             _context.Remove(subCategory);
             _context.SaveChanges();
@@ -40,10 +40,6 @@ namespace EccomerceAPI.Data.Dao
             return _context.SubCategories.FirstOrDefault(p => p.Id == id);
         }
 
-        private bool Null(SubCategoryFilterDto filterSubCategoryDto)
-        {
-            return filterSubCategoryDto.name == null && filterSubCategoryDto.status == null;
-        }
         public List<SubCategory> FilterProduct(SubCategoryFilterDto filterSubCategoryDto)
         {
             var FilterSql = "SELECT * FROM Products WHERE ";
@@ -62,7 +58,7 @@ namespace EccomerceAPI.Data.Dao
             {
                 FilterSql += "Status = @status and ";
             }
-            if (Null(filterSubCategoryDto))
+            if (filterSubCategoryDto.name == null && filterSubCategoryDto.status == null)
             {
                 var wherePosition = FilterSql.LastIndexOf("WHERE");
                 FilterSql = FilterSql.Remove(wherePosition);
@@ -112,7 +108,7 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
-        internal SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto subDto)
+        public SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto subDto)
         {
             var sub = _mapper.Map<SubCategory>(subDto);
             _context.SubCategories.Add(sub);
@@ -122,7 +118,7 @@ namespace EccomerceAPI.Data.Dao
         }
 
 
-        internal SubCategory SearchSubId(int Id)
+        public SubCategory SearchSubId(int Id)
         {
            return _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
         }
