@@ -1,27 +1,19 @@
-﻿using AutoMapper;
-using EccomerceAPI.Data.Dao;
-using EccomerceAPI.Data.Dtos;
+﻿using Eccomerce.Test;
 using EccomerceAPI.Data.Dtos.Categories;
-using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data.productDao;
-using EccomerceAPI.Models;
 using EccomerceAPI.Services;
-using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EccomerceAPI.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
-    [Route("{controller}")]
     public class CategoryController : ControllerBase
     {
-        private CategoryDao _categoryDao;
+        private ICategoryDao _categoryDao;
         private CategoryServices _categoryServices;
 
-        public CategoryController(CategoryDao categoryDao, CategoryServices categoryServices)
+        public CategoryController(ICategoryDao categoryDao, CategoryServices categoryServices)
         {
             _categoryDao = categoryDao;
             _categoryServices = categoryServices;
@@ -30,7 +22,7 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public IActionResult AddCategory([FromBody] CreateCategoryDto categoryDto)
         {
-            SearchCategoriesDto searchCategoriesDto  = _categoryServices.AddCategory(categoryDto);
+            var searchCategoriesDto  = _categoryServices.AddCategory(categoryDto);
             return CreatedAtAction(nameof(SearchCategoryId), new { searchCategoriesDto.Id }, searchCategoriesDto);
         }
 
@@ -57,13 +49,13 @@ namespace EccomerceAPI.Controllers
             return NotFound();
 
         }
-        [HttpPut("{ID}")]
+        [HttpPut("{Id}")]
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
             
 
-            Result result = _categoryServices.EditCategory(Id, Category);
-            if (result.IsFailed)
+            var result = _categoryServices.EditCategory(Id, Category);
+            if (result == null)
             {
                 return NotFound();
             }
@@ -71,7 +63,7 @@ namespace EccomerceAPI.Controllers
             return NoContent();
         }
 
-        [HttpPut("{ID}")]
+        [HttpPut("editarStatus/{Id}")]
         public IActionResult EditCategoryStatus(int Id)
         {
 
@@ -81,10 +73,10 @@ namespace EccomerceAPI.Controllers
             return NotFound();
         }
 
-        [HttpDelete("{ID}")]
-        public IActionResult DeletCategory(int ID)
+        [HttpDelete("{Id}")]
+        public IActionResult DeletCategory(int Id)
         {
-            _categoryDao.DeleteCategory(ID);
+            _categoryDao.DeleteCategory(Id);
             return NoContent();
         }
     }

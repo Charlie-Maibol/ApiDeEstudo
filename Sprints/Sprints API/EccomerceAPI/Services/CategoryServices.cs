@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Eccomerce.Test;
 using EccomerceAPI.Data;
 using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.productDao;
+using EccomerceAPI.Interface;
 using EccomerceAPI.Models;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,24 +18,25 @@ namespace EccomerceAPI.Services
 {
     public class CategoryServices
     {
-        private AppDbContext _context;
-        private CategoryDao _categoryDao;
-        private ProductDao _productDao;
-        private SubCategoryDao _subCategoryDao;
+        
+        private ICategoryDao _categoryDao;
+        private IProductDao _productDao;
+        private ISubCategoryDao _subCategoryDao;
         private IMapper _Mapper;
 
-        public CategoryServices(AppDbContext context, CategoryDao categoryDao, ProductDao productDao, SubCategoryDao subCategoryDao, IMapper mapper)
+        public CategoryServices( ICategoryDao categoryDao, IProductDao productDao, ISubCategoryDao subCategoryDao, IMapper mapper)
         {
-            _context = context;
             _categoryDao = categoryDao;
             _productDao = productDao;
             _subCategoryDao = subCategoryDao;
             _Mapper = mapper;
         }
 
-        public SearchCategoriesDto AddCategory(CreateCategoryDto categoryDto)
+
+        public Category AddCategory(CreateCategoryDto categoryDto)
         {
-            return _categoryDao.AddCategory(categoryDto);
+            var category = _Mapper.Map<Category>(categoryDto);
+            return _categoryDao.AddCategory(category);
         }
 
         public List<SearchCategoriesDto> SearchCategoryId(int Id)

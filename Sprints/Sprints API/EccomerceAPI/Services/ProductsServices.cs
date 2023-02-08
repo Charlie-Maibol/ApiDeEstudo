@@ -1,24 +1,22 @@
 ﻿using AutoMapper;
 using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Models;
 using FluentResults;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Http;
 using Microsoft.Extensions.Configuration;
-using EccomerceAPI.Data;
+using EccomerceAPI.Interface;
 
 namespace EccomerceAPI.Services
 {
     public class ProductsServices
     {
 
-        private ProductDao _productDao;
+        private IProductDao _productDao;
         private IMapper _productMapper;
 
-        public ProductsServices(IMapper mapper, ProductDao dao, IConfiguration configuration)
+        public ProductsServices(IMapper mapper, IProductDao dao, IConfiguration configuration)
         {
             _productMapper = mapper;
             _productDao = dao;

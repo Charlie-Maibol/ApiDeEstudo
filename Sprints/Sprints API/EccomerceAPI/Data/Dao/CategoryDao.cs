@@ -15,7 +15,7 @@ using System.Web.Http;
 
 namespace EccomerceAPI.Data.Dao
 {
-    public class CategoryDao : ICategory
+    public class CategoryDao : ICategoryDao
     {
 
 
@@ -30,13 +30,12 @@ namespace EccomerceAPI.Data.Dao
             _configuration = configuration;
         }
 
-        public SearchCategoriesDto AddCategory(CreateCategoryDto categoryDto)
+        public Category AddCategory(Category category)
         {
 
-            var category = _mapper.Map<Category>(categoryDto);
             _context.Categories.Add(category);
             _context.SaveChanges();
-            return _mapper.Map<SearchCategoriesDto>(category);
+            return category;
         }
 
         public Result ListCategories(int pageNumber, int itensPerPage, int? Id)
@@ -69,10 +68,7 @@ namespace EccomerceAPI.Data.Dao
             _context.Remove(category);
             _context.SaveChanges();
         }
-        private static bool Null(FiltersCategoryDto filterCategoryDto)
-        {
-            return filterCategoryDto.name == null && filterCategoryDto.status == null;
-        }
+
         public List<Category> FilterCategory(FiltersCategoryDto filterCategoryDto)
         {
             var FilterSql = "SELECT * FROM Products WHERE ";
@@ -87,7 +83,7 @@ namespace EccomerceAPI.Data.Dao
             {
                 FilterSql += "Status = @status and ";
             }
-            if (Null(filterCategoryDto))
+            if (filterCategoryDto.name == null && filterCategoryDto.status == null)
             {
                 var wherePosition = FilterSql.LastIndexOf("WHERE");
                 FilterSql = FilterSql.Remove(wherePosition);

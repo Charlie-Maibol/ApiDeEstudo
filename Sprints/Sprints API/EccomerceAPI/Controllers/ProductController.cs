@@ -1,6 +1,7 @@
 ﻿using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Products;
 using EccomerceAPI.Data.productDao;
+using EccomerceAPI.Interface;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using FluentResults;
@@ -12,15 +13,15 @@ using System.Collections.Generic;
 namespace EccomerceAPI.Controllers
 {
 
+    [Route("[controller]")]
     [ApiController]
-    [Route("{controller}")]
     public class ProductController : ControllerBase
     {
 
-        private ProductDao _productDao;
+        private IProductDao _productDao;
         private ProductsServices _productService;
 
-        public ProductController(ProductsServices service, ProductDao productDao)
+        public ProductController(ProductsServices service, IProductDao productDao)
         {
             _productService = service;
             _productDao = productDao;
@@ -32,7 +33,7 @@ namespace EccomerceAPI.Controllers
             SearchProductsDto searchProducts = _productService.AddProduct(productDto);
             return CreatedAtAction(nameof(SearchProdId), new { id = searchProducts.Id }, searchProducts);
         }
-        [HttpGet("{ID}")]
+        [HttpGet("{Id}")]
         public IActionResult SearchProdId(int? Id)
         {
             List<SearchProductsDto> productDto = _productService.SearchProdId(Id);

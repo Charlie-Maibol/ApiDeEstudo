@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using Eccomerce.Test;
 using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
@@ -9,16 +10,16 @@ using System.Collections.Generic;
 
 namespace EccomerceAPI.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
-    [Route("{controller}")]
     public class SubCategoryController : ControllerBase
     {
 
-        private SubCategoryDao _subCategoryDao;
+        private ISubCategoryDao _subCategoryDao;
         private SubCategoryServices _subCategoryServices;
 
 
-        public SubCategoryController(SubCategoryDao subCategoryDao, SubCategoryServices subCategoryServices)
+        public SubCategoryController(ISubCategoryDao subCategoryDao, SubCategoryServices subCategoryServices)
         {
             _subCategoryDao = subCategoryDao;
             _subCategoryServices = subCategoryServices;
@@ -53,7 +54,7 @@ namespace EccomerceAPI.Controllers
         }
 
 
-        [HttpPut("{ID}")]
+        [HttpPut("{Id}")]
         public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto subCategoryDto)
         {
             _subCategoryServices.EditSubCategory(Id, subCategoryDto);
@@ -61,7 +62,7 @@ namespace EccomerceAPI.Controllers
 
         }
 
-        [HttpDelete("{ID}")]
+        [HttpDelete("{Id}")]
         public IActionResult DeletSubCategory(int Id)
         {
             Result result = _subCategoryServices.DeletSubCategory(Id);
