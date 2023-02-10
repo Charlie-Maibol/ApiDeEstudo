@@ -1,11 +1,9 @@
 using AutoMapper;
-using EccomerceAPI.Controllers;
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Interface;
 using EccomerceAPI.Models;
 using EccomerceAPI.Profiles;
 using EccomerceAPI.Services;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
 using Xunit;
@@ -32,16 +30,30 @@ namespace Eccomerce.Test
             });
             mapper = _mapperConfiguration.CreateMapper();
             categoryService = new CategoryServices(categoryDao.Object, productDao.Object, subcategoryDao.Object, mapper);
+            
         }
 
 
         [Fact]
-        public void TestCreateCategory()
+        public void TestCategoryNotNull()
         {
-            var controller = new CategoryController(categoryDao.Object, categoryService);
-            var result = (ObjectResult)controller.AddCategory(new CreateCategoryDto { Name = "teste" });
+            categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category() { Name = "teste" });
 
-            Assert.Equal(201, result.StatusCode);
+            var result = categoryService.AddCategory(new CreateCategoryDto { Name = "teste" });
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void TestCategoryCreatTime()
+        {
+            categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category() { Name = "teste" });
+
+            var created = $"{DateTime.Now:yyyy-MM-dd}";
+
+            var result = categoryService.AddCategory(new CreateCategoryDto { Name = "teste2" });
+
+            Equals(created, $"{result.Created:yyyy-MM-dd}");
         }
     }
 }
