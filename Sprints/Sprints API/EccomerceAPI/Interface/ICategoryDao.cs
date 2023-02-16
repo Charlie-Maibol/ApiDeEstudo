@@ -8,7 +8,7 @@ namespace Eccomerce.Test
 {
     public interface ICategoryDao
     {
-         Category AddCategory(Category category);
+        Category AddCategory(Category category);
         void DeleteCategory(int iD);
         Category GetId(int Id);
         Result ListCategories(int pageNumber, int itensPerPage, int? Id);

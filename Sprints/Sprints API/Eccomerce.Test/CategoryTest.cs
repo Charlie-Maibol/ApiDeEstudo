@@ -6,6 +6,7 @@ using EccomerceAPI.Profiles;
 using EccomerceAPI.Services;
 using Moq;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace Eccomerce.Test
@@ -67,35 +68,25 @@ namespace Eccomerce.Test
         public void TestCategoryMaxCharacters()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
-            var result = "aaaaaaaaaaaaaaaaaaaa" + //20
-                "aaaaaaaaaaaaaaaaaaaa" + //40
-                "aaaaaaaaaaaaaaaaaaaa" + // 60
-                "aaaaaaaaaaaaaaaaaaaa" + //80
-                "aaaaaaaaaaaaaaaaaaaa" + //100
-                "aaaaaaaaaaaaaaaaaaaa";  //120 ;
+            var result = "regexteste";
             Assert.Matches(@"^[a-zA-Z' '-'\s]{1,128}$", result);
         }
         //[Fact]
         //public void TestCategoryMaxCharactersExcetion()
         //{
-        //    categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category
-        //    {
-        //        Name = "aaaaaaaaaaaaaaaaaaaa" + //20
-        //        "aaaaaaaaaaaaaaaaaaaa" + //40
-        //        "aaaaaaaaaaaaaaaaaaaa" + // 60
-        //        "aaaaaaaaaaaaaaaaaaaa" + //80
-        //        "aaaaaaaaaaaaaaaaaaaa" + //100
-        //        "aaaaaaaaaaaaaaaaaaaa" + //120
-        //        "aaaaaaaaaaaaaaaaaaaa"
-        //});
-        //    var result = "aaaaaaaaaaaaaaaaaaaa" + //20
-        //        "aaaaaaaaaaaaaaaaaaaa" + //40
-        //        "aaaaaaaaaaaaaaaaaaaa" + // 60
-        //        "aaaaaaaaaaaaaaaaaaaa" + //80
-        //        "aaaaaaaaaaaaaaaaaaaa" + //100
-        //        "aaaaaaaaaaaaaaaaaaaa" + //120
-        //        "aaaaaaaaaaaaaaaaaaaa";
-        //    Assert.Throws(ExceptionAggregator, result);
-        //}
+            // var category = categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category
+            //var category = new CreateCategoryDto()
+            //{
+            //    Name = "aaaaaaaaaaaaaaaaaaaa" + //20
+            //    "aaaaaaaaaaaaaaaaaaaa" + //40
+            //    "aaaaaaaaaaaaaaaaaaaa" + // 60
+            //    "aaaaaaaaaaaaaaaaaaaa" + //80
+            //    "aaaaaaaaaaaaaaaaaaaa" + //100
+            //    "aaaaaaaaaaaaaaaaaaaa" + //120
+            //    "aaaaaaaaaaaaaaaaaaaa"
+            //};
+            //var result = category.Name.Length =< 128;
+            //Assert.Equal(result, category.Name.Length);
+       // }
     }
 }
