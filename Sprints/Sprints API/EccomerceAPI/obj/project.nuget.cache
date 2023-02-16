@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4vgTEy9nkt8Qzk2Ke8tgAw+H72qL7A0NJCVztL6oS/75PwyhmRG4iQTRbNXeb5Cdjf6P/m0JGa8LFQPUATlqeg==",
+  "dgSpecHash": "obdN7mSh5o0u/dap4xECkuumhGt+8noQfx3DddTh78QjFaOBNjgZLisvjMGq/UxV1GpYKIqaYifsPP8iYDfaiw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI restaurar\\EccomerceAPI.csproj",
+  "projectFilePath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI\\EccomerceAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ClearTech\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\ClearTech\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

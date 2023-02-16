@@ -55,6 +55,6 @@ namespace Eccomerce.Test
 
             Equals(created, $"{result.Created:yyyy-MM-dd}");
         }
-        [Fact]
+        
     }
 }

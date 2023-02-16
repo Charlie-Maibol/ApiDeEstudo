@@ -9029,11 +9029,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI restaurar\\EccomerceAPI.csproj",
+      "projectUniqueName": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI\\EccomerceAPI.csproj",
       "projectName": "EccomerceAPI",
-      "projectPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI restaurar\\EccomerceAPI.csproj",
+      "projectPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI\\EccomerceAPI.csproj",
       "packagesPath": "C:\\Users\\ClearTech\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI restaurar\\obj\\",
+      "outputPath": "C:\\Users\\ClearTech\\Documents\\WorkSpace\\T1-CharlesOliveira\\Sprints\\Sprints API\\EccomerceAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
