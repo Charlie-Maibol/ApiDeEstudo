@@ -1,8 +1,0 @@
-C:\Users\ClearTech\source\repos\Aprendendo CSharp\2-  Criando variaveis\bin\Debug\2-  Criando variaveis.exe.config
-C:\Users\ClearTech\source\repos\Aprendendo CSharp\2-  Criando variaveis\bin\Debug\2-  Criando variaveis.exe
-C:\Users\ClearTech\source\repos\Aprendendo CSharp\2-  Criando variaveis\bin\Debug\2-  Criando variaveis.pdb
-C:\Users\ClearTech\source\repos\Aprendendo CSharp\2-  Criando variaveis\obj\Debug\2-  Criando variaveis.csproj.AssemblyReference.cache
-C:\Users\ClearTech\source\repos\Aprendendo CSharp\2-  Criando variaveis\obj\Debug\2-  Criando variaveis.csproj.SuggestedBindingRedirects.cache
-C:\Users\ClearTech\source\repos\Aprendendo CSharp\2-  Criando variaveis\obj\Debug\2-  Criando variaveis.csproj.CoreCompileInputs.cache
-C:\Users\ClearTech\source\repos\Aprendendo CSharp\2-  Criando variaveis\obj\Debug\2-  Criando variaveis.exe
-C:\Users\ClearTech\source\repos\Aprendendo CSharp\2-  Criando variaveis\obj\Debug\2-  Criando variaveis.pdb

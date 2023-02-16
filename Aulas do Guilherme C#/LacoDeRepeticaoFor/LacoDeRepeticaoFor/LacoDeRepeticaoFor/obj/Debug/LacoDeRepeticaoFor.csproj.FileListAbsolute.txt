@@ -1,8 +1,0 @@
-C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\LacoDeRepeticaoFor\LacoDeRepeticaoFor\LacoDeRepeticaoFor\bin\Debug\LacoDeRepeticaoFor.exe.config
-C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\LacoDeRepeticaoFor\LacoDeRepeticaoFor\LacoDeRepeticaoFor\bin\Debug\LacoDeRepeticaoFor.exe
-C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\LacoDeRepeticaoFor\LacoDeRepeticaoFor\LacoDeRepeticaoFor\bin\Debug\LacoDeRepeticaoFor.pdb
-C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\LacoDeRepeticaoFor\LacoDeRepeticaoFor\LacoDeRepeticaoFor\obj\Debug\LacoDeRepeticaoFor.csproj.AssemblyReference.cache
-C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\LacoDeRepeticaoFor\LacoDeRepeticaoFor\LacoDeRepeticaoFor\obj\Debug\LacoDeRepeticaoFor.csproj.SuggestedBindingRedirects.cache
-C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\LacoDeRepeticaoFor\LacoDeRepeticaoFor\LacoDeRepeticaoFor\obj\Debug\LacoDeRepeticaoFor.csproj.CoreCompileInputs.cache
-C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\LacoDeRepeticaoFor\LacoDeRepeticaoFor\LacoDeRepeticaoFor\obj\Debug\LacoDeRepeticaoFor.exe
-C:\Users\ClearTech\Documents\WorkSpace\T1-CharlesOliveira\LacoDeRepeticaoFor\LacoDeRepeticaoFor\LacoDeRepeticaoFor\obj\Debug\LacoDeRepeticaoFor.pdb

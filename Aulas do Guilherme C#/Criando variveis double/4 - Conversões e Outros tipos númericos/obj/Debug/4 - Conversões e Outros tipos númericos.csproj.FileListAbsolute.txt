@@ -1,8 +1,0 @@
-C:\Users\ClearTech\source\repos\Criando variveis double\4 - Conversões e Outros tipos númericos\bin\Debug\4 - Conversões e Outros tipos númericos.exe.config
-C:\Users\ClearTech\source\repos\Criando variveis double\4 - Conversões e Outros tipos númericos\bin\Debug\4 - Conversões e Outros tipos númericos.exe
-C:\Users\ClearTech\source\repos\Criando variveis double\4 - Conversões e Outros tipos númericos\bin\Debug\4 - Conversões e Outros tipos númericos.pdb
-C:\Users\ClearTech\source\repos\Criando variveis double\4 - Conversões e Outros tipos númericos\obj\Debug\4 - Conversões e Outros tipos númericos.csproj.AssemblyReference.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\4 - Conversões e Outros tipos númericos\obj\Debug\4 - Conversões e Outros tipos númericos.csproj.SuggestedBindingRedirects.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\4 - Conversões e Outros tipos númericos\obj\Debug\4 - Conversões e Outros tipos númericos.csproj.CoreCompileInputs.cache
-C:\Users\ClearTech\source\repos\Criando variveis double\4 - Conversões e Outros tipos númericos\obj\Debug\4 - Conversões e Outros tipos númericos.exe
-C:\Users\ClearTech\source\repos\Criando variveis double\4 - Conversões e Outros tipos númericos\obj\Debug\4 - Conversões e Outros tipos númericos.pdb
