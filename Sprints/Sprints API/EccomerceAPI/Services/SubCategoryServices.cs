@@ -4,6 +4,8 @@ using FluentResults;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
 using Eccomerce.Test;
+using EccomerceAPI.Data.Dao;
+using EccomerceAPI.Data.Dtos.Categories;
 
 namespace EccomerceAPI.Services
 {
@@ -19,10 +21,10 @@ namespace EccomerceAPI.Services
             _Mapper = mapper;
         }
 
-        public SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto SubDto)
+        public SubCategory AddSubCategory(CreateSubCategoryDto subDto)
         {
-            SubCategory sub = _Mapper.Map<SubCategory>(SubDto);
-            return _SubCategoryDao.AddSubCategory(SubDto);
+            var sub = _Mapper.Map<SubCategory>(subDto);
+            return _SubCategoryDao.AddSubCategory(sub);
 
         }
 

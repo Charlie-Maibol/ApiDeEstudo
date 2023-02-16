@@ -7,10 +7,10 @@ namespace Eccomerce.Test
 {
     public interface ISubCategoryDao
     {
-        void DeleteSubCategory(object subCategory);
+        void DeleteSubCategory(SubCategory subCategory);
         SubCategory GetID(int id);
         List<SubCategory> FilterProduct(SubCategoryFilterDto filterSubCategoryDto);
-        SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto subDto);
+        SubCategory AddSubCategory(SubCategory subDto);
         SubCategory SearchSubId(int Id);
 
         IEnumerable<SubCategory> GetAll();
