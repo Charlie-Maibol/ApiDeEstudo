@@ -19,10 +19,10 @@ namespace EccomerceAPI.Services
             _Mapper = mapper;
         }
 
-        public SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto SubDto)
+        public SubCategory AddSubCategory(CreateSubCategoryDto SubDto)
         {
-            SubCategory sub = _Mapper.Map<SubCategory>(SubDto);
-            return _SubCategoryDao.AddSubCategory(SubDto);
+            var sub = _Mapper.Map<SubCategory>(SubDto);
+            return _SubCategoryDao.AddSubCategory(sub);
 
         }
 

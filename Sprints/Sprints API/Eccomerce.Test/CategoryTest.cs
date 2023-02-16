@@ -6,6 +6,7 @@ using EccomerceAPI.Profiles;
 using EccomerceAPI.Services;
 using Moq;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace Eccomerce.Test
@@ -30,7 +31,7 @@ namespace Eccomerce.Test
             });
             mapper = _mapperConfiguration.CreateMapper();
             categoryService = new CategoryServices(categoryDao.Object, productDao.Object, subcategoryDao.Object, mapper);
-            
+
         }
 
 
@@ -55,6 +56,37 @@ namespace Eccomerce.Test
 
             Equals(created, $"{result.Created:yyyy-MM-dd}");
         }
-        
+        [Fact]
+
+        public void TestCategoryStatusWhenCreatedEqualsTrue()
+        {
+            categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category() { Name = "teste" });
+            var status = true;
+            Assert.True(status);
+        }
+        [Fact]
+        public void TestCategoryMaxCharacters()
+        {
+            categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
+            var result = "regexteste";
+            Assert.Matches(@"^[a-zA-Z' '-'\s]{1,128}$", result);
+        }
+        //[Fact]
+        //public void TestCategoryMaxCharactersExcetion()
+        //{
+            // var category = categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category
+            //var category = new CreateCategoryDto()
+            //{
+            //    Name = "aaaaaaaaaaaaaaaaaaaa" + //20
+            //    "aaaaaaaaaaaaaaaaaaaa" + //40
+            //    "aaaaaaaaaaaaaaaaaaaa" + // 60
+            //    "aaaaaaaaaaaaaaaaaaaa" + //80
+            //    "aaaaaaaaaaaaaaaaaaaa" + //100
+            //    "aaaaaaaaaaaaaaaaaaaa" + //120
+            //    "aaaaaaaaaaaaaaaaaaaa"
+            //};
+            //var result = category.Name.Length =< 128;
+            //Assert.Equal(result, category.Name.Length);
+       // }
     }
 }

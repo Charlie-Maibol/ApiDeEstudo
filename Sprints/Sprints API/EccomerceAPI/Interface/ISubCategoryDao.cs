@@ -10,7 +10,7 @@ namespace Eccomerce.Test
         void DeleteSubCategory(object subCategory);
         SubCategory GetID(int id);
         List<SubCategory> FilterProduct(SubCategoryFilterDto filterSubCategoryDto);
-        SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto subDto);
+        SubCategory AddSubCategory(SubCategory sub);
         SubCategory SearchSubId(int Id);
 
         IEnumerable<SubCategory> GetAll();

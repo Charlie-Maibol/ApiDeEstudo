@@ -108,12 +108,11 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
-        public SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto subDto)
+        public SubCategory AddSubCategory(SubCategory sub)
         {
-            var sub = _mapper.Map<SubCategory>(subDto);
             _context.SubCategories.Add(sub);
             _context.SaveChanges();
-            return _mapper.Map<SearchSubCategoriesDto>(sub);
+            return sub;
 
         }
 
