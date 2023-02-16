@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ByteBank.Modelos</name>
+    </assembly>
+    <members>
+        <member name="T:ByteBank.CheckingAccounts">
+            <summary>
+            Esta Classe define uma conta corrente do ByteBank
+            </summary>
+        </member>
+        <member name="M:ByteBank.CheckingAccounts.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Cria uma Instância de conta corrente com os argumentos utilizados
+            </summary>
+            <param name="agency"> Representa o Valor da propriedade <see cref="P:ByteBank.CheckingAccounts.Agency"/> e deve possuir um número maior que zero</param>
+            <param name="number"> Representa o Valor da propriedade <see cref="P:ByteBank.CheckingAccounts.Number"/> e deve possuir um número maior que zero</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ByteBank.CheckingAccounts.Whithdraw(System.Double)" -->
+    </members>
+</doc>

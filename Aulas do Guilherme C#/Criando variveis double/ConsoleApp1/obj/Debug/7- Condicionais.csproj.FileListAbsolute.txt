@@ -1,0 +1,8 @@
+C:\Users\ClearTech\source\repos\Criando variveis double\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\ClearTech\source\repos\Criando variveis double\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\ClearTech\source\repos\Criando variveis double\ConsoleApp1\obj\Debug\7- Condicionais.csproj.AssemblyReference.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\ConsoleApp1\obj\Debug\7- Condicionais.csproj.SuggestedBindingRedirects.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\ConsoleApp1\obj\Debug\7- Condicionais.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\ConsoleApp1\obj\Debug\ConsoleApp1.pdb

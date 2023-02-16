@@ -1,0 +1,8 @@
+C:\Users\ClearTech\source\repos\Criando variveis double\p12 - Calcula Rendimento longo prazo\bin\Debug\p12 - Calcula Rendimento longo prazo.exe.config
+C:\Users\ClearTech\source\repos\Criando variveis double\p12 - Calcula Rendimento longo prazo\bin\Debug\p12 - Calcula Rendimento longo prazo.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\p12 - Calcula Rendimento longo prazo\bin\Debug\p12 - Calcula Rendimento longo prazo.pdb
+C:\Users\ClearTech\source\repos\Criando variveis double\p12 - Calcula Rendimento longo prazo\obj\Debug\p12 - Calcula Rendimento longo prazo.csproj.AssemblyReference.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\p12 - Calcula Rendimento longo prazo\obj\Debug\p12 - Calcula Rendimento longo prazo.csproj.SuggestedBindingRedirects.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\p12 - Calcula Rendimento longo prazo\obj\Debug\p12 - Calcula Rendimento longo prazo.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\p12 - Calcula Rendimento longo prazo\obj\Debug\p12 - Calcula Rendimento longo prazo.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\p12 - Calcula Rendimento longo prazo\obj\Debug\p12 - Calcula Rendimento longo prazo.pdb

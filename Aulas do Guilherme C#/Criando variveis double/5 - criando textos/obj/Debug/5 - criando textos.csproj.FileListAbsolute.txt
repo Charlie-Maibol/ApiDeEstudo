@@ -1,0 +1,8 @@
+C:\Users\ClearTech\source\repos\Criando variveis double\5 - criando textos\bin\Debug\5 - criando textos.exe.config
+C:\Users\ClearTech\source\repos\Criando variveis double\5 - criando textos\bin\Debug\5 - criando textos.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\5 - criando textos\bin\Debug\5 - criando textos.pdb
+C:\Users\ClearTech\source\repos\Criando variveis double\5 - criando textos\obj\Debug\5 - criando textos.csproj.AssemblyReference.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\5 - criando textos\obj\Debug\5 - criando textos.csproj.SuggestedBindingRedirects.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\5 - criando textos\obj\Debug\5 - criando textos.csproj.CoreCompileInputs.cache
+C:\Users\ClearTech\source\repos\Criando variveis double\5 - criando textos\obj\Debug\5 - criando textos.exe
+C:\Users\ClearTech\source\repos\Criando variveis double\5 - criando textos\obj\Debug\5 - criando textos.pdb
