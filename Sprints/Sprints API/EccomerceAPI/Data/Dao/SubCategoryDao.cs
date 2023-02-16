@@ -29,7 +29,7 @@ namespace EccomerceAPI.Data.Dao
             _configuration = configuration;
         }
 
-        public void DeleteSubCategory(object subCategory)
+        public void DeleteSubCategory(SubCategory subCategory)
         {
             _context.Remove(subCategory);
             _context.SaveChanges();
@@ -108,12 +108,11 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
-        public SearchSubCategoriesDto AddSubCategory(CreateSubCategoryDto subDto)
+        public SubCategory AddSubCategory(SubCategory subDto)
         {
-            var sub = _mapper.Map<SubCategory>(subDto);
-            _context.SubCategories.Add(sub);
+            _context.SubCategories.Add(subDto);
             _context.SaveChanges();
-            return _mapper.Map<SearchSubCategoriesDto>(sub);
+            return subDto;
 
         }
 

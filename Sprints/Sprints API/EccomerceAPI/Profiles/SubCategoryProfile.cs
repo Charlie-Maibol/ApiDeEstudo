@@ -11,6 +11,7 @@ namespace EccomerceAPI.Profiles
             CreateMap<CreateSubCategoryDto, SubCategory>();
             CreateMap<SubCategory, SearchSubCategoriesDto>();
             CreateMap<EditSubCategoryDto, SubCategory>();
+            
         }
     }
 }
