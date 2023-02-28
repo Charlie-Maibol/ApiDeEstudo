@@ -2,6 +2,7 @@
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using System.Collections.Generic;
 
 namespace EccomerceAPI.Controllers
@@ -12,6 +13,7 @@ namespace EccomerceAPI.Controllers
     {
         private ICategoryDao _categoryDao;
         private CategoryServices _categoryServices;
+ 
 
         public CategoryController(ICategoryDao categoryDao, CategoryServices categoryServices)
         {
@@ -22,8 +24,8 @@ namespace EccomerceAPI.Controllers
         [HttpPost]
         public IActionResult AddCategory([FromBody] CreateCategoryDto categoryDto)
         {
-            var searchCategoriesDto  = _categoryServices.AddCategory(categoryDto);
-            return CreatedAtAction(nameof(SearchCategoryId), new { searchCategoriesDto.Id }, searchCategoriesDto);
+            var category = _categoryServices.AddCategory(categoryDto);
+            return Ok(category);
         }
 
 

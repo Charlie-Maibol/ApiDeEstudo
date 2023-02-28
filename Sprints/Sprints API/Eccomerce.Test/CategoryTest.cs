@@ -1,36 +1,39 @@
+
+
 using AutoMapper;
+using EccomerceAPI.Controllers;
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Interface;
 using EccomerceAPI.Models;
 using EccomerceAPI.Profiles;
 using EccomerceAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
-using System.Linq;
 using Xunit;
 
 namespace Eccomerce.Test
 {
     public class CategoryTest
     {
-        private CategoryServices categoryService;
+        private CategoryServices categoryServices;
         private Mock<ICategoryDao> categoryDao;
         private Mock<ISubCategoryDao> subcategoryDao;
         private Mock<IProductDao> productDao;
         readonly IMapper mapper;
-        MapperConfiguration _mapperConfiguration;
+        MapperConfiguration mapperConfiguration;
 
         public CategoryTest()
         {
             categoryDao = new Mock<ICategoryDao>();
             subcategoryDao = new Mock<ISubCategoryDao>();
             productDao = new Mock<IProductDao>();
-            _mapperConfiguration = new MapperConfiguration(c =>
+            mapperConfiguration = new MapperConfiguration(c =>
             {
                 c.AddProfile(new CategoryProfile());
             });
-            mapper = _mapperConfiguration.CreateMapper();
-            categoryService = new CategoryServices(categoryDao.Object, productDao.Object, subcategoryDao.Object, mapper);
+            mapper = mapperConfiguration.CreateMapper();
+            categoryServices = new CategoryServices(categoryDao.Object, productDao.Object, subcategoryDao.Object, mapper);
 
         }
 
@@ -40,7 +43,7 @@ namespace Eccomerce.Test
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category() { Name = "teste" });
 
-            var result = categoryService.AddCategory(new CreateCategoryDto { Name = "teste" });
+            var result = categoryServices.AddCategory(new CreateCategoryDto { Name = "teste" });
 
             Assert.NotNull(result);
         }
@@ -52,7 +55,7 @@ namespace Eccomerce.Test
 
             var created = $"{DateTime.Now:yyyy-MM-dd}";
 
-            var result = categoryService.AddCategory(new CreateCategoryDto { Name = "teste2" });
+            var result = categoryServices.AddCategory(new CreateCategoryDto { Name = "teste2" });
 
             Equals(created, $"{result.Created:yyyy-MM-dd}");
         }
@@ -71,22 +74,23 @@ namespace Eccomerce.Test
             var result = "regexteste";
             Assert.Matches(@"^[a-zA-Z' '-'\s]{1,128}$", result);
         }
-        //[Fact]
-        //public void TestCategoryMaxCharactersExcetion()
-        //{
-            // var category = categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category
-            //var category = new CreateCategoryDto()
-            //{
-            //    Name = "aaaaaaaaaaaaaaaaaaaa" + //20
-            //    "aaaaaaaaaaaaaaaaaaaa" + //40
-            //    "aaaaaaaaaaaaaaaaaaaa" + // 60
-            //    "aaaaaaaaaaaaaaaaaaaa" + //80
-            //    "aaaaaaaaaaaaaaaaaaaa" + //100
-            //    "aaaaaaaaaaaaaaaaaaaa" + //120
-            //    "aaaaaaaaaaaaaaaaaaaa"
-            //};
-            //var result = category.Name.Length =< 128;
-            //Assert.Equal(result, category.Name.Length);
-       // }
+        [Fact]
+        public void TestCategoryMaxCharactersExcetion()
+        {
+            var categoryNameTest = new CreateCategoryDto()
+            {
+                Name = "aaaaaaaaaaaaaaaaaaaa" + // 20
+                       "aaaaaaaaaaaaaaaaaaaa" +  // 40
+                       "aaaaaaaaaaaaaaaaaaaa" + // 60 
+                       "aaaaaaaaaaaaaaaaaaaa" + // 80
+                       "aaaaaaaaaaaaaaaaaaaa" + // 100
+                       "aaaaaaaaaaaaaaaaaaaa" + // 120
+                       "aaaaaaaaaaaaaaaaaaaa"   // 140
+            };
+            var controller = new CategoryController(categoryDao.Object,categoryServices);
+            var result = (StatusCodeResult)controller.AddCategory(categoryNameTest);
+
+            Assert.Equal(400,result.StatusCode);
+        }
     }
 }
