@@ -40,7 +40,15 @@ namespace Eccomerce.Test
 
             Assert.NotNull(result);
         }
+        //[Fact]
+        //public void TestSubCategoryCreatWithOutCategoryID()
+        //{
 
+        //    var result = subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory() { Name = "teste" });
+
+
+        //    Assert.(result);
+        //}
         [Fact]
         public void TestSubCategoryCreatTime()
         {
