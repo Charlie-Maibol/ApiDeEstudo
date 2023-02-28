@@ -25,6 +25,7 @@ namespace EccomerceAPI.Controllers
         public IActionResult AddCategory([FromBody] CreateCategoryDto categoryDto)
         {
             var category = _categoryServices.AddCategory(categoryDto);
+            if (category == null) return BadRequest("Número de caracteres excedida");
             return Ok(category);
         }
 
