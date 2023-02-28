@@ -1,15 +1,8 @@
 ﻿using AutoMapper;
 using Eccomerce.Test;
-using EccomerceAPI.Data;
-using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos.Categories;
-using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data.productDao;
 using EccomerceAPI.Interface;
 using EccomerceAPI.Models;
-using FluentResults;
-using Microsoft.EntityFrameworkCore;
-using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +28,11 @@ namespace EccomerceAPI.Services
 
         public Category AddCategory(CreateCategoryDto categoryDto)
         {
+            if(categoryDto.Name.Length > 128 || categoryDto.Name.Length <3 
+                || categoryDto.Name == string.Empty || categoryDto.Status == false)
+            {
+                return null;
+            }
             var category = _Mapper.Map<Category>(categoryDto);
             return _categoryDao.AddCategory(category);
         }
@@ -42,7 +40,7 @@ namespace EccomerceAPI.Services
         public List<SearchCategoriesDto> SearchCategoryId(int Id)
         {
             Category category;
-
+           
             category = _categoryDao.GetId(Id);
             if (category != null)
             {

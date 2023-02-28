@@ -88,7 +88,7 @@ namespace Eccomerce.Test
                        "aaaaaaaaaaaaaaaaaaaa"   // 140
             };
             var controller = new CategoryController(categoryDao.Object,categoryServices);
-            var result = (StatusCodeResult)controller.AddCategory(categoryNameTest);
+            var result = (ObjectResult)controller.AddCategory(categoryNameTest);
 
             Assert.Equal(400,result.StatusCode);
         }
