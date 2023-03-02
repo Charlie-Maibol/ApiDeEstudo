@@ -61,22 +61,24 @@ namespace Eccomerce.Test
         }
         [Fact]
 
-        public void TestCategoryStatusWhenCreatedEqualsTrue()
+        public void TestCategoryStatusCreatedSucced()
         {
-            categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category() { Name = "teste" });
-            var status = true;
-            Assert.True(status);
+            categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
+            var categoryStatusTest = new CreateCategoryDto()
+            {
+                Name = "Controle",
+
+               
+            };
+            var controller = new CategoryController(categoryDao.Object, categoryServices);
+            var result = (ObjectResult)controller.AddCategory(categoryStatusTest);
+
+            Assert.Equal(200, result.StatusCode);
         }
         [Fact]
         public void TestCategoryMaxCharacters()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
-            var result = "regexteste";
-            Assert.Matches(@"^[a-zA-Z' '-'\s]{1,128}$", result);
-        }
-        [Fact]
-        public void TestCategoryMaxCharactersExcetion()
-        {
             var categoryNameTest = new CreateCategoryDto()
             {
                 Name = "aaaaaaaaaaaaaaaaaaaa" + // 20
@@ -91,6 +93,33 @@ namespace Eccomerce.Test
             var result = (ObjectResult)controller.AddCategory(categoryNameTest);
 
             Assert.Equal(400,result.StatusCode);
+        }
+        [Fact]
+        public void TestCategoryMinCharactersExcetion()
+        {
+            categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
+            var categoryNameTest = new CreateCategoryDto()
+            {
+                Name = "aa"
+            };
+            var controller = new CategoryController(categoryDao.Object, categoryServices);
+            var result = (ObjectResult)controller.AddCategory(categoryNameTest);
+
+            Assert.Equal(400, result.StatusCode);
+        }
+        [Fact]
+        public void TestCategoryStatusWhenCreatedEqualsFalse()
+        {
+            categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
+            var categoryStatusTest = new CreateCategoryDto()
+            {
+                Name = "aaaaaaaa",
+                Status = false
+            };
+            var controller = new CategoryController(categoryDao.Object, categoryServices);
+            var result = (ObjectResult)controller.AddCategory(categoryStatusTest);
+
+            Assert.Equal(400, result.StatusCode);
         }
     }
 }
