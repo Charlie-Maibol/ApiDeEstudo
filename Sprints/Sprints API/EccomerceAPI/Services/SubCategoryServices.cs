@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-
 using FluentResults;
 using EccomerceAPI.Data.Dtos.SubCategories;
 using EccomerceAPI.Models;
@@ -22,6 +21,11 @@ namespace EccomerceAPI.Services
         public SubCategory AddSubCategory(CreateSubCategoryDto SubDto)
         {
             var sub = _Mapper.Map<SubCategory>(SubDto);
+            if (sub.Name.Length > 128 || sub.Name.Length < 3
+                || sub.Name == string.Empty || sub.Status == false || sub.CategoryId == 0)
+            {
+                return null;
+            }
             return _SubCategoryDao.AddSubCategory(sub);
 
         }

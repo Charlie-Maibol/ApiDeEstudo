@@ -1,12 +1,8 @@
-﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-using Eccomerce.Test;
-using EccomerceAPI.Data.Dao;
+﻿using Eccomerce.Test;
 using EccomerceAPI.Data.Dtos.SubCategories;
-using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace EccomerceAPI.Controllers
 {
@@ -31,7 +27,7 @@ namespace EccomerceAPI.Controllers
             var sub = _subCategoryServices.AddSubCategory(SubDto);
             if(sub == null) 
             {
-                return BadRequest();
+                return BadRequest("Nem todos os requisitos foram cumprindos");
             }
             return Ok(sub);
         }
