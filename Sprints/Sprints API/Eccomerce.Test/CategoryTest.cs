@@ -1,5 +1,3 @@
-
-
 using AutoMapper;
 using EccomerceAPI.Controllers;
 using EccomerceAPI.Data.Dtos.Categories;
@@ -108,7 +106,7 @@ namespace Eccomerce.Test
             Assert.Equal(400, result.StatusCode);
         }
         [Fact]
-        public void TestCategoryStatusWhenCreatedEqualsFalse()
+        public void TestCategoryCreatedWithStatusFalse()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
             var categoryStatusTest = new CreateCategoryDto()

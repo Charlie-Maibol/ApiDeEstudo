@@ -22,7 +22,7 @@ namespace EccomerceAPI.Services
         {
             var sub = _Mapper.Map<SubCategory>(SubDto);
             if (sub.Name.Length > 128 || sub.Name.Length < 3
-                || sub.Name == string.Empty || sub.Status == false || sub.CategoryId == 0)
+                || sub.Name == string.Empty || sub.Status == false || sub.CategoryId < 1)
             {
                 return null;
             }
