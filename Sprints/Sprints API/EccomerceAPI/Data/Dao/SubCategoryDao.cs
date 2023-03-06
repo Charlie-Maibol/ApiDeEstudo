@@ -35,9 +35,9 @@ namespace EccomerceAPI.Data.Dao
             _context.SaveChanges();
         }
 
-        public SubCategory GetID(int id)
+        public Category GetCategoryID(SubCategory cat)
         {
-            return _context.SubCategories.FirstOrDefault(p => p.Id == id);
+            return _context.Categories.FirstOrDefault(subCategory => subCategory.Id == cat.CategoryId);
         }
 
         public List<SubCategory> FilterProduct(SubCategoryFilterDto filterSubCategoryDto)
@@ -117,7 +117,7 @@ namespace EccomerceAPI.Data.Dao
         }
 
 
-        public SubCategory SearchSubId(int Id)
+        public SubCategory GetSubId(int Id)
         {
            return _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
         }

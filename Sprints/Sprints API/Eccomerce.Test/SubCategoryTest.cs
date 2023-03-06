@@ -32,24 +32,22 @@ namespace Eccomerce.Test
 
 
         [Fact]
-        public void TestSubCategoryNotNull()
+        public void TestSubCategoryNotNull_true()
         {
             subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory());
-
+            subcategoryDao.Setup(repo => repo.GetCategoryID(It.IsAny<SubCategory>())).Returns(new Category() { Status = true });
             var result = SubCategoryService.AddSubCategory(new CreateSubCategoryDto { Name = "teste", CategoryId = 1 });
 
             Assert.NotNull(result);
         }
         [Fact]
-        public void TestSubCategoryCreatWithOutCategoryID()
+        public void TestSubCategoryCreatWithOutCategoryID_400()
         {
 
             subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory());
             var subStatusTest = new CreateSubCategoryDto()
             {
                 Name = "Controle",
-
-
 
             };
             var controller = new SubCategoryController(subcategoryDao.Object, SubCategoryService);
@@ -58,10 +56,10 @@ namespace Eccomerce.Test
             Assert.Equal(400, result.StatusCode);
         }
         [Fact]
-        public void TestSubCategoryCreatTime()
+        public void TestSubCategoryCreatTime_true()
         {
             subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory());
-
+            subcategoryDao.Setup(repo => repo.GetCategoryID(It.IsAny<SubCategory>())).Returns(new Category() { Status = true });
             var created = $"{DateTime.Now:yyyy-MM-dd}";
 
             var result = SubCategoryService.AddSubCategory(new CreateSubCategoryDto { Name = "teste2", CategoryId = 2 });
@@ -70,9 +68,10 @@ namespace Eccomerce.Test
         }
         [Fact]
 
-        public void TestSubCategoryCreatedSucced()
+        public void TestSubCategoryCreatedSucced_200()
         {
             subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory());
+            subcategoryDao.Setup(repo => repo.GetCategoryID(It.IsAny<SubCategory>())).Returns(new Category() { Status = true});
             var subStatusTest = new CreateSubCategoryDto()
             {
                 Name = "Controle",
@@ -87,9 +86,10 @@ namespace Eccomerce.Test
         }
         [Fact]
 
-        public void TestSubCategoryCreatedWithStatusFalse()
+        public void TestSubCategoryCreatedWithStatusFalse_400()
         {
             subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory());
+            subcategoryDao.Setup(repo => repo.GetCategoryID(It.IsAny<SubCategory>())).Returns(new Category() { Status = true });
             var subStatusTest = new CreateSubCategoryDto()
             {
                 Name = "Controle",
@@ -104,7 +104,7 @@ namespace Eccomerce.Test
             Assert.Equal(400, result.StatusCode);
         }
         [Fact]
-        public void TestCategoryMaxCharacter()
+        public void TestCategoryMaxCharacter_400()
         {
             subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory());
 
@@ -123,29 +123,38 @@ namespace Eccomerce.Test
             var result = (ObjectResult)controller.AddSubCategory(subStatusTest);
 
             Assert.Equal(400, result.StatusCode);
-
-
-
         }
         [Fact]
-        public void TestCategoryMinCharacter()
+        public void TestSubCategorydWithCategoryStatusFalse_400()
+        {
+            
+            subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory());
+            subcategoryDao.Setup(repo => repo.GetCategoryID(It.IsAny<SubCategory>())).Returns(new Category() { Status = false });
+            var subStatusTest = new CreateSubCategoryDto()
+            {
+                Name = "Controle",
+                CategoryId = 1,
+            };
+            var controller = new SubCategoryController(subcategoryDao.Object, SubCategoryService);
+            var result = (ObjectResult)controller.AddSubCategory(subStatusTest);
+
+            Assert.Equal(400, result.StatusCode);
+        }
+
+            [Fact]
+        public void TestCategoryMinCharacter_400()
         {
             subcategoryDao.Setup(repo => repo.AddSubCategory(It.IsAny<SubCategory>())).Returns(new SubCategory());
 
             var subStatusTest = new CreateSubCategoryDto()
             {
-                Name = "aaaaaaaaaaaaaaaaaaaa" + //20
-                "aaaaaaaaaaaaaaaaaaaa" + //40
-                "aaaaaaaaaaaaaaaaaaaa" + // 60
-                "aaaaaaaaaaaaaaaaaaaa" + //80
-                "aaaaaaaaaaaaaaaaaaaa" + //100
-                "aaaaaaaaaaaaaaaaaaaa", //120
+                Name = "aa", 
                 CategoryId = 3
             };
             var controller = new SubCategoryController(subcategoryDao.Object, SubCategoryService);
             var result = (ObjectResult)controller.AddSubCategory(subStatusTest);
 
-            Assert.Equal(200, result.StatusCode);
+            Assert.Equal(400, result.StatusCode);
         }
     }
 }

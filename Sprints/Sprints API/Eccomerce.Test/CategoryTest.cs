@@ -37,7 +37,7 @@ namespace Eccomerce.Test
 
 
         [Fact]
-        public void TestCategoryNotNull()
+        public void TestCategoryNotNull_true()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category() { Name = "teste" });
 
@@ -47,7 +47,7 @@ namespace Eccomerce.Test
         }
 
         [Fact]
-        public void TestCategoryCreatTime()
+        public void TestCategoryCreatTime_true()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category() { Name = "teste" });
 
@@ -59,7 +59,7 @@ namespace Eccomerce.Test
         }
         [Fact]
 
-        public void TestCategoryStatusCreatedSucced()
+        public void TestCategoryStatusCreatedSucced_200()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
             var categoryStatusTest = new CreateCategoryDto()
@@ -74,7 +74,7 @@ namespace Eccomerce.Test
             Assert.Equal(200, result.StatusCode);
         }
         [Fact]
-        public void TestCategoryMaxCharacters()
+        public void TestCategoryMaxCharacters_400()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
             var categoryNameTest = new CreateCategoryDto()
@@ -93,7 +93,7 @@ namespace Eccomerce.Test
             Assert.Equal(400,result.StatusCode);
         }
         [Fact]
-        public void TestCategoryMinCharactersExcetion()
+        public void TestCategoryMinCharacters_400()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
             var categoryNameTest = new CreateCategoryDto()
@@ -106,7 +106,7 @@ namespace Eccomerce.Test
             Assert.Equal(400, result.StatusCode);
         }
         [Fact]
-        public void TestCategoryCreatedWithStatusFalse()
+        public void TestCategoryCreatedWithStatusFalse_400()
         {
             categoryDao.Setup(repo => repo.AddCategory(It.IsAny<Category>())).Returns(new Category());
             var categoryStatusTest = new CreateCategoryDto()
