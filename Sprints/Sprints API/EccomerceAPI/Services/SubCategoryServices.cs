@@ -21,8 +21,13 @@ namespace EccomerceAPI.Services
         public SubCategory AddSubCategory(CreateSubCategoryDto SubDto)
         {
             var sub = _Mapper.Map<SubCategory>(SubDto);
+            var cat =_SubCategoryDao.GetCategoryID(sub);
             if (sub.Name.Length > 128 || sub.Name.Length < 3
-                || sub.Name == string.Empty || sub.Status == false || sub.CategoryId < 1)
+                || sub.Name == string.Empty || sub.CategoryId < 1)
+            {
+                return null;
+            }
+            if(sub.Status != true || cat.Status != true)
             {
                 return null;
             }
@@ -32,7 +37,7 @@ namespace EccomerceAPI.Services
 
         internal Result DeletSubCategory(int id)
         {
-            var subCategory = _SubCategoryDao.GetID(id);
+            var subCategory = _SubCategoryDao.GetSubId(id);
             if (subCategory == null)
             {
                 return Result.Fail("Produto não encontrado");
@@ -43,7 +48,7 @@ namespace EccomerceAPI.Services
 
         public Result EditSubCategory(int Id, EditSubCategoryDto subCategoryDto)
         {
-            var subCategory = _SubCategoryDao.SearchSubId(Id);
+            var subCategory = _SubCategoryDao.GetSubId(Id);
             if (subCategory != null)
             {
 
@@ -56,7 +61,7 @@ namespace EccomerceAPI.Services
 
         internal object GetId(int Id)
         {
-            return _SubCategoryDao.SearchSubId(Id);
+            return _SubCategoryDao.GetSubId(Id);
         }
     }
 }
