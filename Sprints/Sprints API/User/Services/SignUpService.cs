@@ -27,7 +27,7 @@ namespace UserAPI.Services
             _roleManager = roleManager;
         }
 
-        public async Task<Result> signUpUser(CreateUserDTO createDto)
+        public async Task<Result> signUpClient(CreateUserDTO createDto)
         {
             var logIn = await GetAdress(createDto.ZipCode);
 
@@ -42,6 +42,36 @@ namespace UserAPI.Services
             var identityResult = await _userManager
                 .CreateAsync(identityUser, createDto.PassWord);
             var identityRoles = await _userManager.AddToRoleAsync(identityUser, "regular");
+
+            if (ConfirmBirthDay(identityUser.BirthDay) == false
+                || ConfirmCPF(identityUser.CPF) == false)
+
+                return Result.Fail("Falha ao cadastrar usuário");
+
+            if (logIn == null) return Result.Fail("Falha ao cadastrar usuário");
+
+            if (identityResult.Succeeded)
+            {
+                return Result.Ok();
+
+            }
+            return Result.Fail("Falha ao cadastrar usuário");
+        }
+        public async Task<Result> SignUpShopkeeper(CreateUserDTO createDto)
+        {
+            var logIn = await GetAdress(createDto.ZipCode);
+
+
+            Users user = _mapper.Map<Users>(createDto);
+            user.Street = logIn.Street;
+            user.Neighborhood = logIn.Neighborhood;
+            user.UF = logIn.UF;
+            user.City = logIn.City;
+            user.Status = true;
+            CustomIdentityUser identityUser = _mapper.Map<CustomIdentityUser>(user);
+            var identityResult = await _userManager
+                .CreateAsync(identityUser, createDto.PassWord);
+            var identityRoles = await _userManager.AddToRoleAsync(identityUser, "lojista");
 
             if (ConfirmBirthDay(identityUser.BirthDay) == false
                 || ConfirmCPF(identityUser.CPF) == false)

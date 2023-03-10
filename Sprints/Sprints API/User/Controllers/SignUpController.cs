@@ -23,9 +23,16 @@ namespace UserAPI.Controllers0
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUpUser(CreateUserDTO createDto)
+        public async Task<IActionResult> SignUpClient(CreateUserDTO createDto)
         {
-            Result result = await _signUpService.signUpUser(createDto);
+            Result result = await _signUpService.signUpClient(createDto);
+            if (result.IsFailed) return StatusCode(500);
+            return Ok();
+        }
+        [HttpPost("/logista")]
+        public async Task<IActionResult> SignUpShopkeeper(CreateUserDTO createDto)
+        {
+            Result result = await _signUpService.SignUpShopkeeper(createDto);
             if (result.IsFailed) return StatusCode(500);
             return Ok();
         }

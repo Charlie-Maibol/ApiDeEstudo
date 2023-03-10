@@ -2,7 +2,6 @@
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
 using System.Collections.Generic;
 
 namespace EccomerceAPI.Controllers
