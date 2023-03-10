@@ -60,7 +60,14 @@ namespace UserAPI.Data
                 NormalizedName = "REGULAR"
             });
 
-           builder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int>
+            builder.Entity<IdentityRole<int>>().HasData(new IdentityRole<int>
+            {
+                Id = 99997,
+                Name = "lojista",
+                NormalizedName = "LOJISTA"
+            });
+
+            builder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int>
             {
                 RoleId = 99999,
                 UserId = 9999
