@@ -61,7 +61,6 @@ namespace UserAPI.Services
         {
             var logIn = await GetAdress(createDto.ZipCode);
 
-
             Users user = _mapper.Map<Users>(createDto);
             user.Street = logIn.Street;
             user.Neighborhood = logIn.Neighborhood;
