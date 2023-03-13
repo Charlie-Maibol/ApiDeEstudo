@@ -9,7 +9,7 @@ namespace UserAPI.Services
     {
 
         public SignInManager<CustomIdentityUser> _signInManager;
-        public ChangeRoleService(SignInManager<CustomIdentityUser> signInManager, TokenService tokenService)
+        public ChangeRoleService(SignInManager<CustomIdentityUser> signInManager)
         {
             _signInManager = signInManager;
         }
