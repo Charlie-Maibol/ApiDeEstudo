@@ -60,7 +60,7 @@ namespace EccomerceAPI.Services
             var requisition = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
             var json = await requisition.Content.ReadAsStringAsync();
             DistributionCenter distributionCenter = new DistributionCenter();
-            var viacep = JsonConvert.DeserializeObject<ViaCepDto>(json);
+            var viacep = JsonConvert.DeserializeObject<DistributionViaCepDto>(json);
             ViaCep(distributionCenter, viacep);
             return distributionCenter;
 
@@ -89,7 +89,7 @@ namespace EccomerceAPI.Services
             return true;
         }
 
-        private static void ViaCep(DistributionCenter distributionCenter, ViaCepDto viacep)
+        private static void ViaCep(DistributionCenter distributionCenter, DistributionViaCepDto viacep)
         {
             distributionCenter.ZipCode = viacep.cep;
             distributionCenter.Street = viacep.logradouro;

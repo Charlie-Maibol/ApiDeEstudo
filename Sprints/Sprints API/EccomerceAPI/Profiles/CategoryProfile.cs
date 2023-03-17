@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using EccomerceAPI.Data.Dtos.Categories;
+﻿using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Models;
 using System.Linq;
 

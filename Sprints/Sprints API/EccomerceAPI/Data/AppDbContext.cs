@@ -35,6 +35,10 @@ namespace EccomerceAPI.Data
                 .HasIndex(center => center.Name)
                 .IsUnique();
 
+            builder.Entity<Product>()
+                .HasOne(prod => prod.Cart)
+                .WithMany(cart => cart.Products)
+                .HasForeignKey(cart => cart.CartId);
         }
         
 
