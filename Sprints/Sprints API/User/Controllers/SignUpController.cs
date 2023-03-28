@@ -29,7 +29,7 @@ namespace UserAPI.Controllers0
             if (result.IsFailed) return StatusCode(500);
             return Ok();
         }
-        [HttpPost("/logista")]
+        [HttpPost("shopKepper")]
         public async Task<IActionResult> SignUpShopkeeper(CreateUserDTO createDto)
         {
             Result result = await _signUpService.SignUpShopkeeper(createDto);

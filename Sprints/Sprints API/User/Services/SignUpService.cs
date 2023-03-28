@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using UserAPI.Data.DTOs;
@@ -60,7 +59,6 @@ namespace UserAPI.Services
         public async Task<Result> SignUpShopkeeper(CreateUserDTO createDto)
         {
             var logIn = await GetAdress(createDto.ZipCode);
-
 
             Users user = _mapper.Map<Users>(createDto);
             user.Street = logIn.Street;
