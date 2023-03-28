@@ -15,10 +15,10 @@ namespace EccomerceAPI.Models
 
         public DateTime Modified { get; set; } = DateTime.Now;
 
-        public virtual List<Product> Products { get; set; }
+        public virtual List<CartWithProduct> CartWithProducts { get; set; }
 
         public string ZipCode { get; set; }
-        public int Totalprice { get; set; }
+        public double Totalprice { get; set; }
 
     }
 }
