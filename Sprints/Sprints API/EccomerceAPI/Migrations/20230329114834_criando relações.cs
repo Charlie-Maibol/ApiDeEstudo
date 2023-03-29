@@ -4,10 +4,27 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace EccomerceAPI.Migrations
 {
-    public partial class criandobanco : Migration
+    public partial class criandorelações : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ZipCode = table.Column<string>(type: "text", nullable: true),
+                    Totalprice = table.Column<double>(type: "double", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -104,6 +121,47 @@ namespace EccomerceAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CartWithProducts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Modified = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ZipCode = table.Column<string>(type: "text", nullable: true),
+                    Totalprice = table.Column<double>(type: "double", nullable: false),
+                    ProductsId = table.Column<int>(type: "int", nullable: true),
+                    CartId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartWithProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartWithProducts_Carts_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartWithProducts_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartWithProducts_CartId",
+                table: "CartWithProducts",
+                column: "CartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartWithProducts_ProductsId",
+                table: "CartWithProducts",
+                column: "ProductsId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_DistributionCenters_Name",
                 table: "DistributionCenters",
@@ -128,6 +186,12 @@ namespace EccomerceAPI.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CartWithProducts");
+
+            migrationBuilder.DropTable(
+                name: "Carts");
+
             migrationBuilder.DropTable(
                 name: "Products");
 

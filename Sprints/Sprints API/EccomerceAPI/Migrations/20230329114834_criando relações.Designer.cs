@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EccomerceAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220923150925_retirando obrigatoriedade do cd")]
-    partial class retirandoobrigatoriedadedocd
+    [Migration("20230329114834_criando relações")]
+    partial class criandorelações
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,68 @@ namespace EccomerceAPI.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.17");
+
+            modelBuilder.Entity("EccomerceAPI.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<double>("Totalprice")
+                        .HasColumnType("double");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("EccomerceAPI.Models.CartWithProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<double>("Totalprice")
+                        .HasColumnType("double");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("CartWithProducts");
+                });
 
             modelBuilder.Entity("EccomerceAPI.Models.Category", b =>
                 {
@@ -172,6 +234,23 @@ namespace EccomerceAPI.Migrations
                     b.ToTable("SubCategories");
                 });
 
+            modelBuilder.Entity("EccomerceAPI.Models.CartWithProduct", b =>
+                {
+                    b.HasOne("EccomerceAPI.Models.Cart", "Carts")
+                        .WithMany("CartWithProducts")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EccomerceAPI.Models.Product", "Products")
+                        .WithMany("CartWithProducts")
+                        .HasForeignKey("ProductsId");
+
+                    b.Navigation("Carts");
+
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
                 {
                     b.HasOne("EccomerceAPI.Models.DistributionCenter", "DistributionCenters")
@@ -202,6 +281,11 @@ namespace EccomerceAPI.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("EccomerceAPI.Models.Cart", b =>
+                {
+                    b.Navigation("CartWithProducts");
+                });
+
             modelBuilder.Entity("EccomerceAPI.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
@@ -210,6 +294,11 @@ namespace EccomerceAPI.Migrations
             modelBuilder.Entity("EccomerceAPI.Models.DistributionCenter", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
+                {
+                    b.Navigation("CartWithProducts");
                 });
 
             modelBuilder.Entity("EccomerceAPI.Models.SubCategory", b =>
