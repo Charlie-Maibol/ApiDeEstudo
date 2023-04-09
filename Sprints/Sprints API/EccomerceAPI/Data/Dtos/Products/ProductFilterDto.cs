@@ -2,7 +2,7 @@
 
 namespace EccomerceAPI.Data.Dtos
 {
-    public class ProductFIlterDto
+    public class ProductFilterDto
     {
 
         public string name;

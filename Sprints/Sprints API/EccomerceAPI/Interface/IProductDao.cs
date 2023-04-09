@@ -13,7 +13,7 @@ namespace EccomerceAPI.Interface
         void EditProduct(int id, Product product);
         Product SearchProdId(int id);
         List<Product> NullProducts(int? Id);
-        List<Product> FilterProduct(ProductFIlterDto productFIlterDto);
+        List<Product> FilterProduct(CartFilterDto productFIlterDto);
         List<Product> GetProductsCenterID(int Id);
         IEnumerable<Product> GetAll();
         SubCategory GetSubCategoryID(CreateProductDto productDto);
