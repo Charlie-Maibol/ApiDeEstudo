@@ -20,8 +20,6 @@ namespace EccomerceAPI.Models
         public virtual Cart Carts { get; set; }
         public virtual Product Products { get; set; }
 
-        public int ProductId { get; set; }
-
         public int CartId { get; set; }
 
     }

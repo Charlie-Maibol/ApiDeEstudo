@@ -58,7 +58,7 @@ namespace EccomerceAPI.Migrations
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductsId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
@@ -74,7 +74,7 @@ namespace EccomerceAPI.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductsId");
 
                     b.ToTable("CartWithProducts");
                 });
@@ -242,9 +242,7 @@ namespace EccomerceAPI.Migrations
 
                     b.HasOne("EccomerceAPI.Models.Product", "Products")
                         .WithMany("CartWithProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductsId");
 
                     b.Navigation("Carts");
 

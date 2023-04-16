@@ -1,17 +1,12 @@
 ﻿using AutoMapper;
 using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Data;
 using EccomerceAPI.Models;
 using System.Linq;
 using System.Collections.Generic;
-using System.Net;
-using System.Web.Http;
 using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Configuration;
 using Dapper;
-using System;
 using EccomerceAPI.Data.Dtos.Categories.DC;
-using EccomerceAPI.Data.Dtos.DC;
 
 namespace EccomerceAPI.Data.productDao
 {
