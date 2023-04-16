@@ -4,19 +4,18 @@ namespace EccomerceAPI.Data.Dtos
 {
     public class CartFilterDto
     {
-
-        public string name;
-        public string center;
-        public bool? status;
-        public double? weight;
-        public double? height;
-        public double? lengths;
-        public double? widths;
-        public double? price;
-        public int? amountOfProducts;
         public int? order;
         public int pageNumber = 0;
         public int itensPerPage = 0;
+        public int? id { get; set; }
+        public bool? status { get; set; }
+        public string city { get; set; }
+        public string UF { get; set; }
+        public string zipCode { get; set; }
+        public string street { get; set; }
+        public int? streetNumber { get; set; }
+        public string neighbourhood { get; set; }
+        public string addComplemente { get; set; }
 
     }
 }

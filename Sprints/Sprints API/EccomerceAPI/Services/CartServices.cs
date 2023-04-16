@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration;
 using EccomerceAPI.Data.Dao;
+using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Cart;
-using EccomerceAPI.Data.Dtos.Products;
-using EccomerceAPI.Interface;
 using EccomerceAPI.Models;
+using FluentResults;
 using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
 
 namespace EccomerceAPI.Services
 {
@@ -29,18 +28,14 @@ namespace EccomerceAPI.Services
         {
 
             var street = await GetAdress(cartDto.ZipCode);
-            var validation = _cartDao.GetCartID(cartDto);
             if (street.Street == null)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-            if (validation.Status == false)
+            else
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-            }
-            if (validation.Status == true)
-            {
-                _cartDao.AddProduct(cartDto);
+                _cartDao.AddCart(cartDto, street);
+
             }
             return null;
         }
@@ -87,6 +82,16 @@ namespace EccomerceAPI.Services
             cart.UF = viacep.uf;
             cart.Neighbourhood = viacep.bairro;
             cart.City = viacep.localidade;
+        }
+
+        internal Result EditCart(int id, EditCartsDto center)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Result DeletCart(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

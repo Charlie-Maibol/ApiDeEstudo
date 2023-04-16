@@ -71,7 +71,7 @@ namespace EccomerceAPI.Data.productDao
             return products;
         }
 
-        public List<Product> FilterProduct(CartFilterDto productFIlterDto)
+        public List<Product> FilterProduct(ProductFilterDto productFIlterDto)
         {
             var FilterSql = "SELECT * FROM Products WHERE ";
             var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
