@@ -1,4 +1,5 @@
 ﻿using EccomerceAPI.Data.Dao;
+using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Cart;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
@@ -26,10 +27,10 @@ public class CartController : ControllerBase
     public async Task<IActionResult> AddCenter([FromBody] CreateCartDto cartDto)
     {
         SearchCartsDto searchCart = await _cartService.CreateCart(cartDto);
-        return CreatedAtAction(nameof(SearchCenterId), new { id = cartDto.Id }, cartDto);
+        return CreatedAtAction(nameof(SearchCartId), new { id = cartDto.Id }, cartDto);
     }
     [HttpGet("{Id}")]
-    public IActionResult SearchCenterId(int? Id)
+    public IActionResult SearchCartId(int? Id)
     {
         List<SearchCartsDto> cartDto = _cartService.SearchCartId(Id);
         if (cartDto != null)
@@ -40,9 +41,9 @@ public class CartController : ControllerBase
         return NotFound();
     }
     [HttpGet("filter")]
-    public List<Cart> FilterCart([FromBody] FilterCartsDto fIlterDto)
+    public List<Cart> FilterCart([FromBody] CartFilterDto fIlterDto)
     {
-        return _CartDao.FilterCart(fIlterDto);
+        return _cartDao.CartFilter(fIlterDto);
 
 
 

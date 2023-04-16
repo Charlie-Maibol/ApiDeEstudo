@@ -38,6 +38,8 @@ namespace EccomerceAPI
             services.AddScoped<IProductDao,ProductDao>();
             services.AddScoped<DistributionCenterServices, DistributionCenterServices>();
             services.AddScoped<DistributionCenterDao>();
+            services.AddScoped<CartServices, CartServices>();
+            services.AddScoped<CartDao>();
             services.AddControllers().AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         );

@@ -7,6 +7,7 @@ using EccomerceAPI.Models;
 using FluentResults;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -32,8 +33,9 @@ namespace EccomerceAPI.Services
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-            else
+            
             {
+                
                 _cartDao.AddCart(cartDto, street);
 
             }
@@ -55,7 +57,7 @@ namespace EccomerceAPI.Services
         private bool UniqueAddress(Cart cart)
         {
             CartFilterDto filter = new();
-            var cartList = _cartDao.Filter(filter);
+            var cartList = _cartDao.CartFilter(filter);
             string address = cart.Street;
             address += cart.StreetNumber;
             address += cart.AddComplemente;
@@ -90,6 +92,11 @@ namespace EccomerceAPI.Services
         }
 
         internal Result DeletCart(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal List<SearchCartsDto> SearchCartId(int? id)
         {
             throw new NotImplementedException();
         }

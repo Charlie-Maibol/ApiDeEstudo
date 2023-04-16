@@ -49,7 +49,7 @@ namespace EccomerceAPI.Data.Dao
             && filterDto.neighbourhood == null;
         }
 
-        public List<Cart> Filter(CartFilterDto filterDto)
+        public List<Cart> CartFilter(CartFilterDto filterDto)
         {
             using var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
             connection.Open();
