@@ -1,6 +1,7 @@
 ﻿using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Cart;
+using EccomerceAPI.Data.Dtos.DC;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using FluentResults;
@@ -69,6 +70,7 @@ public class CartController : ControllerBase
             return NotFound();
         }
         return Ok();
+        
     }
 }
 

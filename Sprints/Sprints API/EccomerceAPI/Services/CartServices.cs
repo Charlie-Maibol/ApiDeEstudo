@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using AutoMapper.Configuration;
 using EccomerceAPI.Data.Dao;
 using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Cart;
 using EccomerceAPI.Models;
 using FluentResults;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -18,8 +17,8 @@ namespace EccomerceAPI.Services
     public class CartServices
     {
         private CartDao _cartDao;
-        private Mapper _cartMapper;
-        public CartServices(Mapper mapper, CartDao dao, IConfiguration configuration)
+        private IMapper _cartMapper;
+        public CartServices(IMapper mapper, CartDao dao, IConfiguration configuration)
         {
             _cartMapper = mapper;
             _cartDao = dao;
@@ -29,14 +28,17 @@ namespace EccomerceAPI.Services
         {
 
             var street = await GetAdress(cartDto.ZipCode);
+            
             if (street.Street == null)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-            
+            else
             {
-                
-                _cartDao.AddCart(cartDto, street);
+                if (UniqueAddress(street))
+                {
+                    _cartDao.AddCart(cartDto, street);
+                }
 
             }
             return null;
@@ -54,13 +56,13 @@ namespace EccomerceAPI.Services
 
         }
 
-        private bool UniqueAddress(Cart cart)
+        private bool UniqueAddress(Cart cartDto)
         {
             CartFilterDto filter = new();
             var cartList = _cartDao.CartFilter(filter);
-            string address = cart.Street;
-            address += cart.StreetNumber;
-            address += cart.AddComplemente;
+            string address = cartDto.Street;
+            address += cartDto.StreetNumber;
+            address += cartDto.AddComplemente;
 
             foreach (var a in cartList)
             {
@@ -86,19 +88,42 @@ namespace EccomerceAPI.Services
             cart.City = viacep.localidade;
         }
 
-        internal Result EditCart(int id, EditCartsDto center)
+        internal Result EditCart(int id, EditCartsDto cartDto)
         {
-            throw new NotImplementedException();
+            var cart = _cartDao.GetCartID(id);
+            if (cart == null)
+            {
+
+                return Result.Fail("Produto não encontrado");
+            }
+            _cartMapper.Map(cartDto, cart);
+            _cartDao.EditCart(id, cart);
+            return Result.Ok();
         }
 
-        internal Result DeletCart(int id)
+
+        public Result DeletCart(int id)
         {
-            throw new NotImplementedException();
+            var cart = _cartDao.GetCartID(id);
+            if (cart == null)
+            {
+                return Result.Fail("Produto não encontrado");
+            }
+            _cartDao.DeleteCart(cart);
+            return Result.Ok();
         }
 
-        internal List<SearchCartsDto> SearchCartId(int? id)
+        internal List<SearchCartsDto> SearchCartId(int? Id)
         {
-            throw new NotImplementedException();
+            List<Cart> cart;
+
+            cart = _cartDao.Nullcart(Id);
+            if (cart != null)
+            {
+                List<SearchCartsDto> cartDto = _cartMapper.Map<List<SearchCartsDto>>(cart);
+                return cartDto;
+            }
+            return null;
         }
     }
 }

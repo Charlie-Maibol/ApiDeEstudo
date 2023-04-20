@@ -31,7 +31,7 @@ namespace EccomerceAPI.Controllers
         public IActionResult AddProduct([FromBody] CreateProductDto productDto)
         {
             SearchProductsDto searchProducts = _productService.AddProduct(productDto);
-            return CreatedAtAction(nameof(SearchProdId), new { id = searchProducts.Id }, searchProducts);
+            return CreatedAtAction(nameof(SearchProdId), new { id = productDto.Id }, productDto);
         }
         [HttpGet("{Id}")]
         public IActionResult SearchProdId(int? Id)

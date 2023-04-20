@@ -23,17 +23,34 @@ namespace EccomerceAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AddComplemente")
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime");
 
+                    b.Property<string>("Neighbourhood")
+                        .HasColumnType("text");
+
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<double>("Totalprice")
-                        .HasColumnType("double");
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<int>("StreetNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UF")
+                        .HasColumnType("text");
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("text");
@@ -158,6 +175,9 @@ namespace EccomerceAPI.Migrations
                     b.Property<int>("AmountOfProducts")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
@@ -194,6 +214,8 @@ namespace EccomerceAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("distribuitonCenterId");
 
@@ -251,6 +273,10 @@ namespace EccomerceAPI.Migrations
 
             modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
                 {
+                    b.HasOne("EccomerceAPI.Models.Cart", null)
+                        .WithMany("Products")
+                        .HasForeignKey("CartId");
+
                     b.HasOne("EccomerceAPI.Models.DistributionCenter", "DistributionCenters")
                         .WithMany("Products")
                         .HasForeignKey("distribuitonCenterId")
@@ -282,6 +308,8 @@ namespace EccomerceAPI.Migrations
             modelBuilder.Entity("EccomerceAPI.Models.Cart", b =>
                 {
                     b.Navigation("CartWithProducts");
+
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("EccomerceAPI.Models.Category", b =>

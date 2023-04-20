@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿
+
+using AutoMapper;
 using Dapper;
 using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Cart;
@@ -14,10 +16,10 @@ namespace EccomerceAPI.Data.Dao
     {
 
         private AppDbContext _context;
-        private Mapper _mapper;
+        private IMapper _mapper;
         private IConfiguration _configuration;
 
-        public CartDao(AppDbContext context, Mapper mapper, IConfiguration configuration)
+        public CartDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
         {
             _context = context;
             _mapper = mapper;
@@ -130,6 +132,34 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
+        internal void DeleteCart(object center)
+        {
+
+            _context.Remove(center);
+            _context.SaveChanges();
+        }
+
+        internal void EditCart(int id, object cart)
+        {
+            _context.SaveChanges();
+        }
+
+        internal List<Cart> Nullcart(int? Id)
+        {
+            List<Cart> carts;
+            if (Id == null)
+            {
+                carts = _context.Carts.ToList();
+            }
+            else
+            {
+                carts = _context.Carts.Where(c => c.Id == Id).ToList();
+
+
+            }
+
+            return carts;
+        }
     }
 
 
