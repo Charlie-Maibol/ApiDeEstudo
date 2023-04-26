@@ -24,53 +24,14 @@ public class CartController : ControllerBase
         _cartDao = cartDao;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> AddCenter([FromBody] CreateCartDto cartDto)
-    {
-        SearchCartsDto searchCart = await _cartService.CreateCart(cartDto);
-        return CreatedAtAction(nameof(SearchCartId), new { id = cartDto.Id }, cartDto);
-    }
-    [HttpGet("{Id}")]
-    public IActionResult SearchCartId(int? Id)
-    {
-        List<SearchCartsDto> cartDto = _cartService.SearchCartId(Id);
-        if (cartDto != null)
-        {
-            return Ok(cartDto);
-
-        }
-        return NotFound();
-    }
-    [HttpGet("filter")]
-    public List<Cart> FilterCart([FromBody] CartFilterDto fIlterDto)
-    {
-        return _cartDao.CartFilter(fIlterDto);
-
-
-
-    }
-    [HttpPut("{Id}")]
-    public IActionResult EditCart(int Id, [FromBody] EditCartsDto Center)
-    {
-        Result result = _cartService.EditCart(Id, Center);
-        if (result.IsFailed)
-        {
-            return NotFound();
-        }
-
-        return NoContent();
-    }
-    [HttpDelete("{Id}")]
-
-    public IActionResult DeletCart(int Id)
-    {
-        Result result = _cartService.DeletCart(Id);
-        if (result.IsFailed)
-        {
-            return NotFound();
-        }
-        return Ok();
+    //[HttpPost]
+    //public async Task<IActionResult> AddCenter([FromBody] CreateCartDto cartDto)
+    //{
+    //    SearchCartsDto searchCart = await _cartService.CreateCart(cartDto);
+    //    return CreatedAtAction(nameof(SearchCartId), new { id = cartDto.Id }, cartDto);
+    //}
+   
         
-    }
+    
 }
 

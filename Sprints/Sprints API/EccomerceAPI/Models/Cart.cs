@@ -9,11 +9,6 @@ namespace EccomerceAPI.Models
         [Key]
         [Required]
         public int Id { get; internal set; }
-        public bool Status { get; set; }
-
-        public DateTime Created { get; set; } = DateTime.Now;
-
-        public DateTime Modified { get; set; } = DateTime.Now;
 
         public virtual List<CartWithProduct> CartWithProducts { get; set; }
 
@@ -28,9 +23,11 @@ namespace EccomerceAPI.Models
         public string Street { get; set; }
         public int StreetNumber { get; set; }
         public string Neighbourhood { get; set; }
-        public virtual List<Product> Products { get; set; }
 
+        public int ProductId { get; set; }
+        public int TotalAmount { get; set; }
         public string AddComplemente { get; set; }
+        public double Totalprice { get; set; }
 
     }
 }

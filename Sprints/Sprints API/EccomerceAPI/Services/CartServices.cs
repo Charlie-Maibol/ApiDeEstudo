@@ -24,106 +24,106 @@ namespace EccomerceAPI.Services
             _cartDao = dao;
 
         }
-        public async Task<SearchCartsDto> CreateCart(CreateCartDto cartDto)
-        {
+        //    public async Task<SearchCartsDto> CreateCart(CreateCartDto cartDto)
+        //    {
 
-            var street = await GetAdress(cartDto.ZipCode);
-            
-            if (street.Street == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-            }
-            else
-            {
-                if (UniqueAddress(street))
-                {
-                    _cartDao.AddCart(cartDto, street);
-                }
+        //        var street = await GetAdress(cartDto.ZipCode);
 
-            }
-            return null;
-        }
+        //        if (street.Street == null)
+        //        {
+        //            throw new HttpResponseException(HttpStatusCode.BadRequest);
+        //        }
+        //        else
+        //        {
+        //            if (UniqueAddress(street))
+        //            {
+        //                _cartDao.AddCart(cartDto, street);
+        //            }
 
-        public async Task<Cart> GetAdress(string cep)
-        {
-            HttpClient client = new HttpClient();
-            var requisition = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
-            var json = await requisition.Content.ReadAsStringAsync();
-            Cart cart = new Cart();
-            var viacep = JsonConvert.DeserializeObject<CartViaCepDto>(json);
-            CartViaCep(cart, viacep);
-            return cart;
+        //        }
+        //        return null;
+        //    }
 
-        }
+        //    public async Task<Cart> GetAdress(string cep)
+        //    {
+        //        HttpClient client = new HttpClient();
+        //        var requisition = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
+        //        var json = await requisition.Content.ReadAsStringAsync();
+        //        Cart cart = new Cart();
+        //        var viacep = JsonConvert.DeserializeObject<CartViaCepDto>(json);
+        //        CartViaCep(cart, viacep);
+        //        return cart;
 
-        private bool UniqueAddress(Cart cartDto)
-        {
-            CartFilterDto filter = new();
-            var cartList = _cartDao.CartFilter(filter);
-            string address = cartDto.Street;
-            address += cartDto.StreetNumber;
-            address += cartDto.AddComplemente;
+        //    }
 
-            foreach (var a in cartList)
-            {
-                string addressComplet = a.Street;
-                addressComplet += a.StreetNumber;
-                addressComplet += a.AddComplemente;
-                if (address == addressComplet)
-                {
-                    return false;
-                }
+        //    private bool UniqueAddress(Cart cartDto)
+        //    {
+        //        CartFilterDto filter = new();
+        //        var cartList = _cartDao.CartFilter(filter);
+        //        string address = cartDto.Street;
+        //        address += cartDto.StreetNumber;
+        //        address += cartDto.AddComplemente;
 
-            }
+        //        foreach (var a in cartList)
+        //        {
+        //            string addressComplet = a.Street;
+        //            addressComplet += a.StreetNumber;
+        //            addressComplet += a.AddComplemente;
+        //            if (address == addressComplet)
+        //            {
+        //                return false;
+        //            }
 
-            return true;
-        }
+        //        }
 
-        private static void CartViaCep(Cart cart, CartViaCepDto viacep)
-        {
-            cart.ZipCode = viacep.cep;
-            cart.Street = viacep.logradouro;
-            cart.UF = viacep.uf;
-            cart.Neighbourhood = viacep.bairro;
-            cart.City = viacep.localidade;
-        }
+        //        return true;
+        //    }
 
-        internal Result EditCart(int id, EditCartsDto cartDto)
-        {
-            var cart = _cartDao.GetCartID(id);
-            if (cart == null)
-            {
+        //    private static void CartViaCep(Cart cart, CartViaCepDto viacep)
+        //    {
+        //        cart.ZipCode = viacep.cep;
+        //        cart.Street = viacep.logradouro;
+        //        cart.UF = viacep.uf;
+        //        cart.Neighbourhood = viacep.bairro;
+        //        cart.City = viacep.localidade;
+        //    }
 
-                return Result.Fail("Produto não encontrado");
-            }
-            _cartMapper.Map(cartDto, cart);
-            _cartDao.EditCart(id, cart);
-            return Result.Ok();
-        }
+        //    internal Result EditCart(int id, EditCartsDto cartDto)
+        //    {
+        //        var cart = _cartDao.GetCartID(id);
+        //        if (cart == null)
+        //        {
+
+        //            return Result.Fail("Produto não encontrado");
+        //        }
+        //        _cartMapper.Map(cartDto, cart);
+        //        _cartDao.EditCart(id, cart);
+        //        return Result.Ok();
+        //    }
 
 
-        public Result DeletCart(int id)
-        {
-            var cart = _cartDao.GetCartID(id);
-            if (cart == null)
-            {
-                return Result.Fail("Produto não encontrado");
-            }
-            _cartDao.DeleteCart(cart);
-            return Result.Ok();
-        }
+        //    public Result DeletCart(int id)
+        //    {
+        //        var cart = _cartDao.GetCartID(id);
+        //        if (cart == null)
+        //        {
+        //            return Result.Fail("Produto não encontrado");
+        //        }
+        //        _cartDao.DeleteCart(cart);
+        //        return Result.Ok();
+        //    }
 
-        internal List<SearchCartsDto> SearchCartId(int? Id)
-        {
-            List<Cart> cart;
+        //    internal List<SearchCartsDto> SearchCartId(int? Id)
+        //    {
+        //        List<Cart> cart;
 
-            cart = _cartDao.Nullcart(Id);
-            if (cart != null)
-            {
-                List<SearchCartsDto> cartDto = _cartMapper.Map<List<SearchCartsDto>>(cart);
-                return cartDto;
-            }
-            return null;
-        }
+        //        cart = _cartDao.Nullcart(Id);
+        //        if (cart != null)
+        //        {
+        //            List<SearchCartsDto> cartDto = _cartMapper.Map<List<SearchCartsDto>>(cart);
+        //            return cartDto;
+        //        }
+        //        return null;
+        //    }
     }
 }

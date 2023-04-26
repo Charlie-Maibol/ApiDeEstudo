@@ -29,17 +29,11 @@ namespace EccomerceAPI.Migrations
                     b.Property<string>("City")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime");
-
                     b.Property<string>("Neighbourhood")
                         .HasColumnType("text");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -48,6 +42,12 @@ namespace EccomerceAPI.Migrations
 
                     b.Property<int>("StreetNumber")
                         .HasColumnType("int");
+
+                    b.Property<int>("TotalAmount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Totalprice")
+                        .HasColumnType("double");
 
                     b.Property<string>("UF")
                         .HasColumnType("text");
@@ -66,32 +66,24 @@ namespace EccomerceAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("AmountOfProducts")
+                        .HasColumnType("int");
+
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<double>("Totalprice")
+                    b.Property<double>("IndividualPrice")
                         .HasColumnType("double");
 
-                    b.Property<string>("ZipCode")
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductName")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
-
-                    b.HasIndex("ProductsId");
 
                     b.ToTable("CartWithProducts");
                 });
@@ -175,9 +167,6 @@ namespace EccomerceAPI.Migrations
                     b.Property<int>("AmountOfProducts")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
@@ -214,8 +203,6 @@ namespace EccomerceAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CartId");
 
                     b.HasIndex("distribuitonCenterId");
 
@@ -262,21 +249,11 @@ namespace EccomerceAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EccomerceAPI.Models.Product", "Products")
-                        .WithMany("CartWithProducts")
-                        .HasForeignKey("ProductsId");
-
                     b.Navigation("Carts");
-
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
                 {
-                    b.HasOne("EccomerceAPI.Models.Cart", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CartId");
-
                     b.HasOne("EccomerceAPI.Models.DistributionCenter", "DistributionCenters")
                         .WithMany("Products")
                         .HasForeignKey("distribuitonCenterId")
@@ -308,8 +285,6 @@ namespace EccomerceAPI.Migrations
             modelBuilder.Entity("EccomerceAPI.Models.Cart", b =>
                 {
                     b.Navigation("CartWithProducts");
-
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("EccomerceAPI.Models.Category", b =>
@@ -320,11 +295,6 @@ namespace EccomerceAPI.Migrations
             modelBuilder.Entity("EccomerceAPI.Models.DistributionCenter", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("EccomerceAPI.Models.Product", b =>
-                {
-                    b.Navigation("CartWithProducts");
                 });
 
             modelBuilder.Entity("EccomerceAPI.Models.SubCategory", b =>

@@ -12,7 +12,7 @@ namespace EccomerceAPI.Controllers
     {
         private ICategoryDao _categoryDao;
         private CategoryServices _categoryServices;
- 
+
 
         public CategoryController(ICategoryDao categoryDao, CategoryServices categoryServices)
         {
@@ -54,14 +54,14 @@ namespace EccomerceAPI.Controllers
         [HttpPut("{Id}")]
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
-            
+
 
             var result = _categoryServices.EditCategory(Id, Category);
             if (result == null)
             {
                 return NotFound();
             }
-            
+
             return NoContent();
         }
 

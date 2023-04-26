@@ -38,6 +38,5 @@ namespace EccomerceAPI.Models
         public int subCategoryId { get; set; }
         public virtual DistributionCenter DistributionCenters { get; set; }
         public int distribuitonCenterId { get;set; }
-        public virtual List<CartWithProduct> CartWithProducts { get; internal set; }
     }
 }

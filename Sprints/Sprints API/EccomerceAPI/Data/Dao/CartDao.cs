@@ -57,10 +57,10 @@ namespace EccomerceAPI.Data.Dao
             connection.Open();
             var queryArgs = new DynamicParameters();
             var FilterSql = "SELECT c.id, c.addComplemente, c.status, c.city, c.uf, c.zipCode, c.street, c.streetNumber," +
-                "d.neighbourhood as neighbourhood, " +
+                "c.neighbourhood as neighbourhood, " +
                 "p.name as Product, p.distribuitonCenterId " +
                 "FROM Carts c " +
-                "INNER JOIN Products p ON c.id = p.distribuitonCenterId " +
+                "INNER JOIN Products p ON c.id = p.productId " +
                 "WHERE ";
 
             if (filterDto.addComplemente != null)
