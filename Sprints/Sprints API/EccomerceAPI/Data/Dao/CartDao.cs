@@ -1,6 +1,4 @@
-﻿
-
-using AutoMapper;
+﻿using AutoMapper;
 using Dapper;
 using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Cart;
@@ -159,6 +157,16 @@ namespace EccomerceAPI.Data.Dao
             }
 
             return carts;
+        }
+
+        internal Product GetProductId(int Id)
+        {
+            return _context.Products.FirstOrDefault(prod => prod.Id == Id);
+        }
+
+        internal object GetProdutCart(int Id)
+        {
+            return _context.CartWithProducts.FirstOrDefault(prodCart => prodCart.Id == Id);
         }
     }
 
