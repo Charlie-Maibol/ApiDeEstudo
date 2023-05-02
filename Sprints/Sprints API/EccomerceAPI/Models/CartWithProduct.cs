@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EccomerceAPI.Models
 {
@@ -9,18 +7,15 @@ namespace EccomerceAPI.Models
         [Key]
         [Required]
         public int Id { get; internal set; }
-        public bool Status { get; set; }
 
-        public DateTime Created { get; set; } = DateTime.Now;
-
-        public DateTime Modified { get; set; } = DateTime.Now;
-
-        public string ZipCode { get; set; }
-        public double Totalprice { get; set; }
         public virtual Cart Carts { get; set; }
-        public virtual Product Products { get; set; }
 
         public int CartId { get; set; }
+
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public double IndividualPrice { get; set; } 
+        public int AmountOfProducts { get; set; }   
 
     }
 }

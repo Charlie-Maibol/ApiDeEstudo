@@ -1,11 +1,10 @@
 ﻿using EccomerceAPI.Data.Dao;
-using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Cart;
+using EccomerceAPI.Data.Dtos.CartWithProducts;
 using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 [Route("[controller]")]
@@ -24,51 +23,39 @@ public class CartController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddCenter([FromBody] CreateCartDto cartDto)
+    public async Task<Cart> AddCart([FromBody] CreateCartDto cartDto)
     {
-        SearchCartsDto searchCart = await _cartService.CreateCart(cartDto);
-        return CreatedAtAction(nameof(SearchCartId), new { id = cartDto.Id }, cartDto);
+        return await _cartService.CreateCart(cartDto); 
     }
-    [HttpGet("{Id}")]
-    public IActionResult SearchCartId(int? Id)
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteCart(int id)
     {
-        List<SearchCartsDto> cartDto = _cartService.SearchCartId(Id);
-        if (cartDto != null)
-        {
-            return Ok(cartDto);
 
-        }
-        return NotFound();
-    }
-    [HttpGet("filter")]
-    public List<Cart> FilterCart([FromBody] CartFilterDto fIlterDto)
-    {
-        return _cartDao.CartFilter(fIlterDto);
-
-
-
-    }
-    [HttpPut("{Id}")]
-    public IActionResult EditCart(int Id, [FromBody] EditCartsDto Center)
-    {
-        Result result = _cartService.EditCart(Id, Center);
-        if (result.IsFailed)
-        {
-            return NotFound();
-        }
-
+        Result result = _cartService.DeletCart(id);
+        if (result.IsFailed) return NotFound("Carrinho não encontrado");
         return NoContent();
-    }
-    [HttpDelete("{Id}")]
 
-    public IActionResult DeletCart(int Id)
-    {
-        Result result = _cartService.DeletCart(Id);
-        if (result.IsFailed)
-        {
-            return NotFound();
-        }
-        return Ok();
     }
+    [HttpPost("add")]
+    public IActionResult AddProduct([FromBody] CreateCartWithProducts product)
+    {
+        var result = _cartService.AddProduct(product);
+        if (result == null) return BadRequest();
+        return Ok(result);
+
+    }
+
+    [HttpPut("remove")]
+    public IActionResult RemoveProduto(CreateCartWithProducts remove)
+    {
+        object result = _cartService.RemoveProduct(remove);
+        if (result == null) return BadRequest();
+        return Ok(result);
+    }
+
+
+
+
 }
 

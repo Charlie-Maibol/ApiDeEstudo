@@ -14,10 +14,10 @@ namespace EccomerceAPI.Data.Dao
     {
 
         private AppDbContext _context;
-        private Mapper _mapper;
+        private IMapper _mapper;
         private IConfiguration _configuration;
 
-        public CartDao(AppDbContext context, Mapper mapper, IConfiguration configuration)
+        public CartDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
         {
             _context = context;
             _mapper = mapper;
@@ -55,10 +55,10 @@ namespace EccomerceAPI.Data.Dao
             connection.Open();
             var queryArgs = new DynamicParameters();
             var FilterSql = "SELECT c.id, c.addComplemente, c.status, c.city, c.uf, c.zipCode, c.street, c.streetNumber," +
-                "d.neighbourhood as neighbourhood, " +
+                "c.neighbourhood as neighbourhood, " +
                 "p.name as Product, p.distribuitonCenterId " +
                 "FROM Carts c " +
-                "INNER JOIN Products p ON c.id = p.distribuitonCenterId " +
+                "INNER JOIN Products p ON c.id = p.productId " +
                 "WHERE ";
 
             if (filterDto.addComplemente != null)
@@ -130,6 +130,44 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
+        internal void DeleteCart(object center)
+        {
+
+            _context.Remove(center);
+            _context.SaveChanges();
+        }
+
+        internal void EditCart(int id, object cart)
+        {
+            _context.SaveChanges();
+        }
+
+        internal List<Cart> Nullcart(int? Id)
+        {
+            List<Cart> carts;
+            if (Id == null)
+            {
+                carts = _context.Carts.ToList();
+            }
+            else
+            {
+                carts = _context.Carts.Where(c => c.Id == Id).ToList();
+
+
+            }
+
+            return carts;
+        }
+
+        internal Product GetProductId(int Id)
+        {
+            return _context.Products.FirstOrDefault(prod => prod.Id == Id);
+        }
+
+        internal object GetProdutCart(int Id)
+        {
+            return _context.CartWithProducts.FirstOrDefault(prodCart => prodCart.Id == Id);
+        }
     }
 
 

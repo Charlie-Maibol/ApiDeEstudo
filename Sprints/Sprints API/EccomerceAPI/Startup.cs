@@ -33,13 +33,13 @@ namespace EccomerceAPI
             services.AddScoped<CategoryServices, CategoryServices>();          
             services.AddScoped<ICategoryDao, CategoryDao>();
             services.AddScoped<SubCategoryServices, SubCategoryServices>();
+            services.AddScoped<CartServices, CartServices>();
+            services.AddScoped<CartDao>();
             services.AddScoped<ISubCategoryDao, SubCategoryDao>();
             services.AddScoped<ProductsServices, ProductsServices>();
             services.AddScoped<IProductDao,ProductDao>();
             services.AddScoped<DistributionCenterServices, DistributionCenterServices>();
             services.AddScoped<DistributionCenterDao>();
-            services.AddScoped<CartServices, CartServices>();
-            services.AddScoped<CartDao>();
             services.AddControllers().AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         );

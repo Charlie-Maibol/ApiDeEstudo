@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EccomerceAPI.Data.Dtos.Products
 {
@@ -8,7 +7,7 @@ namespace EccomerceAPI.Data.Dtos.Products
 
         [Key]
         [Required]
-        public int Id { get; set; }
+        public int Id { get; internal set; }
         [Required(ErrorMessage = "Campo Obrigatório")]
         [StringLength(128, ErrorMessage = "Você excedeu o número da caracteres permitidos!")]
         [RegularExpression(@"^[a-zA-Z' '-'\s]{1,40}$")]
@@ -26,10 +25,8 @@ namespace EccomerceAPI.Data.Dtos.Products
         public double Widths { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório")]
         public int AmountOfProducts { get; set; }
-        public DateTime Created { get; set; } = DateTime.Now;
 
         public int distribuitonCenterId { get; set; }
-        public DateTime Modified { get; set; } = DateTime.Now;
         public int subCategoryId { get; set; }
     }
 }

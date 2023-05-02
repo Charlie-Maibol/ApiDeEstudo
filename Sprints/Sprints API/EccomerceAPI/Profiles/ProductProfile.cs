@@ -7,9 +7,9 @@ namespace EccomerceAPI.Profiles
     {
         public ProductProfile()
         {
-            CreateMap<CreateProductDto, Category>();
-            CreateMap<Category, SearchProductsDto>();
-            CreateMap<EditProductDto, Category>();
+            CreateMap<CreateProductDto, Product>();
+            CreateMap<Product, SearchProductsDto>();
+            CreateMap<EditProductDto, Product>();
            
         }
     }
