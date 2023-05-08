@@ -7,7 +7,8 @@ namespace EccomerceAPI.Profiles
     {
         public CartWithProductsProfile()
         {
-            CreateMap<CreateCartWithProducts, Cart>();
+            CreateMap<CreateCartWithProducts, CartWithProduct>();
+            CreateMap<CartWithProduct, CreateCartWithProducts>();
         }
     }
 }

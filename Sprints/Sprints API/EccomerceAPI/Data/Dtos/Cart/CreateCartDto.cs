@@ -11,5 +11,6 @@ namespace EccomerceAPI.Data.Dtos.Cart
         public int StreetNumber { get; set; }
         public string AddComplemente { get; set; }
 
+
     }
 }

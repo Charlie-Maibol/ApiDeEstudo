@@ -174,7 +174,7 @@ namespace EccomerceAPI.Data.productDao
 
         public List<Product> GetProductsCenterID(int Id)
         {
-            return _context.Products.Where(prod => prod.distribuitonCenterId == Id && prod.Status).ToList();
+            return _context.Products.Where(prod => prod.Id == Id && prod.Status).ToList();
         }
 
         public IEnumerable<Product> GetAll()

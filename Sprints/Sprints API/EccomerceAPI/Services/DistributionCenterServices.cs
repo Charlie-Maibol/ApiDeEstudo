@@ -47,8 +47,11 @@ namespace EccomerceAPI.Services
             }
             else
             {
-
-                _distributionDao.CreateCenter(centerDto, street);
+                if (UniqueAddress(street))
+                {
+                   _distributionDao.CreateCenter(centerDto, street);
+                }
+                
                 
             }
             return null;
