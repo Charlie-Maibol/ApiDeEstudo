@@ -11,6 +11,8 @@ namespace EccomerceAPI.Profiles
         public CartProfile()
         {
             CreateMap<CreateCartDto, Cart>();
+            CreateMap<Cart, CreateCartDto>();
+            CreateMap<TotalProductsIncart, Cart>();
 
 
         }

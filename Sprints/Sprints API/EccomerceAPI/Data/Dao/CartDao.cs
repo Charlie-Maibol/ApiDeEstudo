@@ -2,11 +2,14 @@
 using Dapper;
 using EccomerceAPI.Data.Dtos;
 using EccomerceAPI.Data.Dtos.Cart;
+using EccomerceAPI.Data.Dtos.CartWithProducts;
 using EccomerceAPI.Models;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace EccomerceAPI.Data.Dao
 {
@@ -54,23 +57,17 @@ namespace EccomerceAPI.Data.Dao
             using var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
             connection.Open();
             var queryArgs = new DynamicParameters();
-            var FilterSql = "SELECT c.id, c.addComplemente, c.status, c.city, c.uf, c.zipCode, c.street, c.streetNumber," +
+            var FilterSql = "SELECT c.id, c.addComplemente, c.city, c.uf, c.zipCode, c.street, c.streetNumber," +
                 "c.neighbourhood as neighbourhood, " +
-                "p.name as Product, p.distribuitonCenterId " +
+                "p.Id as Product, p.Id " +
                 "FROM Carts c " +
-                "INNER JOIN Products p ON c.id = p.productId " +
+                "INNER JOIN Products p ON c.id = p.Id " +
                 "WHERE ";
 
             if (filterDto.addComplemente != null)
             {
                 FilterSql += "c.addComplemente LIKE CONCAT('%',@addComplemente,'%') and ";
                 queryArgs.Add("AddComplemente", filterDto.addComplemente);
-            }
-            if (filterDto.status != null)
-            {
-
-                FilterSql += "c.status = @status and ";
-                queryArgs.Add("Status", filterDto.status);
             }
             if (filterDto.city != null)
             {
@@ -113,15 +110,15 @@ namespace EccomerceAPI.Data.Dao
                 var andPosition = FilterSql.LastIndexOf("and");
                 FilterSql = FilterSql.Remove(andPosition);
             }
-            
-            
+
+
 
             var result = connection.Query<Cart, Product, Cart>
                (FilterSql, (cart, product) =>
                {
                    cart.Id = product.Id;
                    return cart;
-               }, queryArgs, splitOn: "productId")
+               }, queryArgs, splitOn: "Id")
                .Skip((filterDto.itensPerPage - 1) * filterDto.pageNumber)
                .Take(filterDto.pageNumber).ToList();
 
@@ -130,17 +127,13 @@ namespace EccomerceAPI.Data.Dao
 
         }
 
-        internal void DeleteCart(object center)
+        internal void DeleteCart(object cart)
         {
 
-            _context.Remove(center);
+            _context.Remove(cart);
             _context.SaveChanges();
         }
 
-        internal void EditCart(int id, object cart)
-        {
-            _context.SaveChanges();
-        }
 
         internal List<Cart> Nullcart(int? Id)
         {
@@ -159,14 +152,76 @@ namespace EccomerceAPI.Data.Dao
             return carts;
         }
 
-        internal Product GetProductId(int Id)
-        {
-            return _context.Products.FirstOrDefault(prod => prod.Id == Id);
-        }
-
         internal object GetProdutCart(int Id)
         {
             return _context.CartWithProducts.FirstOrDefault(prodCart => prodCart.Id == Id);
+        }
+        public CartWithProduct GetItemInCart(CreateCartWithProducts getProd)
+        {
+            var jukinha = _context.CartWithProducts.SingleOrDefault(
+                c => c.CartId == getProd.CartId
+                && c.ProductId == getProd.ProductId);
+
+            return jukinha;
+        }
+
+        public Cart GetCartId(int cartId)
+        {
+            return _context.Carts.FirstOrDefault(cart => cart.Id == cartId);
+           
+        }
+        public List<Product> GetProductActive(int Id)
+        {
+            List<Product> products = _context.Products.Where(prod => prod.Id == Id && prod.Status == true).ToList();
+            return products;
+        }
+
+        public CreateCartWithProducts SaveProducts(CreateCartWithProducts saveProducts)
+        {
+            _context.SaveChanges();
+            return saveProducts;
+        }
+
+        public Cart NewProductPrice(Cart cart)
+        {
+            var sql = " SELECT  P.CartId as cartId," +
+                "               sum(P.AmountOfProducts) as AmountOfProducts," +
+                "               sum(P.IndividualPrice * P.AmountOfProducts) as Totalprice" +
+                "       FROM cartwithproducts P" +
+                "       WHERE  P.CartId = @id" +
+                "       GROUP BY  P.CartId";
+
+            Console.WriteLine(sql);
+            using (var conection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection")))
+            {
+                var result = conection.Query<TotalProductsIncart>(sql.ToString(), cart).FirstOrDefault();
+
+                var map = _mapper.Map<Cart>(result);
+                if (map == null)
+                {
+                    return null;
+                }
+                map.TotalAmount = result.AmountOfProducts;
+                map.Totalprice = result.totalPrice;
+
+                return map;
+            }
+        }
+
+        public void SaveChangesCart()
+        {
+            _context.SaveChanges(); 
+        }
+
+        public CartWithProduct searchProdInCartId(int id)
+        {
+            return _context.CartWithProducts.FirstOrDefault(p => p.Id == id);
+        }
+
+        internal void DeletProdutCart(int id)
+        {
+            var prodInCart = searchProdInCartId(id);
+            _context.Remove(prodInCart);
         }
     }
 
