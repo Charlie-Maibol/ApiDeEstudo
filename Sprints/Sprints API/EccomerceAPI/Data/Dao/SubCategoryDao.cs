@@ -6,6 +6,7 @@ using EccomerceAPI.Models;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -21,22 +22,26 @@ namespace EccomerceAPI.Data.Dao
         private AppDbContext _context;
         private IMapper _mapper;
         private IConfiguration _configuration;
+        private readonly ILogger<SubCategoryDao> logger;
 
-        public SubCategoryDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
+        public SubCategoryDao(AppDbContext context, IMapper mapper, IConfiguration configuration, ILogger<SubCategoryDao> logger)
         {
             _context = context;
             _mapper = mapper;
             _configuration = configuration;
+            this.logger = logger;
         }
 
         public void DeleteSubCategory(object subCategory)
         {
             _context.Remove(subCategory);
             _context.SaveChanges();
+            logger.LogInformation($"#### DAO - Exclusão de uma nova subcategoria. ####");
         }
 
         public Category GetCategoryID(SubCategory cat)
         {
+            logger.LogInformation($"#### DAO - Pesquisa de uma subcategoria por ID. ####");
             return _context.Categories.FirstOrDefault(subCategory => subCategory.Id == cat.CategoryId);
         }
 
@@ -44,6 +49,7 @@ namespace EccomerceAPI.Data.Dao
         {
             var FilterSql = "SELECT * FROM Products WHERE ";
             var connection = new MySqlConnection(_configuration.GetConnectionString("CategoryConnection"));
+            logger.LogInformation($"#### DAO - Pesquisa de uma subcategoria personalizada. ####");
             connection.Open();
 
             if (filterSubCategoryDto.name != null)
@@ -112,6 +118,7 @@ namespace EccomerceAPI.Data.Dao
         {
             _context.SubCategories.Add(sub);
             _context.SaveChanges();
+            logger.LogInformation($"#### DAO - Criação de uma subcategoria por ID. ####");
             return sub;
 
         }
@@ -119,11 +126,13 @@ namespace EccomerceAPI.Data.Dao
 
         public SubCategory GetSubId(int Id)
         {
-           return _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
+            logger.LogInformation($"#### DAO - Pesquisa de uma subcategoria por ID. ####");
+            return _context.SubCategories.FirstOrDefault(sub => sub.Id == Id);
         }
 
         public IEnumerable<SubCategory> GetAll()
         {
+            logger.LogInformation($"#### DAO - Pesquisa de todas as subcategorias. ####");
             return _context.SubCategories.ToList();
 
         }
@@ -133,6 +142,7 @@ namespace EccomerceAPI.Data.Dao
             subCategory.Modified = DateTime.Now;
             _context.Update(subCategory);
             _context.SaveChanges();
+            logger.LogInformation($"#### DAO - Edição de uma subcategoria. ####");
             return Result.Ok();
         }
     }
