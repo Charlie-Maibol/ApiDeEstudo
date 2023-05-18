@@ -1,7 +1,11 @@
 ﻿using Eccomerce.Test;
 using EccomerceAPI.Data.Dtos.Categories;
+using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using SerilogTimings;
 using System.Collections.Generic;
 
 namespace EccomerceAPI.Controllers
@@ -12,19 +16,33 @@ namespace EccomerceAPI.Controllers
     {
         private ICategoryDao _categoryDao;
         private CategoryServices _categoryServices;
+        private readonly ILogger<CategoryController> logger;
 
-
-        public CategoryController(ICategoryDao categoryDao, CategoryServices categoryServices)
+        public CategoryController(ICategoryDao categoryDao, CategoryServices categoryServices, ILogger<CategoryController> logger)
         {
             _categoryDao = categoryDao;
             _categoryServices = categoryServices;
+            this.logger = logger;
         }
 
         [HttpPost]
         public IActionResult AddCategory([FromBody] CreateCategoryDto categoryDto)
         {
-            var category = _categoryServices.AddCategory(categoryDto);
-            if (category == null) return BadRequest("Número de caracteres excedida");
+            logger.LogInformation($"#### POST - Cadastro de uma nova categoria. ####");
+
+            Category category;
+            using (Operation.Time("Tempo de casdastro de nova categoria"))
+            {
+                logger.LogInformation($"#### Requisição -> {JsonConvert.SerializeObject(categoryDto)}. ####");
+                category = _categoryServices.AddCategory(categoryDto);
+            }
+
+            if (category == null)
+            {
+                logger.LogWarning($"#### Erro: Categoria informada não existe.");
+                return BadRequest("Número de caracteres excedida");
+            }
+
             return Ok(category);
         }
 
@@ -33,7 +51,12 @@ namespace EccomerceAPI.Controllers
         public IActionResult FilterProduct([FromQuery] FiltersCategoryDto categoryFilterDto)
         {
 
-            _categoryDao.FilterCategory(categoryFilterDto);
+            logger.LogInformation($"#### GET - Requisição de busca personalizada. ####");
+            using (Operation.Time("Tempo de casdastro de nova categoria"))
+            {
+                _categoryDao.FilterCategory(categoryFilterDto);
+
+            }
             return Ok();
 
 
@@ -41,13 +64,18 @@ namespace EccomerceAPI.Controllers
         [HttpGet("{ID}")]
         public IActionResult SearchCategoryId(int Id)
         {
-
-            List<SearchCategoriesDto> CategoryDto = _categoryServices.SearchCategoryId(Id);
-            if (CategoryDto != null)
+            logger.LogInformation($"#### GET - Requisição de por ID. ####");
+            using (Operation.Time("Tempo de pesquisa de ID de uma categoria"))
             {
-                return Ok(CategoryDto);
+                List<SearchCategoriesDto> CategoryDto = _categoryServices.SearchCategoryId(Id);
+                if (CategoryDto != null)
+                {
+                    return Ok(CategoryDto);
+
+                }
 
             }
+            logger.LogWarning($"#### Erro: Categoria não encontrada no banco de dados.");
             return NotFound();
 
         }
@@ -55,13 +83,16 @@ namespace EccomerceAPI.Controllers
         public IActionResult EditCategory(int Id, [FromBody] EditCategoryDto Category)
         {
 
-
-            var result = _categoryServices.EditCategory(Id, Category);
-            if (result == null)
+            logger.LogInformation($"#### PUT - Requisição de editar categoria. ####");
+            using (Operation.Time("Tempo de Edição de uma categoria"))
             {
-                return NotFound();
+                var result = _categoryServices.EditCategory(Id, Category);
+                if (result == null)
+                {
+                    logger.LogWarning($"#### Erro: Categoria não pode ser editada.");
+                    return NotFound();
+                }
             }
-
             return NoContent();
         }
 
@@ -69,16 +100,29 @@ namespace EccomerceAPI.Controllers
         public IActionResult EditCategoryStatus(int Id)
         {
 
+            logger.LogInformation($"#### PUT - Requisição de editar status da categoria. ####");
+            using (Operation.Time("Tempo de Edição de uma categoria"))
+            {
+                var result = _categoryServices.EditCategoryStatus(Id);
+            if (result != null)
+            {
 
-            var result = _categoryServices.EditCategoryStatus(Id);
-            if (result != null) return Ok(result);
+                return Ok(result);
+            }
+
+            }
+            logger.LogWarning($"#### Erro: Categoria informada não existe no banco de dados.");
             return NotFound();
         }
 
         [HttpDelete("{Id}")]
         public IActionResult DeletCategory(int Id)
         {
-            _categoryDao.DeleteCategory(Id);
+            logger.LogInformation($"#### DELETE - Requisição de deletar uma categoria. ####");
+            using (Operation.Time("Tempo de exclusão de uma categoria"))
+            {
+                _categoryDao.DeleteCategory(Id);
+            }             
             return NoContent();
         }
     }

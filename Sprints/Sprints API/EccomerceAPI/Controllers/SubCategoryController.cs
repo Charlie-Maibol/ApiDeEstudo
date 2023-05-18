@@ -1,8 +1,11 @@
 ﻿using Eccomerce.Test;
 using EccomerceAPI.Data.Dtos.SubCategories;
+using EccomerceAPI.Models;
 using EccomerceAPI.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SerilogTimings;
 
 namespace EccomerceAPI.Controllers
 {
@@ -13,21 +16,29 @@ namespace EccomerceAPI.Controllers
 
         private ISubCategoryDao _subCategoryDao;
         private SubCategoryServices _subCategoryServices;
+        private readonly ILogger<SubCategoryController> logger;
 
-
-        public SubCategoryController(ISubCategoryDao subCategoryDao, SubCategoryServices subCategoryServices)
+        public SubCategoryController(ISubCategoryDao subCategoryDao, SubCategoryServices subCategoryServices,
+            ILogger<SubCategoryController> logger)
         {
             _subCategoryDao = subCategoryDao;
             _subCategoryServices = subCategoryServices;
+            this.logger = logger;
         }
 
         [HttpPost]
         public IActionResult AddSubCategory([FromBody] CreateSubCategoryDto SubDto)
         {
-            var sub = _subCategoryServices.AddSubCategory(SubDto);
-            if(sub == null) 
+            SubCategory sub;
+            logger.LogInformation($"#### POST - Inserção de uma nova subcategoria. ####");
+            using (Operation.Time("#### Tempo de adição de uma nova Subcategoria."))
             {
-                return BadRequest("Nem todos os requisitos foram cumprindos");
+                sub = _subCategoryServices.AddSubCategory(SubDto);
+                if (sub == null)
+                {
+                    logger.LogWarning("Erro ao criar uma sub categoria");
+                    return BadRequest("Nem todos os requisitos foram cumprindos");
+                } 
             }
             return Ok(sub);
         }
@@ -36,36 +47,55 @@ namespace EccomerceAPI.Controllers
         [HttpGet]
         public IActionResult searchSubId(int Id)
         {
-            var sub = _subCategoryServices.GetId(Id);
-            if(sub != null) { return Ok(sub); } 
+            using (Operation.Time("#### Tempo de Busca de uma Subcategoria por ID."))
+            {
+                var sub = _subCategoryServices.GetId(Id);
+                if (sub != null)
+                {
+                    logger.LogInformation($"#### GET - Busca de uma subcategoria. ####");
+                    return Ok(sub);
+                }
+            }
+            logger.LogWarning("Erro ao buscar a sub categoria");
             return NotFound();  
         }
 
         [HttpGet("Filter")]
         public IActionResult Search([FromQuery] SubCategoryFilterDto subCategoryFilterDto)
         {
-            _subCategoryDao.FilterProduct(subCategoryFilterDto);
-            return Ok();
-
+            using (Operation.Time("#### Tempo de Busca de uma Subcategoria por ID."))
+            {
+                _subCategoryDao.FilterProduct(subCategoryFilterDto);
+                logger.LogInformation($"#### GET - Busca de uma subcategoria. ####");
+                return Ok();
+            }
         }
 
 
         [HttpPut("{Id}")]
         public IActionResult EditSubCategory(int Id, [FromBody] EditSubCategoryDto subCategoryDto)
         {
-            _subCategoryServices.EditSubCategory(Id, subCategoryDto);
-            return NoContent();
+            using (Operation.Time("#### Tempo de Busca de uma Subcategoria por ID."))
+            {
+                _subCategoryServices.EditSubCategory(Id, subCategoryDto);
+                logger.LogInformation($"#### PUT - Busca de uma subcategoria. ####");
+                return NoContent();
+            }
 
         }
 
         [HttpDelete("{Id}")]
         public IActionResult DeletSubCategory(int Id)
         {
-            Result result = _subCategoryServices.DeletSubCategory(Id);
-            if (result.IsFailed)
+            using (Operation.Time("#### Tempo de Busca de uma Subcategoria por ID."))
             {
-                return NotFound();
+                Result result = _subCategoryServices.DeletSubCategory(Id);
+                if (result.IsFailed)
+                {
+                    return NotFound();
+                }
             }
+            logger.LogInformation($"#### DELETE - Exclusão de uma subcategoria. ####");
             return Ok();
         }
     }

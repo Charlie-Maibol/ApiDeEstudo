@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Dapper;
 using Eccomerce.Test;
+using EccomerceAPI.Controllers;
 using EccomerceAPI.Data.Dtos.Categories;
 using EccomerceAPI.Models;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -22,12 +24,14 @@ namespace EccomerceAPI.Data.Dao
         private AppDbContext _context;
         private IMapper _mapper;
         private IConfiguration _configuration;
+        private readonly ILogger<CategoryDao> logger;
 
-        public CategoryDao(AppDbContext context, IMapper mapper, IConfiguration configuration)
+        public CategoryDao(AppDbContext context, IMapper mapper, IConfiguration configuration, ILogger<CategoryDao> logger)
         {
             _context = context;
             _mapper = mapper;
             _configuration = configuration;
+            this.logger = logger;
         }
 
         public Category AddCategory(Category category)
@@ -35,6 +39,7 @@ namespace EccomerceAPI.Data.Dao
 
             _context.Categories.Add(category);
             _context.SaveChanges();
+            logger.LogInformation($"#### Dao - Criando categoria. ####");
             return category;
         }
 
@@ -44,6 +49,7 @@ namespace EccomerceAPI.Data.Dao
 
             if (Id == null)
             {
+                logger.LogInformation($"#### Dao - Buscando todas as categoria. ####");
                 categories = _context.Categories.ToList();
             }
             else
@@ -52,11 +58,13 @@ namespace EccomerceAPI.Data.Dao
                     .Skip((pageNumber - 1) * itensPerPage)
                     .Take(itensPerPage).ToList();
                 List<SearchCategoriesDto> category = _mapper.Map<List<SearchCategoriesDto>>(categories);
+                logger.LogInformation($"#### Dao - Buscando categoria por Id. ####");
 
             }
             if (categories != null)
             {
                 List<SearchCategoriesDto> category = _mapper.Map<List<SearchCategoriesDto>>(categories);
+                logger.LogInformation($"#### Dao - Categoria inexistente, exibir tudo. ####");
                 return Result.Ok();
             }
             return null;
@@ -67,6 +75,7 @@ namespace EccomerceAPI.Data.Dao
 
             _context.Remove(category);
             _context.SaveChanges();
+            logger.LogInformation($"#### Dao - Deletando categoria. ####");
         }
 
         public List<Category> FilterCategory(FiltersCategoryDto filterCategoryDto)
@@ -132,6 +141,7 @@ namespace EccomerceAPI.Data.Dao
 
         public Category GetId(int Id)
         {
+            logger.LogInformation($"#### Dao - Buscando Categoria por ID. ####");
             return _context.Categories.FirstOrDefault(category => category.Id == Id);
         }
 
@@ -140,6 +150,7 @@ namespace EccomerceAPI.Data.Dao
             editCategory.Modified = DateTime.Now;
             _context.Update(editCategory);
             _context.SaveChanges();
+            logger.LogInformation($"#### Dao - Editando categoria. ####");
             return Result.Ok();
         }
 
@@ -153,6 +164,7 @@ namespace EccomerceAPI.Data.Dao
 
             if (sub.Count == 0)
             {
+                logger.LogWarning($"#### Erro: ID informado não existe.");
                 return null;
             }
             if (cat.Status == false)
@@ -175,6 +187,7 @@ namespace EccomerceAPI.Data.Dao
             }
 
             _context.SaveChanges();
+            logger.LogInformation($"#### Dao - Editando categoria. ####");
             return null;
         }
 
