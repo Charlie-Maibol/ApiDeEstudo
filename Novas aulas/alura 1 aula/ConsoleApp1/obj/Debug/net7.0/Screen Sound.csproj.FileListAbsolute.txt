@@ -1,0 +1,14 @@
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\bin\Debug\net7.0\Screen Sound.exe
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\bin\Debug\net7.0\Screen Sound.deps.json
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\bin\Debug\net7.0\Screen Sound.runtimeconfig.json
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\bin\Debug\net7.0\Screen Sound.dll
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\bin\Debug\net7.0\Screen Sound.pdb
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\Screen Sound.GeneratedMSBuildEditorConfig.editorconfig
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\Screen Sound.AssemblyInfoInputs.cache
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\Screen Sound.AssemblyInfo.cs
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\Screen Sound.csproj.CoreCompileInputs.cache
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\Screen Sound.dll
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\refint\Screen Sound.dll
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\Screen Sound.pdb
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\Screen Sound.genruntimeconfig.cache
+C:\aula de programação\ApiDeEstudo\Novas aulas\alura 1 aula\ConsoleApp1\obj\Debug\net7.0\ref\Screen Sound.dll
