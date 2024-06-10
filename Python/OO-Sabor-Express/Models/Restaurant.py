@@ -23,8 +23,3 @@ class Restaurant:
         self._status = not self._status
         
 
-restaurant_KFC = Restaurant('KFC', 'fastfood')
-restaurant_KFC.change_status()
-restaurant_Belarte = Restaurant('Belarte', 'pizzaria')
-
-Restaurant.restaurant_list()
