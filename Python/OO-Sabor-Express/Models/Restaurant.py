@@ -1,3 +1,5 @@
+from models.rating import Rating
+
 class Restaurant:
     Restaurants = []
 
@@ -5,6 +7,7 @@ class Restaurant:
         self._name = name.title()
         self._category = category.upper()
         self._status = False
+        self._rating = []
         Restaurant.Restaurants.append(self)
 
     def __str__(self):
@@ -21,5 +24,8 @@ class Restaurant:
 
     def change_status(self):
         self._status = not self._status
-        
+
+    def receive_rating(self, client, score):
+        rating = Rating(client, score)
+        self._rating.append(rating)
 

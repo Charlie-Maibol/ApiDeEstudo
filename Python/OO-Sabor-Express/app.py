@@ -1,8 +1,11 @@
 from Models.restaurant import Restaurant
 
-resstaurant_KFC = Restaurant('KFC', 'FastFood')
-resstaurant_Belarte = Restaurant('Belarte', 'Pizzaria')
-resstaurant_Kebabs = Restaurant('Kebabs', 'arabe')
+restaurant_KFC = Restaurant('KFC', 'FastFood')
+restaurant_Belarte = Restaurant('Belarte', 'Pizzaria')
+restaurant_Kebabs = Restaurant('Kebabs', 'arabe')
+restaurant_Belarte.receive_rating('Pokemon', 10 )
+restaurant_Belarte.receive_rating('ixidi', 8 )
+restaurant_Belarte.receive_rating('Leo', 5 )
 
 def main():
     Restaurant.restaurant_list()
