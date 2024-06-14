@@ -29,13 +29,15 @@ class Restaurant:
         self._status = not self._status
 
     def receive_rating(self, client, score):
-        rating = Rating(client, score)
-        self._rating.append(rating)
+        if 0 < score <= 5:
+            rating = Rating(client, score)
+            self._rating.append(rating)
+        
 
     @property  
     def rating_media(self):
         if not self._rating:
-            return 0
+            return '-'
         score_sum = sum(rating._score for rating in self._rating)
         score_length = len(self._rating)
         media = round(score_sum / score_length, 1)
