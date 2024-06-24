@@ -1,15 +1,18 @@
 from models.restaurant import Restaurant
+from models.menu.dishes import Dishes
+from models.menu.drink import Drink
 
 restaurant_KFC = Restaurant('KFC', 'FastFood')
 restaurant_Belarte = Restaurant('Belarte', 'Pizzaria')
 restaurant_Kebabs = Restaurant('Kebabs', 'arabe')
-restaurant_Belarte.receive_rating('Pokemon', 10 )
-restaurant_Belarte.receive_rating('ixidi', 8 )
-restaurant_Belarte.receive_rating('Leo', 5 )
-restaurant_Belarte.receive_rating('Leo', 2 )
+drink_juice = Drink('Suco de melancia', 5.0, 'grande')
+dishes_bread = Dishes('Pão frances', 2.00, 'Pão de sal')
+
+
 
 def main():
-    Restaurant.restaurant_list()
+    print(drink_juice)
+    print(dishes_bread)
 
 
 
