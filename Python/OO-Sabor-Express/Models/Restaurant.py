@@ -1,4 +1,5 @@
 from models.rating import Rating
+from models.menu.menu_itens import Menu_itens
 
 class Restaurant:
     Restaurants = []
@@ -8,6 +9,7 @@ class Restaurant:
         self._category = category.upper()
         self._status = False
         self._rating = []
+        self._menu = []
         Restaurant.Restaurants.append(self)
 
     def __str__(self):
@@ -43,3 +45,8 @@ class Restaurant:
         media = round(score_sum / score_length, 1)
         return media
     
+    
+
+    def add_itens_into_menu(self, item):
+        if isinstance(item, Menu_itens):
+            self._menu.append(item)
