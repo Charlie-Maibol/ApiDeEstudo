@@ -12,8 +12,7 @@ restaurant_KFC.add_itens_into_menu(dishes_bread)
 
 
 def main():
-    print(drink_juice)
-    print(dishes_bread)
+    restaurant_KFC.show_menu
 
 
 

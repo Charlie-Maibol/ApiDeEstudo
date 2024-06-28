@@ -50,3 +50,15 @@ class Restaurant:
     def add_itens_into_menu(self, item):
         if isinstance(item, Menu_itens):
             self._menu.append(item)
+
+    @property
+    def show_menu(self):
+        print(f'Cardapio do restaurante{self._name}\n')
+        for i,item in enumerate(self._menu,start=1):
+            if hasattr(item,'description'):
+                mensage_dish = f'{i}. Nome:{item._name} | Preço: R${item._price} | Descrição: {item.description}'
+                print(mensage_dish)
+            else:
+                mensage_drink = f'{i}. Nome:{item._name} | Preço: R${item._price} | Tamanho: {item.size}'
+                print(mensage_drink)
+                
